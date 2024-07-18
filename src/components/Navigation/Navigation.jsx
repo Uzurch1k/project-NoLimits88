@@ -23,7 +23,7 @@ const Navigation = () => {
         <span>Home</span>
       </NavLink>
       {isLoggedIn && (
-        <NavLink className={buildLinkClass} to="/contacts">
+        <NavLink className={buildLinkClass} to="/tracker">
           <FaRegAddressBook />
           <span>Contacts</span>
         </NavLink>

@@ -4,7 +4,7 @@ body {
 	color: var(--cy);
 	font-size: 14px;
 	line-height: 1.28;
-	background-color: #000;
+	background-color: var(--cw);
 }
 
 .wrapper {
@@ -15,7 +15,6 @@ body {
 }
 
 .container {
-	width: 100%;
 	max-width: 375rem;
 	padding: 0 16px;
 	margin: 0 auto;
