@@ -1,4 +1,5 @@
 import ScrollUp from '../../ScrollUp/ScrollUp';
+
 import css from './Main.module.scss';
 
 const Main = ({ children }) => {

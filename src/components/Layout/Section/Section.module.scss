@@ -1,5 +1,5 @@
 .section {
-	padding: 10px 0;
+	padding: 15px 0;
 }
 
 /* --------- Adaptive tablet (768px) --------- */
@@ -8,19 +8,13 @@
 	.section {
 		padding: 20px 0;
 	}
-	.container {
-		padding: 0 50px;
-	}
 }
 
 /* --------- Adaptive desktop (1152px) --------- */
 
 @media screen and (min-width: 1152px) {
 	.section {
-		padding: 30px 0;
-	}
-	.container {
-		padding: 0 80px;
+		padding: 25px 0;
 	}
 }
 
@@ -28,10 +22,7 @@
 
 @media screen and (min-width: 1440px) {
 	.section {
-		padding: 40px 0;
-	}
-	.container {
-		padding: 0 100px;
+		padding: 30px 0;
 	}
 }
 
@@ -39,9 +30,6 @@
 
 @media screen and (min-width: 1920px) {
 	.section {
-		padding: 50px 0;
-	}
-	.container {
-		padding: 0 120px;
+		padding: 35px 0;
 	}
 }

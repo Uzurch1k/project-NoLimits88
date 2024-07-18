@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoIosArrowUp } from 'react-icons/io';
+
 import css from './ScrollUp.module.scss';
 
 const ScrollUp = () => {
@@ -31,7 +32,7 @@ const ScrollUp = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`${css.scroll} ${showButton && css.show}`}
+      className={`${css.scrollup} ${showButton && css.show}`}
     >
       <IoIosArrowUp />
     </button>

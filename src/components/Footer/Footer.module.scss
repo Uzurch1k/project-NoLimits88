@@ -1,15 +1,65 @@
 .footer {
-	padding: 20px 0;
+	padding: 10px 0;
 	background-color: #222222;
+	box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 .body {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
-.link {
-	font-size: 20px;
+.github {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	overflow: hidden;
+	img {
+		object-fit: cover;
+		transition: transform 0.5s ease-in-out;
+	}
+	&:hover img {
+		transform: rotate(360deg);
+	}
+}
+.text {
+	font-size: 14px;
+	opacity: 0.5;
+	letter-spacing: 2px;
+}
+.source {
+	font-size: 16px;
 	transition: 150ms color;
+	opacity: 0.5;
 	&:hover {
 		color: #5f828d;
 	}
+}
+/* --------- Adaptive tablet (768px) --------- */
+
+@media screen and (min-width: 768px) {
+}
+
+/* --------- Adaptive desktop (1152px) --------- */
+
+@media screen and (min-width: 1152px) {
+	.github {
+		width: 40px;
+		height: 40px;
+	}
+	.footer {
+		padding: 15px 0;
+	}
+}
+
+/* --------- Adaptive desktop (1440px) --------- */
+
+@media screen and (min-width: 1440px) {
+}
+
+/* --------- Adaptive desktop (1920px) --------- */
+
+@media screen and (min-width: 1920px) {
 }

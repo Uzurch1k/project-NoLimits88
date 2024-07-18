@@ -1,12 +1,34 @@
 .header {
-	padding: 30px 0;
-	background-color: #222222;
+	padding-top: 20px;
 }
 .body {
+	height: 70px;
+	display: flex;
+	align-items: center;
+	background-color: #222222;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.navigation {
+	flex-grow: 1;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	position: relative;
+	height: 100%;
+}
+.logo {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	padding: 0 20px;
+	height: 100%;
+	font-size: 28px;
+	transition: 150ms all;
+	&:hover {
+		color: var(--color-hover);
+	}
 }
 .title {
 	width: 65px;
@@ -19,34 +41,6 @@
 	text-overflow: ellipsis;
 }
 
-// .nav {
-// 	display: flex;
-// 	position: absolute;
-// 	left: 50%;
-// 	transform: translateX(-50%);
-// 	&__link {
-// 		padding: 4px 10px;
-// 		background-color: #43484e;
-// 	}
-// }
-
-.link {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	overflow: hidden;
-	img {
-		object-fit: cover;
-		transition: transform 0.5s ease-in-out;
-	}
-	&:hover img {
-		transform: rotate(360deg);
-	}
-}
-
 /* --------- Adaptive tablet (768px) --------- */
 
 @media screen and (min-width: 768px) {
@@ -54,17 +48,6 @@
 		width: auto;
 		display: block;
 		font-size: 20px;
-	}
-
-	.link {
-		width: 50px;
-		height: 50px;
-	}
-
-	.nav {
-		&__link {
-			padding: 7px 20px;
-		}
 	}
 }
 

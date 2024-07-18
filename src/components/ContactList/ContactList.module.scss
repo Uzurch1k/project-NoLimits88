@@ -1,0 +1,45 @@
+.wrapp {
+	margin-top: 30px;
+	max-height: 460px;
+	width: 600px;
+	overflow-y: scroll;
+	background-color: transparent;
+	padding: 0 20px;
+}
+.wrapp::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 10px;
+}
+.wrapp::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: #3b5252;
+}
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	justify-content: center;
+	gap: 20px;
+}
+/* --------- Adaptive tablet (768px) --------- */
+
+@media screen and (min-width: 768px) {
+}
+
+/* --------- Adaptive desktop (1152px) --------- */
+
+@media screen and (min-width: 1152px) {
+}
+
+/* --------- Adaptive desktop (1440px) --------- */
+
+@media screen and (min-width: 1440px) {
+	.list {
+		// grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* --------- Adaptive desktop (1920px) --------- */
+
+@media screen and (min-width: 1920px) {
+}

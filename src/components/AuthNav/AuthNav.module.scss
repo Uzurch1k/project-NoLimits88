@@ -1,0 +1,20 @@
+.aut {
+	display: flex;
+	gap: 1px;
+	height: 100%;
+}
+.link {
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	transition: 150ms background-color;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.3) inset;
+	background-color: #36383b;
+	&:hover {
+		background-color: #3b5252;
+	}
+}
+.active {
+	background-color: #3b5252;
+}

@@ -1,0 +1,52 @@
+// Poppins
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url("../../../public/fonts/Poppins-Regular/Poppins-Regular.eot")
+			format("embedded-opentype"),
+		url("../../../public/fonts/Poppins-Regular/Poppins-Regular.ttf")
+			format("truetype"),
+		url("../../../public/fonts/Poppins-Regular/Poppins-Regular.woff2")
+			format("woff2");
+}
+@font-face {
+	font-display: swap;
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url("../../../public/fonts/Poppins-Bold/Poppins-Bold.eot")
+			format("embedded-opentype"),
+		url("../../../public/fonts/Poppins-Bold/Poppins-Bold.ttf")
+			format("truetype"),
+		url("../../../public/fonts/Poppins-Bold/Poppins-Bold.woff2") format("woff2");
+}
+
+// Gilroy
+@font-face {
+	font-display: swap;
+	font-family: "Gilroy";
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url("../../../public/fonts/Gilroy-Regular/Gilroy-Regular.eot")
+			format("embedded-opentype"),
+		url("../../../public/fonts/Gilroy-Regular/Gilroy-Regular.ttf")
+			format("truetype"),
+		url("../../../public/fonts/Gilroy-Regular/Gilroy-Regular.woff2")
+			format("woff2");
+}
+@font-face {
+	font-display: swap;
+	font-family: "Gilroy";
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url("../../../public/fonts/Gilroy-Bold/Gilroy-Bold.eot")
+			format("embedded-opentype"),
+		url("../../../public/fonts/Gilroy-Bold/Gilroy-Bold.ttf") format("truetype"),
+		url("../../../public/fonts/Gilroy-Bold/Gilroy-Bold.woff2") format("woff2");
+}
