@@ -1,0 +1,22 @@
+.scroll {
+	position: fixed;
+	bottom: 100px;
+	right: 40px;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	background-color: #757575;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	opacity: 0;
+	transition: 150ms all;
+	&:hover {
+		background-color: #5f828d;
+	}
+}
+.show {
+	opacity: 1;
+}

@@ -1,0 +1,87 @@
+.header {
+	padding: 30px 0;
+	background-color: #222222;
+}
+.body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+.title {
+	width: 65px;
+	font-size: 18px;
+	text-transform: uppercase;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+// .nav {
+// 	display: flex;
+// 	position: absolute;
+// 	left: 50%;
+// 	transform: translateX(-50%);
+// 	&__link {
+// 		padding: 4px 10px;
+// 		background-color: #43484e;
+// 	}
+// }
+
+.link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	img {
+		object-fit: cover;
+		transition: transform 0.5s ease-in-out;
+	}
+	&:hover img {
+		transform: rotate(360deg);
+	}
+}
+
+/* --------- Adaptive tablet (768px) --------- */
+
+@media screen and (min-width: 768px) {
+	.title {
+		width: auto;
+		display: block;
+		font-size: 20px;
+	}
+
+	.link {
+		width: 50px;
+		height: 50px;
+	}
+
+	.nav {
+		&__link {
+			padding: 7px 20px;
+		}
+	}
+}
+
+/* --------- Adaptive desktop (1152px) --------- */
+
+@media screen and (min-width: 1152px) {
+	.title {
+		font-size: 26px;
+	}
+}
+
+/* --------- Adaptive desktop (1440px) --------- */
+
+@media screen and (min-width: 1440px) {
+}
+
+/* --------- Adaptive desktop (1920px) --------- */
+
+@media screen and (min-width: 1920px) {
+}

@@ -1,0 +1,50 @@
+html,
+body {
+	font-family: var(--font-family);
+	color: var(--main-color);
+	font-size: 18px;
+	line-height: 1.5;
+	background-color: #000;
+}
+
+.container {
+	max-width: 360rem;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+/* --------- Adaptive tablet (768px) --------- */
+
+@media screen and (min-width: 768px) {
+	.container {
+		max-width: 768px;
+		padding: 0 25px;
+	}
+}
+
+/* --------- Adaptive desktop (1152px) --------- */
+
+@media screen and (min-width: 1152px) {
+	.container {
+		max-width: 1152px;
+		padding: 0 35px;
+	}
+}
+
+/* --------- Adaptive desktop (1440px) --------- */
+
+@media screen and (min-width: 1440px) {
+	.container {
+		max-width: 1440px;
+		padding: 0 45px;
+	}
+}
+
+/* --------- Adaptive desktop (1920px) --------- */
+
+@media screen and (min-width: 1920px) {
+	.container {
+		max-width: 1920px;
+		padding: 0 55px;
+	}
+}
