@@ -1,7 +1,5 @@
-import css from './Main.module.scss';
-
 const Main = ({ children }) => {
-  return <main className={css.main}>{children}</main>;
+  return <main className="main">{children}</main>;
 };
 
 export default Main;

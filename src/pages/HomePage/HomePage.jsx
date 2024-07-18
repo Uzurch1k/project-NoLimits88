@@ -1,16 +1,25 @@
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
+import Section from '../../components/Layout/Section/Section';
 import WelcomeSection from '../../components/WelcomeSection/WelcomeSection';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
+import Logo from '../../components/Logo/Logo';
 
 import css from './HomePage.module.scss';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className={css.bloc}>
       <DocumentTitle>Home</DocumentTitle>
-      <h2>HomePage</h2>
-      <WelcomeSection />
-      <AdvantagesSection />
+      <Section>
+        <div>
+          <h2>HomePage</h2>
+          <Logo />
+          <WelcomeSection />
+        </div>
+        <div>
+          <AdvantagesSection />
+        </div>
+      </Section>
     </div>
   );
 };

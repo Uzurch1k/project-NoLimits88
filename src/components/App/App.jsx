@@ -18,10 +18,7 @@ function App() {
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/tracker" element={<TrackerPage />} />
-        {/* <Route
+        <Route
           path="/signup"
           element={
             <RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />
@@ -38,7 +35,7 @@ function App() {
           element={
             <PrivateRoute redirectTo="/signin" component={<TrackerPage />} />
           }
-        /> */}
+        />
       </Routes>
     </SharedLayout>
   );
