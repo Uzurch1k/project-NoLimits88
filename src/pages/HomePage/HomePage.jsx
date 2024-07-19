@@ -8,11 +8,10 @@ import css from './HomePage.module.scss';
 
 const HomePage = () => {
   return (
-    <div className={css.bloc}>
+    <div className={css.body}>
       <DocumentTitle>Home</DocumentTitle>
       <Section>
-        <div>
-          <h2>HomePage</h2>
+        <div className={css.wrapp}>
           <Logo />
           <WelcomeSection />
         </div>

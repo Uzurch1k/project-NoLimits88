@@ -7,7 +7,7 @@ import css from './TrackerPage.module.scss';
 
 const TrackerPage = () => {
   return (
-    <div className={css.bloc}>
+    <div className={css.body}>
       <DocumentTitle>Tracker</DocumentTitle>
       <Section>
         <div>

@@ -1,18 +1,18 @@
 .wrapp {
 	position: relative;
+	padding: 216px 16px;
 	border-radius: 30px;
 	background-color: var(--cu);
-	padding: 118px 16px;
 }
 
 @media screen and (min-width: 768px) {
 	.wrapp {
-		padding: 106px 64px 50px 64px;
+		padding: 281px 134px;
 	}
 }
 
 @media screen and (min-width: 1440px) {
 	.wrapp {
-		padding: 188px 64px;
+		padding: 169px 118px;
 	}
 }

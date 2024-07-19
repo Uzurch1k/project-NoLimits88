@@ -1,6 +1,7 @@
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
 import Section from '../../components/Layout/Section/Section';
+import SignSection from '../../components/Layout/SignSection/SignSection';
 import Logo from '../../components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
 
@@ -8,14 +9,13 @@ import css from './SignInPage.module.scss';
 
 const SignInPage = () => {
   return (
-    <div className={css.bloc}>
+    <div className={css.body}>
       <DocumentTitle>Sign In</DocumentTitle>
       <Section>
-        <div>
-          <h2>SignInPage</h2>
+        <SignSection>
           <Logo />
           <SignInForm />
-        </div>
+        </SignSection>
         <div className={css.visibil}>
           <AdvantagesSection />
         </div>

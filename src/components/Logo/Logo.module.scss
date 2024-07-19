@@ -1,4 +1,7 @@
 .logo {
+	position: absolute;
+	top: 24px;
+	left: 16px;
 	color: var(--cy);
 	font-size: 18px;
 	font-weight: 700;
@@ -9,6 +12,8 @@
 
 @media screen and (min-width: 768px) {
 	.logo {
+		top: 32px;
+		left: 32px;
 		font-size: 24px;
 		line-height: 1;
 		letter-spacing: -0.24px;
