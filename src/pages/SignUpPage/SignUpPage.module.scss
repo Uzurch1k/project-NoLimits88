@@ -1,0 +1,9 @@
+.visibil {
+	display: none;
+}
+
+@media screen and (min-width: 1440px) {
+	.visibil {
+		display: block;
+	}
+}

@@ -16,7 +16,7 @@ const SignUpPage = () => {
           <Logo />
           <SignUpForm />
         </div>
-        <div>
+        <div className={css.visibil}>
           <AdvantagesSection />
         </div>
       </Section>
