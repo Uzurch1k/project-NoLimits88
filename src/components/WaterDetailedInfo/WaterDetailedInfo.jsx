@@ -1,9 +1,10 @@
 import css from './WaterDetailedInfo.module.scss';
+import UserPanel from '../UserPanel/UserPanel';
 
 const WaterDetailedInfo = () => {
   return (
-    <div className={css.bloc}>
-      <h2>WaterDetailedInfo</h2>
+    <div className={css.waterDetailedBg}>
+      <UserPanel />
     </div>
   );
 };
