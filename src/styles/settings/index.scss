@@ -1,11 +1,12 @@
 .btn-def {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: fit-content;
-	display: block;
 	padding: 14px 19px;
 	color: var(--cy);
 	font-weight: 700;
-	line-height: 1.28;
-	letter-spacing: -0.14px;
+	letter-spacing: -0.01em;
 	border-radius: 30px;
 	background-color: var(--cg);
 	transition: all 150ms ease-in;
@@ -18,8 +19,6 @@
 @media screen and (min-width: 768px) {
 	.btn-def {
 		padding: 18px 40px;
-		line-height: 1.5;
-		letter-spacing: -0.16px;
 	}
 }
 
