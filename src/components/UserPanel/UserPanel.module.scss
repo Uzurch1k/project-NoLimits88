@@ -1,0 +1,28 @@
+.userPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hello {
+  font-family: var(--ff2);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.userPanelName {
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .userPanel {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hello {
+    font-size: 36px;
+  }
+}
