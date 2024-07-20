@@ -1,0 +1,47 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(47, 47, 47, 0.6);;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.content {
+    background-color: var(--cw);
+    color: var(--cy);
+    padding: 40px 20px;
+    width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    position: relative;
+}
+
+.closebutton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+}
+
+@media screen and (min-width: 768px) {
+    .content {
+        padding: 40px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+}
