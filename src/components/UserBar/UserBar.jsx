@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import icon from '../../img/icons/icons.svg';
 import clsx from 'clsx';
 
-const UserBar = ({ openSettings, openLogout, user }) => {
+const UserBar = ({ user }) => {
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
@@ -52,13 +52,7 @@ const UserBar = ({ openSettings, openLogout, user }) => {
           <use xlinkHref={icon + '#arrow-down'} />
         </svg>
       </button>
-      {showPopover && (
-        <UserBarPopover
-          openSettings={openSettings}
-          openLogout={openLogout}
-          ref={popoverRef}
-        />
-      )}
+      {showPopover && <UserBarPopover ref={popoverRef} />}
     </div>
   );
 };

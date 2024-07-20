@@ -1,9 +1,12 @@
 import css from './LogOutModal.module.scss';
+import Modal from '../Modal/Modal';
 
-const LogOutModal = () => {
+const LogOutModal = ({ isOpen, onClose }) => {
   return (
     <div className={css.bloc}>
-      <h2>LogOutModal</h2>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <h2>Log out</h2>
+      </Modal>
     </div>
   );
 };
