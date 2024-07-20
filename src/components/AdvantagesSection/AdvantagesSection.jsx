@@ -5,10 +5,6 @@ import ava3 from '../../img/content/ava3.png';
 
 const AdvantagesSection = () => {
   return (
-    // <div className={css.bloc}>
-    //   <h2>AdvantagesSection</h2>
-    // </div>
-
     <div className={css.advantagesSection}>
       <div className={css.customers}>
         <ul className={css.customersBox}>
