@@ -1,0 +1,19 @@
+.settings{
+    width: 90%;
+    max-width: 343px;
+    max-height: 1302px;
+}
+
+@media screen and (min-width: 768px) {
+    .settings {
+        max-width: 648px;
+        max-height: 1336px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .settings {
+        max-width: 920px;
+        max-height: 996px;
+    }
+}

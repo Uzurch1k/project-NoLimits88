@@ -1,10 +1,13 @@
 import css from './UserSettingsModal.module.scss';
+import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
+import Modal from '../Modal/Modal'
 
-const UserSettingsModal = () => {
+const UserSettingsModal = ({ isOpen, onClose }) => {
   return (
-    <div className={css.bloc}>
-      <h2>UserSettingsModal</h2>
-    </div>
+    <Modal isOpen={isOpen} onClose={onClose} className={css.settings}>
+        <h2>Settings</h2>
+        <UserSettingsForm />
+    </Modal>
   );
 };
 
