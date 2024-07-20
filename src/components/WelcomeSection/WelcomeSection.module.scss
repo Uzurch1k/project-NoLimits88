@@ -16,13 +16,12 @@
 
 .welcomeBtns {
 	display: flex;
+	align-items: center;
 	gap: 10px;
 }
 
 .signInBtn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: block;
 	width: fit-content;
 	border: 1px solid var(--cy);
 	border-radius: 30px;
