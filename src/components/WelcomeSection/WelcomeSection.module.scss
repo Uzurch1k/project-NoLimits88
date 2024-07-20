@@ -1,13 +1,9 @@
 .welcomeText {
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 1.29;
 	letter-spacing: 0.06em;
 	color: var(--cb);
 	margin-bottom: 16px;
 }
 .welcomeTitle {
-	font-weight: 700;
 	font-size: 38px;
 	line-height: 1;
 	letter-spacing: -0.01em;
@@ -27,8 +23,6 @@
 	border-radius: 30px;
 	padding: 14px 28px;
 	font-weight: 700;
-	font-size: 14px;
-	line-height: 1.29;
 	letter-spacing: -0.01em;
 	color: var(---cy);
 	background-color: transparent;
@@ -47,8 +41,6 @@
 
 @media screen and (min-width: 768px) {
 	.welcomeText {
-		font-size: 16px;
-		line-height: 1.5;
 		letter-spacing: 0.06em;
 	}
 
@@ -64,8 +56,6 @@
 	}
 
 	.signInBtn {
-		font-size: 16px;
-		line-height: 1.5;
 		padding: 18px 40px;
 	}
 }

@@ -6,7 +6,7 @@ const WelcomeSection = () => {
   return (
     <div>
       <p className={css.welcomeText}>Record daily water intake and track</p>
-      <h2 className={css.welcomeTitle}>Water consumption tracker</h2>
+      <h1 className={css.welcomeTitle}>Water consumption tracker</h1>
       <div className={css.welcomeBtns}>
         <NavLink to="/signup" className="btn-def">
           Try tracker
