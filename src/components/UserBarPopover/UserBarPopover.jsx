@@ -14,11 +14,13 @@ const UserBarPopover = forwardRef((_, ref) => {
   });
 
   const handleOpenModal = item => {
+    console.log(`handleOpenModal ${item} modal`);
     setActiveItem(item);
     setModals(prev => ({ ...prev, [item]: true }));
   };
 
   const handleCloseModal = item => {
+    console.log(`handleCloseModal ${item} modal`);
     setActiveItem(null);
     setModals(prev => ({ ...prev, [item]: false }));
   };
@@ -39,12 +41,7 @@ const UserBarPopover = forwardRef((_, ref) => {
           >
             <use xlinkHref={`${icon}#settings`} />
           </svg>
-          <button
-            className={css.userBarPopoverButton}
-            onClick={() => handleOpenModal('settings')}
-          >
-            Settings
-          </button>
+          <button className={css.userBarPopoverButton}>Settings</button>
           <UserSettingsModal
             isOpen={modals.settings}
             onClose={() => handleCloseModal('settings')}
@@ -63,12 +60,7 @@ const UserBarPopover = forwardRef((_, ref) => {
           >
             <use xlinkHref={`${icon}#arrow-right-on-rectangle`} />
           </svg>
-          <button
-            className={css.userBarPopoverButton}
-            onClick={() => handleOpenModal('logout')}
-          >
-            Log out
-          </button>
+          <button className={css.userBarPopoverButton}>Log out</button>
           <LogOutmodal
             isOpen={modals.logout}
             onClose={() => handleCloseModal('logout')}

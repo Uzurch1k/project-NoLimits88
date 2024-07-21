@@ -1,10 +1,6 @@
 .settingsForm {
-  display: flex;
-  flex-direction: column;
-  /* TODO REMOVE LATER */
-  padding: 40px 20px;
-  max-width: 920px;
-  margin: 0 auto;
+	display: flex;
+	flex-direction: column;
 }
 
 /*.title {
@@ -16,214 +12,214 @@
   margin-bottom: 20px;
 }*/
 .avatarCont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 40px;
 }
 
 .avatar {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  margin-bottom: 8px;
-  text-align: center;
-  object-fit: cover;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	margin-bottom: 8px;
+	text-align: center;
+	object-fit: cover;
 }
 
 .avatarInput {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 .uplIcon {
-  width: 18px;
-  height: 18px;
-  position: relative;
-  top: 2px;
-  margin-right: 8px;
+	width: 18px;
+	height: 18px;
+	position: relative;
+	top: 2px;
+	margin-right: 8px;
 }
 .settingsCont {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .genderCont {
-  margin-bottom: 24px;
-  width: 100%;
+	margin-bottom: 24px;
+	width: 100%;
 }
 
 .genderLabel {
-  cursor: pointer;
+	cursor: pointer;
 }
 .genderRadioInput {
-  width: 0px;
-  height: 0px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+	width: 0px;
+	height: 0px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 .genderLabel::before {
-  content: '';
-  border-radius: 100%;
-  border: 1px solid var(--cg);
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  top: 5px;
-  margin-right: 10px;
+	content: "";
+	border-radius: 100%;
+	border: 1px solid var(--cg);
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+	margin-right: 10px;
 }
 
 .genderRadioInput:checked + .genderLabel::before {
-  background-color: var(--cg);
-  box-shadow: inset 0 0 0 5px var(--cw);
+	background-color: var(--cg);
+	box-shadow: inset 0 0 0 5px var(--cw);
 }
 
 .settingsTitle {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.16px;
-  padding-bottom: 14px;
-  color: var(--cy);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.16px;
+	padding-bottom: 14px;
+	color: var(--cy);
 }
 
 .text {
-  align-items: start;
-  padding-right: 10px;
+	align-items: start;
+	padding-right: 10px;
 }
 
 .UserInfoCont {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
 }
 
 .formulaCont {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-bottom: 14px;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	padding-bottom: 14px;
 }
 .formulaWrap {
-  margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 .normaCont {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 .normaFormula {
-  color: var(--cg);
-  line-height: 1.125em;
-  font-size: 14px;
-  font-weight: 700;
+	color: var(--cg);
+	line-height: 1.125em;
+	font-size: 14px;
+	font-weight: 700;
 }
 
 .normaTextArea {
-  border-radius: 15px;
-  border: 1px solid var(--cb);
-  padding: 16px;
-  margin-bottom: 14px;
-  text-align: left;
+	border-radius: 15px;
+	border: 1px solid var(--cb);
+	padding: 16px;
+	margin-bottom: 14px;
+	text-align: left;
 }
 
 .metricsWrapper {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .figure {
-  color: var(--cg);
+	color: var(--cg);
 }
 
 .settingsButton {
-  border: none;
-  border-radius: 30px;
-  padding: 14px, 40px, 14px, 40px;
-  gap: 10px;
-  max-width: 116px;
-  height: 46px;
-  margin-top: 40px;
-  background-color: var(--cg);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.125em;
+	border: none;
+	border-radius: 30px;
+	padding: 14px, 40px, 14px, 40px;
+	gap: 10px;
+	max-width: 116px;
+	height: 46px;
+	margin-top: 40px;
+	background-color: var(--cg);
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 1.125em;
 }
 .settingsButton:hover,
 .settingsButton:focus {
-  background-color: var(--cn);
+	background-color: var(--cn);
 }
 
 .input {
-  height: 46px;
-  width: 100%;
-  border-radius: 15px;
-  border: 1px solid var(--cb);
-  padding: 14px 16px;
-  margin-bottom: 8px;
+	height: 46px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid var(--cb);
+	padding: 14px 16px;
+	margin-bottom: 8px;
 }
 .input:last-child {
-  margin-top: 8px;
-  margin-bottom: 0;
+	margin-top: 8px;
+	margin-bottom: 0;
 }
 .waterAmountField {
-  margin-bottom: 14px;
+	margin-bottom: 14px;
 }
 .errorMessage {
-  font-size: 12px;
-  margin-top: 4px;
-  padding: 4px;
-  color: var(--cn);
+	font-size: 12px;
+	margin-top: 4px;
+	padding: 4px;
+	color: var(--cn);
 }
 
 /*==========================================*/
 @media screen and (min-width: 768px) {
-  /* .title {
+	/* .title {
     font-size: 28px;
     line-height: 1.14;
     letter-spacing: -0.28px;
   }*/
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
+	.avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		margin-bottom: 10px;
+	}
 
-  .genderCont {
-    width: 100%;
-  }
+	.genderCont {
+		width: 100%;
+	}
 
-  .formulaCont {
-    display: flex;
-    flex-direction: row;
-  }
-  .text {
-    padding-right: 28px;
-  }
+	.formulaCont {
+		display: flex;
+		flex-direction: row;
+	}
+	.text {
+		padding-right: 28px;
+	}
 }
 
 /*==================================================*/
 @media screen and (min-width: 1440px) {
-  .settingsCont {
-    display: flex;
-  }
-  .desctopCont {
-    max-width: 400px;
-    padding-right: 40px;
-  }
-  .desktopWeight {
-    max-width: 400px;
-    padding-top: 86px;
-  }
+	.settingsCont {
+		display: flex;
+	}
+	.desctopCont {
+		max-width: 400px;
+		padding-right: 40px;
+	}
+	.desktopWeight {
+		max-width: 400px;
+		padding-top: 86px;
+	}
 }
 
 .textWeight {
-  display: inline-block;
-  margin-bottom: 8px;
+	display: inline-block;
+	margin-bottom: 8px;
 }
