@@ -2,8 +2,9 @@ import css from './SignInForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useId } from 'react';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 // const getVisibleAndHiddenPassword = password => {
 //   const passwordCharacters = password.split('');
@@ -18,7 +19,15 @@ const loginSchema = yup.object().shape({
   email: yup
     .string('Email should be a string')
     .required('Email is required')
-    .email('Invalid email format'),
+    .email('Invalid email format')
+    .test('isValidAfterSign', 'Invalid email format', function (email) {
+      const strAfterEmailSign = email.slice(email.indexOf('@'));
+      if (strAfterEmailSign.includes('@') === -1) {
+        return true;
+      } else if (strAfterEmailSign.includes('@') !== -1) {
+        return strAfterEmailSign.includes('.');
+      }
+    }),
   password: yup
     .string()
     .required('Password is required')
@@ -31,11 +40,7 @@ const SignInForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    getValues,
-    watch,
-    setError,
-    getFieldState,
+    reset,
   } = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
@@ -43,10 +48,16 @@ const SignInForm = () => {
       defaultValues: { email: '', password: '' },
     },
   });
+
+  const fieldEmailId = useId();
+  const fieldPasswordId = useId();
+
   // const [password, setPassword] = useState('');
 
   const onSubmit = data => {
-    console.log(data);
+    const userData = { email: data.email, password: data.password };
+    // dispatch(login(userData))
+    reset();
   };
 
   // useEffect(() => {
@@ -56,44 +67,53 @@ const SignInForm = () => {
   // }, [password, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
-      <label htmlFor="email" className={css.emailLabel}>
-        Email
-      </label>
-      <input
-        type="email"
-        id="email"
-        {...register('email')}
-        className={clsx({
-          [css.emailInput]: true,
-          [css.errorEmailInput]: errors.email,
-        })}
-        placeholder="Enter your email"
-      />
-      {errors.email && (
-        <p className={css.errorMessage}>{errors.email.message}</p>
-      )}
-      <label htmlFor="password" className={css.passwordLabel}>
-        Password
-      </label>
-      <input
-        type="text"
-        id="password"
-        {...register('password')}
-        placeholder="Enter your password"
-        className={clsx({
-          [css.passwordInput]: true,
-          [css.errorPasswordInput]: errors.password,
-        })}
-        data-visible-pwd=""
-      />
-      {errors.password && (
-        <p className={css.errorMessage}>{errors.password.message}</p>
-      )}
-      <button type="submit" className={css.btnSignIn}>
-        Sign In
-      </button>
-    </form>
+    <>
+      <h2 className={css.signInTitle}>Sign In</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
+        <label htmlFor={fieldEmailId} className={css.emailLabel}>
+          Email
+        </label>
+        <input
+          type="email"
+          id={fieldEmailId}
+          {...register('email')}
+          className={clsx({
+            [css.emailInput]: true,
+            [css.errorEmailInput]: errors.email,
+          })}
+          placeholder="Enter your email"
+        />
+        {errors.email && (
+          <p className={css.errorMessage}>{errors.email.message}</p>
+        )}
+        <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
+          Password
+        </label>
+        <input
+          type="password"
+          id={fieldPasswordId}
+          {...register('password')}
+          placeholder="Enter your password"
+          className={clsx({
+            [css.passwordInput]: true,
+            [css.errorPasswordInput]: errors.password,
+          })}
+          data-visible-pwd=""
+        />
+        {errors.password && (
+          <p className={css.errorMessage}>{errors.password.message}</p>
+        )}
+        <button type="submit" className={css.btnSignIn}>
+          Sign In
+        </button>
+      </form>
+      <p className={css.questionText}>
+        Don&#39;t have an account?{' '}
+        <Link className={css.signUpLink} to="/signup">
+          Sign Up
+        </Link>
+      </p>
+    </>
   );
 };
 
