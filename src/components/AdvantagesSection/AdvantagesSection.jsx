@@ -19,7 +19,8 @@ const AdvantagesSection = () => {
           </li>
         </ul>
         <p className={css.text}>
-          Our <span className={css.highlightedtext}>happy</span> customers
+          Our <span className={css.highlightedtext}>happy</span>
+          <br /> customers
         </p>
       </div>
       <div className={css.group}>
