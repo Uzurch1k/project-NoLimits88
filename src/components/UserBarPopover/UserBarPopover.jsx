@@ -8,35 +8,19 @@ import LogOutmodal from '../LogOutModal/LogOutModal';
 // eslint-disable-next-line react/display-name
 const UserBarPopover = forwardRef((_, ref) => {
   const [activeItem, setActiveItem] = useState(null);
+  const [modals, setModals] = useState({
+    settings: false,
+    logout: false,
+  });
 
-  const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-
-  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
-
-  const openSettingsModal = () => {
-    setSettingsModalOpen(true);
+  const handleOpenModal = item => {
+    setActiveItem(item);
+    setModals(prev => ({ ...prev, [item]: true }));
   };
 
-  const closeSettingsModal = () => {
-    setSettingsModalOpen(false);
-  };
-
-  const openLogoutModal = () => {
-    setLogoutModalOpen(true);
-  };
-
-  const closeLogoutModal = () => {
-    setLogoutModalOpen(false);
-  };
-
-  const handleOpenSettings = () => {
-    setActiveItem('settings');
-    openSettingsModal();
-  };
-
-  const handleOpenLogout = () => {
-    setActiveItem('logout');
-    openLogoutModal();
+  const handleCloseModal = item => {
+    setActiveItem(null);
+    setModals(prev => ({ ...prev, [item]: false }));
   };
 
   return (
@@ -46,46 +30,49 @@ const UserBarPopover = forwardRef((_, ref) => {
           className={clsx(css.userBarPopoverItem, {
             [css.active]: activeItem === 'settings',
           })}
-          onClick={handleOpenSettings}
+          onClick={() => handleOpenModal('settings')}
         >
           <svg
             className={clsx(css.iconPopover, {
               [css.activeIcon]: activeItem === 'settings',
             })}
           >
-            <use xlinkHref={icon + '#settings'} />
+            <use xlinkHref={`${icon}#settings`} />
           </svg>
           <button
             className={css.userBarPopoverButton}
-            onClick={openSettingsModal}
+            onClick={() => handleOpenModal('settings')}
           >
             Settings
           </button>
           <UserSettingsModal
-            isOpen={isSettingsModalOpen}
-            onClose={closeSettingsModal}
+            isOpen={modals.settings}
+            onClose={() => handleCloseModal('settings')}
           />
         </li>
         <li
           className={clsx(css.userBarPopoverItem, {
             [css.active]: activeItem === 'logout',
           })}
-          onClick={handleOpenLogout}
+          onClick={() => handleOpenModal('logout')}
         >
           <svg
             className={clsx(css.iconPopover, {
               [css.activeIcon]: activeItem === 'logout',
             })}
           >
-            <use xlinkHref={icon + '#arrow-right-on-rectangle'} />
+            <use xlinkHref={`${icon}#arrow-right-on-rectangle`} />
           </svg>
           <button
             className={css.userBarPopoverButton}
-            onClick={openLogoutModal}
+            onClick={() => handleOpenModal('logout')}
           >
             Log out
           </button>
-          <LogOutmodal isOpen={isLogoutModalOpen} onClose={closeLogoutModal} />
+          <LogOutmodal
+            isOpen={modals.logout}
+            onClose={() => handleCloseModal('logout')}
+          />
         </li>
       </ul>
     </div>
