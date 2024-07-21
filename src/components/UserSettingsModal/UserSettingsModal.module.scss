@@ -1,0 +1,15 @@
+.sectionBox {
+	max-width: 343px;
+}
+
+@media screen and (min-width: 768px) {
+	.sectionBox {
+		max-width: 648px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.sectionBox {
+		max-width: 920px;
+	}
+}

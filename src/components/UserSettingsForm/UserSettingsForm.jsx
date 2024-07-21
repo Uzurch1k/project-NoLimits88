@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.css';
+import css from './UserSettingsForm.module.scss';
 import { useState } from 'react';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
@@ -34,7 +34,7 @@ const userSettingsSchema = Yup.object().shape({
     .required('The field is required'),
 });
 
- const UserSettingsForm = () => {
+const UserSettingsForm = () => {
   const [avatarUrl, setAvatarUrl] = useState('');
   const {
     register,
@@ -251,4 +251,5 @@ const userSettingsSchema = Yup.object().shape({
     </>
   );
 };
-export default UserSettingsForm
+
+export default UserSettingsForm;

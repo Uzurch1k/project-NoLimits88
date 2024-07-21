@@ -1,0 +1,63 @@
+.userBar {
+  position: relative;
+  width: fit-content;
+}
+
+.userBarButton {
+  background-color: var(--cy);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--cw);
+  padding-top: 6px;
+  padding-left: 12px;
+  padding-right: 18px;
+  padding-bottom: 6px;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.avatarWrapper {
+  display: flex;
+  border-radius: 50%;
+  background-color: var(--cu);
+  height: 38px;
+  width: 38px;
+  overflow: hidden;
+}
+
+.iconArrowDown {
+  height: 16px;
+  width: 16px;
+  fill: var(--cw);
+  stroke-width: 2;
+  stroke: var(--cw);
+  transition: all 150ms ease-in;
+}
+
+.iconArrowDown.rotate {
+  transform: rotate(180deg);
+}
+
+@media screen and (min-width: 768px) {
+  .userBarButton {
+    gap: 10px;
+  }
+
+  .avatarWrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .iconArrowDown {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .userBarButton {
+    padding-right: 12px;
+  }
+}
