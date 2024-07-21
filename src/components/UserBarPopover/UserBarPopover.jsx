@@ -3,7 +3,7 @@ import { forwardRef, useState } from 'react';
 import icon from '../../img/icons/icons.svg';
 import clsx from 'clsx';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
-import LogOutmodal from '../LogOutModal/LogOutModal';
+import LogOutModal from '../LogOutModal/LogOutModal';
 
 // eslint-disable-next-line react/display-name
 const UserBarPopover = forwardRef((_, ref) => {
@@ -32,7 +32,10 @@ const UserBarPopover = forwardRef((_, ref) => {
           className={clsx(css.userBarPopoverItem, {
             [css.active]: activeItem === 'settings',
           })}
-          onClick={() => handleOpenModal('settings')}
+          onClick={e => {
+            e.stopPropagation();
+            handleOpenModal('settings');
+          }}
         >
           <svg
             className={clsx(css.iconPopover, {
@@ -51,7 +54,10 @@ const UserBarPopover = forwardRef((_, ref) => {
           className={clsx(css.userBarPopoverItem, {
             [css.active]: activeItem === 'logout',
           })}
-          onClick={() => handleOpenModal('logout')}
+          onClick={e => {
+            e.stopPropagation();
+            handleOpenModal('logout');
+          }}
         >
           <svg
             className={clsx(css.iconPopover, {
@@ -61,7 +67,7 @@ const UserBarPopover = forwardRef((_, ref) => {
             <use xlinkHref={`${icon}#arrow-right-on-rectangle`} />
           </svg>
           <button className={css.userBarPopoverButton}>Log out</button>
-          <LogOutmodal
+          <LogOutModal
             isOpen={modals.logout}
             onClose={() => handleCloseModal('logout')}
           />
