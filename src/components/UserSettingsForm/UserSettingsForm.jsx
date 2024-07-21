@@ -34,7 +34,7 @@ const userSettingsSchema = Yup.object().shape({
     .required('The field is required'),
 });
 
-export const UserSettingsForm = () => {
+ const UserSettingsForm = () => {
   const [avatarUrl, setAvatarUrl] = useState('');
   const {
     register,
@@ -67,12 +67,11 @@ export const UserSettingsForm = () => {
     console.log(data);
     // код для обробки даних форми
   };
-
   return (
     <>
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
-          {/*<h3 className={css.title}>Setting</h3>*/}
+          <h3 className={css.title}>Setting</h3>
           {/* handle when BE logic is added */}
           {/* Add check if no avatarUrl show placeholder else show uploaded image */}
           <img className={css.avatar} src={avatarUrl} alt="" />
@@ -121,7 +120,7 @@ export const UserSettingsForm = () => {
             </div>
 
             <div className={css.UserInfoCont}>
-              <label className={css.settingsTitle} htmlFor="userName">
+              <label className={css.settingsTitleUserInfo} htmlFor="userName">
                 Your name
               </label>
               <input
@@ -137,7 +136,7 @@ export const UserSettingsForm = () => {
                 </span>
               )}
 
-              <label className={css.settingsTitle} htmlFor="userEmail">
+              <label className={css.settingsTitleUserInfo} htmlFor="userEmail">
                 Email
               </label>
               <input
@@ -223,12 +222,12 @@ export const UserSettingsForm = () => {
                   The required amount of water in liters per day:
                 </p>
               </div>
-              <label className={css.settingsTitle} htmlFor="userVolume">
+              <label className={css.settingsTitleUserInfo} htmlFor="userVolume">
                 Write down how much water you will drink:
               </label>
               <input
                 {...register('userVolume')}
-                className={css.input}
+                className={css.inputLast}
                 type="number"
                 name="userVolume"
                 id="userVolume"
@@ -252,3 +251,4 @@ export const UserSettingsForm = () => {
     </>
   );
 };
+export default UserSettingsForm
