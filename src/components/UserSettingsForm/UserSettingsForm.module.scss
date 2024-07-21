@@ -1,0 +1,251 @@
+.settingsForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	align-self: flex-start;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	margin-bottom: 20px;
+}
+.avatarCont {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+
+.avatarImg {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.avatarInput {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.uplIcon {
+	width: 18px;
+	height: 18px;
+	position: relative;
+	top: 2px;
+	margin-right: 8px;
+}
+.settingsCont {
+}
+.settingsBox {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	margin-bottom: 24px;
+}
+
+.genderCont {
+	margin-bottom: 24px;
+	width: 100%;
+}
+
+.genderLabel {
+	cursor: pointer;
+}
+.genderRadioInput {
+	width: 0px;
+	height: 0px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.genderLabel::before {
+	content: "";
+	border-radius: 100%;
+	border: 1px solid var(--cg);
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+	margin-right: 10px;
+}
+
+.genderRadioInput:checked + .genderLabel::before {
+	background-color: var(--cg);
+	box-shadow: inset 0 0 0 5px var(--cw);
+}
+
+.settingsTitle {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	margin-bottom: 14px;
+	color: var(--cy);
+}
+.settingsTitleUserInfo {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+}
+
+.text {
+	align-items: start;
+	padding-right: 20px;
+	margin-bottom: 4px;
+}
+
+.UserInfoCont {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.formulaCont {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	align-items: start;
+	padding-right: 10px;
+}
+
+.formulaWrap {
+	margin-bottom: 12px;
+}
+
+.normaCont {
+	margin-bottom: 24px;
+}
+.normaFormula {
+	color: var(--cg);
+	line-height: 1.25;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.normaTextArea {
+	border-radius: 15px;
+	border: 1px solid rgba(47, 47, 47, 0.15);
+	padding: 16px;
+	margin-bottom: 14px;
+	text-align: left;
+	color: rgba(47, 47, 47, 0.6);
+}
+
+.metricsWrapper {
+	margin-bottom: 10px;
+	color: var(--cg);
+	line-height: 1.125em;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.figure {
+	color: var(--cg);
+}
+
+.settingsButton {
+	padding: 14px 40px;
+}
+.settingsButton:hover,
+.settingsButton:focus {
+	background-color: var(--cn);
+}
+
+.input {
+	height: 46px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid rgba(47, 47, 47, 0.15);
+	padding: 14px 16px;
+	margin-bottom: 14px;
+}
+.input:last-child {
+	margin-top: 8px;
+	margin-bottom: 0;
+}
+.inputLast {
+	height: 46px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid rgba(47, 47, 47, 0.15);
+	padding: 14px 16px;
+	margin-top: 8px;
+}
+
+.waterAmountField {
+	margin-bottom: 14px;
+}
+.errorMessage {
+	font-size: 12px;
+	margin-top: 4px;
+	padding: 4px;
+	color: var(--cn);
+}
+
+.waterNorma {
+	color: var(--cg);
+	font-weight: 700;
+	font-size: 15px;
+}
+
+/*==========================================*/
+@media screen and (min-width: 768px) {
+	.title {
+		font-size: 28px;
+		line-height: 1.14;
+		letter-spacing: -0.01em;
+	}
+	.avatarImg {
+		width: 100px;
+		height: 100px;
+	}
+	.genderCont {
+		width: 100%;
+	}
+
+	.formulaCont {
+		display: flex;
+		flex-direction: row;
+	}
+	.text {
+		padding-right: 28px;
+	}
+	.settingsButton {
+		padding: 16px 50px;
+	}
+}
+
+/*==================================================*/
+@media screen and (min-width: 1440px) {
+	.settingsBox {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+	}
+	.desctopCont {
+		padding-right: 40px;
+	}
+}
+
+.textWeight {
+	display: inline-block;
+	margin-bottom: 8px;
+}

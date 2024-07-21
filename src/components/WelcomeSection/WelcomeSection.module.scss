@@ -1,0 +1,68 @@
+.welcomeText {
+	letter-spacing: 0.06em;
+	color: var(--cb);
+	margin-bottom: 16px;
+}
+.welcomeTitle {
+	font-size: 37px;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	margin-bottom: 32px;
+}
+
+.welcomeBtns {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.signInBtn {
+	display: block;
+	width: fit-content;
+	border: 1px solid var(--cy);
+	border-radius: 30px;
+	padding: 14px 28px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(---cy);
+	background-color: transparent;
+	transition: all 150ms ease-in;
+	&:hover,
+	&:focus {
+		color: var(--cn);
+		border-color: var(--cn);
+	}
+	&:disabled {
+		color: var(--cy);
+		border-color: var(--cy);
+		opacity: 0.2;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.welcomeText {
+		letter-spacing: 0.06em;
+	}
+
+	.welcomeTitle {
+		font-size: 64px;
+		line-height: 1.09;
+		letter-spacing: -0.01em;
+		margin-bottom: 32px;
+	}
+
+	.welcomeBtns {
+		gap: 16px;
+	}
+
+	.signInBtn {
+		padding: 18px 40px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.welcomeTitle {
+		font-size: 80px;
+		line-height: 0.95;
+	}
+}
