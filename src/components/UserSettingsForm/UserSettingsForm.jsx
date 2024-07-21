@@ -69,11 +69,9 @@ const UserSettingsForm = () => {
   };
   return (
     <>
+      <h2 className={css.title}>Setting</h2>
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
-          <h3 className={css.title}>Setting</h3>
-          {/* handle when BE logic is added */}
-          {/* Add check if no avatarUrl show placeholder else show uploaded image */}
           <img className={css.avatar} src={avatarUrl} alt="" />
           <input
             onChange={handleAvatarUpload}
@@ -89,9 +87,9 @@ const UserSettingsForm = () => {
         </div>
 
         <div className={css.settingsCont}>
-          <div className={css.desctopCont}>
-            <div className={css.genderCont}>
-              <p className={css.settingsTitle}>Your gender identity</p>
+          <div className={css.genderCont}>
+            <p className={css.settingsTitle}>Your gender identity</p>
+            <div>
               <input
                 {...register('gender')}
                 className={css.genderRadioInput}
@@ -118,128 +116,143 @@ const UserSettingsForm = () => {
                 Man
               </label>
             </div>
-
-            <div className={css.UserInfoCont}>
-              <label className={css.settingsTitleUserInfo} htmlFor="userName">
-                Your name
-              </label>
-              <input
-                {...register('userName')}
-                className={css.input}
-                type="text"
-                name="userName"
-                id="userName"
-              />
-              {errors.userName && (
-                <span className={css.errorMessage}>
-                  {errors.userName.message}
-                </span>
-              )}
-
-              <label className={css.settingsTitleUserInfo} htmlFor="userEmail">
-                Email
-              </label>
-              <input
-                {...register('userEmail')}
-                className={css.input}
-                type="text"
-                name="userEmail"
-                id="userEmail"
-              />
-              {errors.userEmail && (
-                <span className={css.errorMessage}>
-                  {errors.userEmail.message}
-                </span>
-              )}
-            </div>
-
-            <div className={css.normaCont}>
-              <p className={css.settingsTitle}>My daily norma</p>
-              <div className={css.formulaCont}>
-                <div className={css.formulaWrap}>
-                  <p className={css.text}>For woman:</p>
-                  <span className={`${css.text} ${css.normaFormula}`}>
-                    V=(M*0,03) + (T*0,4)
-                  </span>
-                </div>
-                <div className={css.formulaWrap}>
-                  <p className={css.text}>For man:</p>
-                  <span className={`${css.text} ${css.normaFormula}`}>
-                    V=(M*0,04) + (T*0,6)
-                  </span>
-                </div>
-              </div>
-              <p className={css.normaTextArea}>
-                <span className={css.figure}>*</span> V is the volume of the
-                water norm in liters per day, M is your body weight, T is the
-                time of active sports, or another type of activity commensurate
-                in terms of loads (in the absence of these, you must set 0)
-              </p>
-              <span className={`${css.text} ${css.activeTime}`}>
-                <FaExclamation size={18} color="#9BE1A0" /> Active time in hours
-              </span>
-            </div>
           </div>
 
-          <div className={css.desktopWeight}>
-            <div className={css.metricsWrapper}>
-              <label className={css.textWeight} htmlFor="userWeight">
-                Your weight in kilograms:
-              </label>
-              <input
-                {...register('userWeight')}
-                className={css.input}
-                type="number"
-                name="userWeight"
-                id="userWeight"
-              />
-              {errors.userWeight && (
-                <span className={css.errorMessage}>
-                  {errors.userWeight.message}
-                </span>
-              )}
+          <div className={css.settingsBox}>
+            <div>
+              <div className={css.UserInfoCont}>
+                <label className={css.settingsTitleUserInfo} htmlFor="userName">
+                  Your name
+                </label>
+                <input
+                  {...register('userName')}
+                  className={css.input}
+                  type="text"
+                  name="userName"
+                  id="userName"
+                />
+                {errors.userName && (
+                  <span className={css.errorMessage}>
+                    {errors.userName.message}
+                  </span>
+                )}
 
-              <label className={css.textWeight} htmlFor="activityTime">
-                The time of active participation in sports:
-              </label>
-              <input
-                {...register('activityTime')}
-                className={css.input}
-                type="number"
-                name="activityTime"
-                id="activityTime"
-              />
-              {errors.activityTime && (
-                <span className={css.errorMessage}>
-                  {errors.activityTime.message}
+                <label
+                  className={css.settingsTitleUserInfo}
+                  htmlFor="userEmail"
+                >
+                  Email
+                </label>
+                <input
+                  {...register('userEmail')}
+                  className={css.input}
+                  type="text"
+                  name="userEmail"
+                  id="userEmail"
+                />
+                {errors.userEmail && (
+                  <span className={css.errorMessage}>
+                    {errors.userEmail.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={css.normaCont}>
+                <p className={css.settingsTitle}>My daily norma</p>
+                <div className={css.formulaCont}>
+                  <div className={css.formulaWrap}>
+                    <p className={css.text}>For woman:</p>
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      V=(M*0,03) + (T*0,4)
+                    </span>
+                  </div>
+                  <div className={css.formulaWrap}>
+                    <p className={css.text}>For man:</p>
+                    <span className={`${css.text} ${css.normaFormula}`}>
+                      V=(M*0,04) + (T*0,6)
+                    </span>
+                  </div>
+                </div>
+                <p className={css.normaTextArea}>
+                  <span className={css.figure}>*</span> V is the volume of the
+                  water norm in liters per day, M is your body weight, T is the
+                  time of active sports, or another type of activity
+                  commensurate in terms of loads (in the absence of these, you
+                  must set 0)
+                </p>
+                <span className={`${css.text} ${css.activeTime}`}>
+                  <FaExclamation size={18} color="#9BE1A0" /> Active time in
+                  hours
                 </span>
-              )}
+              </div>
             </div>
 
-            <div className={css.waterAmountCont}>
-              <div className={css.waterAmountField}>
-                <p className={css.text}>
-                  The required amount of water in liters per day:
-                </p>
+            <div>
+              <div className={css.desktopWeight}>
+                <div className={css.metricsWrapper}>
+                  <label className={css.textWeight} htmlFor="userWeight">
+                    Your weight in kilograms:
+                  </label>
+                  <input
+                    {...register('userWeight')}
+                    className={css.input}
+                    type="number"
+                    name="userWeight"
+                    id="userWeight"
+                  />
+                  {errors.userWeight && (
+                    <span className={css.errorMessage}>
+                      {errors.userWeight.message}
+                    </span>
+                  )}
+
+                  <label className={css.textWeight} htmlFor="activityTime">
+                    The time of active participation in sports:
+                  </label>
+                  <input
+                    {...register('activityTime')}
+                    className={css.input}
+                    type="number"
+                    name="activityTime"
+                    id="activityTime"
+                  />
+                  {errors.activityTime && (
+                    <span className={css.errorMessage}>
+                      {errors.activityTime.message}
+                    </span>
+                  )}
+                </div>
+
+                <div className={css.waterAmountCont}>
+                  <div className={css.waterAmountField}>
+                    <p className={css.text}>
+                      The required amount of water in liters per day:
+                    </p>
+                  </div>
+                  <label
+                    className={css.settingsTitleUserInfo}
+                    htmlFor="userVolume"
+                  >
+                    Write down how much water you will drink:
+                  </label>
+                  <input
+                    {...register('userVolume')}
+                    className={css.inputLast}
+                    type="number"
+                    name="userVolume"
+                    id="userVolume"
+                  />
+                  {errors.userVolume && (
+                    <span className={css.errorMessage}>
+                      {errors.userVolume.message}
+                    </span>
+                  )}
+                </div>
               </div>
-              <label className={css.settingsTitleUserInfo} htmlFor="userVolume">
-                Write down how much water you will drink:
-              </label>
-              <input
-                {...register('userVolume')}
-                className={css.inputLast}
-                type="number"
-                name="userVolume"
-                id="userVolume"
-              />
-              {errors.userVolume && (
-                <span className={css.errorMessage}>
-                  {errors.userVolume.message}
-                </span>
-              )}
             </div>
           </div>
         </div>
+
         <button
           className={css.settingsButton}
           type="submit"

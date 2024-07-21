@@ -44,7 +44,11 @@
 	margin-right: 8px;
 }
 .settingsCont {
-	margin-bottom: 40px;
+}
+.settingsBox {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	margin-bottom: 24px;
 }
 
 .genderCont {
@@ -240,16 +244,12 @@
 
 /*==================================================*/
 @media screen and (min-width: 1440px) {
-	.settingsCont {
-		display: flex;
+	.settingsBox {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
 	}
 	.desctopCont {
-		max-width: 400px;
 		padding-right: 40px;
-	}
-	.desktopWeight {
-		max-width: 400px;
-		padding-top: 86px;
 	}
 }
 
