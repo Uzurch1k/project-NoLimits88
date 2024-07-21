@@ -5,6 +5,7 @@ import css from './UserSettingsForm.module.scss';
 import { useState } from 'react';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
+import clsx from 'clsx';
 
 const user = {
   avatarURL: 'path/to/avatar.jpg',
@@ -72,7 +73,9 @@ const UserSettingsForm = () => {
       <h2 className={css.title}>Setting</h2>
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
-          <img className={css.avatar} src={avatarUrl} alt="" />
+          <div className={css.avatarImg}>
+            <img src={avatarUrl} alt="" />
+          </div>
           <input
             onChange={handleAvatarUpload}
             className={css.avatarInput}
@@ -90,31 +93,38 @@ const UserSettingsForm = () => {
           <div className={css.genderCont}>
             <p className={css.settingsTitle}>Your gender identity</p>
             <div>
-              <input
-                {...register('gender')}
-                className={css.genderRadioInput}
-                type="radio"
-                name="gender"
-                id="woman"
-                value="Woman"
-              />
-              <label
-                className={`${css.text} ${css.genderLabel}`}
-                htmlFor="woman"
-              >
-                Woman
-              </label>
-              <input
-                {...register('gender')}
-                className={css.genderRadioInput}
-                type="radio"
-                name="gender"
-                id="man"
-                value="Man"
-              />
-              <label className={`${css.text} ${css.genderLabel}`} htmlFor="man">
-                Man
-              </label>
+              <div>
+                <input
+                  {...register('gender')}
+                  className={css.genderRadioInput}
+                  type="radio"
+                  name="gender"
+                  id="woman"
+                  value="Woman"
+                />
+                <label
+                  className={`${css.text} ${css.genderLabel}`}
+                  htmlFor="woman"
+                >
+                  Woman
+                </label>
+              </div>
+              <div>
+                <input
+                  {...register('gender')}
+                  className={css.genderRadioInput}
+                  type="radio"
+                  name="gender"
+                  id="man"
+                  value="Man"
+                />
+                <label
+                  className={`${css.text} ${css.genderLabel}`}
+                  htmlFor="man"
+                >
+                  Man
+                </label>
+              </div>
             </div>
           </div>
 
@@ -254,7 +264,7 @@ const UserSettingsForm = () => {
         </div>
 
         <button
-          className={css.settingsButton}
+          className={clsx(css.settingsButton, 'btn-def')}
           type="submit"
           disabled={!isAnyFieldFilled}
         >

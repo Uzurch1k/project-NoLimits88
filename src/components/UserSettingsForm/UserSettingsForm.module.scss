@@ -19,13 +19,19 @@
 	margin-bottom: 40px;
 }
 
-.avatar {
+.avatarImg {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	margin-bottom: 8px;
-	text-align: center;
-	object-fit: cover;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+	}
 }
 
 .avatarInput {
@@ -157,16 +163,7 @@
 }
 
 .settingsButton {
-	border: none;
-	border-radius: 30px;
-	padding: 14px, 40px, 14px, 40px;
-	gap: 10px;
-	max-width: 116px;
-	height: 46px;
-	background-color: var(--cg);
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 1.25;
+	padding: 14px 40px;
 }
 .settingsButton:hover,
 .settingsButton:focus {
@@ -217,17 +214,9 @@
 		line-height: 1.14;
 		letter-spacing: -0.01em;
 	}
-	.avatar {
+	.avatarImg {
 		width: 100px;
 		height: 100px;
-		border-radius: 50%;
-		margin-bottom: 10px;
-	}
-	.avatar {
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-		margin-bottom: 10px;
 	}
 	.genderCont {
 		width: 100%;
@@ -239,6 +228,9 @@
 	}
 	.text {
 		padding-right: 28px;
+	}
+	.settingsButton {
+		padding: 16px 50px;
 	}
 }
 
