@@ -1,90 +1,68 @@
-.content {
-    max-width: 344px;
-    max-height: 267px;
+.sectionBox {
+	max-width: 344px;
 }
 
-.title{
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 16px;
+.title {
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 16px;
 }
 
 .quest {
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 28px;
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.boxBtns {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	width: 100%;
 }
 
 .btnlogout {
-    white-space: nowrap;
-    border-radius: 30px;
-    padding: 14px 126px;
-    width: 304px;
-    height: 46px;
-    background-color: var(--cg);
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.28571;
-    text-align: center;
-    color: var(--cy);
-    margin-bottom: 9px;
-}
-
-.btnlogout:hover,
-.btnlogout:focus-within {
-    background-color: var(--cn);
+	width: 100%;
 }
 
 .btncancel {
-    border-radius: 30px;
-    padding: 14px 126px;
-    width: 304px;
-    height: 46px;
-    font-weight: 700;
-    font-size: 14px;
-    background-color: var(--cu);
-    color: rgba(50, 63, 71, 0.3);;
+	width: 100%;
+	background-color: var(--cu);
+	color: rgba(50, 63, 71, 0.3);
 }
 
 .btncancel:hover,
 .btncancel:focus-within {
-    color: var(--cy);
+	color: var(--cy);
 }
 
 @media screen and (min-width: 768px) {
-    .content {
-        max-width: 516px;
-        max-height: 244px;
-    }
+	.sectionBox {
+		max-width: 516px;
+	}
 
-    .title {
-        font-size: 28px;
-        margin-bottom: 24px;
-    }
+	.title {
+		font-size: 28px;
+		margin-bottom: 24px;
+	}
 
-    .quest {
-        font-size: 18px;
-        margin-bottom: 24px;
-    }
+	.quest {
+		font-size: 18px;
+		margin-bottom: 24px;
+	}
 
-    .btnlogout {
-        padding: 18px 57px;
-        width: 173px;
-        height: 60px;
-        margin-right: 10px;
-        margin-left: 38.5px;
-        font-size: 16px;
-        margin-bottom: 0;
-    }
+	.boxBtns {
+		justify-content: center;
+		flex-direction: row;
+		gap: 10px;
+	}
 
-    .btncancel {
-        padding: 18px 59px;
-        width: 176px;
-        height: 60px;
-        font-size: 16px;
-    }
+	.btnlogout,
+	.btncancel {
+		width: fit-content;
+		padding: 18px 57px;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-
 }

@@ -1,8 +1,9 @@
-import css from './LogOutModal.module.scss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../Modal/Modal';
-import { logOut } from '../../redux/auth/operations'
+import { logOut } from '../../redux/auth/operations';
+import clsx from 'clsx';
+import css from './LogOutModal.module.scss';
 
 const LogOutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -21,12 +22,26 @@ const LogOutModal = ({ isOpen, onClose }) => {
   };
 
   return (
-      <Modal isOpen={isOpen} onClose={onClose} className={css.content}>
-        <h2 className={css.title}>Log out</h2>
-        <p className={css.quest}>Do you really want to leave?</p>
-        <button className={css.btnlogout} type='button' onClick={handleLogout}> Log Out </button>
-        <button className={css.btncancel} type='button' onClick={onClose}>Cancel</button>
-      </Modal>
+    <Modal isOpen={isOpen} onClose={onClose} classSectionBox={css.sectionBox}>
+      <h2 className={css.title}>Log out</h2>
+      <p className={css.quest}>Do you really want to leave?</p>
+      <div className={css.boxBtns}>
+        <button
+          className={clsx(css.btnlogout, 'btn-def')}
+          type="button"
+          onClick={handleLogout}
+        >
+          Log Out
+        </button>
+        <button
+          className={clsx(css.btncancel, 'btn-def')}
+          type="button"
+          onClick={onClose}
+        >
+          Cancel
+        </button>
+      </div>
+    </Modal>
   );
 };
 

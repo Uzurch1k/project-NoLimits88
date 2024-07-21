@@ -10,8 +10,10 @@ body {
 	left: 0;
 	background-color: var(--rcb);
 	display: grid;
+	grid-template-columns: repeat(1, 1fr);
 	justify-content: center;
 	align-items: center;
+	justify-items: center;
 	z-index: 100;
 	padding: 80px 16px;
 	overflow-y: auto;
