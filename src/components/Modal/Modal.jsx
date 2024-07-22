@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import icons from '../../img/icons/icons.svg';
-import clsx from 'clsx';
-
 import css from './Modal.module.scss';
 
 const Modal = ({ children, isOpen, onClose, classSectionBox }) => {
@@ -23,10 +21,17 @@ const Modal = ({ children, isOpen, onClose, classSectionBox }) => {
 
   if (!isOpen) return null;
 
+  const handleBackdropClick = e => {
+    if (e.target === e.currentTarget) {
+      onClose();
+      e.stopPropagation();
+    }
+  };
+
   return (
-    <div className={css.backdrop} onClick={onClose}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
       <div
-        className={clsx(css.content, classSectionBox)}
+        className={`${css.content} ${classSectionBox || ''}`}
         onClick={e => e.stopPropagation()}
       >
         <button className={css.closebutton} onClick={onClose}>
@@ -34,7 +39,6 @@ const Modal = ({ children, isOpen, onClose, classSectionBox }) => {
             <use href={`${icons}#arrow-left`}></use>
           </svg>
         </button>
-
         {children}
       </div>
     </div>
