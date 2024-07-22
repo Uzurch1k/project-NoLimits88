@@ -11,8 +11,6 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { contactsReducer } from '../redux/contacts/slice';
-import { filtersReducer } from '../redux/filters/slice';
 import { authReducer } from '../redux/auth/slice';
 
 const persistConfig = {
@@ -27,8 +25,6 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    contacts: contactsReducer,
-    filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
