@@ -33,22 +33,21 @@
   .inputBaseStyles::placeholder {
     color: #2f2f2f99;
   }
+  .inputPasswordWrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .inputPasswordWrapperError {
+    margin-bottom: 10px;
+  }
   .emailInput {
     @extend .inputBaseStyles;
     margin-bottom: 16px;
   }
   .passwordInput {
     @extend .inputBaseStyles;
-    margin-bottom: 32px;
-    // opacity: 0;
-    // visibility: hidden;
-    // display: none;
-    // position: relative;
   }
-  // .inputPasswordMask {
-  //   @extend .inputBaseStyles;
-  //   margin-bottom: 32px;
-  // }
   .errorInput {
     color: #ef5050;
     border: 1px solid #ef5050;
@@ -59,7 +58,7 @@
   }
   .errorPasswordInput {
     @extend .errorInput;
-    margin-bottom: 10px;
+    -webkit-text-security: square;
   }
   .errorMessage {
     color: #ef5050;
@@ -68,6 +67,20 @@
     display: inline-block;
     width: 100%;
     margin-bottom: 10px;
+  }
+  .showPwdBtn {
+    width: 20px;
+    height: 20px;
+    display: none;
+    position: absolute;
+    top: 18px;
+    right: 16px;
+  }
+  .eye {
+    display: inline-block;
+    stroke-width: 1;
+    stroke: rgba(47, 47, 47, 1);
+    fill: rgba(240, 239, 244, 1);
   }
   .btnSignIn {
     width: 100%;
@@ -87,16 +100,6 @@
     color: #bcbcbc;
     background-color: #e6e6e6;
     border: none;
-  }
-  .closedEye {
-    background-color: black;
-    stroke: white;
-    fill: white;
-  }
-  .openedEye {
-    background-color: black;
-    stroke: white;
-    fill: white;
   }
 }
 
@@ -129,6 +132,9 @@
     }
     .emailInput {
       margin-bottom: 20px;
+    }
+    .showPwdBtn {
+      display: block;
     }
     .btnSignIn {
       width: 100%;

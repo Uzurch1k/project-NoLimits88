@@ -6,6 +6,9 @@ import { useEffect, useRef, useState, useId } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import icons from '../../img/icons/icons.svg';
 
 // const getVisibleAndHiddenPassword = password => {
 //   const passwordCharacters = password.split('');
@@ -57,7 +60,20 @@ const SignInForm = () => {
 
   const onSubmit = data => {
     const userData = { email: data.email, password: data.password };
-    // dispatch(login(userData))
+
+    const loginUser = async () => {
+      try {
+        const response = await axios.post(
+          'https://aquatrack-backend-bmxm.onrender.com/auth/signin',
+          userData
+        );
+        toast.success('Successfully logged in!');
+      } catch (error) {
+        toast.error(error.response.data.message || 'Login error');
+      }
+    };
+
+    loginUser();
     reset();
   };
 
@@ -90,17 +106,32 @@ const SignInForm = () => {
         <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
           Password
         </label>
-        <input
-          type="password"
-          id={fieldPasswordId}
-          {...register('password')}
-          placeholder="Enter your password"
+        <div
           className={clsx({
-            [css.passwordInput]: true,
-            [css.errorPasswordInput]: errors.password,
+            [css.inputPasswordWrapper]: true,
+            [css.inputPasswordWrapperError]: errors.password,
           })}
-          data-visible-pwd=""
-        />
+        >
+          <input
+            type="password"
+            id={fieldPasswordId}
+            {...register('password')}
+            placeholder="Enter your password"
+            className={clsx({
+              [css.passwordInput]: true,
+              [css.errorPasswordInput]: errors.password,
+            })}
+            data-visible-pwd=""
+          />
+          <button
+            className={css.showPwdBtn}
+            onClick={showPasswordToggleHandler}
+          >
+            <svg width="20" height="20" className={css.eye}>
+              <use href={`${icons}#closed-eye`}></use>
+            </svg>
+          </button>
+        </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
@@ -114,6 +145,20 @@ const SignInForm = () => {
           Sign Up
         </Link>
       </p>
+      <ToastContainer
+        className={css.Toastify}
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+        closeButton={window.innerWidth > 480}
+      />
     </>
   );
 };
