@@ -1,14 +1,19 @@
-import css from './SignInForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { useEffect, useRef, useState, useId } from 'react';
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { logIn } from '../../redux/auth/operations';
+
+import clsx from 'clsx';
 import icons from '../../img/icons/icons.svg';
+import css from './SignInForm.module.scss';
 
 // const getVisibleAndHiddenPassword = password => {
 //   const passwordCharacters = password.split('');
@@ -55,25 +60,27 @@ const SignInForm = () => {
 
   const fieldEmailId = useId();
   const fieldPasswordId = useId();
+  const dispatch = useDispatch();
 
   // const [password, setPassword] = useState('');
 
   const onSubmit = data => {
     const userData = { email: data.email, password: data.password };
 
-    const loginUser = async () => {
-      try {
-        const response = await axios.post(
-          'https://aquatrack-backend-bmxm.onrender.com/auth/signin',
-          userData
-        );
-        toast.success('Successfully logged in!');
-      } catch (error) {
-        toast.error(error.response.data.message || 'Login error');
-      }
-    };
+    // const loginUser = async () => {
+    //   try {
+    //     const response = await axios.post(
+    //       'https://aquatrack-backend-bmxm.onrender.com/auth/signin',
+    //       userData
+    //     );
+    //     toast.success('Successfully logged in!');
+    //   } catch (error) {
+    //     toast.error(error.response.data.message || 'Login error');
+    //   }
+    // };
+    // loginUser();
+    dispatch(logIn(userData));
 
-    loginUser();
     reset();
   };
 
@@ -125,7 +132,7 @@ const SignInForm = () => {
           />
           <button
             className={css.showPwdBtn}
-            onClick={showPasswordToggleHandler}
+            // onClick={showPasswordToggleHandler}
           >
             <svg width="20" height="20" className={css.eye}>
               <use href={`${icons}#closed-eye`}></use>

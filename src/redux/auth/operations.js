@@ -58,12 +58,12 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('/users/signin', credentials);
+      const res = await axios.post('/users/login', credentials);
       setAuthHeader(res.data.token);
       toast.success(res.data.message);
-
-      const profileRes = await axios.get('/users/profile');
-      return { ...res.data, user: profileRes.data };
+      return res.data;
+      // const profileRes = await axios.get('/users/profile');
+      // return { ...res.data, user: profileRes.data };
     } catch (error) {
       toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
