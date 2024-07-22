@@ -1,20 +1,15 @@
 .section {
-	padding: 16px 0;
-}
-.body {
+	// flex-grow: 1;
+	width: 100%;
+	height: 100%;
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	gap: 16px;
 }
 
-@media screen and (min-width: 768px) {
-	.section {
-		padding: 32px 0;
-	}
-}
-
 @media screen and (min-width: 1440px) {
-	.body {
+	.section {
+		flex-grow: 0;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 32px;
 	}

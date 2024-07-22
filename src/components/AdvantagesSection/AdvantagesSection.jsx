@@ -9,30 +9,24 @@ const AdvantagesSection = () => {
       <div className={css.customers}>
         <ul className={css.customersBox}>
           <li className={css.customerImgBox}>
-            <img
-              className={css.customerImg}
-              src={ava1}
-              alt="user image"
-              width="26.4"
-              height="28"
-            />
+            <img className={css.customerImg} src={ava1} alt="User ava" />
           </li>
           <li className={css.customerImgBox}>
-            <img className={css.customerImg} src={ava2} alt="user image" />
+            <img className={css.customerImg} src={ava2} alt="User ava" />
           </li>
           <li className={css.customerImgBox}>
-            <img className={css.customerImg} src={ava3} alt="user image" />
+            <img className={css.customerImg} src={ava3} alt="User ava" />
           </li>
         </ul>
-        <div className={css.text}>
-          <span>Our</span> <span className={css.highlightedtext}>happy</span>{' '}
-          <span>customers</span>
-        </div>
+        <p className={css.text}>
+          Our <span className={css.highlightedtext}>happy</span>
+          <br /> customers
+        </p>
       </div>
       <div className={css.group}>
         <ul className={css.advantagesGroup}>
           <li className={css.advantagesGroupItem}>
-            <div className={css.ellipse}></div>
+            <span className={css.ellipse}></span>
             <p>Habit drive</p>
           </li>
           <li className={css.advantagesGroupItem}>
