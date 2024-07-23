@@ -61,6 +61,8 @@ const SignInForm = () => {
     const userData = { email: data.email, password: data.password };
     setIsLoader(true);
 
+    dispatch(logIn(userData));
+
     setTimeout(() => {
       setIsLoader(false);
       console.log('success');

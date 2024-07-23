@@ -2,6 +2,9 @@ import { lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { selectIsRefreshing } from '../../redux/auth/selectors';
+import { refreshUser } from '../../redux/auth/operations';
+
 import SharedLayout from '../Layout/SharedLayout/SharedLayout';
 import PrivateRoute from '../Routes/PrivateRoute';
 import RestrictedRoute from '../Routes/RestrictedRoute';
@@ -14,6 +17,13 @@ const SignUpPage = lazy(() => import('../../pages/SignUpPage/SignUpPage'));
 import './App.scss';
 
 function App() {
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <SharedLayout>
       <Routes>
