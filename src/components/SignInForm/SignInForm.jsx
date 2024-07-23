@@ -99,7 +99,7 @@ const SignInForm = () => {
   };
 
   return (
-    <>
+    <div className={css.signInBody}>
       <h2 className={css.signInTitle}>Sign In</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
@@ -142,7 +142,7 @@ const SignInForm = () => {
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
-        <button type="submit" className={css.btnSignIn}>
+        <button type="submit" className={clsx(css.btnSignIn, 'btn-def')}>
           Sign In
         </button>
       </form>
@@ -166,7 +166,7 @@ const SignInForm = () => {
         transition:Bounce
         closeButton={window.innerWidth > 480}
       />
-    </>
+    </div>
   );
 };
 

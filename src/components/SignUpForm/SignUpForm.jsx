@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import css from './SignUpForm.module.scss';
 import icons from '../../img/icons/icons.svg';
+import clsx from 'clsx';
 
 const schema = yup.object().shape({
   email: yup
@@ -137,7 +138,7 @@ const SignUpForm = () => {
             </span>
           )}
         </div>
-        <button className={css.signupButton} type="submit">
+        <button className={clsx(css.signupButton, 'btn-def')} type="submit">
           Sign Up
         </button>
         <ToastContainer />
