@@ -61,9 +61,8 @@ export const logIn = createAsyncThunk(
       const res = await axios.post('/users/login', credentials);
       setAuthHeader(res.data.token);
       toast.success(res.data.message);
-      return res.data;
-      // const profileRes = await axios.get('/users/profile');
-      // return { ...res.data, user: profileRes.data };
+      const profileRes = await axios.get('/users/current'); // Отримання профілю
+      return { ...res.data, user: profileRes.data };
     } catch (error) {
       toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);

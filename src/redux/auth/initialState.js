@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
     amountOfWater: null,
   },
   token: null,
+  refreshToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
