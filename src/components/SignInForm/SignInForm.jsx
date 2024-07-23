@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import css from './SignInForm.module.scss';
 import BtnShowPassword from './BtnShowPassword';
+import { LoaderDetails } from '../Loader/Loader';
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -54,48 +55,17 @@ const SignInForm = () => {
   const dispatch = useDispatch();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
 
-  const onSubmit = data => {
+  const onSubmit = (data, e) => {
     const userData = { email: data.email, password: data.password };
-    dispatch(logIn(userData));
+    setIsLoader(true);
+
+    setTimeout(() => {
+      setIsLoader(false);
+      console.log('success');
+    }, 20000);
     reset();
-
-    // const load = async () => {
-    // const promise = new Promise((resolve, reject) => {});
-
-    //   try {
-    //      ;
-    //     if (response.error) throw new Error(response.error);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-
-    // const promise = new Promise((resolve, reject) => {
-    //   if (response.error) {
-    //     reject('Login failed');
-    //   }
-    //   resolve('Login successfull!');
-    // });
-
-    // toast.promise(),
-    //   {
-    //     pending: 'Login user...',
-    //     error: 'Login failed',
-    //     success: 'Successfully logged in!',
-    //   };
-    // };
-
-    // load();
-
-    // try {
-    //   toast.promise(dispatch(logIn(userData)), {
-    //     pending: 'Login user...',
-    //     error: 'Login failed',
-    //     success: 'Successfully logged in!',
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
@@ -143,7 +113,7 @@ const SignInForm = () => {
           <p className={css.errorMessage}>{errors.password.message}</p>
         )}
         <button type="submit" className={clsx(css.btnSignIn, 'btn-def')}>
-          Sign In
+          {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign In'}
         </button>
       </form>
       <p className={css.questionText}>
