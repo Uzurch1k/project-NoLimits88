@@ -1,11 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import BaseModal from '../BaseModal/BaseModal';
 import { logOut } from '../../redux/auth/operations';
 import clsx from 'clsx';
 import css from './LogOutModal.module.scss';
 
-const LogOutModal = ({ isOpen, onClose }) => {
+const LogOutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,11 +21,7 @@ const LogOutModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onClose}
-      classSectionBox={css.sectionBox}
-    >
+    <div>
       <h2 className={css.title}>Log out</h2>
       <p className={css.quest}>Do you really want to leave?</p>
       <div className={css.boxBtns}>
@@ -37,15 +32,11 @@ const LogOutModal = ({ isOpen, onClose }) => {
         >
           Log Out
         </button>
-        <button
-          className={clsx(css.btncancel, 'btn-def')}
-          type="button"
-          onClick={onClose}
-        >
+        <button className={clsx(css.btncancel, 'btn-def')} type="button">
           Cancel
         </button>
       </div>
-    </BaseModal>
+    </div>
   );
 };
 
