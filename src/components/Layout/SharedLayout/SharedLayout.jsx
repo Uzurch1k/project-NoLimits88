@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 
 import Main from '../Main/Main';
-import { Loader } from '../../Loader/Loader';
+import { LoaderMain } from '../../Loader/Loader';
 
 const SharedLayout = ({ children }) => {
   return (
     <div className="wrapper">
       <Main>
-        <Suspense fallback="Loader">{children}</Suspense>
+        <Suspense fallback={<LoaderMain />}>{children}</Suspense>
       </Main>
     </div>
   );
