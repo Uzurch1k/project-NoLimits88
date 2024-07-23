@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import css from './SignUpForm.module.scss';
 import icons from '../../img/icons/icons.svg';
 import clsx from 'clsx';
@@ -143,6 +143,12 @@ const SignUpForm = () => {
         </button>
         <ToastContainer />
       </form>
+      <p className={css.questionText}>
+        Already have account?{' '}
+        <Link className={css.signInLink} to="/signin">
+          Sign In
+        </Link>
+      </p>
     </div>
   );
 };
