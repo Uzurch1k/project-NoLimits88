@@ -25,13 +25,11 @@
 }
 
 .ReactModal__Overlay--after-open {
-	visibility: visible;
 	opacity: 1;
 }
 
 .ReactModal__Overlay--before-close {
 	opacity: 0;
-	visibility: hidden;
 }
 
 .buttonClose {
@@ -69,10 +67,8 @@
 @keyframes fadeIn {
 	from {
 		opacity: 0;
-		visibility: hidden;
 	}
 	to {
 		opacity: 1;
-		visibility: visible;
 	}
 }
