@@ -21,7 +21,7 @@ const LogOutModal = () => {
   };
 
   return (
-    <div>
+    <div className={css.sectionBox}>
       <h2 className={css.title}>Log out</h2>
       <p className={css.quest}>Do you really want to leave?</p>
       <div className={css.boxBtns}>
