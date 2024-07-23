@@ -1,4 +1,4 @@
-import Modal from '../Modal/Modal';
+import BaseModal from '../BaseModal/BaseModal';
 // import WaterForm from '../WaterForm/WaterForm'; відсутній файл
 import css from './WaterModal.module.scss';
 
@@ -18,23 +18,23 @@ import css from './WaterModal.module.scss';
 // };
 
 //return (
-      //<button className={css.button} onClick={() => handleOpenModal('add')}>
-        //   Add water
-      // </button>
+//<button className={css.button} onClick={() => handleOpenModal('add')}>
+//   Add water
+// </button>
 // * для редагування
 //       <button className={css.button} onClick={() => handleOpenModal('edit', { id: 1, name: 'Test' })}>
 //         Edit
-      // </button>
+// </button>
 //       *
-      // <WaterModal
-      //   isOpen={modalOpen}
-      //   onClose={handleCloseModal}
-      //   operationType={operationType} // Тип операції ('add' або 'edit')
-      //   initialData={initialData} // Початкові дані для форми (для редагування)
-      // /> )
+// <WaterModal
+//   isOpen={modalOpen}
+//   onClose={handleCloseModal}
+//   operationType={operationType} // Тип операції ('add' або 'edit')
+//   initialData={initialData} // Початкові дані для форми (для редагування)
+// /> )
 
 const WaterModal = ({ isOpen, onClose, operationType, initialData }) => {
-  const getTitle = (operationType) => {
+  const getTitle = operationType => {
     switch (operationType) {
       case 'add':
         return 'Add water';
@@ -46,10 +46,14 @@ const WaterModal = ({ isOpen, onClose, operationType, initialData }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} classSectionBox={css.sectionBox}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onClose}
+      classSectionBox={css.sectionBox}
+    >
       <h2 className={css.modalTitle}>{getTitle(operationType)}</h2>
       {/* <WaterForm initialData={initialData} operationType={operationType} /> */}
-    </Modal>
+    </BaseModal>
   );
 };
 
