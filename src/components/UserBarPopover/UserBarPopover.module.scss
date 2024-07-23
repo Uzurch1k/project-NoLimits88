@@ -1,63 +1,63 @@
 .userBarPopover {
-	position: absolute;
-	top: 100%;
-	width: 100%;
-	border-radius: 15px;
-	background-color: var(--cw);
-	z-index: 1000;
-	margin-top: 4px;
-	padding: 14px 20px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  border-radius: 15px;
+  background-color: var(--cw);
+  z-index: 1000;
+  margin-top: 4px;
+  padding: 14px 20px;
 }
 
 .userBarPopoverList {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .userBarPopoverItem {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	color: var(--rcy);
-	transition: all 150ms ease-in;
+  color: var(--rcy);
+  transition: all 150ms ease-in;
 }
 
 .iconPopover {
-	height: 16px;
-	width: 16px;
-	stroke: var(--rcy);
-	fill: var(--cw);
-	stroke-width: 3;
-	transition: all 150ms ease-in;
+  height: 16px;
+  width: 16px;
+  stroke: var(--rcy);
+  fill: var(--cw);
+  stroke-width: 3;
+  transition: all 150ms ease-in;
 }
 
 .userBarPopoverButton {
-	font-weight: 700;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .userBarPopoverItem.active,
 .userBarPopoverItem:hover,
 .userBarPopoverItem:focus-within {
-	color: var(--cy);
+  color: var(--cy);
 }
 
 .iconPopover.activeIcon,
 .userBarPopoverItem:hover .iconPopover,
 .userBarPopoverItem:focus-within .iconPopover {
-	stroke: var(--cy);
+  stroke: var(--cy);
 }
 
 @media screen and (min-width: 768px) {
-	.userBarPopover {
-		margin-top: 8px;
-	}
+  .userBarPopover {
+    margin-top: 8px;
+  }
 
-	.userBarPopoverList {
-		gap: 4px;
-	}
+  .userBarPopoverList {
+    gap: 4px;
+  }
 
-	.userBarPopoverButton {
-		font-size: 15px;
-	}
+  .userBarPopoverButton {
+    font-size: 15px;
+  }
 }

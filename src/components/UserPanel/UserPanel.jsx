@@ -5,6 +5,8 @@ import UserBar from '../UserBar/UserBar';
 import avatar from '../../img/content/default avatar.png';
 
 const UserPanel = () => {
+  // const user = useSelector(selectUser);
+
   const userDataFromStore = useSelector(selectUser);
 
   const user =

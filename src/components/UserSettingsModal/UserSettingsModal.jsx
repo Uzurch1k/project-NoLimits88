@@ -1,12 +1,12 @@
 import css from './UserSettingsModal.module.scss';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import Modal from '../Modal/Modal';
+import BaseModal from '../BaseModal/BaseModal';
 
 const UserSettingsModal = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} classSectionBox={css.sectionBox}>
+    <BaseModal isOpen={isOpen} onClose={onClose} className={css.sectionBox}>
       <UserSettingsForm />
-    </Modal>
+    </BaseModal>
   );
 };
 
