@@ -25,7 +25,7 @@ const LogOutModal = ({ isOpen, onClose }) => {
     <BaseModal
       isOpen={isOpen}
       onClose={onClose}
-      classSectionBox={css.sectionBox}
+      classNameModal={css.sectionBox}
     >
       <h2 className={css.title}>Log out</h2>
       <p className={css.quest}>Do you really want to leave?</p>

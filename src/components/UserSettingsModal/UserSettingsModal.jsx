@@ -4,7 +4,7 @@ import BaseModal from '../BaseModal/BaseModal';
 
 const UserSettingsModal = ({ isOpen, onClose }) => {
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} className={css.sectionBox}>
+    <BaseModal isOpen={isOpen} onClose={onClose} classNameModal={css.sectionBox}>
       <UserSettingsForm />
     </BaseModal>
   );
