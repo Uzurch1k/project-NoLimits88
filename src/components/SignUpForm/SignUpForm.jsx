@@ -55,8 +55,8 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={css.signupBack}>
-      <h2 className={css.signupName}>Sign up</h2>
+    <div className={css.signInBody}>
+      <h2 className={css.signupTitle}>Sign up</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signupForm}>
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="email">

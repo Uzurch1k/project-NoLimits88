@@ -1,39 +1,20 @@
-.signupBack {
+.signInBody {
 	width: 100%;
 }
 
-.signupName {
-	color: var(--color-darkblue);
+.signupTitle {
 	font-size: 32px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 32px;
+	line-height: 1;
 	letter-spacing: -0.32px;
-	margin: 0;
 	padding-bottom: 32px;
 }
-@media screen and (min-width: 768px) {
-	.signupName {
-		font-size: 36px;
-		line-height: 38px;
-		letter-spacing: -0.36px;
-	}
-}
+
 .signupForm {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	margin: 0 auto;
-}
-@media screen and (max-width: 767.98px) {
-	.signupForm {
-		width: 343px;
-	}
-}
-@media screen and (min-width: 768px) {
-	.signupForm {
-		width: 436px;
-	}
 }
 
 .signupLabel {
@@ -45,13 +26,7 @@
 	line-height: 18px;
 	letter-spacing: -0.14px;
 }
-@media screen and (min-width: 768px) {
-	.signupLabel {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
+
 .signupFormGroup {
 	display: flex;
 	flex-direction: column;
@@ -104,15 +79,7 @@
 	line-height: 18px;
 	letter-spacing: -0.14px;
 }
-@media screen and (min-width: 768px) {
-	.signupField,
-	.signupField::placeholder {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-		height: 56px;
-	}
-}
+
 .signupButton {
 	width: 100%;
 }
@@ -126,13 +93,7 @@
 	letter-spacing: -0.14px;
 	margin: 0 auto;
 }
-@media screen and (min-width: 768px) {
-	.signupText {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
+
 .signupA {
 	color: var(--color-black);
 	font-size: 14px;
@@ -142,13 +103,7 @@
 	letter-spacing: -0.14px;
 	text-decoration-line: underline;
 }
-@media screen and (min-width: 768px) {
-	.signupA {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
+
 .signupError {
 	color: var(--color-error);
 	font-size: 14px;
@@ -176,4 +131,34 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+	.signupTitle {
+		font-size: 36px;
+		line-height: 38px;
+		letter-spacing: -0.36px;
+	}
+	.signupLabel {
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.16px;
+	}
+	.signupField,
+	.signupField::placeholder {
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.16px;
+		height: 56px;
+	}
+	.signupText {
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.16px;
+	}
+	.signupA {
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.16px;
+	}
 }
