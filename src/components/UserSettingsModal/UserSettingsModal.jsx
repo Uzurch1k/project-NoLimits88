@@ -1,10 +1,10 @@
 import css from './UserSettingsModal.module.scss';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 
-const UserSettingsModal = ({ onClose }) => {
+const UserSettingsModal = () => {
   return (
     <div className={css.sectionBox}>
-      <UserSettingsForm onClose={onClose} />
+      <UserSettingsForm />
     </div>
   );
 };
