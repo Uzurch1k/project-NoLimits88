@@ -58,7 +58,6 @@
   }
   .errorPasswordInput {
     @extend .errorInput;
-    -webkit-text-security: square;
   }
   .errorMessage {
     color: #ef5050;
@@ -132,6 +131,9 @@
     }
     .emailInput {
       margin-bottom: 20px;
+    }
+    .passwordInput {
+      padding-right: 45px;
     }
     .showPwdBtn {
       display: block;

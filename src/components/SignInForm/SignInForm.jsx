@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useRef, useState, useId } from 'react';
+import { useState, useId } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,19 +9,11 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { logIn } from '../../redux/auth/operations';
+import { useDispatch } from 'react-redux';
 
 import clsx from 'clsx';
-import icons from '../../img/icons/icons.svg';
 import css from './SignInForm.module.scss';
-
-// const getVisibleAndHiddenPassword = password => {
-//   const passwordCharacters = password.split('');
-//   const hiddenCharacters = passwordCharacters.map(() => '*').join('');
-//   return {
-//     hiddenPassword: hiddenCharacters,
-//     visiblePassword: password,
-//   };
-// };
+import BtnShowPassword from './BtnShowPassword';
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -62,33 +53,50 @@ const SignInForm = () => {
   const fieldPasswordId = useId();
   const dispatch = useDispatch();
 
-  // const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit = data => {
     const userData = { email: data.email, password: data.password };
-
-    // const loginUser = async () => {
-    //   try {
-    //     const response = await axios.post(
-    //       'https://aquatrack-backend-bmxm.onrender.com/auth/signin',
-    //       userData
-    //     );
-    //     toast.success('Successfully logged in!');
-    //   } catch (error) {
-    //     toast.error(error.response.data.message || 'Login error');
-    //   }
-    // };
-    // loginUser();
     dispatch(logIn(userData));
-
     reset();
+
+    // const load = async () => {
+    // const promise = new Promise((resolve, reject) => {});
+
+    //   try {
+    //      ;
+    //     if (response.error) throw new Error(response.error);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+
+    // const promise = new Promise((resolve, reject) => {
+    //   if (response.error) {
+    //     reject('Login failed');
+    //   }
+    //   resolve('Login successfull!');
+    // });
+
+    // toast.promise(),
+    //   {
+    //     pending: 'Login user...',
+    //     error: 'Login failed',
+    //     success: 'Successfully logged in!',
+    //   };
+    // };
+
+    // load();
+
+    // try {
+    //   toast.promise(dispatch(logIn(userData)), {
+    //     pending: 'Login user...',
+    //     error: 'Login failed',
+    //     success: 'Successfully logged in!',
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
-
-  // useEffect(() => {
-  //   const visibleAndHiddenPassword = getVisibleAndHiddenPassword(password);
-
-  //   setValue('password', visibleAndHiddenPassword.hiddenPassword);
-  // }, [password, setValue]);
 
   return (
     <>
@@ -120,7 +128,7 @@ const SignInForm = () => {
           })}
         >
           <input
-            type="password"
+            type={isPasswordVisible ? 'text' : 'password'}
             id={fieldPasswordId}
             {...register('password')}
             placeholder="Enter your password"
@@ -128,16 +136,8 @@ const SignInForm = () => {
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.password,
             })}
-            data-visible-pwd=""
           />
-          <button
-            className={css.showPwdBtn}
-            // onClick={showPasswordToggleHandler}
-          >
-            <svg width="20" height="20" className={css.eye}>
-              <use href={`${icons}#closed-eye`}></use>
-            </svg>
-          </button>
+          <BtnShowPassword setIsPasswordVisible={setIsPasswordVisible} />
         </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
