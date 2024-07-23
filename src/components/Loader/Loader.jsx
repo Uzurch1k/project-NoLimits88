@@ -1,6 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 
 import css from './Loader.module.scss';
+import clsx from 'clsx';
 
 export const LoaderMain = () => {
   return (
@@ -12,17 +13,20 @@ export const LoaderMain = () => {
   );
 };
 
-export const LoaderDetails = () => {
+export const LoaderDetails = isPositioning => {
   return (
     <ThreeDots
       visible={true}
       height="50"
       width="50"
-      color="#87d28d"
+      color={isPositioning ? 'white' : '#87d28d'}
       radius="9"
       ariaLabel="three-dots-loading"
-      wrapperStyle={{}}
-      wrapperClass={css.details}
+      wrapperStyle={{ color: 'yellow' }}
+      wrapperClass={clsx({
+        [css.details]: true,
+        [css.loaderPositioning]: isPositioning,
+      })}
     />
   );
 };
