@@ -1,16 +1,16 @@
-import css from './UserBar.module.scss';
-import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import { useState, useRef, useEffect } from 'react';
-import icon from '../../img/icons/icons.svg';
 import clsx from 'clsx';
+import UserBarPopover from '../UserBarPopover/UserBarPopover';
+import css from './UserBar.module.scss';
+import icon from '../../img/icons/icons.svg';
 
-const UserBar = ({ user }) => {
+const UserBar = ({ openSettings, openLogout, user }) => {
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
 
   const togglePopover = () => {
-    setShowPopover(show => !show);
+    setShowPopover(prev => !prev);
   };
 
   const handleClickOutside = e => {
@@ -49,10 +49,16 @@ const UserBar = ({ user }) => {
           <img src={user.avatar} alt="Avatar user" />
         </div>
         <svg className={clsx(css.iconArrowDown, { [css.rotate]: showPopover })}>
-          <use xlinkHref={icon + '#arrow-down'} />
+          <use xlinkHref={`${icon}#arrow-down`} />
         </svg>
       </button>
-      {showPopover && <UserBarPopover ref={popoverRef} />}
+      {showPopover && (
+        <UserBarPopover
+          ref={popoverRef}
+          openSettings={openSettings}
+          openLogout={openLogout}
+        />
+      )}
     </div>
   );
 };

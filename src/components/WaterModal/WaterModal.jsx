@@ -1,6 +1,5 @@
-import BaseModal from '../BaseModal/BaseModal';
 // import WaterForm from '../WaterForm/WaterForm'; відсутній файл
-import css from './WaterModal.module.scss';
+// import css from './WaterModal.module.scss';
 
 // * в компоненті AddWaterBtn приблизно такий код для виклику модалки
 // const [modalOpen, setModalOpen] = useState(false);
@@ -33,28 +32,28 @@ import css from './WaterModal.module.scss';
 //   initialData={initialData} // Початкові дані для форми (для редагування)
 // /> )
 
-const WaterModal = ({ isOpen, onClose, operationType, initialData }) => {
-  const getTitle = operationType => {
-    switch (operationType) {
-      case 'add':
-        return 'Add water';
-      case 'edit':
-        return 'Edit the entered amount of water';
-      default:
-        return 'Add water';
-    }
-  };
+// const WaterModal = ({ onClose, operationType, initialData }) => {
+//   const getTitle = operationType => {
+//     switch (operationType) {
+//       case 'add':
+//         return 'Add water';
+//       case 'edit':
+//         return 'Edit the entered amount of water';
+//       default:
+//         return 'Add water';
+//     }
+//   };
 
-  return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onClose}
-      classSectionBox={css.sectionBox}
-    >
-      <h2 className={css.modalTitle}>{getTitle(operationType)}</h2>
-      {/* <WaterForm initialData={initialData} operationType={operationType} /> */}
-    </BaseModal>
-  );
-};
+//   return (
+//     <div>
+//       <h2 className={css.modalTitle}>{getTitle(operationType)}</h2>
+//       <WaterForm
+//         initialData={initialData}
+//         operationType={operationType}
+//         onClose={onClose}
+//       />
+//     </div>
+//   );
+// };
 
-export default WaterModal;
+// export default WaterModal;

@@ -1,0 +1,23 @@
+.settingsModal,
+.logoutModal,
+.waterModal,
+.deletewaterModal {
+	max-width: 343px;
+}
+
+@media screen and (min-width: 768px) {
+	.settingsModal {
+		max-width: 648px;
+	}
+	.logoutModal,
+	.waterModal,
+	.deletewaterModal {
+		max-width: 518px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.settingsModal {
+		max-width: 920px;
+	}
+}

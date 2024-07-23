@@ -26,6 +26,7 @@ const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
 BaseModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  classNameModal: PropTypes.string,
   children: PropTypes.node,
 };
 
