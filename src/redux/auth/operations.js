@@ -11,7 +11,7 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const setupAxiosInterceptors = store => {
+export const setupInterceptors = store => {
   axios.interceptors.response.use(
     response => response,
     async error => {
