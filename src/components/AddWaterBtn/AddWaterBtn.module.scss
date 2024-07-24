@@ -16,8 +16,11 @@
   color: var(--cw);
   transition: all 150ms ease-in;
   &:hover,
-  &:focus {
+  &:focus,
+  &:hover .addWaterIcn,
+  &:focus .addWaterIcn {
     color: var(--cg);
+    stroke: var(--cg);
   }
 }
 
@@ -25,10 +28,6 @@
   width: 16px;
   height: 16px;
   stroke: var(--cw);
-  &:hover,
-  &:focus {
-    stroke: var(--cg);
-  }
 }
 
 @media screen and (min-width: 768px) {

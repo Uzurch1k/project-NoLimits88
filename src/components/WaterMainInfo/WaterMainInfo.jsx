@@ -7,19 +7,24 @@ import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
 
 const WaterMainInfo = () => {
   return (
-    <div className={css.wrapp}>
-      <Logo />
-      <AddWaterBtn />
-      <WaterDailyNorma />
-      <div className={css.waterInfocard}>
-        <img
-          className={css.waterInfoImg}
-          srcSet={`${bottlx1} 1x, ${bottlex2} 2x `}
-          src={bottlx1}
-          alt="Bottle image"
-        />
-      </div>
-    </div>
+    <section className={css.waterMainInfoSection}>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique quae
+      magnam corrupti vel laudantium? Ab eaque ullam, voluptate magni sint
+      repudiandae, quod perspiciatis iusto, iure non laudantium ex eius error.
+      {/* <div className={css.wrapp}>
+        <Logo />
+        <AddWaterBtn />
+        <WaterDailyNorma /> */}
+      {/* <div className={css.waterInfocard}>
+          <img
+            className={css.waterInfoImg}
+            srcSet={`${bottlx1} 1x, ${bottlex2} 2x `}
+            src={bottlx1}
+            alt="Bottle image"
+          />
+        </div> */}
+      {/* </div> */}
+    </section>
   );
 };
 
