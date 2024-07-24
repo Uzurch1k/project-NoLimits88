@@ -33,7 +33,9 @@ const loginSchema = yup.object().shape({
     .string()
     .required('Password is required')
     .min(6, 'Password should have at least 6 characters')
-    .max(28, 'Password should not have more than 28 characters'),
+    .max(28, 'Password should not have more than 28 characters')
+    .matches(/\d/, 'The password must contain at least one number')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters'),
 });
 
 const SignInForm = () => {
