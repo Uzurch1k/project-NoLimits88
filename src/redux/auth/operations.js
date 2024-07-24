@@ -1,6 +1,6 @@
 import axios from '../../helpers/axiosBase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setToken } from './slice';
+// import { setToken } from './slice';
 
 export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -66,10 +66,10 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signin', credentials);
-      setAuthHeader(res.data.accessToken);
-      console.log(res.data.accessToken);
+      setAuthHeader(res.data.data.accessToken);
+      console.log(res.data.data.accessToken);
 
-      return res.data;
+      return res.data.data; //{user, accessToken}
       // Отримання поточного користувача
       // const profileRes = await axios.get('/users/current');
       // return { ...res.data, user: profileRes.data };
