@@ -8,6 +8,7 @@ import { refreshUser } from '../../redux/auth/operations';
 import SharedLayout from '../Layout/SharedLayout/SharedLayout';
 import PrivateRoute from '../Routes/PrivateRoute';
 import RestrictedRoute from '../Routes/RestrictedRoute';
+import { LoaderMain } from '../Loader/Loader';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('../../pages/TrackerPage/TrackerPage'));
@@ -24,7 +25,9 @@ function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <LoaderMain />
+  ) : (
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
