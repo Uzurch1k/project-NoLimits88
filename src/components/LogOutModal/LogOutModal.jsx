@@ -14,8 +14,6 @@ const LogOutModal = () => {
     } catch (error) {
       console.error('Logout failed', error);
     } finally {
-      // dispatch({ type: 'CLEAR_STORE' });
-      // localStorage.clear();
       navigate('/');
     }
   };
