@@ -9,6 +9,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../redux/auth/operations';
+import css from './SignUpForm.module.scss';
+import clsx from 'clsx';
 import { LoaderDetails } from '../Loader/Loader';
 
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
@@ -96,10 +98,10 @@ const SignUpForm = () => {
             }`}
             placeholder="Enter your email"
           />
-          {errors.email && (
-            <span className={css.signupError}>{errors.email.message}</span>
-          )}
         </div>
+        {errors.email && (
+          <p className={css.signupError}>{errors.email.message}</p>
+        )}
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="password">
             Password
@@ -115,23 +117,11 @@ const SignUpForm = () => {
               placeholder="Enter your password"
             />
             <BtnShowPassword setIsPasswordVisible={setShowPassword} />
-            {/* <div
-              className={css.signupIcon}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <svg className={css.icon}>
-                <use
-                  href={`${icons}${
-                    showPassword ? '#icon-eye' : '#icon-eye-close'
-                  }`}
-                />
-              </svg>
-            </div> */}
           </div>
-          {errors.password && (
-            <span className={css.signupError}>{errors.password.message}</span>
-          )}
         </div>
+        {errors.password && (
+          <p className={css.signupError}>{errors.password.message}</p>
+        )}
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="repeatPassword">
             Repeat Password
@@ -147,25 +137,11 @@ const SignUpForm = () => {
               placeholder="Repeat password"
             />
             <BtnShowPassword setIsPasswordVisible={setShowRepeatPassword} />
-            {/* <div
-              className={css.signupIcon}
-              onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-            >
-              <svg className={css.icon}>
-                <use
-                  href={`${icons}${
-                    showRepeatPassword ? '#icon-eye' : '#icon-eye-close'
-                  }`}
-                />
-              </svg>
-            </div> */}
           </div>
-          {errors.repeatPassword && (
-            <span className={css.signupError}>
-              {errors.repeatPassword.message}
-            </span>
-          )}
         </div>
+        {errors.repeatPassword && (
+          <p className={css.signupError}>{errors.repeatPassword.message}</p>
+        )}
         <button className={clsx(css.signupButton, 'btn-def')} type="submit">
           {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
         </button>
@@ -180,7 +156,7 @@ const SignUpForm = () => {
           draggable
           pauseOnHover
           theme="light"
-          transition:Slide
+          transition="slide"
           closeButton={window.innerWidth > 480}
         />
       </form>
