@@ -1,16 +1,10 @@
-.waterMainInfoSection {
-  padding: 32px;
-  background-color: red;
-}
-
 .wrapp {
   position: relative;
   border-radius: 30px;
   background-color: var(--cg);
-  // min-height: 415px;
+  min-height: 415px;
   display: flex;
   justify-content: center;
-  // min-height: 100vh;
 }
 
 .waterInfocard {
@@ -27,7 +21,7 @@
 
 @media screen and (min-width: 768px) {
   .wrapp {
-    height: 578px;
+    min-height: 578px;
   }
 
   .waterInfocard {
@@ -40,7 +34,7 @@
 }
 @media screen and (min-width: 1440px) {
   .wrapp {
-    height: 736px;
+    min-height: 736px;
   }
 
   .waterInfocard {
