@@ -1,0 +1,50 @@
+.addWaterBtn {
+  position: absolute;
+  top: 337px;
+  right: 16px;
+
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 20px;
+  background-color: var(--cy);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-radius: 30px;
+  color: var(--cw);
+  transition: all 150ms ease-in;
+  &:hover,
+  &:focus,
+  &:hover .addWaterIcn,
+  &:focus .addWaterIcn {
+    color: var(--cg);
+    stroke: var(--cg);
+  }
+}
+
+.addWaterIcn {
+  width: 16px;
+  height: 16px;
+  stroke: var(--cw);
+}
+
+@media screen and (min-width: 768px) {
+  .addWaterBtn {
+    top: 454px;
+    right: 32px;
+    padding: 18px 30px;
+  }
+
+  .addWaterIcn {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .addWaterBtn {
+    top: 612px;
+  }
+}
