@@ -12,6 +12,10 @@
 	&:focus {
 		background-color: var(--cn);
 	}
+	&:active {
+		color: var(--ch);
+		background-color: var(--cq);
+	}
 }
 
 @media screen and (min-width: 768px) {
