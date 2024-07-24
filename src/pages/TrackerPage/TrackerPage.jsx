@@ -11,7 +11,6 @@ const TrackerPage = () => {
       <DocumentTitle>Tracker</DocumentTitle>
       <Section>
         <div>
-          <h2>TrackerPage</h2>
           <WaterMainInfo />
         </div>
         <div>

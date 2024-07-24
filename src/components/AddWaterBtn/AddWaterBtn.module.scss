@@ -24,11 +24,10 @@
 .addWaterIcn {
   width: 16px;
   height: 16px;
-  margin-right: 10px;
-  fill: var(--cw);
+  stroke: var(--cw);
   &:hover,
   &:focus {
-    fill: var(--cg);
+    stroke: var(--cg);
   }
 }
 
