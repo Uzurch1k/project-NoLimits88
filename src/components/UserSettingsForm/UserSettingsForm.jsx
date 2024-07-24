@@ -6,11 +6,13 @@ import { useState } from 'react';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
 import clsx from 'clsx';
+import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import defaultAvatar from '../../img/content/default avatar.png';
 /*import icons from '../../img/icons/icons.svg'*/
 
 const user = {
   avatarURL: '',
+  userGender: 'woman',
   userName: '',
   userEmail: '',
   userWeight: 0,
@@ -32,9 +34,9 @@ const userSettingsSchema = Yup.object().shape({
     .max(999, 'The value must be no more than 3 numbers')
     .required('The field is required'),
   activityTime: Yup.number()
-    .min(0, 'The value must be at least 0')
-    .max(24, 'The value must be no more than 24')
-    .required('The field is required'),
+  .min(0, 'The value must be at least 0')
+  .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
+  .required('The field is required'),
 });
 
 const UserSettingsForm = () => {
@@ -47,6 +49,7 @@ const UserSettingsForm = () => {
   } = useForm({
     resolver: yupResolver(userSettingsSchema),
     defaultValues: {
+      gender: user.userGender || 'woman',
       userName: user.userName || '',
       userEmail: user.userEmail || '',
       userWeight: user.userWeight || 0,
@@ -55,9 +58,11 @@ const UserSettingsForm = () => {
     },
   });
 
-  const { userName, userEmail, userWeight, userVolume, activityTime } = watch();
+  const { userName, gender, userEmail, userWeight, userVolume, activityTime } = watch();
   const isAnyFieldFilled =
     userName || userEmail || userWeight || userVolume || activityTime;
+
+    const dailyWaterNorma = calculateDailyWaterNorma(gender, userWeight, activityTime);
 
   const handleAvatarUpload = event => {
     const file = event.target.files[0];
@@ -249,7 +254,7 @@ const UserSettingsForm = () => {
                     <div className={css.waterAmountField}>
                       <p className={css.text}>
                         The required amount of water in liters per day:
-                      </p>
+                      </p><span className={css.waterNorma}>{dailyWaterNorma} L</span>
                     </div>
                     <label
                       className={css.settingsTitleUserInfo}
@@ -263,6 +268,7 @@ const UserSettingsForm = () => {
                       type="number"
                       name="userVolume"
                       id="userVolume"
+                      step="0.1"
                     />
                     {errors.userVolume && (
                       <span className={css.errorMessage}>
