@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 
 import clsx from 'clsx';
 import css from './SignInForm.module.scss';
-import BtnShowPassword from './BtnShowPassword';
+import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import { LoaderDetails } from '../Loader/Loader';
 
 const loginSchema = yup.object().shape({

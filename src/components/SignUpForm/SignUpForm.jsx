@@ -12,7 +12,7 @@ import css from './SignUpForm.module.scss';
 import icons from '../../img/icons/icons.svg';
 import clsx from 'clsx';
 import { LoaderDetails } from '../Loader/Loader';
-import BtnShowPassword from '../SignInForm/BtnShowPassword';
+import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 
 const schema = yup.object().shape({
   email: yup
@@ -112,7 +112,7 @@ const SignUpForm = () => {
               }`}
               placeholder="Enter your password"
             />
-            <BtnShowPassword isPositioning={true} />
+            <BtnShowPassword setIsPasswordVisible={setShowPassword} />
             {/* <div
               className={css.signupIcon}
               onClick={() => setShowPassword(!showPassword)}
@@ -144,7 +144,7 @@ const SignUpForm = () => {
               }`}
               placeholder="Repeat password"
             />
-            <BtnShowPassword isPositioning={true} />
+            <BtnShowPassword setIsPasswordVisible={setShowRepeatPassword} />
             {/* <div
               className={css.signupIcon}
               onClick={() => setShowRepeatPassword(!showRepeatPassword)}
