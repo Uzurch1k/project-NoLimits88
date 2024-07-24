@@ -1,168 +1,177 @@
 .signInBody {
-  width: 100%;
+	width: 100%;
 }
 
 .signInTitle {
-  font-size: 32px;
-  margin-bottom: 32px;
-  line-height: 1;
+	font-size: 32px;
+	letter-spacing: -0.01em;
+	margin-bottom: 32px;
+	line-height: 1;
 }
 
 .signInForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 16px;
-  .emailLabel,
-  .passwordLabel {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    line-height: 1.28;
-    color: #2f2f2f;
-    display: inline-block;
-    width: 100%;
-  }
-  .inputBaseStyles {
-    width: 100%;
-    height: 50px;
-    font-size: 14px;
-    line-height: 1.28;
-    color: #2f2f2f;
-    border: 1px solid rgba(47, 47, 47, 0.2);
-    background-color: var(--cu);
-    border-radius: 15px;
-    padding: 16px 0 16px 16px;
-  }
-  .inputBaseStyles::placeholder {
-    color: #2f2f2f99;
-  }
-  .inputPasswordWrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 32px;
-  }
-  .inputPasswordWrapperError {
-    margin-bottom: 10px;
-  }
-  .emailInput {
-    @extend .inputBaseStyles;
-    margin-bottom: 16px;
-    transition: border 150ms ease-in-out;
-    &:focus {
-      border: 1px solid rgba(47, 47, 47, 0.4);
-    }
-  }
-  .passwordInput {
-    @extend .inputBaseStyles;
-    transition: border 150ms ease-in-out;
-    &:focus {
-      border: 1px solid rgba(47, 47, 47, 0.4);
-    }
-  }
-  .errorInput {
-    color: #ef5050;
-    border: 1px solid #ef5050;
-    &:focus {
-      border: 1px solid #ef5050;
-    }
-  }
-  .errorEmailInput {
-    @extend .errorInput;
-    margin-bottom: 10px;
-  }
-  .errorPasswordInput {
-    @extend .errorInput;
-  }
-  .errorMessage {
-    color: #ef5050;
-    font-size: 14px;
-    line-height: 1.28;
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .showPwdBtn {
-    width: 20px;
-    height: 20px;
-    display: none;
-    position: absolute;
-    top: 18px;
-    right: 16px;
-  }
-  .eye {
-    display: inline-block;
-    stroke-width: 1;
-    stroke: rgba(47, 47, 47, 1);
-    fill: rgba(240, 239, 244, 1);
-  }
-  .btnSignIn {
-    position: relative;
-    width: 100%;
-  }
-  .btnSignIn:hover,
-  .btnSignIn:focus {
-    background-color: #87d28d;
-  }
-  .btnSignIn:active {
-    color: #bcbcbc;
-    background-color: #e6e6e6;
-  }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 16px;
+	.emailLabel,
+	.passwordLabel {
+		font-size: 14px;
+		font-weight: 700;
+		margin-bottom: 8px;
+		line-height: 1.28;
+		color: var(--cb);
+		display: block;
+		width: 100%;
+		letter-spacing: -0.01em;
+	}
+	.inputBaseStyles {
+		width: 100%;
+		height: 50px;
+		font-size: 14px;
+		line-height: 1.28;
+		color: var(--rcb);
+		border: 1px solid var(--rcm);
+		background-color: transparent;
+		letter-spacing: -0.01em;
+		border-radius: 15px;
+		padding: 16px;
+		transition: all 150ms ease-in;
+	}
+	.inputBaseStyles:hover,
+	.inputBaseStyles:focus {
+		border: 1px solid var(--rcw);
+	}
+
+	.inputPasswordWrapper {
+		position: relative;
+		width: 100%;
+		margin-bottom: 32px;
+	}
+	.inputPasswordWrapperError {
+		margin-bottom: 10px;
+	}
+	.emailInput {
+		@extend .inputBaseStyles;
+		margin-bottom: 16px;
+		transition: all 150ms ease-in;
+		&:focus {
+			border: 1px solid var(--rcw);
+		}
+	}
+	.passwordInput {
+		@extend .inputBaseStyles;
+		transition: all 150ms ease-in;
+		&:focus {
+			border: 1px solid var(--rcw);
+		}
+	}
+	.errorInput {
+		color: var(--cr);
+		border: 1px solid var(--cr);
+		&:focus {
+			border: 1px solid var(--cr);
+		}
+	}
+	.errorEmailInput {
+		@extend .errorInput;
+		margin-bottom: 10px;
+	}
+	.errorPasswordInput {
+		@extend .errorInput;
+	}
+	.errorMessage {
+		color: var(--cr);
+		font-size: 14px;
+		line-height: 1.28;
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.showPwdBtn {
+		width: 20px;
+		height: 20px;
+		display: none;
+		position: absolute;
+		top: 18px;
+		right: 16px;
+	}
+	.eye {
+		display: inline-block;
+		stroke-width: 1;
+		stroke: rgba(47, 47, 47, 1);
+		fill: rgba(240, 239, 244, 1);
+	}
+	.btnSignIn {
+		position: relative;
+		width: 100%;
+	}
+	.btnSignIn:hover,
+	.btnSignIn:focus {
+		background-color: var(--cn);
+	}
+	.btnSignIn:active {
+		color: var(--ch);
+		background-color: var(--cq);
+	}
 }
 
 .questionText {
-  font-family: var(--ff2);
-  color: var(--rcb);
-  text-align: center;
+	line-height: 1.28;
+	letter-spacing: -0.01em;
+	margin-top: 16px;
+	color: var(--rcg);
+	text-align: center;
 }
 .signUpLink {
-  font-family: var(--ff1);
-  font-weight: 700;
-  color: var(--cb);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
+	font-family: var(--ff1);
+	font-weight: 700;
+	color: var(--cb);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
 }
 
 @media screen and (min-width: 768px) {
-  .signInForm {
-    .emailLabel,
-    .passwordLabel {
-      font-size: 16px;
-      line-height: 1.5;
-      width: 100%;
-    }
-    .inputBaseStyles {
-      width: 100%;
-      height: 56px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    .emailInput {
-      margin-bottom: 20px;
-      padding-right: 45px;
-    }
-    .passwordInput {
-      padding-right: 45px;
-    }
-    .showPwdBtn {
-      display: block;
-    }
-    .errorEmailInput {
-      margin-bottom: 10px;
-    }
-    .errorMessage {
-      font-size: 16px;
-      line-height: 1.5;
-      width: 100%;
-    }
-  }
-  .questionText {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .signUpLink {
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 700;
-  }
+	.signInTitle {
+		font-size: 36px;
+		line-height: 1.05;
+	}
+	.signInForm {
+		.emailLabel,
+		.passwordLabel {
+			font-size: 16px;
+			line-height: 1.5;
+		}
+		.inputBaseStyles {
+			height: 56px;
+			font-size: 16px;
+			line-height: 1.5;
+		}
+		.emailInput {
+			margin-bottom: 20px;
+			padding-right: 45px;
+		}
+		.passwordInput {
+			padding-right: 45px;
+		}
+		.showPwdBtn {
+			display: block;
+		}
+		.errorEmailInput {
+			margin-bottom: 10px;
+		}
+		.errorMessage {
+			font-size: 16px;
+			line-height: 1.5;
+			width: 100%;
+		}
+	}
+	.questionText {
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	.signUpLink {
+		font-size: 16px;
+		line-height: 1.5;
+	}
 }

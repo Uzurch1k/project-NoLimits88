@@ -10,14 +10,15 @@
 }
 
 .signupForm {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 16px;
 }
 
 .signupLabel {
 	position: relative;
 	color: var(--cb);
+	width: 100%;
 	font-size: 14px;
 	line-height: 1.28;
 	font-weight: 700;
@@ -35,73 +36,46 @@
 .signupField {
 	position: relative;
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.2);
+	border: 1px solid var(--rcm);
+	color: var(--rcb);
 	display: flex;
 	width: 100%;
 	height: 50px;
 	padding: 16px;
-	color: var(--rcb);
 	font-size: 14px;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	line-height: 1.28;
+	letter-spacing: -0.01em;
 	background-color: transparent;
 	transition: all 150ms ease-in;
 }
 
 .signupField:hover,
 .signupField:focus {
-	box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
-}
-
-.signupField:focus {
-	transform: scale(1.01);
-}
-
-.signupField::placeholder {
-	color: var(--color-blacksemi);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	border: 1px solid var(--rcw);
 }
 
 .signupButton {
 	margin-top: 16px;
+	position: relative;
 	width: 100%;
 }
-
-.signupText {
-	color: var(--color-blacksemi);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-	margin: 0 auto;
+.signupButton:hover,
+.signupButton:focus {
+	background-color: var(--cn);
 }
-
-.signupA {
-	color: var(--color-black);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-	text-decoration-line: underline;
+.signupButton:active {
+	color: var(--ch);
+	background-color: var(--cq);
 }
 
 .signupError {
-	color: var(--color-error);
+	color: var(--cr);
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	line-height: 1.28;
+	letter-spacing: -0.01em;
 }
 .signUpErrorField {
-	border-color: var(--color-error);
+	border-color: var(--cr);
 }
 .signupIconEyes {
 	position: relative;
@@ -121,9 +95,10 @@
 	justify-content: center;
 }
 .questionText {
+	line-height: 1.28;
+	letter-spacing: -0.01em;
 	margin-top: 16px;
-	font-family: var(--ff2);
-	color: var(--rcb);
+	color: var(--rcg);
 	text-align: center;
 }
 .signInLink {
@@ -137,31 +112,18 @@
 @media screen and (min-width: 768px) {
 	.signupTitle {
 		font-size: 36px;
-		line-height: 38px;
-		letter-spacing: -0.36px;
+		line-height: 1.05;
 	}
 	.signupLabel {
 		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
+		line-height: 1.5;
 	}
-	.signupField,
-	.signupField::placeholder {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
+	.signupField {
 		height: 56px;
-	}
-	.signupText {
 		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
+		line-height: 1.5;
 	}
-	.signupA {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
+
 	.questionText {
 		font-size: 16px;
 		line-height: 1.5;
@@ -169,6 +131,5 @@
 	.signInLink {
 		font-size: 16px;
 		line-height: 1.5;
-		font-weight: 700;
 	}
 }

@@ -32,10 +32,9 @@
 		color: var(--cn);
 		border-color: var(--cn);
 	}
-	&:disabled {
-		color: var(--cy);
-		border-color: var(--cy);
-		opacity: 0.2;
+	&:active {
+		color: var(--ch);
+		border-color: var(--ch);
 	}
 }
 
