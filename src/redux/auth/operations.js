@@ -1,5 +1,4 @@
 import axios from '../../helpers/axiosBase';
-import toast from 'react-hot-toast';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setToken } from './slice';
 
@@ -19,9 +18,13 @@ export const setupInterceptors = store => {
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
-          const { refreshToken } = store.getState().auth;
+          const { refreshToken, sessionId } = store.getState().auth;
+          if (!refreshToken || !sessionId) {
+            return Promise.reject('Refresh token or session ID is missing');
+          }
           const { data } = await axios.post('/users/refresh', {
             refreshToken,
+            sessionId,
           });
 
           setAuthHeader(data.token);
@@ -31,6 +34,8 @@ export const setupInterceptors = store => {
           originalRequest.headers.Authorization = `Bearer ${data.token}`;
           return axios(originalRequest);
         } catch (err) {
+          clearAuthHeader();
+          store.dispatch(logOut());
           return Promise.reject(err);
         }
       }
@@ -45,10 +50,8 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await axios.post('/users/signup', credentials);
       setAuthHeader(res.data.token);
-      toast.success(res.data.message);
       return res.data;
     } catch (error) {
-      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -60,12 +63,12 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post('/users/signin', credentials);
       setAuthHeader(res.data.token);
-      toast.success(res.data.message);
-      return res.data;
-      // const profileRes = await axios.get('/users/current');
-      // return { ...res.data, user: profileRes.data };
+
+      // Отримання поточного користувача
+      const profileRes = await axios.get('/users/current');
+      console.log(profileRes.data);
+      return { ...res.data, user: profileRes.data };
     } catch (error) {
-      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
