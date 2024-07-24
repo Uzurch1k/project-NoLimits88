@@ -27,11 +27,14 @@ export const setupInterceptors = store => {
             sessionId,
           });
 
-          setAuthHeader(data.token);
+          setAuthHeader(data.accessToken);
           store.dispatch(
-            setToken({ token: data.token, refreshToken: data.refreshToken })
+            setToken({
+              token: data.accessToken,
+              refreshToken: data.refreshToken,
+            })
           );
-          originalRequest.headers.Authorization = `Bearer ${data.token}`;
+          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
           return axios(originalRequest);
         } catch (err) {
           clearAuthHeader();
@@ -62,12 +65,12 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signin', credentials);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
 
+      return res.data;
       // Отримання поточного користувача
-      const profileRes = await axios.get('/users/current');
-      console.log(profileRes.data);
-      return { ...res.data, user: profileRes.data };
+      // const profileRes = await axios.get('/users/current');
+      // return { ...res.data, user: profileRes.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
