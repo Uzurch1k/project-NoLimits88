@@ -48,13 +48,24 @@
   .emailInput {
     @extend .inputBaseStyles;
     margin-bottom: 16px;
+    transition: border 150ms ease-in-out;
+    &:focus {
+      border: 1px solid rgba(47, 47, 47, 0.4);
+    }
   }
   .passwordInput {
     @extend .inputBaseStyles;
+    transition: border 150ms ease-in-out;
+    &:focus {
+      border: 1px solid rgba(47, 47, 47, 0.4);
+    }
   }
   .errorInput {
     color: #ef5050;
     border: 1px solid #ef5050;
+    &:focus {
+      border: 1px solid #ef5050;
+    }
   }
   .errorEmailInput {
     @extend .errorInput;
@@ -128,6 +139,7 @@
     }
     .emailInput {
       margin-bottom: 20px;
+      padding-right: 45px;
     }
     .passwordInput {
       padding-right: 45px;
