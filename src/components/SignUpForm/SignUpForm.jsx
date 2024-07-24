@@ -9,14 +9,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../redux/auth/operations';
-import css from './SignUpForm.module.scss';
-import clsx from 'clsx';
 import { LoaderDetails } from '../Loader/Loader';
 
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 
-import clsx from 'clsx';
 import css from './SignUpForm.module.scss';
+import clsx from 'clsx';
 
 const schema = yup.object().shape({
   email: yup
