@@ -57,16 +57,24 @@ const SignInForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
 
-  const onSubmit = (data, e) => {
+  const onSubmit = data => {
     const userData = { email: data.email, password: data.password };
+
     setIsLoader(true);
 
-    dispatch(logIn(userData));
+    const isLoginSuccessfull = async () => {
+      try {
+        const response = await dispatch(logIn(userData));
+        if (response.error) throw new Error(response.payload);
+        toast.success('Successfully logged in!');
+      } catch (error) {
+        toast.error('Login failed');
+      } finally {
+        setIsLoader(false);
+      }
+    };
+    isLoginSuccessfull();
 
-    setTimeout(() => {
-      setIsLoader(false);
-      console.log('success');
-    }, 20000);
     reset();
   };
 
@@ -135,7 +143,7 @@ const SignInForm = () => {
         draggable
         pauseOnHover
         theme="light"
-        transition:Bounce
+        transition:Slide
         closeButton={window.innerWidth > 480}
       />
     </div>
