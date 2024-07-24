@@ -1,0 +1,113 @@
+.waterForm {
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.textEnter {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.counterContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.decrementButton,
+.incrementButton {
+  border: 1.5px solid var(--cy);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--cw);
+}
+.icon {
+  color: var(--cy);
+}
+.mlText {
+  position: relative;
+  right: 36%;
+  top: 50%;
+  font-size: 16px;
+  color: var(--cw);
+}
+
+.waterAmountInput {
+  text-align: center;
+  border-radius: 30px;
+  background-color: var(--cy);
+  color: var(--cw);
+  height: 40px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeInput {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+}
+
+.settingsButton {
+  padding: 14px 40px;
+}
+.settingsButton:hover,
+.settingsButton:focus {
+  background-color: var(--cn);
+}
+
+.input {
+  height: 46px;
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  padding: 14px 16px;
+  margin-bottom: 24px;
+}
+.input:hover,
+.input:focus {
+  border-color: var(--cg);
+  outline: none;
+}
+
+/*==========================================*/
+@media screen and (min-width: 768px) {
+  .settingsButton {
+    padding: 16px 50px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+  .textEnter {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+}
+
+/*==================================================*/
+/*@media screen and (min-width: 1440px) */

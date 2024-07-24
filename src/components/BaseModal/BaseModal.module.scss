@@ -1,35 +1,38 @@
-body {
-	overflow: hidden;
-}
-
-.backdrop {
+.overlay {
 	position: fixed;
-	width: 100%;
-	height: 100%;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 100%;
 	background-color: var(--rcb);
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	justify-content: center;
 	align-items: center;
 	justify-items: center;
-	z-index: 100;
-	padding: 80px 16px;
+	z-index: 200;
+	padding: 80px 0;
 	overflow-y: auto;
+	animation: fadeIn 150ms ease-in;
 }
-
-.content {
-	position: relative;
+.bodyDef {
 	width: 100%;
-	background-color: var(--cw);
-	color: var(--cy);
 	padding: 40px 20px;
+	position: relative;
 	border-radius: 15px;
-	box-shadow: 0 4px 50px rgba(0, 0, 0, 0.2);
+	background-color: var(--cw);
+	box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
 }
 
-.closebutton {
+.ReactModal__Overlay--after-open {
+	opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+	opacity: 0;
+}
+
+.buttonClose {
 	position: absolute;
 	display: flex;
 	justify-content: center;
@@ -46,16 +49,26 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-	.backdrop {
+	.overlay {
 		padding: 64px 0;
 	}
-	.content {
+	.bodyDef {
 		padding: 40px;
 	}
-	.closebutton {
+	.buttonClose {
+		position: absolute;
 		top: 40px;
 		right: 40px;
 		width: 28px;
 		height: 28px;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }

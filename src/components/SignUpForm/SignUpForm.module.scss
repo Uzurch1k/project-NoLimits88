@@ -1,185 +1,92 @@
-.signupName {
-	color: var(--color-darkblue);
+.signInBody {
+	width: 100%;
+}
+
+.signupTitle {
 	font-size: 32px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 32px;
-	letter-spacing: -0.32px;
-	margin: 0;
-	padding-bottom: 32px;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	margin-bottom: 32px;
 }
-@media screen and (min-width: 768px) {
-	.signupName {
-		font-size: 36px;
-		line-height: 38px;
-		letter-spacing: -0.36px;
-	}
-}
+
 .signupForm {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	margin: 0 auto;
-}
-@media screen and (max-width: 767.98px) {
-	.signupForm {
-		width: 343px;
-	}
-}
-@media screen and (min-width: 768px) {
-	.signupForm {
-		width: 436px;
-	}
+	margin-bottom: 10px;
 }
 
 .signupLabel {
 	position: relative;
-	color: var(--color-black);
+	color: var(--cb);
+	width: 100%;
 	font-size: 14px;
-	font-style: normal;
+	line-height: 1.28;
 	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	letter-spacing: -0.01em;
 }
-@media screen and (min-width: 768px) {
-	.signupLabel {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
+
 .signupFormGroup {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
-	margin-bottom: 32px;
-	width: 100%;
-}
-.signupFormGroupEmail {
-	display: flex;
-	flex-direction: column;
 	gap: 8px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	width: 100%;
 }
+
 .signupField {
+	padding-right: 45px;
 	position: relative;
 	border-radius: 15px;
-	border: 1px solid var(--color-blacksemi);
-	outline: none;
+	border: 1px solid var(--rcm);
+	color: var(--cb);
 	display: flex;
 	width: 100%;
 	height: 50px;
-	padding-left: 16px;
-	color: var(--color-black);
+	padding: 16px;
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	line-height: 1.28;
+	letter-spacing: -0.01em;
 	background-color: transparent;
-	transition:
-		box-shadow var(--animation),
-		transform var(--animation);
-}
-
-.signupField:hover,
-.signupField:focus {
-	box-shadow: 7px 5px 29px -18px rgba(50, 63, 71, 1);
-}
-
-.signupField:focus {
-	transform: scale(1.01);
-}
-
-.signupField::placeholder {
-	color: var(--color-blacksemi);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-}
-@media screen and (min-width: 768px) {
-	.signupField,
-	.signupField::placeholder {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-		height: 56px;
+	transition: all 150ms ease-in;
+	&:hover,
+	&:focus {
+		border: 1px solid var(--rcw);
 	}
 }
+
+.eye {
+	display: inline-block;
+	stroke-width: 1;
+	stroke: rgba(47, 47, 47, 1);
+	fill: rgba(240, 239, 244, 1);
+}
+
 .signupButton {
-	display: flex;
+	position: relative;
 	width: 100%;
-	height: 50px;
-	justify-content: center;
-	align-items: center;
-	border-color: transparent;
-	border-radius: 30px;
-	background: var(--color-lightgreen);
-	color: var(--color-darkblue);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-	margin-bottom: 16px;
-	transition: var(--animation);
-}
-@media screen and (min-width: 768px) {
-	.signupButton {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
 }
 .signupButton:hover,
 .signupButton:focus {
-	background: var(--color-lightgreenhover);
+	background-color: var(--cn);
 }
-.signupText {
-	color: var(--color-blacksemi);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-	margin: 0 auto;
+.signupButton:active {
+	color: var(--ch);
+	background-color: var(--cq);
 }
-@media screen and (min-width: 768px) {
-	.signupText {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
-.signupA {
-	color: var(--color-black);
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.14px;
-	text-decoration-line: underline;
-}
-@media screen and (min-width: 768px) {
-	.signupA {
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.16px;
-	}
-}
+
 .signupError {
-	color: var(--color-error);
+	color: var(--cr);
 	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: -0.14px;
+	line-height: 1.28;
+	letter-spacing: -0.01em;
+	margin-bottom: 10px;
 }
 .signUpErrorField {
-	border-color: var(--color-error);
+	border-color: var(--cr);
+	&:hover,
+	&:focus {
+		border: 1px solid var(--cr);
+	}
 }
 .signupIconEyes {
 	position: relative;
@@ -197,4 +104,48 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.questionText {
+	line-height: 1.28;
+	letter-spacing: -0.01em;
+	margin-top: 16px;
+	color: var(--rcg);
+	text-align: center;
+}
+.signInLink {
+	font-family: var(--ff1);
+	font-weight: 700;
+	color: var(--cb);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+}
+
+@media screen and (min-width: 768px) {
+	.signupTitle {
+		font-size: 36px;
+		line-height: 1.05;
+	}
+	.signupLabel {
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	.signupField {
+		padding-right: 45px;
+		height: 56px;
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	.signupError {
+		font-size: 16px;
+		line-height: 1.5;
+		letter-spacing: -0.01em;
+	}
+	.questionText {
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	.signInLink {
+		font-size: 16px;
+		line-height: 1.5;
+	}
 }

@@ -1,0 +1,69 @@
+.sectionBox {
+    max-width: 344px;
+}
+
+.title {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.quest {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.boxBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+}
+
+.btndelete {
+    width: 100%;
+}
+
+.btncancel {
+    width: 100%;
+    background-color: var(--cu);
+    color: var(--rcn);
+}
+
+.btncancel:hover,
+.btncancel:focus-within {
+    color: var(--cy);
+}
+
+@media screen and (min-width: 768px) {
+    .sectionBox {
+        max-width: 516px;
+    }
+
+    .title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .quest {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+
+    .boxBtns {
+        justify-content: center;
+        flex-direction: row;
+        gap: 10px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .btnlogout,
+    .btncancel {
+        width: fit-content;
+        padding: 18px 57px;
+    }
+}
+
+@media screen and (min-width: 1440px) {}

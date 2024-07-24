@@ -4,7 +4,9 @@ import { selectUser } from '../../redux/auth/selectors';
 import UserBar from '../UserBar/UserBar';
 import avatar from '../../img/content/default avatar.png';
 
-const UserPanel = () => {
+const UserPanel = ({ openSettings, openLogout }) => {
+  // const user = useSelector(selectUser);
+
   const userDataFromStore = useSelector(selectUser);
 
   const user =
@@ -20,7 +22,11 @@ const UserPanel = () => {
       <h2 className={css.hello}>
         Hello, <span className={css.userPanelName}>{user.name}</span>!
       </h2>
-      <UserBar user={user} />
+      <UserBar
+        openSettings={openSettings}
+        openLogout={openLogout}
+        user={user}
+      />
     </div>
   );
 };

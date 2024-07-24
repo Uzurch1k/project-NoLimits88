@@ -1,39 +1,32 @@
-import { MutatingDots } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 
 import css from './Loader.module.scss';
+import clsx from 'clsx';
 
-export const Loader = () => {
+export const LoaderMain = () => {
   return (
     <div className={css.main}>
-      <MutatingDots
-        visible={true}
-        height="100"
-        width="100"
-        color="#5f828d"
-        secondaryColor="#5f828d"
-        radius="12.5"
-        ariaLabel="mutating-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-      />
+      <div className={css.box}>
+        <p className={css.title}>AquaTrack</p>
+      </div>
     </div>
   );
 };
 
-export const LoaderDetails = () => {
+export const LoaderDetails = isPositioning => {
   return (
-    <div className={css.details}>
-      <MutatingDots
-        visible={true}
-        height="100"
-        width="100"
-        color="#5f828d"
-        secondaryColor="#5f828d"
-        radius="12.5"
-        ariaLabel="mutating-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-      />
-    </div>
+    <ThreeDots
+      visible={true}
+      height="50"
+      width="50"
+      color={isPositioning ? 'white' : '#87d28d'}
+      radius="9"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{ color: 'yellow' }}
+      wrapperClass={clsx({
+        [css.details]: true,
+        [css.loaderPositioning]: isPositioning,
+      })}
+    />
   );
 };

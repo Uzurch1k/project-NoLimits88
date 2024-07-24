@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import * as yup from 'yup';
-import axios from 'axios';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { registerUser } from '../../redux/auth/operations';
+import { LoaderDetails } from '../Loader/Loader';
+
+import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
+
 import css from './SignUpForm.module.scss';
-import icons from '../../img/icons/icons.svg';
+import clsx from 'clsx';
 
 const schema = yup.object().shape({
   email: yup
-    .string()
+    .string('Email should be a string')
+    .required('Email is required')
     .email('Invalid email format')
-    .required('Email is required'),
+    .test('isValidAfterSign', 'Invalid email format', function (email) {
+      const strAfterEmailSign = email.slice(email.indexOf('@'));
+      if (strAfterEmailSign.includes('@') === -1) {
+        return true;
+      } else if (strAfterEmailSign.includes('@') !== -1) {
+        return strAfterEmailSign.includes('.');
+      }
+    }),
   password: yup
     .string()
-    .min(8, 'Password must be at least 8 characters long')
+    .required('Password is required')
+    .min(6, 'Password should have at least 6 characters')
+    .max(28, 'Password should not have more than 28 characters')
     .matches(/\d/, 'The password must contain at least one number')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters')
-    .required('Password is required'),
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters'),
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -31,31 +47,42 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onSubmit = async data => {
-    try {
-      const response = await axios.post('/api/register', data);
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-      toast.success('Registration successful! Redirecting...');
-      setTimeout(() => {
-        navigate('/tracker');
-      }, 2000);
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
-    }
+    const userData = { email: data.email, password: data.password };
+
+    setIsLoader(true);
+
+    const isLoginSuccessfull = async () => {
+      try {
+        const response = await dispatch(registerUser(userData));
+        if (response.error) throw new Error(response.payload);
+        toast.success('Successfully logged in!');
+      } catch (error) {
+        toast.error('Login failed');
+      } finally {
+        setIsLoader(false);
+      }
+    };
+    isLoginSuccessfull();
+
+    reset();
   };
 
   return (
-    <div className={css.signupBack}>
-      <h2 className={css.signupName}>Sign up</h2>
+    <div className={css.signInBody}>
+      <h2 className={css.signupTitle}>Sign up</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signupForm}>
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="email">
@@ -69,10 +96,10 @@ const SignUpForm = () => {
             }`}
             placeholder="Enter your email"
           />
-          {errors.email && (
-            <span className={css.signupError}>{errors.email.message}</span>
-          )}
         </div>
+        {errors.email && (
+          <p className={css.signupError}>{errors.email.message}</p>
+        )}
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="password">
             Password
@@ -87,23 +114,12 @@ const SignUpForm = () => {
               }`}
               placeholder="Enter your password"
             />
-            <div
-              className={css.signupIcon}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <svg className={css.icon}>
-                <use
-                  href={`${icons}${
-                    showPassword ? '#icon-eye' : '#icon-eye-close'
-                  }`}
-                />
-              </svg>
-            </div>
+            <BtnShowPassword setIsPasswordVisible={setShowPassword} />
           </div>
-          {errors.password && (
-            <span className={css.signupError}>{errors.password.message}</span>
-          )}
         </div>
+        {errors.password && (
+          <p className={css.signupError}>{errors.password.message}</p>
+        )}
         <div className={css.signupFormGroup}>
           <label className={css.signupLabel} htmlFor="repeatPassword">
             Repeat Password
@@ -118,30 +134,36 @@ const SignUpForm = () => {
               }`}
               placeholder="Repeat password"
             />
-            <div
-              className={css.signupIcon}
-              onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-            >
-              <svg className={css.icon}>
-                <use
-                  href={`${icons}${
-                    showRepeatPassword ? '#icon-eye' : '#icon-eye-close'
-                  }`}
-                />
-              </svg>
-            </div>
+            <BtnShowPassword setIsPasswordVisible={setShowRepeatPassword} />
           </div>
-          {errors.repeatPassword && (
-            <span className={css.signupError}>
-              {errors.repeatPassword.message}
-            </span>
-          )}
         </div>
-        <button className={css.signupButton} type="submit">
-          Sign Up
+        {errors.repeatPassword && (
+          <p className={css.signupError}>{errors.repeatPassword.message}</p>
+        )}
+        <button className={clsx(css.signupButton, 'btn-def')} type="submit">
+          {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
         </button>
-        <ToastContainer />
+        <ToastContainer
+          className={css.Toastify}
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition="slide"
+          closeButton={window.innerWidth > 480}
+        />
       </form>
+      <p className={css.questionText}>
+        Already have account?{' '}
+        <Link className={css.signInLink} to="/signin">
+          Sign In
+        </Link>
+      </p>
     </div>
   );
 };
