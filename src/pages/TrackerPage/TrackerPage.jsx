@@ -29,17 +29,14 @@ const TrackerPage = () => {
     <div className={css.body}>
       <DocumentTitle>Tracker</DocumentTitle>
       <Section>
-        <div>
-          <WaterMainInfo openWaterModal={() => openModal('water')} />
-        </div>
-        <div>
-          <WaterDetailedInfo
-            openSettings={() => openModal('settings')}
-            openLogout={() => openModal('logout')}
-            openWaterModal={() => openModal('water')}
-            openDeleteWaterModal={() => openModal('deletewater')}
-          />
-        </div>
+        <WaterMainInfo openWaterModal={() => openModal('water')} />
+
+        <WaterDetailedInfo
+          openSettings={() => openModal('settings')}
+          openLogout={() => openModal('logout')}
+          openWaterModal={() => openModal('water')}
+          openDeleteWaterModal={() => openModal('deletewater')}
+        />
       </Section>
 
       <BaseModal
