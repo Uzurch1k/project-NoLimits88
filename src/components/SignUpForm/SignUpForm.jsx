@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import { registerUser } from '../../redux/auth/operations';
-import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import { registerUser } from '../../redux/auth/operations';
+import { LoaderDetails } from '../Loader/Loader';
+
+import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
+
 import css from './SignUpForm.module.scss';
 import clsx from 'clsx';
-import { LoaderDetails } from '../Loader/Loader';
-import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 
 const schema = yup.object().shape({
   email: yup
