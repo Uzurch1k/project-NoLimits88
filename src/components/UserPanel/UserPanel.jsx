@@ -1,31 +1,23 @@
-import css from './UserPanel.module.scss';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
 import UserBar from '../UserBar/UserBar';
-import avatar from '../../img/content/ava1.png';
+
+import css from './UserPanel.module.scss';
 
 const UserPanel = ({ openSettings, openLogout }) => {
-  // const user = useSelector(selectUser);
+  const { email } = useSelector(selectUser);
 
-  const userDataFromStore = useSelector(selectUser);
-
-  const user =
-    userDataFromStore && userDataFromStore.name && userDataFromStore.avatar
-      ? userDataFromStore
-      : {
-          name: 'User',
-          avatar: avatar,
-        };
+  const username = email ? email.split('@')[0] : 'User';
 
   return (
     <div className={css.userPanel}>
       <h2 className={css.hello}>
-        Hello<span className={css.userPanelName}>, {user.name}</span>!
+        Hello<span className={css.userPanelName}>, {username}</span>!
       </h2>
       <UserBar
         openSettings={openSettings}
         openLogout={openLogout}
-        user={user}
+        username={username}
       />
     </div>
   );

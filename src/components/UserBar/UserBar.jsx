@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import icon from '../../img/icons/symbol.svg';
+import avatar from '../../img/content/ava1.png';
 
 import clsx from 'clsx';
 import css from './UserBar.module.scss';
 
-const UserBar = ({ openSettings, openLogout, user }) => {
+const UserBar = ({ openSettings, openLogout, username }) => {
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
@@ -45,16 +46,14 @@ const UserBar = ({ openSettings, openLogout, user }) => {
         onClick={togglePopover}
         ref={buttonRef}
       >
-        <p>{user.name}</p>
+        <p>{username}</p>
 
         <div className={css.avatarWrapper}>
-          <img src={user.avatar} alt="Avatar user" />
+          <img src={avatar} alt="Avatar user" />
         </div>
 
         <div className={css.iconArrowWrapp}>
-          <svg
-            className={clsx(css.iconArrowUp, { [css.rotate]: showPopover })}
-          >
+          <svg className={clsx(css.iconArrowUp, { [css.rotate]: showPopover })}>
             <use xlinkHref={`${icon}#icon-arrow-up`} />
           </svg>
         </div>
