@@ -39,6 +39,7 @@
 	height: 16px;
 }
 .iconArrowUp {
+	transform: rotate(180deg);
 	height: 100%;
 	width: 100%;
 	fill: none;
@@ -47,7 +48,7 @@
 }
 
 .iconArrowUp.rotate {
-	transform: rotate(180deg);
+	transform: rotate(0);
 }
 
 @media screen and (min-width: 768px) {
