@@ -1,4 +1,4 @@
-// import WaterForm from '../WaterForm/WaterForm'; відсутній файл
+// import WaterForm from '../WaterForm/WaterForm'; 
 // import css from './WaterModal.module.scss';
 
 // * в компоненті AddWaterBtn приблизно такий код для виклику модалки

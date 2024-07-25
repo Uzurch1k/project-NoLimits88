@@ -1,16 +1,8 @@
-.sectionBox {
-    max-width: 343px;
-}
-
 .modalTitle {
     font-size: 20px;
 }
 
 @media screen and (min-width: 768px) {
-    .sectionBox {
-        max-width: 518px;
-    }
-
     .modalTitle {
         font-size: 28px;
     }
