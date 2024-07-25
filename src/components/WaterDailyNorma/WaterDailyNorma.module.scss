@@ -1,59 +1,43 @@
 .dailyNormaSection {
-  position: absolute;
-  top: 122px;
-  left: 16px;
-
-  border-radius: 15px;
-  padding: 12px;
-  width: 102px;
-  height: 54px;
-  background-color: var(--cw);
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 122px;
+	left: 16px;
+	border-radius: 15px;
+	padding: 12px;
+	background-color: var(--cw);
+	box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
-
 .dailyNormaValue {
-  font-weight: 700;
-  line-height: 1;
-  color: var(--cy);
-  margin-bottom: 6px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--cy);
+	margin-bottom: 6px;
 }
-
 .normaDescr {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 100%;
-  color: rgba(47, 47, 47, 0.6);
+	font-size: 10px;
+	line-height: 1;
+	color: var(--rcb);
 }
 
 @media screen and (min-width: 768px) {
-  .dailyNormaSection {
-    top: 167px;
-    left: 32px;
-
-    padding: 14px 18px;
-    width: 129px;
-    height: 78px;
-  }
-
-  .dailyNormaValue {
-    font-size: 15px;
-    line-height: 1.49;
-    margin-bottom: 4px;
-  }
-
-  .normaDescr {
-    font-size: 12px;
-    line-height: 1.87;
-  }
+	.dailyNormaSection {
+		top: 157px;
+		left: 32px;
+		padding: 14px 18px;
+	}
+	.dailyNormaValue {
+		font-size: 15px;
+		line-height: 1.49;
+		margin-bottom: 4px;
+	}
+	.normaDescr {
+		font-size: 12px;
+		line-height: 1.87;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-  .dailyNormaSection {
-    top: 157px;
-    left: 64px;
-
-    padding: 14px 18px;
-    width: 129px;
-    height: 78px;
-  }
+	.dailyNormaSection {
+		left: 64px;
+	}
 }

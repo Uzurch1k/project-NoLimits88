@@ -1,44 +1,93 @@
 .wrapp {
-  position: relative;
-  border-radius: 30px;
-  background-color: var(--cg);
-  height: 415px;
-  display: flex;
-  justify-content: center;
+	position: relative;
+	border-radius: 30px;
+	background-color: var(--cg);
+	height: 415px;
+	display: flex;
+	justify-content: center;
 }
-
 .waterInfocard {
-  display: flex;
-  align-items: center;
-  margin-top: 50px;
-  width: 262px;
-  height: 335px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+	width: 262px;
+	height: 335px;
 }
 .waterInfoImg {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.waterClassBtn {
+	position: absolute;
+	bottom: 32px;
+	right: 16px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	padding: 14px 20px;
+	background-color: var(--cy);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	border-radius: 30px;
+	color: var(--cw);
+	transition: all 150ms ease-in;
+	&:hover,
+	&:focus {
+		color: var(--cg);
+		svg {
+			stroke: var(--cg);
+		}
+	}
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 16px;
+		height: 16px;
+	}
+	svg {
+		width: 100%;
+		height: 100%;
+		stroke: var(--cw);
+		transition: all 150ms ease-in;
+	}
 }
 
 @media screen and (min-width: 768px) {
-  .wrapp {
-    height: 578px;
-  }
+	.wrapp {
+		height: 578px;
+	}
+	.waterInfocard {
+		margin-top: 69px;
+		width: 374px;
+		height: 477px;
+	}
 
-  .waterInfocard {
-    margin-top: 69px;
-    width: 374px;
-    height: 477px;
-  }
+	.waterClassBtn {
+		bottom: 64px;
+		right: 32px;
+		padding: 18px 30px;
+
+		div {
+			width: 24px;
+			height: 24px;
+		}
+	}
 }
 @media screen and (min-width: 1440px) {
-  .wrapp {
-    height: 736px;
-  }
-
-  .waterInfocard {
-    margin-top: 92px;
-    width: 472px;
-    height: 604px;
-  }
+	.wrapp {
+		height: 736px;
+	}
+	.waterInfocard {
+		margin-top: 92px;
+		width: 472px;
+		height: 604px;
+	}
 }
