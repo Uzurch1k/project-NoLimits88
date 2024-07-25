@@ -1,12 +1,14 @@
-import css from './AddWaterBtn.module.scss';
 import icons from '../../img/icons/icons.svg';
+// import css from './AddWaterBtn.module.scss';
 
-const AddWaterBtn = () => {
+const AddWaterBtn = ({ waterClassBtn, openWaterModal }) => {
   return (
-    <button className={css.addWaterBtn} type="submit">
-      <svg className={css.addWaterIcn}>
-        <use href={`${icons}#plus`}></use>
-      </svg>
+    <button className={waterClassBtn} type="button" onClick={openWaterModal}>
+      <div>
+        <svg>
+          <use href={`${icons}#plus`}></use>
+        </svg>
+      </div>
       <span>Add water</span>
     </button>
   );
