@@ -84,13 +84,16 @@
 
   .waterProgressBar {
     right: 20px;
-    bottom: 35px;
+    bottom: 38px;
 
     width: 255px;
     height: 8px;
   }
-
+  .percentContainer {
+    width: calc(100% - 40px);
+  }
   .progressPercent {
+    top: -22px;
     font-size: 12px;
   }
 
