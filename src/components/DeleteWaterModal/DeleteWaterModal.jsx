@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BaseModal from '../BaseModal/BaseModal';
 import clsx from 'clsx';
 import css from './DeleteWaterModal.module.scss';
 
@@ -9,7 +8,7 @@ import css from './DeleteWaterModal.module.scss';
 // import { updateWaterProgressBar, updateWaterList, updateCalendar } from '../redux' * дія в редаксі для оновлення
 import { logOut } from '../../redux/auth/operations'; // скопійовано з LogOutModal, щоб не вибивало помилок за відсутності редаксу, потім видалити!
 
-const DeleteWaterModal = ({ isOpen, onClose, entryId }) => {
+const DeleteWaterModal = ({ onClose, entryId }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
@@ -41,11 +40,7 @@ const DeleteWaterModal = ({ isOpen, onClose, entryId }) => {
   };
 
   return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onClose}
-      classSectionBox={css.sectionBox}
-    >
+    <div>
       <h2 className={css.title}>Delete entry</h2>
       <p className={css.quest}>Are you sure you want to delete the entry?</p>
       <div className={css.boxBtns}>
@@ -65,7 +60,7 @@ const DeleteWaterModal = ({ isOpen, onClose, entryId }) => {
         </button>
       </div>
       <ToastContainer />
-    </BaseModal>
+    </div>
   );
 };
 

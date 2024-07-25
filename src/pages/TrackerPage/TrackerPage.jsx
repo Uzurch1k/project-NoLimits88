@@ -52,7 +52,7 @@ const TrackerPage = () => {
         onClose={() => closeModal('logout')}
         classNameModal={css.logoutModal}
       >
-        <LogOutModal />
+        <LogOutModal onClose={() => closeModal('logout')}/>
       </BaseModal>
 
       {/* <BaseModal
@@ -68,7 +68,7 @@ const TrackerPage = () => {
         onClose={() => closeModal('deletewater')}
         classNameModal={css.deletewaterModal}
       >
-        <DeleteWaterModal />
+        <DeleteWaterModal onClose={() => closeModal('deletewater')}/>
       </BaseModal> */}
     </div>
   );

@@ -4,7 +4,7 @@ import { logOut } from '../../redux/auth/operations';
 import clsx from 'clsx';
 import css from './LogOutModal.module.scss';
 
-const LogOutModal = () => {
+const LogOutModal = ({onClose}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const LogOutModal = () => {
         >
           Log Out
         </button>
-        <button className={clsx(css.btncancel, 'btn-def')} type="button">
+        <button className={clsx(css.btncancel, 'btn-def')} type="button" onClick={onClose}>
           Cancel
         </button>
       </div>
