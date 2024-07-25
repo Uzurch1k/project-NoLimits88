@@ -1,0 +1,53 @@
+.dailyInfoSec {
+}
+
+.dailyWrapp {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.waterClassBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	color: var(--cy);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: -0.01em;
+
+	&:hover,
+	&:focus {
+		div {
+			background-color: var(--cy);
+		}
+		svg {
+			stroke: var(--cw);
+		}
+	}
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 30px;
+		height: 30px;
+		background-color: var(--cg);
+		border-radius: 50%;
+		transition: all 150ms ease-in;
+	}
+	svg {
+		width: 17px;
+		height: 17px;
+		stroke: var(--cy);
+		transition: all 150ms ease-in;
+	}
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1440px) {
+}
