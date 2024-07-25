@@ -11,7 +11,6 @@ const authSlice = createSlice({
       state.refreshToken = action.payload.refreshToken;
       state.isLoggedIn = true;
     },
-    logOut() {},
   },
   extraReducers: builder => {
     builder
@@ -58,5 +57,5 @@ const authSlice = createSlice({
   },
 });
 
-// export const { setToken } = authSlice.actions;
+export const { setToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

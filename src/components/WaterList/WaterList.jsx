@@ -10,10 +10,6 @@ const WaterList = () => {
           <WaterItem />
           <WaterItem />
           <WaterItem />
-          <WaterItem />
-          <WaterItem />
-          <WaterItem />
-          <WaterItem />
         </ul>
       </div>
     </div>

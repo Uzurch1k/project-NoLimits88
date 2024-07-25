@@ -11,9 +11,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 
+import { setupInterceptors } from './auth/operations';
 import { authReducer } from './auth/slice';
 // import { waterReducer } from './water/slice';
-// import { setupInterceptors } from './auth/operations';
 
 const authPersistConfig = {
   key: 'auth',
@@ -51,6 +51,6 @@ export const store = configureStore({
     }),
 });
 
-// setupInterceptors(store);
+setupInterceptors(store);
 
 export const persistor = persistStore(store);

@@ -2,7 +2,8 @@
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	width: 147.5px;
+	justify-content: space-between;
 	background-color: var(--cw);
 	border-radius: 15px;
 	padding: 18px 14px;
@@ -63,7 +64,7 @@
 @media screen and (min-width: 768px) {
 	.waterItem {
 		padding: 20px;
-		gap: 20px;
+		width: 192px;
 	}
 	.iconWaterWrapp {
 		width: 45px;

@@ -1,16 +1,18 @@
 .waterListSec {
-	max-width: 303px;
+	position: relative;
 	overflow: hidden;
+	height: 130px;
 }
 .waterListbody {
-	overflow-x: auto;
+	position: absolute;
+	max-width: 303px;
 }
 .waterList {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	overflow-x: auto;
 	padding: 24px 0;
+	overflow-x: auto;
 
 	&::-webkit-scrollbar {
 		-webkit-appearance: none;
@@ -26,6 +28,9 @@
 
 @media screen and (min-width: 768px) {
 	.waterListSec {
+		height: 145px;
+	}
+	.waterListbody {
 		max-width: 640px;
 	}
 	.waterList {
@@ -34,7 +39,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-	.waterListSec {
+	.waterListbody {
 		max-width: 608px;
 	}
 	.waterList {
