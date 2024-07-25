@@ -1,11 +1,11 @@
 import css from './WaterItem.module.scss';
-import icons from '../../img/icons/icons.svg';
+import icons from '../../img/icons/symbol.svg';
 
 const WaterItem = () => {
   return (
-    <div className={css.water_item_content}>
+    <li className={css.water_item_content}>
       <svg className={css.icon_water_glass} width="38" height="38">
-        <use href={`${icons}#water-glass`}></use>
+        <use href={`${icons}#icon-glass`}></use>
       </svg>
 
       <div className={css.water_info}>
@@ -19,7 +19,7 @@ const WaterItem = () => {
           aria-label="Edit the entered amount of water"
         >
           <svg className={css.icon_action} width="14" height="14">
-            <use href={`${icons}#pencil-square`}></use>
+            <use href={`${icons}#icon-edit`}></use>
           </svg>
         </button>
         <button
@@ -28,11 +28,11 @@ const WaterItem = () => {
           aria-label="Delete the entered amount of water"
         >
           <svg className={css.icon_action} width="14" height="14">
-            <use href={`${icons}#trash`}></use>
+            <use href={`${icons}#icon-trash`}></use>
           </svg>
         </button>
       </div>
-    </div>
+    </li>
   );
 };
 
