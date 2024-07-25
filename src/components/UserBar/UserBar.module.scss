@@ -38,15 +38,15 @@
 	width: 16px;
 	height: 16px;
 }
-.iconArrowDown {
+.iconArrowUp {
 	height: 100%;
 	width: 100%;
-	fill: var(--cw);
+	fill: none;
 	stroke: var(--cw);
 	transition: all 150ms ease-in;
 }
 
-.iconArrowDown.rotate {
+.iconArrowUp.rotate {
 	transform: rotate(180deg);
 }
 

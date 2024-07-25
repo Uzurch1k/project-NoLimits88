@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import clsx from 'clsx';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
+import icon from '../../img/icons/symbol.svg';
+
+import clsx from 'clsx';
 import css from './UserBar.module.scss';
-import icon from '../../img/icons/icons.svg';
 
 const UserBar = ({ openSettings, openLogout, user }) => {
   const [showPopover, setShowPopover] = useState(false);
@@ -52,9 +53,9 @@ const UserBar = ({ openSettings, openLogout, user }) => {
 
         <div className={css.iconArrowWrapp}>
           <svg
-            className={clsx(css.iconArrowDown, { [css.rotate]: showPopover })}
+            className={clsx(css.iconArrowUp, { [css.rotate]: showPopover })}
           >
-            <use xlinkHref={`${icon}#arrow-down`} />
+            <use xlinkHref={`${icon}#icon-arrow-up`} />
           </svg>
         </div>
       </button>
