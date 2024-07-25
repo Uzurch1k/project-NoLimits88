@@ -1,63 +1,67 @@
 .userBar {
-  position: relative;
-  width: fit-content;
+	position: relative;
+	width: fit-content;
 }
 
 .userBarButton {
-  background-color: var(--cy);
-  border-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--cw);
-  padding-top: 6px;
-  padding-left: 12px;
-  padding-right: 18px;
-  padding-bottom: 6px;
-  gap: 8px;
-  font-weight: 700;
+	background-color: var(--cy);
+	border-radius: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--cw);
+	padding: 6px 12px;
+	gap: 8px;
+	font-weight: 700;
 }
 
 .avatarWrapper {
-  display: flex;
-  border-radius: 50%;
-  background-color: var(--cu);
-  height: 38px;
-  width: 38px;
-  overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: var(--cu);
+	height: 38px;
+	width: 38px;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
+.iconArrowWrapp {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 16px;
+	height: 16px;
+}
 .iconArrowDown {
-  height: 16px;
-  width: 16px;
-  fill: var(--cw);
-  stroke-width: 2;
-  stroke: var(--cw);
-  transition: all 150ms ease-in;
+	height: 100%;
+	width: 100%;
+	fill: var(--cw);
+	stroke: var(--cw);
+	transition: all 150ms ease-in;
 }
 
 .iconArrowDown.rotate {
-  transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 @media screen and (min-width: 768px) {
-  .userBarButton {
-    gap: 10px;
-  }
+	.userBarButton {
+		gap: 10px;
+	}
 
-  .avatarWrapper {
-    width: 44px;
-    height: 44px;
-  }
+	.avatarWrapper {
+		width: 44px;
+		height: 44px;
+	}
 
-  .iconArrowDown {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .userBarButton {
-    padding-right: 12px;
-  }
+	.iconArrowWrapp {
+		width: 20px;
+		height: 20px;
+	}
 }

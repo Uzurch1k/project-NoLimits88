@@ -1,28 +1,31 @@
 .userPanel {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin-bottom: 40px;
 }
 
 .hello {
-  font-family: var(--ff2);
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1;
+	font-family: var(--ff2);
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 1;
+	letter-spacing: -0.01em;
 }
 
 .userPanelName {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 @media screen and (min-width: 768px) {
-  .userPanel {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
+	.userPanel {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-  .hello {
-    font-size: 36px;
-  }
+	.hello {
+		line-height: 1.05;
+		font-size: 36px;
+	}
 }

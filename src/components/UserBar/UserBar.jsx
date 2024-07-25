@@ -45,13 +45,20 @@ const UserBar = ({ openSettings, openLogout, user }) => {
         ref={buttonRef}
       >
         <p>{user.name}</p>
+
         <div className={css.avatarWrapper}>
           <img src={user.avatar} alt="Avatar user" />
         </div>
-        <svg className={clsx(css.iconArrowDown, { [css.rotate]: showPopover })}>
-          <use xlinkHref={`${icon}#arrow-down`} />
-        </svg>
+
+        <div className={css.iconArrowWrapp}>
+          <svg
+            className={clsx(css.iconArrowDown, { [css.rotate]: showPopover })}
+          >
+            <use xlinkHref={`${icon}#arrow-down`} />
+          </svg>
+        </div>
       </button>
+
       {showPopover && (
         <UserBarPopover
           ref={popoverRef}

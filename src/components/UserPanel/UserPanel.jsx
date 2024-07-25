@@ -2,7 +2,7 @@ import css from './UserPanel.module.scss';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
 import UserBar from '../UserBar/UserBar';
-import avatar from '../../img/content/default avatar.png';
+import avatar from '../../img/content/ava1.png';
 
 const UserPanel = ({ openSettings, openLogout }) => {
   // const user = useSelector(selectUser);
@@ -20,7 +20,7 @@ const UserPanel = ({ openSettings, openLogout }) => {
   return (
     <div className={css.userPanel}>
       <h2 className={css.hello}>
-        Hello, <span className={css.userPanelName}>{user.name}</span>!
+        Hello<span className={css.userPanelName}>, {user.name}</span>!
       </h2>
       <UserBar
         openSettings={openSettings}
