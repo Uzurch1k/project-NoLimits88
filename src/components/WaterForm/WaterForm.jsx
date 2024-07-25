@@ -2,9 +2,9 @@ import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+/*import { FaPlus, FaMinus } from 'react-icons/fa';*/
 import css from './WaterForm.module.scss';
-/*import icons from '../../img/icons/icons.svg'*/
+import icons from '../../img/icons/symbol.svg'
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -91,7 +91,9 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
           className={css.decrementButton}
           onClick={decrementWater}
         >
-          <FaMinus className={css.icon} />
+          <svg className={css.icon}>
+  <use href={`${icons}#icon-minus-amount`}></use>
+</svg>
         </button>
         <div className={css.inputWrapper}>
           <input
@@ -108,7 +110,9 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
           className={css.incrementButton}
           onClick={incrementWater}
         >
-          <FaPlus className={css.icon} />
+          <svg className={css.icon}>
+  <use href={`${icons}#icon-plus-amount`}></use>
+</svg>
         </button>
       </div>
       {errors.waterAmount && (
