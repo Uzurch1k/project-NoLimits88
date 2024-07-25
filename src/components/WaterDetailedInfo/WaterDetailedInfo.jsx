@@ -5,10 +5,12 @@ import MonthInfo from '../MonthInfo/MonthInfo';
 
 const WaterDetailedInfo = ({ openSettings, openLogout, openWaterModal }) => {
   return (
-    <div className={css.waterDetailedBg}>
+    <div className={css.waterDetailedSec}>
       <UserPanel openSettings={openSettings} openLogout={openLogout} />
       <DailyInfo openWaterModal={openWaterModal} />
-      <MonthInfo />
+      <div className={css.waterDetailedWrapp}>
+        <MonthInfo />
+      </div>
     </div>
   );
 };

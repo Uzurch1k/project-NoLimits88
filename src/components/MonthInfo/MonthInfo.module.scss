@@ -1,18 +1,18 @@
 .monthInfo {
-  outline: 1px solid red;
-  display: flex;
-  flex-direction: column;
+	outline: 1px solid red;
+	display: flex;
+	flex-direction: column;
 }
 
 .calendarPaginationWrapper {
-  display: flex;
-  justify-content: space-between;
-  .monthTitle {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    text-align: left;
-  }
+	display: flex;
+	justify-content: space-between;
+	.monthTitle {
+		font-size: 20px;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		text-align: left;
+	}
 }
 
 // .calendarWrapper {
@@ -20,3 +20,9 @@
 //   align-items: center;
 //   justify-content: space-between;
 // }
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1440px) {
+}

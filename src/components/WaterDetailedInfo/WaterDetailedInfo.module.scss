@@ -1,12 +1,27 @@
-.waterDetailedBg {
-  position: relative;
-  border-radius: 30px;
-  background-color: var(--cu);
-  padding: 40px 20px;
+.waterDetailedSec {
+	position: relative;
+	border-radius: 30px;
+	background-color: var(--cu);
+	padding: 40px 20px;
+	height: 770px;
+	display: flex;
+	flex-direction: column;
+}
+.waterDetailedWrapp {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 @media screen and (min-width: 768px) {
-  .waterDetailedBg {
-    padding: 32px 32px;
-  }
+	.waterDetailedSec {
+		padding: 40px 32px 35px 32px;
+		height: 738px;
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.waterDetailedSec {
+		height: 100%;
+	}
 }

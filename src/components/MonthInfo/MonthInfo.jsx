@@ -7,7 +7,7 @@ const MonthInfo = () => {
   return (
     <div className={css.monthInfo}>
       <div className={css.calendarPaginationWrapper}>
-        <h3 className={css.monthTitle}>Month</h3>
+        <h2 className={css.monthTitle}>Month</h2>
         <CalendarPagination />
       </div>
       <Calendar />
