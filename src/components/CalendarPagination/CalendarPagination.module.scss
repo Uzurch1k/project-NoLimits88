@@ -1,0 +1,36 @@
+.calendarPaginationWrapper {
+  display: flex;
+  align-items: baseline;
+  .chooseMonthWrapper {
+    display: flex;
+    gap: 16px;
+  }
+  .calendarArrowIcon {
+    fill: transparent;
+    stroke: var(--cy);
+  }
+  .dateTitle {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+  }
+  .statisticsButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+  }
+  .iconStatistics {
+    fill: var(--cw);
+    width: 20px;
+    right: 20px;
+    opacity: 0.4;
+    transition: all 150ms ease-in;
+  }
+  .iconStatistics.active,
+  .iconStatistics:hover,
+  .iconStatistics:focus-within {
+    opacity: 1;
+  }
+}
