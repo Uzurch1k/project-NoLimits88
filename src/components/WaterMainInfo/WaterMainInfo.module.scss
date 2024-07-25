@@ -2,7 +2,7 @@
   position: relative;
   border-radius: 30px;
   background-color: var(--cg);
-  min-height: 415px;
+  height: 415px;
   display: flex;
   justify-content: center;
 }
@@ -11,37 +11,34 @@
   display: flex;
   align-items: center;
   margin-top: 50px;
-  object-fit: cover;
+  width: 262px;
+  height: 335px;
 }
 .waterInfoImg {
-  min-width: 262px;
-  min-height: 335px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
 @media screen and (min-width: 768px) {
   .wrapp {
-    min-height: 578px;
+    height: 578px;
   }
 
   .waterInfocard {
     margin-top: 69px;
-  }
-  .waterInfoImg {
-    min-width: 374px;
-    min-height: 477px;
+    width: 374px;
+    height: 477px;
   }
 }
 @media screen and (min-width: 1440px) {
   .wrapp {
-    min-height: 736px;
+    height: 736px;
   }
 
   .waterInfocard {
     margin-top: 92px;
-  }
-  .waterInfoImg {
-    min-width: 472px;
-    min-height: 604px;
+    width: 472px;
+    height: 604px;
   }
 }

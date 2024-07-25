@@ -5,7 +5,7 @@ import bottlex2 from '../../img/content/bottle@x2.png';
 import Logo from '../../components/Logo/Logo';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
 
-const WaterMainInfo = ({}) => {
+const WaterMainInfo = () => {
   return (
     <div className={css.wrapp}>
       <Logo />
