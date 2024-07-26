@@ -1,6 +1,7 @@
-import axiosInstance from '../../helpers/axiosBase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setToken } from './slice';
+
+import axiosInstance from '../../helpers/axiosBase';
 
 export const setAuthHeader = token => {
   axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
