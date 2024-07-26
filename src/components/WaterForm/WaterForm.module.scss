@@ -33,28 +33,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  align-content: center;
   cursor: pointer;
   background-color: var(--cw);
 }
 .icon {
-  color: var(--cy);
-}
-.mlText {
-  position: relative;
-  right: 36%;
-  top: 50%;
-  font-size: 16px;
-  color: var(--cw);
+  stroke: var(--cy);
+  width: 25px;
+  height: 25px;
 }
 
 .waterAmountInput {
   text-align: center;
+  align-content: center;
   border-radius: 30px;
   background-color: var(--cy);
   color: var(--cw);
   height: 40px;
-  font-size: 14px;
   font-weight: 700;
+  width: 89px;
 }
 
 .inputContainer {
@@ -74,12 +71,23 @@
 
 .settingsButton {
   padding: 14px 40px;
+  cursor: pointer;
 }
 .settingsButton:hover,
 .settingsButton:focus {
   background-color: var(--cn);
 }
-
+.settingsTitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--cy);
+}
+.textTime {
+  margin-bottom: 8px;
+}
 .input {
   height: 46px;
   width: 100%;
@@ -88,16 +96,28 @@
   padding: 14px 16px;
   margin-bottom: 24px;
 }
+.inputContainerTime {
+  display: flex;
+  flex-direction: column;
+}
 .input:hover,
 .input:focus {
   border-color: var(--cg);
   outline: none;
 }
 
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /*==========================================*/
 @media screen and (min-width: 768px) {
   .settingsButton {
     padding: 16px 50px;
+    cursor: pointer;
   }
 
   .text {
