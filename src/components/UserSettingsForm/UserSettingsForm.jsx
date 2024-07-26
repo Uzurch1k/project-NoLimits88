@@ -87,6 +87,7 @@ const UserSettingsForm = () => {
             Upload a photo
           </label>
         </div>
+
         <div className={css.scroll}>
           <div className={css.settingsCont}>
             <div className={css.genderCont}>
