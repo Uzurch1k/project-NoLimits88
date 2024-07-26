@@ -11,59 +11,27 @@ const clearAuthHeader = () => {
 };
 
 export const setupInterceptors = store => {
-  axios.interceptors.request.use(
-    async config => {
-      const { token } = store.getState().auth;
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      console.log('Request Interceptor', config);
-      return config;
-    },
-    error => Promise.reject(error)
-  );
-
   axios.interceptors.response.use(
     response => response,
     async error => {
-      const originalRequest = error.config;
-      console.log('Response Error Interceptor', error.response.status);
-
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        const { refreshToken, sessionId } = store.getState().auth;
-
-        if (!refreshToken || !sessionId) {
-          store.dispatch(logOut());
-          return Promise.reject('Refresh token or session ID is missing');
-        }
-
+      if (error.response.status === 401) {
         try {
-          console.log('Attempting to refresh token');
-          const { data } = await axios.post('/users/refresh', {
-            refreshToken,
-            sessionId,
-          });
+          const { refreshToken } = store.getState().user;
+          console.log(refreshToken);
+          if (refreshToken) {
+            const { data } = await axios.post('/users/refresh', {
+              refreshToken,
+            });
+            setAuthHeader(data.accessToken);
+            store.dispatch(setToken(data));
+            error.config.headers.authorization = `Bearer ${data.accessToken}`;
+          }
 
-          console.log('New tokens:', data);
-
-          setAuthHeader(data.accessToken);
-          store.dispatch(
-            setToken({
-              accessToken: data.accessToken,
-              refreshToken: refreshToken, // Якщо refreshToken не змінюється
-            })
-          );
-
-          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-          return axios(originalRequest);
-        } catch (err) {
-          clearAuthHeader();
-          store.dispatch(logOut());
-          return Promise.reject(err);
+          return axios.request(error.config);
+        } catch (error) {
+          return Promise.reject(error);
         }
       }
-
       return Promise.reject(error);
     }
   );
