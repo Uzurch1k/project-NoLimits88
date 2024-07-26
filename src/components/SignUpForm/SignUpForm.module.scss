@@ -1,110 +1,120 @@
-.signInBody {
+.signUpBody {
 	width: 100%;
 }
 
-.signupTitle {
+.signUpTitle {
 	font-size: 32px;
-	line-height: 1;
 	letter-spacing: -0.01em;
 	margin-bottom: 32px;
+	line-height: 1;
 }
 
-.signupForm {
+.signUpForm {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	margin-bottom: 10px;
-}
-
-.signupLabel {
-	position: relative;
-	color: var(--cb);
-	width: 100%;
-	font-size: 14px;
-	line-height: 1.28;
-	font-weight: 700;
-	letter-spacing: -0.01em;
-}
-
-.signupFormGroup {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	margin-bottom: 10px;
-	width: 100%;
-}
-
-.signupField {
-	padding-right: 45px;
-	position: relative;
-	border-radius: 15px;
-	border: 1px solid var(--rcm);
-	color: var(--cb);
-	display: flex;
-	width: 100%;
-	height: 50px;
-	padding: 16px;
-	font-size: 14px;
-	line-height: 1.28;
-	letter-spacing: -0.01em;
-	background-color: transparent;
-	transition: all 150ms ease-in;
-	&:hover,
-	&:focus {
+	.emailLabel,
+	.passwordLabel {
+		font-size: 14px;
+		font-weight: 700;
+		margin-bottom: 8px;
+		line-height: 1.28;
+		color: var(--cb);
+		display: block;
+		width: 100%;
+		letter-spacing: -0.01em;
+	}
+	.inputBaseStyles {
+		width: 100%;
+		height: 50px;
+		font-size: 14px;
+		line-height: 1.28;
+		color: var(--cb);
+		border: 1px solid var(--rcm);
+		background-color: transparent;
+		letter-spacing: -0.01em;
+		border-radius: 15px;
+		padding: 16px;
+	}
+	.inputBaseStyles:hover,
+	.inputBaseStyles:focus {
 		border: 1px solid var(--rcw);
 	}
-}
 
-.eye {
-	display: inline-block;
-	stroke-width: 1;
-	stroke: rgba(47, 47, 47, 1);
-	fill: rgba(240, 239, 244, 1);
-}
-
-.signupButton {
-	position: relative;
-	width: 100%;
-}
-.signupButton:hover,
-.signupButton:focus {
-	background-color: var(--cn);
-}
-.signupButton:active {
-	color: var(--ch);
-	background-color: var(--cq);
-}
-
-.signupError {
-	color: var(--cr);
-	font-size: 14px;
-	line-height: 1.28;
-	letter-spacing: -0.01em;
-	margin-bottom: 10px;
-}
-.signUpErrorField {
-	border-color: var(--cr);
-	&:hover,
-	&:focus {
+	.inputPasswordWrapper {
+		position: relative;
+		width: 100%;
+		margin-bottom: 32px;
+	}
+	.inputPasswordWrapperError {
+		margin-bottom: 10px;
+	}
+	.emailInput {
+		@extend .inputBaseStyles;
+		margin-bottom: 16px;
+		transition: border 150ms ease-in;
+		&:focus {
+			border: 1px solid var(--rcw);
+		}
+	}
+	.passwordInput {
+		@extend .inputBaseStyles;
+		transition: border 150ms ease-in;
+		&:focus {
+			border: 1px solid var(--rcw);
+		}
+	}
+	.errorInput {
+		color: var(--cr);
 		border: 1px solid var(--cr);
+		&:focus {
+			border: 1px solid var(--cr);
+		}
+	}
+	.errorEmailInput {
+		@extend .errorInput;
+		margin-bottom: 10px;
+	}
+	.errorPasswordInput {
+		@extend .errorInput;
+	}
+	.errorMessage {
+		color: var(--cr);
+		font-size: 14px;
+		line-height: 1.28;
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.showPwdBtn {
+		width: 20px;
+		height: 20px;
+		display: none;
+		position: absolute;
+		top: 18px;
+		right: 16px;
+	}
+	.eye {
+		display: inline-block;
+		stroke-width: 1;
+		stroke: rgba(47, 47, 47, 1);
+		fill: rgba(240, 239, 244, 1);
+	}
+	.btnSignUp {
+		position: relative;
+		width: 100%;
+	}
+	.btnSignUp:hover,
+	.btnSignUp:focus {
+		background-color: var(--cn);
+	}
+	.btnSignUp:active {
+		color: var(--ch);
+		background-color: var(--cq);
 	}
 }
-.signupIconEyes {
-	position: relative;
-	width: 100%;
-}
 
-.signupIcon {
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	right: 16px;
-	top: 50%;
-	transform: translateY(-50%);
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 .questionText {
 	line-height: 1.28;
 	letter-spacing: -0.01em;
@@ -121,24 +131,39 @@
 }
 
 @media screen and (min-width: 768px) {
-	.signupTitle {
+	.signUpTitle {
 		font-size: 36px;
 		line-height: 1.05;
 	}
-	.signupLabel {
-		font-size: 16px;
-		line-height: 1.5;
-	}
-	.signupField {
-		padding-right: 45px;
-		height: 56px;
-		font-size: 16px;
-		line-height: 1.5;
-	}
-	.signupError {
-		font-size: 16px;
-		line-height: 1.5;
-		letter-spacing: -0.01em;
+	.signUpForm {
+		.emailLabel,
+		.passwordLabel {
+			font-size: 16px;
+			line-height: 1.5;
+		}
+		.inputBaseStyles {
+			height: 56px;
+			font-size: 16px;
+			line-height: 1.5;
+		}
+		.emailInput {
+			margin-bottom: 20px;
+			padding-right: 45px;
+		}
+		.passwordInput {
+			padding-right: 45px;
+		}
+		.showPwdBtn {
+			display: block;
+		}
+		.errorEmailInput {
+			margin-bottom: 10px;
+		}
+		.errorMessage {
+			font-size: 16px;
+			line-height: 1.5;
+			width: 100%;
+		}
 	}
 	.questionText {
 		font-size: 16px;

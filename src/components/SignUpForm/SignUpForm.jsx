@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as yup from 'yup';
@@ -16,18 +16,16 @@ import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import css from './SignUpForm.module.scss';
 import clsx from 'clsx';
 
-const schema = yup.object().shape({
+const loginSchema = yup.object().shape({
   email: yup
     .string('Email should be a string')
     .required('Email is required')
     .email('Invalid email format')
     .test('isValidAfterSign', 'Invalid email format', function (email) {
       const strAfterEmailSign = email.slice(email.indexOf('@'));
-      if (strAfterEmailSign.includes('@') === -1) {
-        return true;
-      } else if (strAfterEmailSign.includes('@') !== -1) {
-        return strAfterEmailSign.includes('.');
-      }
+      return (
+        !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.')
+      );
     }),
   password: yup
     .string()
@@ -49,121 +47,136 @@ const SignUpForm = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
     mode: 'onChange',
+    defaultValues: { email: '', password: '', repeatPassword: '' },
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-  const [isLoader, setIsLoader] = useState(false);
-
+  const fieldEmailId = useId();
+  const fieldPasswordId = useId();
+  const fieldRepeatPasswordId = useId();
   const dispatch = useDispatch();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
 
   const onSubmit = async data => {
     const userData = { email: data.email, password: data.password };
 
     setIsLoader(true);
 
-    const isLoginSuccessfull = async () => {
-      try {
-        const response = await dispatch(registerUser(userData));
-        if (response.error) throw new Error(response.payload);
-        toast.success('Successfully logged in!');
-      } catch (error) {
-        toast.error('Login failed');
-      } finally {
-        setIsLoader(false);
-      }
-    };
-    isLoginSuccessfull();
+    try {
+      const response = await dispatch(registerUser(userData));
+      if (response.error) throw new Error(response.payload);
+      toast.success('Successfully registered!');
+    } catch (error) {
+      toast.error('Registration failed');
+    } finally {
+      setIsLoader(false);
+    }
 
     reset();
   };
 
   return (
-    <div className={css.signInBody}>
-      <h2 className={css.signupTitle}>Sign up</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className={css.signupForm}>
-        <div className={css.signupFormGroup}>
-          <label className={css.signupLabel} htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            {...register('email')}
-            className={`${css.signupField} ${
-              errors.email ? css.signUpErrorField : ''
-            }`}
-            placeholder="Enter your email"
-          />
-        </div>
+    <div className={css.signUpBody}>
+			<h2 className={css.signUpTitle}>Sign Up</h2>
+			
+      <form onSubmit={handleSubmit(onSubmit)} className={css.signUpForm}>
+        <label htmlFor={fieldEmailId} className={css.emailLabel}>
+          Email
+        </label>
+        <input
+          type="email"
+          id={fieldEmailId}
+          {...register('email')}
+          className={clsx({
+            [css.emailInput]: true,
+            [css.errorEmailInput]: errors.email,
+          })}
+          placeholder="Enter your email"
+        />
         {errors.email && (
-          <p className={css.signupError}>{errors.email.message}</p>
+          <p className={css.errorMessage}>{errors.email.message}</p>
         )}
-        <div className={css.signupFormGroup}>
-          <label className={css.signupLabel} htmlFor="password">
-            Password
-          </label>
-          <div className={css.signupIconEyes}>
-            <input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              {...register('password')}
-              className={`${css.signupField} ${
-                errors.password ? css.signUpErrorField : ''
-              }`}
-              placeholder="Enter your password"
-            />
-            <BtnShowPassword setIsPasswordVisible={setShowPassword} />
-          </div>
+
+        <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
+          Password
+        </label>
+        <div
+          className={clsx({
+            [css.inputPasswordWrapper]: true,
+            [css.inputPasswordWrapperError]: errors.password,
+          })}
+        >
+          <input
+            type={isPasswordVisible ? 'text' : 'password'}
+            id={fieldPasswordId}
+            {...register('password')}
+            placeholder="Enter your password"
+            className={clsx({
+              [css.passwordInput]: true,
+              [css.errorPasswordInput]: errors.password,
+            })}
+          />
+          <BtnShowPassword setIsPasswordVisible={setIsPasswordVisible} />
         </div>
         {errors.password && (
-          <p className={css.signupError}>{errors.password.message}</p>
+          <p className={css.errorMessage}>{errors.password.message}</p>
         )}
-        <div className={css.signupFormGroup}>
-          <label className={css.signupLabel} htmlFor="repeatPassword">
-            Repeat Password
-          </label>
-          <div className={css.signupIconEyes}>
-            <input
-              id="repeatPassword"
-              type={showRepeatPassword ? 'text' : 'password'}
-              {...register('repeatPassword')}
-              className={`${css.signupField} ${
-                errors.repeatPassword ? css.signUpErrorField : ''
-              }`}
-              placeholder="Repeat password"
-            />
-            <BtnShowPassword setIsPasswordVisible={setShowRepeatPassword} />
-          </div>
+
+        <label htmlFor={fieldRepeatPasswordId} className={css.passwordLabel}>
+          Repeat Password
+        </label>
+        <div
+          className={clsx({
+            [css.inputPasswordWrapper]: true,
+            [css.inputPasswordWrapperError]: errors.repeatPassword,
+          })}
+        >
+          <input
+            type={isRepeatPasswordVisible ? 'text' : 'password'}
+            id={fieldRepeatPasswordId}
+            {...register('repeatPassword')}
+            placeholder="Repeat your password"
+            className={clsx({
+              [css.passwordInput]: true,
+              [css.errorPasswordInput]: errors.repeatPassword,
+            })}
+          />
+          <BtnShowPassword setIsPasswordVisible={setIsRepeatPasswordVisible} />
         </div>
         {errors.repeatPassword && (
-          <p className={css.signupError}>{errors.repeatPassword.message}</p>
+          <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
-        <button className={clsx(css.signupButton, 'btn-def')} type="submit">
+
+        <button className={clsx(css.btnSignUp, 'btn-def')} type="submit">
           {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
         </button>
-        <ToastContainer
-          className={css.Toastify}
-          position="top-right"
-          autoClose={2500}
-          hideProgressBar
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition="slide"
-          closeButton={window.innerWidth > 480}
-        />
-      </form>
+			</form>
+			
       <p className={css.questionText}>
-        Already have account?{' '}
+        Already have an account?{' '}
         <Link className={css.signInLink} to="/signin">
           Sign In
         </Link>
-      </p>
+			</p>
+			
+      <ToastContainer
+        className={css.Toastify}
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition="slide"
+        closeButton={window.innerWidth > 480}
+      />
     </div>
   );
 };

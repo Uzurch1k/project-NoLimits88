@@ -82,7 +82,8 @@ const SignInForm = () => {
 
   return (
     <div className={css.signInBody}>
-      <h2 className={css.signInTitle}>Sign In</h2>
+			<h2 className={css.signInTitle}>Sign In</h2>
+			
       <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
           Email
@@ -99,7 +100,8 @@ const SignInForm = () => {
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
-        )}
+				)}
+				
         <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
           Password
         </label>
@@ -123,17 +125,20 @@ const SignInForm = () => {
         </div>
         {errors.password && (
           <p className={css.errorMessage}>{errors.password.message}</p>
-        )}
+				)}
+				
         <button type="submit" className={clsx(css.btnSignIn, 'btn-def')}>
           {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign In'}
         </button>
-      </form>
+			</form>
+			
       <p className={css.questionText}>
         Don&#39;t have an account?{' '}
         <Link className={css.signUpLink} to="/signup">
           Sign Up
         </Link>
-      </p>
+			</p>
+			
       <ToastContainer
         className={css.Toastify}
         position="top-right"
