@@ -4,6 +4,7 @@ import bottlx1 from '../../img/content/bottle@x1.png';
 import bottlex2 from '../../img/content/bottle@x2.png';
 import Logo from '../../components/Logo/Logo';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
+import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
 
 const WaterMainInfo = ({ openAddWaterModal }) => {
   return (
@@ -22,6 +23,7 @@ const WaterMainInfo = ({ openAddWaterModal }) => {
           alt="Bottle image"
         />
       </div>
+      <WaterProgressBar />
     </div>
   );
 };
