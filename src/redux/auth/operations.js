@@ -17,6 +17,7 @@ export const setupInterceptors = store => {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      console.log('Request Interceptor', config);
       return config;
     },
     error => Promise.reject(error)
@@ -26,6 +27,7 @@ export const setupInterceptors = store => {
     response => response,
     async error => {
       const originalRequest = error.config;
+      console.log('Response Error Interceptor', error.response.status);
 
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
@@ -37,16 +39,19 @@ export const setupInterceptors = store => {
         }
 
         try {
+          console.log('Attempting to refresh token');
           const { data } = await axios.post('/users/refresh', {
             refreshToken,
             sessionId,
           });
 
+          console.log('New tokens:', data);
+
           setAuthHeader(data.accessToken);
           store.dispatch(
             setToken({
-              token: data.accessToken,
-              refreshToken: data.refreshToken,
+              accessToken: data.accessToken,
+              refreshToken: refreshToken, // Якщо refreshToken не змінюється
             })
           );
 
@@ -69,6 +74,7 @@ export const registerUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signup', credentials);
+      console.log('Register response:', res.data);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -81,8 +87,9 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signin', credentials);
+      console.log(credentials);
       setAuthHeader(res.data.data.accessToken);
-      console.log(res.data);
+      console.log('Login response:', res.data.data);
       return res.data.data; // { user, accessToken }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

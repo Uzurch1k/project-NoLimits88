@@ -7,7 +7,7 @@ const authSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setToken(state, action) {
-      state.token = action.payload.token;
+      state.token = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
       state.isLoggedIn = true;
     },
