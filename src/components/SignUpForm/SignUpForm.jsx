@@ -23,7 +23,9 @@ const loginSchema = yup.object().shape({
     .email('Invalid email format')
     .test('isValidAfterSign', 'Invalid email format', function (email) {
       const strAfterEmailSign = email.slice(email.indexOf('@'));
-      return !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.');
+      return (
+        !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.')
+      );
     }),
   password: yup
     .string()
@@ -59,7 +61,7 @@ const SignUpForm = () => {
   const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     const userData = { email: data.email, password: data.password };
 
     setIsLoader(true);
@@ -79,7 +81,8 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpBody}>
-      <h2 className={css.signUpTitle}>Sign Up</h2>
+			<h2 className={css.signUpTitle}>Sign Up</h2>
+			
       <form onSubmit={handleSubmit(onSubmit)} className={css.signUpForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
           Email
@@ -151,33 +154,31 @@ const SignUpForm = () => {
         <button className={clsx(css.btnSignUp, 'btn-def')} type="submit">
           {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
         </button>
-        <ToastContainer
-          className={css.Toastify}
-          position="top-right"
-          autoClose={2500}
-          hideProgressBar
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition="slide"
-          closeButton={window.innerWidth > 480}
-        />
-      </form>
+			</form>
+			
       <p className={css.questionText}>
         Already have an account?{' '}
         <Link className={css.signInLink} to="/signin">
           Sign In
         </Link>
-      </p>
+			</p>
+			
+      <ToastContainer
+        className={css.Toastify}
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition="slide"
+        closeButton={window.innerWidth > 480}
+      />
     </div>
   );
 };
 
 export default SignUpForm;
-
-
-
-
