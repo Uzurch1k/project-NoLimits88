@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/auth/selectors';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import css from './UserSettingsForm.module.scss';
@@ -8,39 +10,31 @@ import { FiUpload } from 'react-icons/fi';
 import clsx from 'clsx';
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import defaultAvatar from '../../img/content/default avatar.png';
-/*import icons from '../../img/icons/icons.svg'*/
-
-const user = {
-  avatarURL: '',
-  userGender: 'woman',
-  userName: '',
-  userEmail: '',
-  userWeight: 0,
-  userVolume: 0,
-  activityTime: 0,
-};
+/*import icons from '../../img/icons/symbol.svg'*/
 
 const userSettingsSchema = Yup.object().shape({
-  userName: Yup.string().required('The field is required'),
-  userEmail: Yup.string()
+  name: Yup.string().required('The field is required'),
+  email: Yup.string()
     .email('Please enter a valid email address (must contain @)')
     .required('Email is required'),
-  userWeight: Yup.number()
+  weight: Yup.number()
     .min(0, 'The value must be at least 0')
     .max(999, 'The value must be no more than 3 numbers')
     .required('The field is required'),
-  userVolume: Yup.number()
+  amountOfWater: Yup.number()
     .min(0, 'The value must be at least 0')
     .max(999, 'The value must be no more than 3 numbers')
     .required('The field is required'),
-  activityTime: Yup.number()
-  .min(0, 'The value must be at least 0')
-  .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
-  .required('The field is required'),
+  activeTime: Yup.number()
+    .min(0, 'The value must be at least 0')
+    .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
+    .required('The field is required'),
 });
 
 const UserSettingsForm = () => {
-  const [avatarUrl, setAvatarUrl] = useState(user.avatarURL || defaultAvatar);
+  const user = useSelector(selectUser);
+  const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
+
   const {
     register,
     handleSubmit,
@@ -48,21 +42,17 @@ const UserSettingsForm = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(userSettingsSchema),
-    defaultValues: {
-      gender: user.userGender || 'woman',
-      userName: user.userName || '',
-      userEmail: user.userEmail || '',
-      userWeight: user.userWeight || 0,
-      userVolume: user.userVolume || 0,
-      activityTime: user.activityTime || 0,
-    },
+    defaultValues: user,
   });
 
-  const { userName, gender, userEmail, userWeight, userVolume, activityTime } = watch();
+  const { name, gender, email, weight, amountOfWater, activeTime } = watch();
   const isAnyFieldFilled =
-    userName || userEmail || userWeight || userVolume || activityTime;
+    name || email || weight || amountOfWater || activeTime;
 
-    const dailyWaterNorma = calculateDailyWaterNorma(gender, userWeight, activityTime);
+  const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
+  const displayWaterNorma = isNaN(dailyWaterNorma)
+    ? ''
+    : `${dailyWaterNorma} L`;
 
   const handleAvatarUpload = event => {
     const file = event.target.files[0];
@@ -75,28 +65,29 @@ const UserSettingsForm = () => {
     console.log(data);
     // код для обробки даних форми
   };
+
   return (
     <>
       <h2 className={css.title}>Setting</h2>
-      <div className={css.scroll}>
-        <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
-          <div className={css.avatarCont}>
-            <div className={css.avatarImg}>
-              <img src={avatarUrl} alt="" />
-            </div>
-            <input
-              onChange={handleAvatarUpload}
-              className={css.avatarInput}
-              type="file"
-              name="avatar"
-              id="avatar"
-            />
-            <label htmlFor="avatar" className={css.avatarInputLabel}>
-              <FiUpload className={css.uplIcon} />
-              Upload a photo
-            </label>
-          </div>
 
+      <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.avatarCont}>
+          <div className={css.avatarImg}>
+            <img src={avatarUrl} alt="" />
+          </div>
+          <input
+            onChange={handleAvatarUpload}
+            className={css.avatarInput}
+            type="file"
+            name="avatar"
+            id="avatar"
+          />
+          <label htmlFor="avatar" className={css.avatarInputLabel}>
+            <FiUpload className={css.uplIcon} />
+            Upload a photo
+          </label>
+        </div>
+        <div className={css.scroll}>
           <div className={css.settingsCont}>
             <div className={css.genderCont}>
               <p className={css.settingsTitle}>Your gender identity</p>
@@ -108,7 +99,7 @@ const UserSettingsForm = () => {
                     type="radio"
                     name="gender"
                     id="woman"
-                    value="Woman"
+                    value="woman"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
@@ -124,7 +115,7 @@ const UserSettingsForm = () => {
                     type="radio"
                     name="gender"
                     id="man"
-                    value="Man"
+                    value="man"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
@@ -139,41 +130,35 @@ const UserSettingsForm = () => {
             <div className={css.settingsBox}>
               <div>
                 <div className={css.UserInfoCont}>
-                  <label
-                    className={css.settingsTitleUserInfo}
-                    htmlFor="userName"
-                  >
+                  <label className={css.settingsTitleUserInfo} htmlFor="name">
                     Your name
                   </label>
                   <input
-                    {...register('userName')}
+                    {...register('name')}
                     className={css.input}
                     type="text"
-                    name="userName"
-                    id="userName"
+                    name="name"
+                    id="name"
                   />
-                  {errors.userName && (
+                  {errors.name && (
                     <span className={css.errorMessage}>
-                      {errors.userName.message}
+                      {errors.name.message}
                     </span>
                   )}
 
-                  <label
-                    className={css.settingsTitleUserInfo}
-                    htmlFor="userEmail"
-                  >
+                  <label className={css.settingsTitleUserInfo} htmlFor="email">
                     Email
                   </label>
                   <input
-                    {...register('userEmail')}
+                    {...register('email')}
                     className={css.input}
                     type="text"
-                    name="userEmail"
-                    id="userEmail"
+                    name="email"
+                    id="email"
                   />
-                  {errors.userEmail && (
+                  {errors.email && (
                     <span className={css.errorMessage}>
-                      {errors.userEmail.message}
+                      {errors.email.message}
                     </span>
                   )}
                 </div>
@@ -211,41 +196,38 @@ const UserSettingsForm = () => {
               <div>
                 <div className={css.desktopWeight}>
                   <div className={css.metricsWrapper}>
-                    <label
-                      className={css.textWeightFormula}
-                      htmlFor="userWeight"
-                    >
+                    <label className={css.textWeightFormula} htmlFor="weight">
                       Your weight in kilograms:
                     </label>
                     <input
-                      {...register('userWeight')}
+                      {...register('weight')}
                       className={css.input}
                       type="number"
-                      name="userWeight"
-                      id="userWeight"
+                      name="weight"
+                      id="weight"
                     />
-                    {errors.userWeight && (
+                    {errors.weight && (
                       <span className={css.errorMessage}>
-                        {errors.userWeight.message}
+                        {errors.weight.message}
                       </span>
                     )}
 
                     <label
                       className={css.textWeightFormula}
-                      htmlFor="activityTime"
+                      htmlFor="activeTime"
                     >
                       The time of active participation in sports:
                     </label>
                     <input
-                      {...register('activityTime')}
+                      {...register('activeTime')}
                       className={css.input}
                       type="number"
-                      name="activityTime"
-                      id="activityTime"
+                      name="activeTime"
+                      id="activeTime"
                     />
-                    {errors.activityTime && (
+                    {errors.activeTime && (
                       <span className={css.errorMessage}>
-                        {errors.activityTime.message}
+                        {errors.activeTime.message}
                       </span>
                     )}
                   </div>
@@ -254,25 +236,28 @@ const UserSettingsForm = () => {
                     <div className={css.waterAmountField}>
                       <p className={css.text}>
                         The required amount of water in liters per day:
-                      </p><span className={css.waterNorma}>{dailyWaterNorma} L</span>
+                      </p>
+                      <span className={css.waterNorma}>
+                        {displayWaterNorma}
+                      </span>
                     </div>
                     <label
                       className={css.settingsTitleUserInfo}
-                      htmlFor="userVolume"
+                      htmlFor="amountOfWater"
                     >
                       Write down how much water you will drink:
                     </label>
                     <input
-                      {...register('userVolume')}
+                      {...register('amountOfWater')}
                       className={css.inputLast}
                       type="number"
-                      name="userVolume"
-                      id="userVolume"
+                      name="amountOfWater"
+                      id="amountOfWater"
                       step="0.1"
                     />
-                    {errors.userVolume && (
+                    {errors.amountOfWater && (
                       <span className={css.errorMessage}>
-                        {errors.userVolume.message}
+                        {errors.amountOfWater.message}
                       </span>
                     )}
                   </div>
@@ -288,8 +273,8 @@ const UserSettingsForm = () => {
           >
             Save
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 };
