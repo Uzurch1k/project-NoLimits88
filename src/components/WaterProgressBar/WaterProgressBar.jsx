@@ -2,9 +2,10 @@ import css from './WaterProgressBar.module.scss';
 
 const WaterProgressBar = () => {
   const progressPercents = 21;
+
   return (
     <div className={css.waterProgressBarSection}>
-      <h2 className={css.waterBarTitle}>today</h2>
+      <h3 className={css.waterBarTitle}>today</h3>
       <div>
         <div className={css.waterProgressBar}>
           <div
