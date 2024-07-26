@@ -11,7 +11,7 @@ const WaterProgressBar = () => {
     if (progressBarRef.current) {
       const barWidth = progressBarRef.current.offsetWidth; // Ширина родительского контейнера в пикселях
       const percentWidth = (barWidth * progressPercents) / 100; // Ширина в пикселях для 50%
-      const leftPosition = percentWidth - 12; // Уменьшаем на 12 пикселей
+      const leftPosition = percentWidth - 6; // Уменьшаем на 12 пикселей
       const leftPercent = (leftPosition / barWidth) * 100; // Преобразуем в проценты
       setEllipseLeft(leftPercent);
     }
