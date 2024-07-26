@@ -66,8 +66,7 @@ const SignInForm = () => {
 
     const isLoginSuccessfull = async () => {
       try {
-        const response = await dispatch(logIn(userData));
-        if (response.error) throw new Error(response.payload);
+        await dispatch(logIn(userData)).unwrap();
         toast.success('Successfully logged in!');
       } catch (error) {
         toast.error('Login failed');

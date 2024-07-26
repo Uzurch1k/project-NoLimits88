@@ -3,16 +3,16 @@ import icons from '../../img/icons/icons.svg';
 
 const CalendarPagination = () => {
   return (
-    <div className={css.calendarPaginationWrapper}>
+    <div className={css.paginationWrapper}>
       <div className={css.chooseMonthWrapper}>
-        <button>
-          <svg width="18" height="18" className={css.calendarArrowIcon}>
+        <button className={css.previousMonthBtn}>
+          <svg width="18" height="18" className={css.calendarArrowIconLeft}>
             <use href={`${icons}#calendar-arrow-left`}></use>
           </svg>
         </button>
         <p className={css.dateTitle}>Some date</p>
-        <button>
-          <svg width="18" height="18" className={css.calendarArrowIcon}>
+        <button className={css.nextMonthBtn}>
+          <svg width="18" height="18" className={css.calendarArrowIconRight}>
             <use href={`${icons}#calendar-arrow-right`}></use>
           </svg>
         </button>
