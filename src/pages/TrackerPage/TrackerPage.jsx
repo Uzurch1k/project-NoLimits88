@@ -6,8 +6,8 @@ import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import BaseModal from '../../components/BaseModal/BaseModal';
 import LogOutModal from '../../components/LogOutModal/LogOutModal';
 import UserSettingsModal from '../../components/UserSettingsModal/UserSettingsModal';
-// import WaterModal from '../../components/WaterModal/WaterModal';
-// import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
+import WaterModal from '../../components/WaterModal/WaterModal';
+import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 
 import css from './TrackerPage.module.scss';
 
@@ -55,21 +55,21 @@ const TrackerPage = () => {
         <LogOutModal onClose={() => closeModal('logout')}/>
       </BaseModal>
 
-      {/* <BaseModal
+      <BaseModal
         isOpen={modals.water}
         onClose={() => closeModal('water')}
         classNameModal={css.waterModal}
       >
         <WaterModal />
-      </BaseModal> */}
+      </BaseModal>
 
-      {/* <BaseModal
+      <BaseModal
         isOpen={modals.deletewater}
         onClose={() => closeModal('deletewater')}
         classNameModal={css.deletewaterModal}
       >
         <DeleteWaterModal onClose={() => closeModal('deletewater')}/>
-      </BaseModal> */}
+      </BaseModal>
     </div>
   );
 };

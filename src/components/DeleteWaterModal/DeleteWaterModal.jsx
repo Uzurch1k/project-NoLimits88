@@ -33,14 +33,11 @@ const DeleteWaterModal = ({ onClose, entryId }) => {
       await dispatch(logOut()).unwrap();
     } catch (error) {
       console.error('Logout failed', error);
-    } finally {
-      dispatch({ type: 'CLEAR_STORE' });
-      localStorage.clear();
     }
   };
 
   return (
-    <div>
+    <div className={css.sectionBox}>
       <h2 className={css.title}>Delete entry</h2>
       <p className={css.quest}>Are you sure you want to delete the entry?</p>
       <div className={css.boxBtns}>

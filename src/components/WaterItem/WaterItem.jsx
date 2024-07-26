@@ -1,7 +1,7 @@
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
 
-const WaterItem = () => {
+const WaterItem = ({ openWaterModal, openDeleteWaterModal}) => {
   return (
     <li className={css.waterItem}>
       <div className={css.iconWaterWrapp}>
@@ -18,7 +18,7 @@ const WaterItem = () => {
       <div className={css.buttonsBox}>
         <button
           className={css.editBtn}
-          // onClick={openModalEdit}
+          onClick={openWaterModal}
           aria-label="Edit the entered amount of water"
         >
           <svg className={css.iconAction} width="14" height="14">
@@ -27,7 +27,7 @@ const WaterItem = () => {
         </button>
         <button
           className={css.deleteBtn}
-          // onClick={openModalDelete}
+          onClick={openDeleteWaterModal}
           aria-label="Delete the entered amount of water"
         >
           <svg className={css.iconAction} width="14" height="14">
