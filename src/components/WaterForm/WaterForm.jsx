@@ -1,17 +1,19 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
-/*import { FaPlus, FaMinus } from 'react-icons/fa';*/
 import css from './WaterForm.module.scss';
-import icons from '../../img/icons/symbol.svg'
+import { GoPlus } from 'react-icons/go';
+import { HiOutlineMinus } from 'react-icons/hi';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
     .min(50, 'The amount must be at least 50ml')
     .max(5000, 'The amount of water must be less than 5000 ml')
     .required('Water amount is required'),
-  time: Yup.string().required('Time is required'),
+  time: Yup.string()
+    .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format')
+    .required('Time is required'),
 });
 
 const WaterForm = ({ initialData = {}, onSubmit }) => {
@@ -30,23 +32,22 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     handleSubmit,
     control,
     setValue,
-    getValues,
+    /*getValues,*/
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
   });
 
-  const mlToDecimal = ml => {
-    return parseFloat((ml / 1000).toFixed(3));
-  };
+  // Стеження за змінами води
+  const waterAmount = useWatch({ control, name: 'waterAmount' });
 
-  const handleWaterChange = newValue => {
-    setValue('waterAmount', newValue);
-  };
+  const mlToDecimal = ml => parseFloat((ml / 1000).toFixed(3));
+
+  const handleWaterChange = newValue => setValue('waterAmount', newValue);
 
   const incrementWater = () => {
-    const currentAmount = Number(getValues('waterAmount'));
+    const currentAmount = Number(waterAmount);
     const newValue = currentAmount + 50;
     if (newValue <= 5000) {
       handleWaterChange(newValue);
@@ -54,7 +55,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
   };
 
   const decrementWater = () => {
-    const currentAmount = Number(getValues('waterAmount'));
+    const currentAmount = Number(waterAmount);
     if (currentAmount >= 50) {
       const newValue = currentAmount - 50;
       handleWaterChange(newValue);
@@ -82,6 +83,13 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     onSubmit(newEntry);
   };
 
+  const handleTimeChange = e => {
+    const value = e.target.value;
+    if (/^([0-1]\d|2[0-3]):([0-5]\d)$/.test(value)) {
+      setValue('time', value);
+    }
+  };
+
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
       <p className={css.text}>Amount of water</p>
@@ -91,42 +99,38 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
           className={css.decrementButton}
           onClick={decrementWater}
         >
-          <svg className={css.icon}>
-  <use href={`${icons}#icon-minus-amount`}></use>
-</svg>
+          <HiOutlineMinus className={css.icon} />
         </button>
         <div className={css.inputWrapper}>
-          <input
-            {...register('waterAmount')}
-            type="number"
-            className={css.waterAmountInput}
-            onChange={handleKeyboardAmountChange}
-            min="50"
-          />
-          <span className={css.mlText}>ml</span>
+          <span className={css.waterAmountInput}>{`${waterAmount} ml`}</span>
         </div>
         <button
           type="button"
           className={css.incrementButton}
           onClick={incrementWater}
         >
-          <svg className={css.icon}>
-  <use href={`${icons}#icon-plus-amount`}></use>
-</svg>
+          <GoPlus className={css.icon} />
         </button>
       </div>
       {errors.waterAmount && (
         <span className={css.errorMessage}>{errors.waterAmount.message}</span>
       )}
-      <div className={css.inputContainer}>
-        <label htmlFor="time" className={css.text}>
+      <div className={css.inputContainerTime}>
+        <label htmlFor="time" className={css.textTime}>
           Recording time:
         </label>
         <Controller
           name="time"
           control={control}
           render={({ field }) => (
-            <input className={css.input} {...field} type="time" id="time" />
+            <input
+              className={css.input}
+              {...field}
+              type="text"
+              id="time"
+              placeholder="HH:MM"
+              onChange={handleTimeChange}
+            />
           )}
         />
         {errors.time && (
@@ -134,7 +138,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         )}
       </div>
       <div className={css.inputContainer}>
-        <label htmlFor="waterAmountKeyboard">
+        <label htmlFor="waterAmountKeyboard" className={css.settingsTitle}>
           Enter the value of the water used:
         </label>
         <div className={css.inputWrapper}>
@@ -146,7 +150,6 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
             min="50"
             onChange={handleKeyboardAmountChange}
           />
-          <span className={css.mlText}>ml</span>
         </div>
         {errors.waterAmount && (
           <span className={css.errorMessage}>{errors.waterAmount.message}</span>
