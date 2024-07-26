@@ -15,7 +15,8 @@ const TrackerPage = () => {
   const [modals, setModals] = useState({
     logout: false,
     settings: false,
-    water: false,
+    addWater: false,
+    editWater: false,
     deletewater: false,
   });
 
@@ -25,16 +26,24 @@ const TrackerPage = () => {
   const closeModal = modalName =>
     setModals(prev => ({ ...prev, [modalName]: false }));
 
+  const closeMultipleModals = (...modalNames) =>
+    setModals(prev =>
+      modalNames.reduce((acc, modalName) => ({ ...acc, [modalName]: false }), {
+        ...prev,
+      })
+    );
+
   return (
     <div className={css.body}>
       <DocumentTitle>Tracker</DocumentTitle>
       <Section>
-        <WaterMainInfo openWaterModal={() => openModal('water')} />
+        <WaterMainInfo openAddWaterModal={() => openModal('addWater')} />
 
         <WaterDetailedInfo
           openSettings={() => openModal('settings')}
           openLogout={() => openModal('logout')}
-          openWaterModal={() => openModal('water')}
+          openAddWaterModal={() => openModal('addWater')}
+          openEditWaterModal={() => openModal('editWater')}
           openDeleteWaterModal={() => openModal('deletewater')}
         />
       </Section>
@@ -52,15 +61,18 @@ const TrackerPage = () => {
         onClose={() => closeModal('logout')}
         classNameModal={css.logoutModal}
       >
-        <LogOutModal onClose={() => closeModal('logout')}/>
+        <LogOutModal onClose={() => closeModal('logout')} />
       </BaseModal>
 
       <BaseModal
-        isOpen={modals.water}
-        onClose={() => closeModal('water')}
+        isOpen={modals.addWater || modals.editWater}
+        onClose={() => closeMultipleModals('addWater', 'editWater')}
         classNameModal={css.waterModal}
       >
-        <WaterModal />
+        <WaterModal
+          onAddWater={modals.addWater}
+          onEditWater={modals.editWater}
+        />
       </BaseModal>
 
       <BaseModal
@@ -68,7 +80,7 @@ const TrackerPage = () => {
         onClose={() => closeModal('deletewater')}
         classNameModal={css.deletewaterModal}
       >
-        <DeleteWaterModal onClose={() => closeModal('deletewater')}/>
+        <DeleteWaterModal onClose={() => closeModal('deletewater')} />
       </BaseModal>
     </div>
   );

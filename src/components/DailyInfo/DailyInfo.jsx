@@ -4,17 +4,24 @@ import WaterList from '../WaterList/WaterList';
 
 import css from './DailyInfo.module.scss';
 
-const DailyInfo = ({ openWaterModal }) => {
+const DailyInfo = ({
+  openAddWaterModal,
+  openEditWaterModal,
+  openDeleteWaterModal,
+}) => {
   return (
     <div className={css.dailyInfoSec}>
       <div className={css.dailyWrapp}>
         <ChooseDate />
         <AddWaterBtn
           waterClassBtn={css.waterClassBtn}
-          openWaterModal={openWaterModal}
+          openAddWaterModal={openAddWaterModal}
         />
       </div>
-      <WaterList />
+      <WaterList
+        openEditWaterModal={openEditWaterModal}
+        openDeleteWaterModal={openDeleteWaterModal}
+      />
     </div>
   );
 };
