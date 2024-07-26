@@ -1,12 +1,24 @@
 .titleModal {
 	font-size: 20px;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	margin-bottom: 24px;
+}
+.subtitleModal {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	margin-bottom: 20px;
 }
 
 @media screen and (min-width: 768px) {
 	.titleModal {
 		font-size: 28px;
+		line-height: 1.14;
 	}
-}
-
-@media screen and (min-width: 1440px) {
+	.subtitleModal {
+		font-size: 18px;
+		line-height: 1.33;
+	}
 }
