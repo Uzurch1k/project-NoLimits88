@@ -64,7 +64,13 @@ const SignUpForm = () => {
   const [isLoader, setIsLoader] = useState(false);
 
   const onSubmit = async data => {
-    const userData = { email: data.email, password: data.password };
+    const username = data.email ? data.email.split('@')[0] : 'User';
+
+    const userData = {
+      name: username,
+      email: data.email,
+      password: data.password,
+    };
 
     setIsLoader(true);
 

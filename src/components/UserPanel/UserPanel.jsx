@@ -5,19 +5,17 @@ import UserBar from '../UserBar/UserBar';
 import css from './UserPanel.module.scss';
 
 const UserPanel = ({ openSettings, openLogout }) => {
-  const { email } = useSelector(selectUser);
-
-  const username = email ? email.split('@')[0] : 'User';
+  const { name } = useSelector(selectUser);
 
   return (
     <div className={css.userPanel}>
       <h2 className={css.hello}>
-        Hello<span className={css.userPanelName}>, {username}</span>!
+        Hello<span className={css.userPanelName}>, {name}</span>!
       </h2>
       <UserBar
         openSettings={openSettings}
         openLogout={openLogout}
-        username={username}
+        name={name}
       />
     </div>
   );
