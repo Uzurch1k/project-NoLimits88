@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../redux/auth/operations';
 import { LoaderDetails } from '../Loader/Loader';
+import { useTranslation } from 'react-i18next';
 
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 
@@ -41,6 +42,7 @@ const loginSchema = yup.object().shape({
 });
 
 const SignUpForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -69,9 +71,9 @@ const SignUpForm = () => {
     try {
       const response = await dispatch(registerUser(userData));
       if (response.error) throw new Error(response.payload);
-      toast.success('Successfully registered!');
+      toast.success(t('Successfully registered!'));
     } catch (error) {
-      toast.error('Registration failed');
+      toast.error(t('Registration failed'));
     } finally {
       setIsLoader(false);
     }
@@ -81,11 +83,11 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpBody}>
-			<h2 className={css.signUpTitle}>Sign Up</h2>
-			
+      <h2 className={css.signUpTitle}>{t('Sign Up')}</h2>
+
       <form onSubmit={handleSubmit(onSubmit)} className={css.signUpForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
-          Email
+          {t('Email')}
         </label>
         <input
           type="email"
@@ -95,14 +97,14 @@ const SignUpForm = () => {
             [css.emailInput]: true,
             [css.errorEmailInput]: errors.email,
           })}
-          placeholder="Enter your email"
+          placeholder={t('Enter your email')}
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
 
         <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
-          Password
+          {t('Password')}
         </label>
         <div
           className={clsx({
@@ -114,7 +116,7 @@ const SignUpForm = () => {
             type={isPasswordVisible ? 'text' : 'password'}
             id={fieldPasswordId}
             {...register('password')}
-            placeholder="Enter your password"
+            placeholder={t('Enter your password')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.password,
@@ -127,7 +129,7 @@ const SignUpForm = () => {
         )}
 
         <label htmlFor={fieldRepeatPasswordId} className={css.passwordLabel}>
-          Repeat Password
+          {t('Repeat Password')}
         </label>
         <div
           className={clsx({
@@ -139,7 +141,7 @@ const SignUpForm = () => {
             type={isRepeatPasswordVisible ? 'text' : 'password'}
             id={fieldRepeatPasswordId}
             {...register('repeatPassword')}
-            placeholder="Repeat your password"
+            placeholder={t('Repeat your password')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.repeatPassword,
@@ -152,17 +154,17 @@ const SignUpForm = () => {
         )}
 
         <button className={clsx(css.btnSignUp, 'btn-def')} type="submit">
-          {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
+          {isLoader ? <LoaderDetails isPositioning={true} /> : t('Sign Up')}
         </button>
-			</form>
-			
+      </form>
+
       <p className={css.questionText}>
-        Already have an account?{' '}
+        {t('Already have an account?')}{' '}
         <Link className={css.signInLink} to="/signin">
-          Sign In
+          {t('Sign In')}
         </Link>
-			</p>
-			
+      </p>
+
       <ToastContainer
         className={css.Toastify}
         position="top-right"

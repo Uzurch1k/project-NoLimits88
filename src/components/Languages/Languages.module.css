@@ -1,0 +1,52 @@
+.languages {
+  display: flex;
+  gap: 5px;
+  margin-right: 10px;
+}
+
+.languageBtn {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  background-color: transparent;
+  border: none;
+  transform: scale(1);
+
+  transition: transform var(--animation);
+}
+
+.languageBtn:hover,
+.languageBtn:active {
+  transform: scale(1.2);
+}
+
+@media (min-width: 768px) {
+  .languages {
+    margin-right: 15px;
+  }
+
+  .iconFlag {
+    width: 24px;
+    height: 24px;
+  }
+
+  .line {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .languages {
+    margin-right: 25px;
+  }
+
+  .iconFlag {
+    width: 30px;
+    height: 30px;
+  }
+
+  .line {
+    font-size: 30px;
+  }
+}

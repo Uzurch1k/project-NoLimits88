@@ -4,13 +4,16 @@ import Section from '../../components/Layout/Section/Section';
 import SignSection from '../../components/Layout/SignSection/SignSection';
 import Logo from '../../components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
-
+import Languages from '../../components/Languages/Languages';
+import { useTranslation } from 'react-i18next';
 import css from './SignInPage.module.scss';
 
 const SignInPage = () => {
+  const { t } = useTranslation();
   return (
     <div className={css.body}>
-      <DocumentTitle>Sign In</DocumentTitle>
+      <DocumentTitle>{t('page.signIn')}</DocumentTitle>
+      <Languages />
       <Section>
         <SignSection>
           <Logo />
