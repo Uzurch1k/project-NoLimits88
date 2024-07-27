@@ -55,9 +55,7 @@ const UserSettingsForm = () => {
     name || email || weight || amountOfWater || activeTime;
 
   const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
-  const displayWaterNorma = isNaN(dailyWaterNorma)
-    ? ''
-    : `${dailyWaterNorma} L`;
+  const displayWaterNorma = isNaN(dailyWaterNorma) ? '0' : `${dailyWaterNorma}`;
 
   const handleAvatarUpload = event => {
     const file = event.target.files[0];
@@ -244,7 +242,7 @@ const UserSettingsForm = () => {
                         The required amount of water in liters per day:
                       </p>
                       <span className={css.waterNorma}>
-                        {displayWaterNorma}
+                        {displayWaterNorma} L
                       </span>
                     </div>
                     <label
