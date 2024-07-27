@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operations';
-import { logOut } from '../auth/operations';
+import {
+  fetchAllWaterRecordsOfToday,
+  addWaterRecord,
+  deleteWaterRecord,
+} from './operations';
 
-const contactsInitialState = {
-  items: [],
+export const WATER_INITIAL_STATE = {
+  records: [],
   loading: false,
   error: null,
 };
@@ -13,46 +16,39 @@ const isPending = action =>
 const isRejected = action =>
   typeof action.type === 'string' && action.type.endsWith('/rejected');
 
-const contactsPending = state => {
+const waterPending = state => {
+  state.records = [];
   state.loading = true;
   state.error = null;
 };
-const contactsRejected = state => {
+const waterRejected = (state, action) => {
   state.loading = false;
-  state.error = true;
+  state.error = action.payload;
 };
 
-const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: contactsInitialState,
+const waterSlice = createSlice({
+  name: 'water',
+  initialState: WATER_INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.fulfilled, (state, action) => {
+      .addCase(fetchAllWaterRecordsOfToday.fulfilled, (state, action) => {
+        state.records = action.payload;
         state.loading = false;
-        state.items = action.payload;
-      })
-
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items.push(action.payload);
-      })
-
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items = state.items.filter(
-          contact => contact.id !== action.payload.id
-        );
-      })
-
-      .addCase(logOut.fulfilled, state => {
-        state.items = [];
         state.error = null;
-        state.loading = false;
       })
-
-      .addMatcher(isPending, contactsPending)
-      .addMatcher(isRejected, contactsRejected);
+      .addCase(addWaterRecord.fulfilled, (state, action) => {
+        state.records = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(deleteWaterRecord.fulfilled, (state, action) => {
+        state.records = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addMatcher(isPending, waterPending)
+      .addMatcher(isRejected, waterRejected);
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const waterReducer = waterSlice.reducer;

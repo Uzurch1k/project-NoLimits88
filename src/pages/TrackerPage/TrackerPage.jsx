@@ -1,4 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  deleteWaterRecord,
+  fetchAllWaterRecordsOfToday,
+} from '../../redux/water/operations';
+import { TODAY } from '../../constants/time';
+
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
 import Section from '../../components/Layout/Section/Section';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
@@ -32,6 +39,16 @@ const TrackerPage = () => {
         ...prev,
       })
     );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const arr = [1, 2, 3];
+    console.log(arr.filter(number => number !== 2));
+
+    // dispatch(deleteWaterRecord('66a51d8c9b9c486f9828607d'));
+    // dispatch(fetchAllWaterRecordsOfToday(TODAY));
+  }, [dispatch]);
 
   return (
     <div className={css.body}>

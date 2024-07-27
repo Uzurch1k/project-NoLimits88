@@ -1,36 +1,39 @@
-import axios from 'axios';
+import axiosInstance from '../../helpers/axiosBase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TODAY } from '../../constants/time';
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkAPI) => {
+export const fetchAllWaterRecordsOfToday = createAsyncThunk(
+  'water/fetchAll',
+  async (today, thunkAPI) => {
     try {
-      const response = await axios.get('/contacts');
-      return response.data;
+      const response = await axiosInstance.get(`/water/day/${today}`);
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async (contacts, thunkAPI) => {
+export const addWaterRecord = createAsyncThunk(
+  'water/addRecord',
+  async (recordData, thunkAPI) => {
     try {
-      const response = await axios.post('/contacts', contacts);
-      return response.data;
+      await axiosInstance.post('/water', recordData);
+      const response = await axiosInstance.get(`/water/day/${TODAY}`);
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact',
-  async (contactsId, thunkAPI) => {
+export const deleteWaterRecord = createAsyncThunk(
+  'water/deleteRecord',
+  async (recordId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/contacts/${contactsId}`);
-      return response.data;
+      await axiosInstance.delete(`/water/${recordId}`);
+      const response = await axiosInstance.get(`/water/day/${TODAY}`);
+      return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

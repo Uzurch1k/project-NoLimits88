@@ -6,6 +6,9 @@ import css from './WaterForm.module.scss';
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
 
+import { addWaterRecord } from '../../redux/water/operations';
+import { useDispatch } from 'react-redux';
+
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
     .min(50, 'The amount must be at least 50ml')
@@ -38,6 +41,8 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     resolver: yupResolver(validationSchema),
     defaultValues,
   });
+
+  const dispatch = useDispatch();
 
   // Стеження за змінами води
   const waterAmount = useWatch({ control, name: 'waterAmount' });
@@ -80,7 +85,8 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
       date: new Date(fullDateTime).toISOString(),
     };
 
-    onSubmit(newEntry);
+    dispatch(addWaterRecord(newEntry));
+    // console.log(onSubmit(newEntry));
   };
 
   const handleTimeChange = e => {

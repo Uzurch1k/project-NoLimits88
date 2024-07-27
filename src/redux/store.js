@@ -13,7 +13,7 @@ import {
 
 import { setupInterceptors } from './auth/operations';
 import { authReducer } from './auth/slice';
-// import { waterReducer } from './water/slice';
+import { waterReducer } from './water/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -41,7 +41,7 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    // water: persistedWaterReducer,
+    water: waterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
