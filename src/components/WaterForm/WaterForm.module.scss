@@ -113,6 +113,10 @@
   justify-content: center;
 }
 
+input[type='time']:hover {
+  cursor: text;
+}
+
 /*==========================================*/
 @media screen and (min-width: 768px) {
   .settingsButton {
