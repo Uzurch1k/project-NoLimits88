@@ -206,6 +206,9 @@
 	outline: none;
 }
 .waterAmountField {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
 	margin-bottom: 14px;
 }
 .errorMessage {
@@ -218,7 +221,7 @@
 .waterNorma {
 	color: var(--cg);
 	font-weight: 700;
-	font-size: 15px;
+	font-size: 14px;
 }
 .scroll {
 	// height: 100vh;
@@ -283,9 +286,6 @@
 		padding: 16px 50px;
 	}
 	.waterAmountField {
-		display: flex;
-		flex-direction: row;
-		gap: 5px;
 		margin-bottom: 0;
 	}
 }
@@ -296,10 +296,6 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 40px;
 	}
-}
-.waterAmountField {
-	white-space: nowrap;
-	align-items: baseline;
 }
 
 .textWeight {

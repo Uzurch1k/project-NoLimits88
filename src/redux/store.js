@@ -19,7 +19,7 @@ const authPersistConfig = {
   key: 'auth',
   version: 1,
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'refreshToken'],
 };
 
 // const waterPersistConfig = {

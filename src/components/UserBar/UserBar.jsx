@@ -6,7 +6,7 @@ import avatar from '../../img/content/ava1.png';
 import clsx from 'clsx';
 import css from './UserBar.module.scss';
 
-const UserBar = ({ openSettings, openLogout, username }) => {
+const UserBar = ({ openSettings, openLogout, name }) => {
   const [showPopover, setShowPopover] = useState(false);
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
@@ -46,7 +46,7 @@ const UserBar = ({ openSettings, openLogout, username }) => {
         onClick={togglePopover}
         ref={buttonRef}
       >
-        <p>{username}</p>
+        <p>{name}</p>
 
         <div className={css.avatarWrapper}>
           <img src={avatar} alt="Avatar user" />

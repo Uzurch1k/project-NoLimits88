@@ -62,7 +62,13 @@ const SignUpForm = () => {
   const [isLoader, setIsLoader] = useState(false);
 
   const onSubmit = async data => {
-    const userData = { email: data.email, password: data.password };
+    const username = data.email ? data.email.split('@')[0] : 'User';
+
+    const userData = {
+      name: username,
+      email: data.email,
+      password: data.password,
+    };
 
     setIsLoader(true);
 
@@ -81,8 +87,8 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpBody}>
-			<h2 className={css.signUpTitle}>Sign Up</h2>
-			
+      <h2 className={css.signUpTitle}>Sign Up</h2>
+
       <form onSubmit={handleSubmit(onSubmit)} className={css.signUpForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
           Email
@@ -154,15 +160,15 @@ const SignUpForm = () => {
         <button className={clsx(css.btnSignUp, 'btn-def')} type="submit">
           {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign Up'}
         </button>
-			</form>
-			
+      </form>
+
       <p className={css.questionText}>
         Already have an account?{' '}
         <Link className={css.signInLink} to="/signin">
           Sign In
         </Link>
-			</p>
-			
+      </p>
+
       <ToastContainer
         className={css.Toastify}
         position="top-right"

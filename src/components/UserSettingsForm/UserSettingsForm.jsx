@@ -1,16 +1,21 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors';
-import * as Yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.scss';
-import { useState } from 'react';
+import * as Yup from 'yup';
+
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
-import clsx from 'clsx';
-import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import defaultAvatar from '../../img/content/default avatar.png';
 /*import icons from '../../img/icons/symbol.svg'*/
+
+import { selectUser } from '../../redux/auth/selectors';
+
+import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+
+import clsx from 'clsx';
+import css from './UserSettingsForm.module.scss';
 
 const userSettingsSchema = Yup.object().shape({
   name: Yup.string().required('The field is required'),
@@ -50,9 +55,7 @@ const UserSettingsForm = () => {
     name || email || weight || amountOfWater || activeTime;
 
   const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
-  const displayWaterNorma = isNaN(dailyWaterNorma)
-    ? ''
-    : `${dailyWaterNorma} L`;
+  const displayWaterNorma = isNaN(dailyWaterNorma) ? '0' : `${dailyWaterNorma}`;
 
   const handleAvatarUpload = event => {
     const file = event.target.files[0];
@@ -239,7 +242,7 @@ const UserSettingsForm = () => {
                         The required amount of water in liters per day:
                       </p>
                       <span className={css.waterNorma}>
-                        {displayWaterNorma}
+                        {displayWaterNorma} L
                       </span>
                     </div>
                     <label
