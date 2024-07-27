@@ -17,6 +17,7 @@ export const setupInterceptors = store => {
     async error => {
       const originalRequest = error.config;
       if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
         try {
           const { refreshToken } = store.getState().auth;
           console.log(store.getState().auth);
