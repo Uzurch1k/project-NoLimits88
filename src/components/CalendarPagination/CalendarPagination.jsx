@@ -13,16 +13,14 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
     }
   };
 
-
   const handleNextMonth = () => {
     if (normalisedDate < new Date()) {
       const newMonth = addMonths(normalisedDate, 1);
       setCurrentDate(newMonth);
     }
-    
   };
 
-  const isPrevDisabled = normalisedDate <= startOfMonth(minDate); 
+  const isPrevDisabled = normalisedDate <= startOfMonth(minDate);
   const isNextDisabled = normalisedDate >= new Date();
 
   return (
@@ -33,25 +31,20 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
           disabled={isPrevDisabled}
           onClick={handlePrevMonth}
         >
-          <svg
-            width="18"
-            height="18"
-            className={css.calendarArrowIconLeft}
-          >
+          <svg width="18" height="18" className={css.calendarArrowIconLeft}>
             <use href={`${icons}#icon-arrow-left`}></use>
           </svg>
         </button>
-        <p className={css.dateTitle}>{format(currentDate, 'MMMM, yyyy')}</p>
+        <div className={css.dateTitleBox}>
+          <p className={css.dateTitle}>{format(currentDate, 'MMM,')}</p>
+          <p className={css.dateTitle}>{format(currentDate, 'yyyy')}</p>
+        </div>
         <button
           className={css.nextMonthBtn}
           onClick={handleNextMonth}
           disabled={isNextDisabled}
         >
-          <svg
-            width="18"
-            height="18"
-            className={css.calendarArrowIconRight}
-          >
+          <svg width="18" height="18" className={css.calendarArrowIconRight}>
             <use href={`${icons}#icon-arrow-right`}></use>
           </svg>
         </button>

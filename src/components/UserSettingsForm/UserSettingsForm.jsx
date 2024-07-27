@@ -1,16 +1,21 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors';
-import * as Yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.scss';
-import { useState } from 'react';
+import * as Yup from 'yup';
+
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
-import clsx from 'clsx';
-import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import defaultAvatar from '../../img/content/default avatar.png';
 /*import icons from '../../img/icons/symbol.svg'*/
+
+import { selectUser } from '../../redux/auth/selectors';
+
+import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+
+import clsx from 'clsx';
+import css from './UserSettingsForm.module.scss';
 
 const userSettingsSchema = Yup.object().shape({
   name: Yup.string().required('The field is required'),
