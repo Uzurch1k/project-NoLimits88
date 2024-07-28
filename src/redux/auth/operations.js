@@ -123,18 +123,21 @@ export const updateUser = createAsyncThunk(
 
     try {
       const res = await axiosInstance.patch('/users/update', userData);
-      return res.data.data; // { _id, name, email, createdAt, updatedAt }
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const getUserCount = createAsyncThunk('auth/count', async (_, thunkAPI) => {
-  try {
-    const res = await axiosInstance.get('/users/count');
-    return res.data.count;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+export const getUserCount = createAsyncThunk(
+  'auth/count',
+  async (_, thunkAPI) => {
+    try {
+      const res = await axiosInstance.get('/users/count');
+      return res.data.count;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
