@@ -11,7 +11,12 @@ const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
       onRequestClose={onClose}
       className={clsx(css.bodyDef, classNameModal)}
       ariaHideApp={false}
-      overlayClassName={css.overlay}
+      overlayClassName={{
+        base: css.overlay,
+        afterOpen: css.overlayAfterOpen,
+        beforeClose: css.overlayBeforeClose,
+      }}
+      closeTimeoutMS={200}
     >
       <button className={css.buttonClose} onClick={onClose}>
         <svg className={css.icon}>

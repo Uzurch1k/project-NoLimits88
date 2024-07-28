@@ -17,6 +17,7 @@
 		justify-content: end;
 		gap: 3px;
 		width: 75px;
+		overflow: hidden; 
 	}
 
 	.calendarArrowIconLeft,
@@ -28,6 +29,9 @@
 		font-weight: 700;
 		line-height: 1.28;
 		letter-spacing: -0.01em;
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
 	.previousMonthBtn,
 	.nextMonthBtn {
@@ -92,4 +96,26 @@
 			margin-left: 20px;
 		}
 	}
+}
+
+.dateTitleEnter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.dateTitleEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 200ms ease-in-out;
+}
+
+.dateTitleExit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dateTitleExitActive {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 200ms ease-in-out;
 }
