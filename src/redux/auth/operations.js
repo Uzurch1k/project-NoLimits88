@@ -16,24 +16,22 @@ export const setupInterceptors = store => {
     response => response,
     async error => {
       const originalRequest = error.config;
+
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
           const { refreshToken } = store.getState().auth;
-          console.log(store.getState().auth);
 
           if (refreshToken) {
-            console.log(refreshToken);
             const { data } = await axiosInstance.post('/users/refresh', {
               refreshToken,
             });
 
-            console.log(data);
+            setAuthHeader(data.data.accessToken);
+            store.dispatch(setToken(data.data));
+            originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
 
-            setAuthHeader(data.accessToken);
-            store.dispatch(setToken(data));
-            error.config.headers.Authorization = `Bearer ${data.accessToken}`;
-            return axiosInstance.request(error.config);
+            return axiosInstance.request(originalRequest);
           }
         } catch (error) {
           return Promise.reject(error);
