@@ -54,7 +54,7 @@ const TrackerPage = () => {
         onClose={() => closeModal('settings')}
         classNameModal={css.settingsModal}
       >
-        <UserSettingsModal />
+        <UserSettingsModal onClose={() => closeModal('settings')} />
       </BaseModal>
 
       <BaseModal

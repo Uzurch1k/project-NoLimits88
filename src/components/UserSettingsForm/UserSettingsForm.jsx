@@ -45,7 +45,7 @@ const userSettingsSchema = Yup.object()
     return true;
   });
 
-const UserSettingsForm = () => {
+const UserSettingsForm = ({ onClose }) => {
   const user = useSelector(selectUser);
   const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
 
@@ -58,7 +58,7 @@ const UserSettingsForm = () => {
     resolver: yupResolver(userSettingsSchema),
     defaultValues: {
       ...user,
-      gender: user.gender || 'woman', 
+      gender: user.gender || 'woman',
     },
   });
 
@@ -78,6 +78,7 @@ const UserSettingsForm = () => {
 
   const onSubmit = data => {
     console.log(data);
+    onClose();
     // код для обробки даних форми
   };
 
