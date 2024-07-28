@@ -1,9 +1,23 @@
-import css from './AdvantagesSection.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { selectUserCount } from '../../redux/auth/selectors';
+import { getUserCount } from '../../redux/auth/operations';
+
 import ava1 from '../../img/content/ava1.png';
 import ava2 from '../../img/content/ava2.png';
 import ava3 from '../../img/content/ava3.png';
 
+import css from './AdvantagesSection.module.scss';
+
 const AdvantagesSection = () => {
+  const dispatch = useDispatch();
+  const userCount = useSelector(selectUserCount);
+
+  useEffect(() => {
+    dispatch(getUserCount());
+  }, [dispatch]);
+
   return (
     <div className={css.advantagesSection}>
       <div className={css.customers}>
@@ -19,7 +33,7 @@ const AdvantagesSection = () => {
           </li>
         </ul>
         <p className={css.text}>
-          Our <span className={css.highlightedtext}>happy</span>
+          <span className={css.highlightedtext}>{userCount || 0} happy</span>
           <br /> customers
         </p>
       </div>

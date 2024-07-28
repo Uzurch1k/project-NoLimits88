@@ -6,6 +6,7 @@ import {
   registerUser,
   refreshUser,
   updateUser,
+  getUserCount,
 } from './operations';
 
 const authSlice = createSlice({
@@ -66,6 +67,13 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+
+      .addCase(getUserCount.fulfilled, (state, action) => {
+        state.userCount = action.payload;
+      })
+      .addCase(getUserCount.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

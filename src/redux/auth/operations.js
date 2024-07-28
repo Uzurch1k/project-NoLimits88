@@ -50,7 +50,6 @@ export const logIn = createAsyncThunk(
       const { user, accessToken, refreshToken } = res.data.data;
 
       setAuthHeader(accessToken);
-      // thunkAPI.dispatch(setToken({ accessToken, refreshToken }));
 
       return { user, accessToken, refreshToken };
     } catch (error) {
@@ -104,7 +103,7 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axiosInstance.get('/users/current');
-      console.log(res.data.data);
+
       return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -130,3 +129,12 @@ export const updateUser = createAsyncThunk(
     }
   }
 );
+
+export const getUserCount = createAsyncThunk('auth/count', async (_, thunkAPI) => {
+  try {
+    const res = await axiosInstance.get('/users/count');
+    return res.data.count;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
