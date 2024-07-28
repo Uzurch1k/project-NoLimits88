@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchAllWaterRecordsOfToday,
-  addWaterRecord,
-  deleteWaterRecord,
-} from './operations';
+  createSlice,
+  isPending,
+  isFulfilled,
+  isRejected,
+} from '@reduxjs/toolkit';
 
 export const WATER_INITIAL_STATE = {
   records: [],
@@ -11,14 +11,14 @@ export const WATER_INITIAL_STATE = {
   error: null,
 };
 
-const isPending = action =>
-  typeof action.type === 'string' && action.type.endsWith('/pending');
-const isRejected = action =>
-  typeof action.type === 'string' && action.type.endsWith('/rejected');
-
 const waterPending = state => {
   state.records = [];
   state.loading = true;
+  state.error = null;
+};
+const waterFulfilled = (state, action) => {
+  state.records = action.payload;
+  state.loading = false;
   state.error = null;
 };
 const waterRejected = (state, action) => {
@@ -31,22 +31,8 @@ const waterSlice = createSlice({
   initialState: WATER_INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(fetchAllWaterRecordsOfToday.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
-      })
-      .addCase(addWaterRecord.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
-      })
-      .addCase(deleteWaterRecord.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
-      })
       .addMatcher(isPending, waterPending)
+      .addMatcher(isFulfilled, waterFulfilled)
       .addMatcher(isRejected, waterRejected);
   },
 });
