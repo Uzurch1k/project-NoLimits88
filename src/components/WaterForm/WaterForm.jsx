@@ -80,7 +80,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
       date: new Date(fullDateTime).toISOString(),
     };
 
-    onSubmit(newEntry);
+    console.log(onSubmit(newEntry));
   };
 
   const handleTimeChange = e => {
