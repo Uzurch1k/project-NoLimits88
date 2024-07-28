@@ -59,13 +59,14 @@ const UserBar = ({ openSettings, openLogout, name }) => {
         </div>
       </button>
 
-      {showPopover && (
+      <div className={clsx(css.popoverContainer, { [css.open]: showPopover })}>
         <UserBarPopover
           ref={popoverRef}
           openSettings={openSettings}
           openLogout={openLogout}
+          isOpen={showPopover}
         />
-      )}
+      </div>
     </div>
   );
 };
