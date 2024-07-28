@@ -1,4 +1,4 @@
-import { useForm, Controller, useWatch } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
@@ -125,20 +125,16 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         <label htmlFor="time" className={css.textTime}>
           Recording time:
         </label>
-        <Controller
+        <input
           name="time"
-          control={control}
-          render={({ field }) => (
-            <input
-              className={css.input}
-              {...field}
-              type="text"
-              id="time"
-              placeholder="HH:MM"
-              onChange={handleTimeChange}
-            />
-          )}
+          className={`${css.input} ${css.timeInput}`}
+          type="time"
+          id="time"
+          placeholder="HH:MM"
+          {...register('time')}
+          onChange={handleTimeChange}
         />
+
         {errors.time && (
           <span className={css.errorMessage}>{errors.time.message}</span>
         )}

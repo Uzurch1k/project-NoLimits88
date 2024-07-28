@@ -1,97 +1,105 @@
 .waterProgressBarSection {
-	position: absolute;
-	top: 225px;
-	left: 50%;
-	transform: translateX(-50%);
+  position: absolute;
+  top: 225px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .waterProgressBarBody {
-	width: 198px;
-	border-radius: 15px;
-	padding: 12px;
-	background-color: var(--cw);
-	box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  width: 198px;
+  border-radius: 15px;
+  padding: 12px;
+  background-color: var(--cw);
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .waterBarTitle {
-	font-size: 14px;
-	line-height: 1;
-	text-transform: capitalize;
-	margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1;
+  text-transform: capitalize;
+  margin-bottom: 20px;
 }
 
 .waterProgressBar {
-	position: relative;
-	width: 100%;
-	height: 6px;
-	border-radius: 9px;
-	background-color: var(--cu);
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: 9px;
+  background-color: var(--cu);
 }
 .progressBarFill {
-	background-color: var(--cg);
-	height: 100%;
-	border-radius: 9px;
+  background-color: var(--cg);
+  height: 100%;
+  border-radius: 9px;
 }
 
 .progressEllipse {
-	position: absolute;
-	border-radius: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	height: 12px;
-	width: 12px;
-	background-color: var(--cw);
-	border: 1px solid var(--cg);
+  position: absolute;
+  border-radius: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 12px;
+  width: 12px;
+  background-color: var(--cw);
+  border: 1px solid var(--cg);
 }
 .progressPercent {
-	position: absolute;
-	top: -13px;
-	left: calc(50% + 2px);
-	transform: translateX(-50%);
-	font-size: 8px;
-	line-height: 1;
-	color: var(--cg);
+  position: absolute;
+  top: -13px;
+  left: calc(50% + 2px);
+  transform: translateX(-50%);
+  font-size: 8px;
+  line-height: 1;
+  color: var(--cg);
 }
 
 .percentContainer {
-	margin-top: 8px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .waterProgressValue {
-	font-size: 10px;
-	line-height: 1;
-	color: var(--rcb);
-	&:nth-child(2) {
-		transform: translateX(8px);
-	}
+  font-size: 10px;
+  line-height: 1;
+  color: var(--rcb);
+  &:nth-child(2) {
+    transform: translateX(8px);
+  }
 }
 
 @media screen and (min-width: 768px) {
-	.waterProgressBarSection {
-	}
-	.waterProgressBarBody {
-	}
+  .waterProgressBarSection {
+    top: 322px;
+  }
 
-	.waterBarTitle {
-	}
+  .waterProgressBarBody {
+    width: 295px;
+    padding: 20px;
+  }
 
-	.waterProgressBar {
-	}
-	.progressBarFill {
-	}
+  .waterBarTitle {
+    font-size: 15px;
+    line-height: 1.49;
+    margin-bottom: 18px;
+  }
 
-	.progressEllipse {
-	}
-	.progressPercent {
-	}
+  .progressPercent {
+    top: -18px;
+    font-size: 10px;
+  }
 
-	.percentContainer {
-	}
-	.waterProgressValue {
-	}
+  .percentContainer {
+    margin-top: 6px;
+  }
+  .waterProgressValue {
+    font-size: 12px;
+    line-height: 1.87;
+  }
 }
 
 @media screen and (min-width: 1440px) {
+  .waterProgressBarSection {
+    top: 450px;
+  }
 }
