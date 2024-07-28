@@ -1,10 +1,24 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import css from './BaseModal.module.scss';
 import Modal from 'react-modal';
-import icons from '../../img/icons/icons.svg';
+
 import clsx from 'clsx';
 
+import icons from '../../img/icons/icons.svg';
+import css from './BaseModal.module.scss';
+
 const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add(css.noScroll);
+    } else {
+      document.body.classList.remove(css.noScroll);
+    }
+    return () => {
+      document.body.classList.remove(css.noScroll);
+    };
+  }, [isOpen]);
+
   return (
     <Modal
       isOpen={isOpen}
