@@ -1,41 +1,46 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
 import defaultAvatar from '../../img/content/default avatar.png';
 import { selectUser } from '../../redux/auth/selectors';
+import { updateUser } from '../../redux/auth/operations';
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
+import { toast } from 'react-hot-toast';
 
-const userSettingsSchema = Yup.object()
-  .shape({
-    name: Yup.string().required('The field is required'),
-    email: Yup.string()
-      .email('Please enter a valid email address (must contain @)')
-      .required('Email is required'),
-    weight: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(999, 'The value must be no more than 3 numbers')
-      .nullable(),
-    amountOfWater: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(999, 'The value must be no more than 3 numbers'),
+const userSettingsSchema = Yup.object().shape({
+  name: Yup.string().required('The field is required'),
+  email: Yup.string()
+    .email('Please enter a valid email address (must contain @)')
+    .required('Email is required'),
+  weight: Yup.number()
+    .transform(value => (isNaN(value) ? undefined : value))
+    .min(0, 'The value must be at least 0')
+    .max(999, 'The value must be no more than 3 numbers')
+    .nullable(),
+  amountOfWater: Yup.number()
+    .typeError('Amount of water should be a number')
+    .min(0, 'The value must be at least 0')
+    .max(999, 'The value must be no more than 3 numbers')
+    .nullable(),
+  activeTime: Yup.number()
+    .typeError('Active time must be a number')
+    .min(0, 'The value must be at least 0')
+    .max(24, 'The value must be no more than 24 hours')
+    .nullable(),
+  gender: Yup.string()
+    .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
+    .required('Gender is required'),
+});
 
-    activeTime: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
-      .nullable(),
-  })
-  .test('weight-and-active-time', null, function (values) {
+/* .test('weight-and-active-time', null, function (values) {
     const { weight, activeTime } = values;
-    if ((weight && !activeTime) || (!weight && activeTime)) {
+    if ((weight || activeTime) && (!weight || !activeTime)) {
       return this.createError({
         path: 'weight',
         message:
@@ -43,11 +48,13 @@ const userSettingsSchema = Yup.object()
       });
     }
     return true;
-  });
+  })*/
 
 const UserSettingsForm = ({ onClose }) => {
   const user = useSelector(selectUser);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
+  const dispatch = useDispatch();
+  const [photoUrl, setPhotoUrl] = useState(user?.photo);
+  const [photoFile, setPhotoFile] = useState();
 
   const {
     register,
@@ -58,28 +65,58 @@ const UserSettingsForm = ({ onClose }) => {
     resolver: yupResolver(userSettingsSchema),
     defaultValues: {
       ...user,
-      gender: user.gender || 'woman',
+      gender: user.gender || 'Woman',
+      weight: user.weight || '0',
+      activeTime: user.activeTime || '0',
+      amountOfWater: user.amountOfWater || '0',
     },
+    mode: 'onChange',
   });
 
-  const { name, gender, email, weight, amountOfWater, activeTime } = watch();
+  const { name, gender, email, weight, amountOfWater, activeTime, photo } =
+    watch();
   const isAnyFieldFilled =
-    name || email || weight || amountOfWater || activeTime;
+    name || email || weight || amountOfWater || activeTime || photo;
 
   const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
   const displayWaterNorma = isNaN(dailyWaterNorma) ? '0' : `${dailyWaterNorma}`;
 
-  const handleAvatarUpload = event => {
+  const handlePhotoUpload = event => {
     const file = event.target.files[0];
     if (!file) return;
     const imageUrl = URL.createObjectURL(file);
-    setAvatarUrl(imageUrl);
+    setPhotoUrl(imageUrl);
+    setPhotoFile(file);
   };
 
-  const onSubmit = data => {
-    console.log(data);
-    onClose();
-    // код для обробки даних форми
+  const handleNumberInput = (event, maxLength) => {
+    const value = event.target.value;
+    if (value.length > maxLength) {
+      event.target.value = value.slice(0, maxLength);
+    }
+  };
+
+  const onSubmit = async data => {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('email', data.email);
+    formData.append('weight', data.weight);
+    formData.append('amountOfWater', data.amountOfWater);
+    formData.append('activeTime', data.activeTime);
+    formData.append('gender', data.gender);
+    if (photoFile) {
+      formData.append('photo', photoFile);
+    }
+
+    dispatch(updateUser(formData))
+      .unwrap()
+      .then(() => {
+        toast.success('User data updated successfully!');
+        onClose();
+      })
+      .catch(() => {
+        toast.error('Failed to update user data.');
+      });
   };
 
   return (
@@ -89,16 +126,20 @@ const UserSettingsForm = ({ onClose }) => {
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
           <div className={css.avatarImg}>
-            <img src={avatarUrl} alt="" />
+            {photoUrl ? (
+              <img src={photoUrl} alt="" />
+            ) : (
+              <img src={defaultAvatar} alt="" />
+            )}
           </div>
           <input
-            onChange={handleAvatarUpload}
+            onChange={handlePhotoUpload}
             className={css.avatarInput}
             type="file"
-            name="avatar"
-            id="avatar"
+            name="photo"
+            id="photo"
           />
-          <label htmlFor="avatar" className={css.avatarInputLabel}>
+          <label htmlFor="photo" className={css.avatarInputLabel}>
             <FiUpload className={css.uplIcon} />
             Upload a photo
           </label>
@@ -116,11 +157,11 @@ const UserSettingsForm = ({ onClose }) => {
                     type="radio"
                     name="gender"
                     id="woman"
-                    value="woman"
+                    value="Woman"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
-                    htmlFor="woman"
+                    htmlFor="Woman"
                   >
                     Woman
                   </label>
@@ -132,7 +173,7 @@ const UserSettingsForm = ({ onClose }) => {
                     type="radio"
                     name="gender"
                     id="man"
-                    value="man"
+                    value="Man"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
@@ -222,6 +263,7 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="weight"
                       id="weight"
+                      onInput={e => handleNumberInput(e, 4)}
                     />
                     {errors.weight && (
                       <span className={css.errorMessage}>
@@ -241,6 +283,8 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="activeTime"
                       id="activeTime"
+                      onInput={e => handleNumberInput(e, 3)}
+                      step="0.1"
                     />
                     {errors.activeTime && (
                       <span className={css.errorMessage}>

@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import css from './WaterForm.module.scss';
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { addWaterRecord } from '../../redux/water/operations';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -16,7 +18,7 @@ const validationSchema = Yup.object().shape({
     .required('Time is required'),
 });
 
-const WaterForm = ({ initialData = {}, onSubmit }) => {
+const WaterForm = ({ initialData = {} }) => {
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -26,6 +28,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         minute: '2-digit',
       }),
   };
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -69,7 +72,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     }
   };
 
-  const onSubmitHandler = data => {
+  const submitHandler = async data => {
     const [hours, minutes] = data.time.split(':');
     const fullDateTime = `${
       new Date().toISOString().split('T')[0]
@@ -80,7 +83,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
       date: new Date(fullDateTime).toISOString(),
     };
 
-    console.log(onSubmit(newEntry));
+    await dispatch(addWaterRecord(newEntry)).unwrap();
   };
 
   const handleTimeChange = e => {
@@ -91,7 +94,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
   };
 
   return (
-    <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
+    <form className={css.waterForm} onSubmit={handleSubmit(submitHandler)}>
       <p className={css.text}>Amount of water</p>
       <div className={css.counterContainer}>
         <button
