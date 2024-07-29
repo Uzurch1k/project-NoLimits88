@@ -1,7 +1,7 @@
 import css from './Calendar.module.scss';
 
 import CalendarItem from '../CalendarItem/CalendarItem';
-import { startOfMonth, endOfMonth, eachDayOfInterval, format } from 'date-fns';
+import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
@@ -20,12 +20,12 @@ const Calendar = ({ currentDate }) => {
 
   const generateRandomPercent = () => Math.floor(Math.random() * 100);
 
-  // const selectedDate = useSelector(selectSelectedDate);
-  // const dispatch = useDispatch();
+  const selectedDate = useSelector(selectSelectedDate);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchAllWaterRecordsOfMonth(selectedDate));
-  // }, [dispatch, selectedDate]);
+  useEffect(() => {
+    dispatch(fetchAllWaterRecordsOfMonth(selectedDate));
+  }, [dispatch, selectedDate]);
 
   return (
     <ul className={css.calendarWrapper}>

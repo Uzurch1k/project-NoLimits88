@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { fetchAllWaterRecordsOfDay } from '../../redux/water/operations';
 
 const CalendarItem = ({ day, percent, date }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleOnClick = () => {
-  //   console.log(date);
-  //   dispatch(fetchAllWaterRecordsOfDay(date));
-  // };
+  const handleOnClick = () => {
+    console.log(date);
+    dispatch(fetchAllWaterRecordsOfDay(date));
+  };
 
   return (
     <div className={css.btnDayWrapper}>
@@ -18,7 +18,7 @@ const CalendarItem = ({ day, percent, date }) => {
           [css.btn100Percent]: true,
           [css.btnNot100Percent]: percent < 100,
         })}
-        // onClick={handleOnClick}
+        onClick={handleOnClick}
       >
         <span className={css.day}>{day}</span>
       </button>
