@@ -3,15 +3,16 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { toast } from 'react-hot-toast';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
-import defaultAvatar from '../../img/content/default avatar.png';
 import { selectUser } from '../../redux/auth/selectors';
 import { updateUser } from '../../redux/auth/operations';
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+import defaultAvatar from '../../img/content/default avatar.png';
+
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
-import { toast } from 'react-hot-toast';
 
 const userSettingsSchema = Yup.object().shape({
   name: Yup.string().required('The field is required'),
@@ -31,7 +32,7 @@ const userSettingsSchema = Yup.object().shape({
   activeTime: Yup.number()
     .typeError('Active time must be a number')
     .min(0, 'The value must be at least 0')
-    .max(24, 'The value must be no more than 24 hours')
+    .max(1440, 'The value must be no more than 1440 minutes')
     .nullable(),
   gender: Yup.string()
     .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
@@ -53,8 +54,6 @@ const userSettingsSchema = Yup.object().shape({
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
-  const [avatarUrl, setAvatarUrl] = useState(user.photo || defaultAvatar);
 
   const [photoUrl, setPhotoUrl] = useState(user?.photo);
   const [photoFile, setPhotoFile] = useState();
@@ -110,7 +109,7 @@ const UserSettingsForm = ({ onClose }) => {
     if (photoFile) {
       formData.append('photo', photoFile);
     }
-
+    console.log(formData);
     dispatch(updateUser(formData))
       .unwrap()
       .then(() => {
@@ -286,7 +285,7 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="activeTime"
                       id="activeTime"
-                      onInput={e => handleNumberInput(e, 3)}
+                      onInput={e => handleNumberInput(e, 5)}
                       step="0.1"
                     />
                     {errors.activeTime && (
