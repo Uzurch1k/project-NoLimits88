@@ -122,13 +122,25 @@ export const updateUser = createAsyncThunk(
     }
 
     try {
-      const res = await axiosInstance.patch('/users/update', userData);
+      const { activeTime, amountOfWater, weight, email, name, gender } =
+        userData;
+
+      const res = await axiosInstance.patch('/users/update', {
+        activeTime,
+        amountOfWater,
+        weight,
+        email,
+        name,
+        gender,
+      });
+
       return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 
 export const getUserCount = createAsyncThunk(
   'auth/count',
