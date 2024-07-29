@@ -36,6 +36,8 @@
     letter-spacing: -0.01em;
     border-radius: 15px;
     padding: 16px;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+    transition: border-color 150ms ease-in;
   }
   .inputBaseStyles:hover,
   .inputBaseStyles:focus {
@@ -104,6 +106,7 @@
   .btnSignIn {
     position: relative;
     width: 100%;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   }
   .btnSignIn:hover,
   .btnSignIn:focus {
