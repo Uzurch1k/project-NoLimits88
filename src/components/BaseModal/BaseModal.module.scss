@@ -46,9 +46,17 @@
 	right: 16px;
 	width: 24px;
 	height: 24px;
+	&:hover,
+	&:focus {
+		.icon {
+			stroke: var(--cg);
+		}
+	}
 }
 
 .icon {
+	transition: all 150ms ease-in;
+	stroke: var(--cb);
 	width: 100%;
 	height: 100%;
 }

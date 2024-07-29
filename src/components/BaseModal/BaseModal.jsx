@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import clsx from 'clsx';
 
-import icons from '../../img/icons/icons.svg';
+import icons from '../../img/icons/symbol.svg';
 import css from './BaseModal.module.scss';
 
 const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
@@ -34,7 +34,7 @@ const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
     >
       <button className={css.buttonClose} onClick={onClose}>
         <svg className={css.icon}>
-          <use href={`${icons}#modal-close`}></use>
+          <use href={`${icons}#icon-close`}></use>
         </svg>
       </button>
       {children}
