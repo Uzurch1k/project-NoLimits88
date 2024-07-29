@@ -1,21 +1,40 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import css from './BaseModal.module.scss';
 import Modal from 'react-modal';
-import icons from '../../img/icons/icons.svg';
+
 import clsx from 'clsx';
 
+import icons from '../../img/icons/symbol.svg';
+import css from './BaseModal.module.scss';
+
 const BaseModal = ({ isOpen, onClose, classNameModal, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add(css.noScroll);
+    } else {
+      document.body.classList.remove(css.noScroll);
+    }
+    return () => {
+      document.body.classList.remove(css.noScroll);
+    };
+  }, [isOpen]);
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       className={clsx(css.bodyDef, classNameModal)}
       ariaHideApp={false}
-      overlayClassName={css.overlay}
+      overlayClassName={{
+        base: css.overlay,
+        afterOpen: css.overlayAfterOpen,
+        beforeClose: css.overlayBeforeClose,
+      }}
+      closeTimeoutMS={200}
     >
       <button className={css.buttonClose} onClick={onClose}>
         <svg className={css.icon}>
-          <use href={`${icons}#modal-close`}></use>
+          <use href={`${icons}#icon-close`}></use>
         </svg>
       </button>
       {children}

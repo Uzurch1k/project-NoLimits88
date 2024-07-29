@@ -1,37 +1,51 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import css from './UserSettingsForm.module.scss';
-import { useState } from 'react';
+import * as Yup from 'yup';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
-import clsx from 'clsx';
-import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import defaultAvatar from '../../img/content/default avatar.png';
-/*import icons from '../../img/icons/symbol.svg'*/
+import { selectUser } from '../../redux/auth/selectors';
+import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+import clsx from 'clsx';
+import css from './UserSettingsForm.module.scss';
 
-const userSettingsSchema = Yup.object().shape({
-  name: Yup.string().required('The field is required'),
-  email: Yup.string()
-    .email('Please enter a valid email address (must contain @)')
-    .required('Email is required'),
-  weight: Yup.number()
-    .min(0, 'The value must be at least 0')
-    .max(999, 'The value must be no more than 3 numbers')
-    .required('The field is required'),
-  amountOfWater: Yup.number()
-    .min(0, 'The value must be at least 0')
-    .max(999, 'The value must be no more than 3 numbers')
-    .required('The field is required'),
-  activeTime: Yup.number()
-    .min(0, 'The value must be at least 0')
-    .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
-    .required('The field is required'),
-});
+const userSettingsSchema = Yup.object()
+  .shape({
+    name: Yup.string().required('The field is required'),
+    email: Yup.string()
+      .email('Please enter a valid email address (must contain @)')
+      .required('Email is required'),
+    weight: Yup.number()
+      .transform(value => (isNaN(value) ? undefined : value))
+      .min(0, 'The value must be at least 0')
+      .max(999, 'The value must be no more than 3 numbers')
+      .nullable(),
+    amountOfWater: Yup.number()
+      .transform(value => (isNaN(value) ? undefined : value))
+      .min(0, 'The value must be at least 0')
+      .max(999, 'The value must be no more than 3 numbers'),
 
-const UserSettingsForm = () => {
+    activeTime: Yup.number()
+      .transform(value => (isNaN(value) ? undefined : value))
+      .min(0, 'The value must be at least 0')
+      .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
+      .nullable(),
+  })
+  .test('weight-and-active-time', null, function (values) {
+    const { weight, activeTime } = values;
+    if ((weight && !activeTime) || (!weight && activeTime)) {
+      return this.createError({
+        path: 'weight',
+        message:
+          'Both weight and active time must be filled if one of them is filled',
+      });
+    }
+    return true;
+  });
+
+const UserSettingsForm = ({ onClose }) => {
   const user = useSelector(selectUser);
   const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
 
@@ -42,7 +56,10 @@ const UserSettingsForm = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(userSettingsSchema),
-    defaultValues: user,
+    defaultValues: {
+      ...user,
+      gender: user.gender || 'woman',
+    },
   });
 
   const { name, gender, email, weight, amountOfWater, activeTime } = watch();
@@ -50,9 +67,7 @@ const UserSettingsForm = () => {
     name || email || weight || amountOfWater || activeTime;
 
   const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
-  const displayWaterNorma = isNaN(dailyWaterNorma)
-    ? ''
-    : `${dailyWaterNorma} L`;
+  const displayWaterNorma = isNaN(dailyWaterNorma) ? '0' : `${dailyWaterNorma}`;
 
   const handleAvatarUpload = event => {
     const file = event.target.files[0];
@@ -63,6 +78,7 @@ const UserSettingsForm = () => {
 
   const onSubmit = data => {
     console.log(data);
+    onClose();
     // код для обробки даних форми
   };
 
@@ -93,7 +109,7 @@ const UserSettingsForm = () => {
             <div className={css.genderCont}>
               <p className={css.settingsTitle}>Your gender identity</p>
               <div className={css.genderWrapper}>
-                <div>
+                <div className={css.genderWrapper}>
                   <input
                     {...register('gender')}
                     className={css.genderRadioInput}
@@ -136,7 +152,7 @@ const UserSettingsForm = () => {
                   </label>
                   <input
                     {...register('name')}
-                    className={css.input}
+                    className={css.inputFirst}
                     type="text"
                     name="name"
                     id="name"
@@ -167,14 +183,14 @@ const UserSettingsForm = () => {
                 <div className={css.normaCont}>
                   <p className={css.settingsTitle}>My daily norma</p>
                   <div className={css.formulaCont}>
-                    <div className={css.formulaWrap}>
-                      <p className={css.text}>For woman:</p>
+                    <div className={css.formulaWrapOne}>
+                      <p className={css.textInNorma}>For woman:</p>
                       <span className={`${css.text} ${css.normaFormula}`}>
                         V=(M*0,03) + (T*0,4)
                       </span>
                     </div>
-                    <div className={css.formulaWrap}>
-                      <p className={css.text}>For man:</p>
+                    <div className={css.formulaWrapTwo}>
+                      <p className={css.textInNorma}>For man:</p>
                       <span className={`${css.text} ${css.normaFormula}`}>
                         V=(M*0,04) + (T*0,6)
                       </span>
@@ -202,7 +218,7 @@ const UserSettingsForm = () => {
                     </label>
                     <input
                       {...register('weight')}
-                      className={css.input}
+                      className={css.inputWeight}
                       type="number"
                       name="weight"
                       id="weight"
@@ -235,11 +251,11 @@ const UserSettingsForm = () => {
 
                   <div className={css.waterAmountCont}>
                     <div className={css.waterAmountField}>
-                      <p className={css.text}>
+                      <p className={css.textWaterAmount}>
                         The required amount of water in liters per day:
                       </p>
                       <span className={css.waterNorma}>
-                        {displayWaterNorma}
+                        {displayWaterNorma}L
                       </span>
                     </div>
                     <label
@@ -250,7 +266,7 @@ const UserSettingsForm = () => {
                     </label>
                     <input
                       {...register('amountOfWater')}
-                      className={css.inputLast}
+                      className={css.inputAnount}
                       type="number"
                       name="amountOfWater"
                       id="amountOfWater"
@@ -266,15 +282,15 @@ const UserSettingsForm = () => {
               </div>
             </div>
           </div>
-
-          <button
-            className={clsx(css.settingsButton, 'btn-def')}
-            type="submit"
-            disabled={!isAnyFieldFilled}
-          >
-            Save
-          </button>
         </div>
+
+        <button
+          className={clsx(css.settingsButton, 'btn-def')}
+          type="submit"
+          disabled={!isAnyFieldFilled}
+        >
+          Save
+        </button>
       </form>
     </>
   );

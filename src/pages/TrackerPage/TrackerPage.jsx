@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
 import Section from '../../components/Layout/Section/Section';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
@@ -57,7 +58,7 @@ const TrackerPage = () => {
         onClose={() => closeModal('settings')}
         classNameModal={css.settingsModal}
       >
-        <UserSettingsModal />
+        <UserSettingsModal onClose={() => closeModal('settings')} />
       </BaseModal>
 
       <BaseModal

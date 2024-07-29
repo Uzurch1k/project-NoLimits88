@@ -1,58 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operations';
-import { logOut } from '../auth/operations';
+import {
+  createSlice,
+  isPending,
+  isFulfilled,
+  isRejected,
+} from '@reduxjs/toolkit';
 
-const contactsInitialState = {
-  items: [],
+export const WATER_INITIAL_STATE = {
+  records: [],
   loading: false,
   error: null,
 };
 
-const isPending = action =>
-  typeof action.type === 'string' && action.type.endsWith('/pending');
-const isRejected = action =>
-  typeof action.type === 'string' && action.type.endsWith('/rejected');
-
-const contactsPending = state => {
+const waterPending = state => {
+  state.records = [];
   state.loading = true;
   state.error = null;
 };
-const contactsRejected = state => {
+const waterFulfilled = (state, action) => {
+  state.records = action.payload;
   state.loading = false;
-  state.error = true;
+  state.error = null;
+};
+const waterRejected = (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
 };
 
-const contactsSlice = createSlice({
-  name: 'contacts',
-  initialState: contactsInitialState,
+const waterSlice = createSlice({
+  name: 'water',
+  initialState: WATER_INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items = action.payload;
-      })
-
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items.push(action.payload);
-      })
-
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items = state.items.filter(
-          contact => contact.id !== action.payload.id
-        );
-      })
-
-      .addCase(logOut.fulfilled, state => {
-        state.items = [];
-        state.error = null;
-        state.loading = false;
-      })
-
-      .addMatcher(isPending, contactsPending)
-      .addMatcher(isRejected, contactsRejected);
+      .addMatcher(isPending, waterPending)
+      .addMatcher(isFulfilled, waterFulfilled)
+      .addMatcher(isRejected, waterRejected);
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
+export const waterReducer = waterSlice.reducer;

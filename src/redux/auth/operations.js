@@ -16,24 +16,22 @@ export const setupInterceptors = store => {
     response => response,
     async error => {
       const originalRequest = error.config;
+
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
           const { refreshToken } = store.getState().auth;
-          console.log(store.getState().auth);
 
           if (refreshToken) {
-            console.log(refreshToken);
             const { data } = await axiosInstance.post('/users/refresh', {
               refreshToken,
             });
 
-            console.log(data);
+            setAuthHeader(data.data.accessToken);
+            store.dispatch(setToken(data.data));
+            originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
 
-            setAuthHeader(data.accessToken);
-            store.dispatch(setToken(data));
-            error.config.headers.Authorization = `Bearer ${data.accessToken}`;
-            return axiosInstance.request(error.config);
+            return axiosInstance.request(originalRequest);
           }
         } catch (error) {
           return Promise.reject(error);
@@ -52,7 +50,6 @@ export const logIn = createAsyncThunk(
       const { user, accessToken, refreshToken } = res.data.data;
 
       setAuthHeader(accessToken);
-      // thunkAPI.dispatch(setToken({ accessToken, refreshToken }));
 
       return { user, accessToken, refreshToken };
     } catch (error) {
@@ -106,8 +103,39 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axiosInstance.get('/users/current');
-      console.log(res.data.data);
+
       return res.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'auth/update',
+  async (userData, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+
+    try {
+      const res = await axiosInstance.patch('/users/update', userData);
+      return res.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getUserCount = createAsyncThunk(
+  'auth/count',
+  async (_, thunkAPI) => {
+    try {
+      const res = await axiosInstance.get('/users/count');
+      return res.data.count;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

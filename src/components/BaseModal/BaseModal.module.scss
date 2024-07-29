@@ -1,3 +1,7 @@
+.noScroll {
+	overflow: hidden;
+}
+
 .overlay {
 	position: fixed;
 	top: 0;
@@ -13,8 +17,17 @@
 	z-index: 200;
 	padding: 80px 0;
 	overflow-y: auto;
-	animation: fadeIn 150ms ease-in;
+	animation: fadeIn 200ms ease-in;
 }
+
+.overlayAfterOpen {
+	animation: fadeIn 200ms ease-in forwards;
+}
+
+.overlayBeforeClose {
+	animation: fadeOut 200ms ease-out forwards;
+}
+
 .bodyDef {
 	width: 100%;
 	padding: 40px 20px;
@@ -22,14 +35,6 @@
 	border-radius: 15px;
 	background-color: var(--cw);
 	box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
-}
-
-.ReactModal__Overlay--after-open {
-	opacity: 1;
-}
-
-.ReactModal__Overlay--before-close {
-	opacity: 0;
 }
 
 .buttonClose {
@@ -41,9 +46,17 @@
 	right: 16px;
 	width: 24px;
 	height: 24px;
+	&:hover,
+	&:focus {
+		.icon {
+			stroke: var(--cg);
+		}
+	}
 }
 
 .icon {
+	transition: all 150ms ease-in;
+	stroke: var(--cb);
 	width: 100%;
 	height: 100%;
 }
@@ -70,5 +83,14 @@
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
 	}
 }
