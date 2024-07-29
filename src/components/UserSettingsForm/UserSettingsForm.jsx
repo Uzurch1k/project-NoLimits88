@@ -78,15 +78,21 @@ const UserSettingsForm = ({ onClose }) => {
     setAvatarUrl(imageUrl);
   };
 
- const onSubmit = async data => {
-   try {
-     console.log('Дані для оновлення:', data);
-     await dispatch(updateUser(data));
-     onClose();
-   } catch (error) {
-     console.error('Update user failed:', error);
-   }
- };
+  const onSubmit = async data => {
+    try {
+      const trimmedData = {
+        ...data,
+        name: data.name.trim(),
+        email: data.email.trim(),
+      };
+
+      console.log('Дані для оновлення:', trimmedData);
+      await dispatch(updateUser(trimmedData));
+      onClose();
+    } catch (error) {
+      console.error('Update user failed:', error);
+    }
+  };
 
   return (
     <>
