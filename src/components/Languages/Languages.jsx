@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import style from './Languages.module.css';
-import icons from '../../img/icons/icons.svg';
+import icons from '../../img/icons/symbol.svg';
 
 const Languages = () => {
   const { i18n } = useTranslation();

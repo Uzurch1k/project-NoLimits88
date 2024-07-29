@@ -82,7 +82,7 @@
     "today": "Today",
     "btn": "Add water"
   },
-  "ChooseDate": {
+  "calendar": {
     "january": "January",
     "february": "February",
     "march": "March",
@@ -104,7 +104,7 @@
   },
   "monthInfo": {
     "error": "Oops, something is wrong...",
-    "mouth": "Month",
+    "month": "Month",
     "statistics": "Statistics"
   },
   "Userbar": {
@@ -140,7 +140,8 @@
       "successEdit": "Water record successfully updated",
       "successAdd": "Water record successfully added",
       "errorEdit": "Oops, something is wrong...",
-      "errorAdd": "Oops, something is wrong..."
+      "errorAdd": "Oops, something is wrong...",
+      "saveBtn": "Save"
     },
     "UserSettingsForm": {
       "setting": "Setting",

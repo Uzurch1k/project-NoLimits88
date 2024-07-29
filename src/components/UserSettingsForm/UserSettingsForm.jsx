@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -13,24 +14,23 @@ import css from './UserSettingsForm.module.scss';
 
 const userSettingsSchema = Yup.object()
   .shape({
-    name: Yup.string().required('The field is required'),
+    name: Yup.string().required('modals.UserSettingsForm.errors.name'),
     email: Yup.string()
-      .email('Please enter a valid email address (must contain @)')
-      .required('Email is required'),
+      .email('modals.UserSettingsForm.errors.email')
+      .required('modals.UserSettingsForm.errors.email'),
     weight: Yup.number()
       .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(999, 'The value must be no more than 3 numbers')
+      .min(0, 'modals.UserSettingsForm.errors.weight')
+      .max(999, 'modals.UserSettingsForm.errors.weight')
       .nullable(),
     amountOfWater: Yup.number()
       .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(999, 'The value must be no more than 3 numbers'),
-
+      .min(0, 'modals.UserSettingsForm.errors.water')
+      .max(999, 'modals.UserSettingsForm.errors.water'),
     activeTime: Yup.number()
       .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'The value must be at least 0')
-      .max(1440, 'The value must be no more than 1440 minutes (24 hours)')
+      .min(0, 'modals.UserSettingsForm.errors.time')
+      .max(1440, 'modals.UserSettingsForm.errors.time')
       .nullable(),
   })
   .test('weight-and-active-time', null, function (values) {
@@ -38,14 +38,14 @@ const userSettingsSchema = Yup.object()
     if ((weight && !activeTime) || (!weight && activeTime)) {
       return this.createError({
         path: 'weight',
-        message:
-          'Both weight and active time must be filled if one of them is filled',
+        message: 'modals.UserSettingsForm.errors.weightAndActiveTime',
       });
     }
     return true;
   });
 
 const UserSettingsForm = ({ onClose }) => {
+  const { t } = useTranslation();
   const user = useSelector(selectUser);
   const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
 
@@ -84,7 +84,7 @@ const UserSettingsForm = ({ onClose }) => {
 
   return (
     <>
-      <h2 className={css.title}>Setting</h2>
+      <h2 className={css.title}>{t('modals.UserSettingsForm.setting')}</h2>
 
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
@@ -100,14 +100,16 @@ const UserSettingsForm = ({ onClose }) => {
           />
           <label htmlFor="avatar" className={css.avatarInputLabel}>
             <FiUpload className={css.uplIcon} />
-            Upload a photo
+            {t('modals.UserSettingsForm.uploadPhotoBtn')}
           </label>
         </div>
 
         <div className={css.scroll}>
           <div className={css.settingsCont}>
             <div className={css.genderCont}>
-              <p className={css.settingsTitle}>Your gender identity</p>
+              <p className={css.settingsTitle}>
+                {t('modals.UserSettingsForm.yourGenderLabel')}
+              </p>
               <div className={css.genderWrapper}>
                 <div className={css.genderWrapper}>
                   <input
@@ -122,7 +124,7 @@ const UserSettingsForm = ({ onClose }) => {
                     className={`${css.text} ${css.genderLabel}`}
                     htmlFor="woman"
                   >
-                    Woman
+                    {t('modals.UserSettingsForm.femaleGenderLabel')}
                   </label>
                 </div>
                 <div>
@@ -138,7 +140,7 @@ const UserSettingsForm = ({ onClose }) => {
                     className={`${css.text} ${css.genderLabel}`}
                     htmlFor="man"
                   >
-                    Man
+                    {t('modals.UserSettingsForm.femaleGenderMale')}
                   </label>
                 </div>
               </div>
@@ -148,7 +150,7 @@ const UserSettingsForm = ({ onClose }) => {
               <div>
                 <div className={css.UserInfoCont}>
                   <label className={css.settingsTitleUserInfo} htmlFor="name">
-                    Your name
+                    {t('modals.UserSettingsForm.yourNameLabel')}
                   </label>
                   <input
                     {...register('name')}
@@ -159,12 +161,12 @@ const UserSettingsForm = ({ onClose }) => {
                   />
                   {errors.name && (
                     <span className={css.errorMessage}>
-                      {errors.name.message}
+                      {t(errors.name.message)}
                     </span>
                   )}
 
                   <label className={css.settingsTitleUserInfo} htmlFor="email">
-                    Email
+                    {t('modals.UserSettingsForm.labelEmail')}
                   </label>
                   <input
                     {...register('email')}
@@ -175,37 +177,40 @@ const UserSettingsForm = ({ onClose }) => {
                   />
                   {errors.email && (
                     <span className={css.errorMessage}>
-                      {errors.email.message}
+                      {t(errors.email.message)}
                     </span>
                   )}
                 </div>
 
                 <div className={css.normaCont}>
-                  <p className={css.settingsTitle}>My daily norma</p>
+                  <p className={css.settingsTitle}>
+                    {t('modals.UserSettingsForm.dailyNormah')}
+                  </p>
                   <div className={css.formulaCont}>
                     <div className={css.formulaWrapOne}>
-                      <p className={css.textInNorma}>For woman:</p>
+                      <p className={css.textInNorma}>
+                        {t('modals.UserSettingsForm.forWomanP')}
+                      </p>
                       <span className={`${css.text} ${css.normaFormula}`}>
                         V=(M*0,03) + (T*0,4)
                       </span>
                     </div>
                     <div className={css.formulaWrapTwo}>
-                      <p className={css.textInNorma}>For man:</p>
+                      <p className={css.textInNorma}>
+                        {t('modals.UserSettingsForm.forManP')}
+                      </p>
                       <span className={`${css.text} ${css.normaFormula}`}>
                         V=(M*0,04) + (T*0,6)
                       </span>
                     </div>
                   </div>
                   <p className={css.normaTextArea}>
-                    <span className={css.figure}>*</span> V is the volume of the
-                    water norm in liters per day, M is your body weight, T is
-                    the time of active sports, or another type of activity
-                    commensurate in terms of loads (in the absence of these, you
-                    must set 0)
+                    <span className={css.figure}>*</span>{' '}
+                    {t('modals.UserSettingsForm.starText')}
                   </p>
                   <span className={`${css.text} ${css.activeTime}`}>
-                    <FaExclamation size={18} color="#9BE1A0" /> Active time in
-                    hours
+                    <FaExclamation size={18} color="#9BE1A0" />{' '}
+                    {t('modals.UserSettingsForm.activeText')}
                   </span>
                 </div>
               </div>
@@ -214,7 +219,7 @@ const UserSettingsForm = ({ onClose }) => {
                 <div className={css.desktopWeight}>
                   <div className={css.metricsWrapper}>
                     <label className={css.textWeightFormula} htmlFor="weight">
-                      Your weight in kilograms:
+                      {t('modals.UserSettingsForm.infoUser')}
                     </label>
                     <input
                       {...register('weight')}
@@ -225,7 +230,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                     {errors.weight && (
                       <span className={css.errorMessage}>
-                        {errors.weight.message}
+                        {t(errors.weight.message)}
                       </span>
                     )}
 
@@ -233,7 +238,7 @@ const UserSettingsForm = ({ onClose }) => {
                       className={css.textWeightFormula}
                       htmlFor="activeTime"
                     >
-                      The time of active participation in sports:
+                      {t('modals.UserSettingsForm.TheTimeSportsLabel')}
                     </label>
                     <input
                       {...register('activeTime')}
@@ -244,7 +249,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                     {errors.activeTime && (
                       <span className={css.errorMessage}>
-                        {errors.activeTime.message}
+                        {t(errors.activeTime.message)}
                       </span>
                     )}
                   </div>
@@ -252,17 +257,17 @@ const UserSettingsForm = ({ onClose }) => {
                   <div className={css.waterAmountCont}>
                     <div className={css.waterAmountField}>
                       <p className={css.textWaterAmount}>
-                        The required amount of water in liters per day:
+                        {t('modals.UserSettingsForm.requiredWater')}
                       </p>
                       <span className={css.waterNorma}>
-                        {displayWaterNorma}L
+                        {displayWaterNorma} {t('modals.UserSettingsForm.l')}
                       </span>
                     </div>
                     <label
                       className={css.settingsTitleUserInfo}
                       htmlFor="amountOfWater"
                     >
-                      Write down how much water you will drink:
+                      {t('modals.UserSettingsForm.writeDownLabel')}
                     </label>
                     <input
                       {...register('amountOfWater')}
@@ -274,7 +279,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                     {errors.amountOfWater && (
                       <span className={css.errorMessage}>
-                        {errors.amountOfWater.message}
+                        {t(errors.amountOfWater.message)}
                       </span>
                     )}
                   </div>
@@ -289,7 +294,7 @@ const UserSettingsForm = ({ onClose }) => {
           type="submit"
           disabled={!isAnyFieldFilled}
         >
-          Save
+          {t('modals.UserSettingsForm.saveBtn')}
         </button>
       </form>
     </>

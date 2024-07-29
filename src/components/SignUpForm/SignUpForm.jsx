@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useState, useId } from 'react';
 import { useDispatch } from 'react-redux';
@@ -10,36 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../redux/auth/operations';
 import { LoaderDetails } from '../Loader/Loader';
-import { useTranslation } from 'react-i18next';
 
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 
 import css from './SignUpForm.module.scss';
 import clsx from 'clsx';
-
-const loginSchema = yup.object().shape({
-  email: yup
-    .string('Email should be a string')
-    .required('Email is required')
-    .email('Invalid email format')
-    .test('isValidAfterSign', 'Invalid email format', function (email) {
-      const strAfterEmailSign = email.slice(email.indexOf('@'));
-      return (
-        !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.')
-      );
-    }),
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(6, 'Password should have at least 6 characters')
-    .max(28, 'Password should not have more than 28 characters')
-    .matches(/\d/, 'The password must contain at least one number')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters'),
-  repeatPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Repeat Password is required'),
-});
 
 const SignUpForm = () => {
   const { t } = useTranslation();
@@ -49,7 +25,39 @@ const SignUpForm = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(
+      yup.object().shape({
+        email: yup
+          .string()
+          .required(t('signUpPage.emailSpanError'))
+          .email(t('signUpPage.emailSpanError'))
+          .test(
+            'isValidAfterSign',
+            t('signUpPage.emailSpanError'),
+            function (email) {
+              const strAfterEmailSign = email.slice(email.indexOf('@'));
+              return (
+                !strAfterEmailSign.includes('@') ||
+                strAfterEmailSign.includes('.')
+              );
+            }
+          ),
+        password: yup
+          .string()
+          .required(t('signUpPage.passwordSpanError'))
+          .min(6, t('signUpPage.passwordSpanError'))
+          .max(28, t('signUpPage.passwordSpanError'))
+          .matches(/\d/, t('signUpPage.passwordSpanError'))
+          .matches(/[a-zA-Z]/, t('signUpPage.passwordSpanError')),
+        repeatPassword: yup
+          .string()
+          .oneOf(
+            [yup.ref('password'), null],
+            t('signUpPage.repeatPasswordpanErrorTwo')
+          )
+          .required(t('signUpPage.repeatPasswordpanError')),
+      })
+    ),
     mode: 'onChange',
     defaultValues: { email: '', password: '', repeatPassword: '' },
   });
@@ -77,9 +85,9 @@ const SignUpForm = () => {
     try {
       const response = await dispatch(registerUser(userData));
       if (response.error) throw new Error(response.payload);
-      toast.success(t('Successfully registered!'));
+      toast.success(t('signUpPage.registrationSuccess'));
     } catch (error) {
-      toast.error(t('Registration failed'));
+      toast.error(t('signUpPage.registrationFailed'));
     } finally {
       setIsLoader(false);
     }
@@ -89,11 +97,10 @@ const SignUpForm = () => {
 
   return (
     <div className={css.signUpBody}>
-      <h2 className={css.signUpTitle}>{t('Sign Up')}</h2>
-
+      <h2 className={css.signUpTitle}>{t('signUpPage.signUp')}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signUpForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
-          {t('Email')}
+          {t('signUpPage.email')}
         </label>
         <input
           type="email"
@@ -103,14 +110,14 @@ const SignUpForm = () => {
             [css.emailInput]: true,
             [css.errorEmailInput]: errors.email,
           })}
-          placeholder={t('Enter your email')}
+          placeholder={t('signUpPage.emailPlaceholder')}
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
 
         <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
-          {t('Password')}
+          {t('signUpPage.password')}
         </label>
         <div
           className={clsx({
@@ -122,7 +129,7 @@ const SignUpForm = () => {
             type={isPasswordVisible ? 'text' : 'password'}
             id={fieldPasswordId}
             {...register('password')}
-            placeholder={t('Enter your password')}
+            placeholder={t('signUpPage.passwordPlaceholder')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.password,
@@ -135,7 +142,7 @@ const SignUpForm = () => {
         )}
 
         <label htmlFor={fieldRepeatPasswordId} className={css.passwordLabel}>
-          {t('Repeat Password')}
+          {t('signUpPage.repeatPassword')}
         </label>
         <div
           className={clsx({
@@ -147,7 +154,7 @@ const SignUpForm = () => {
             type={isRepeatPasswordVisible ? 'text' : 'password'}
             id={fieldRepeatPasswordId}
             {...register('repeatPassword')}
-            placeholder={t('Repeat your password')}
+            placeholder={t('signUpPage.repeatPasswordPlaceholder')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.repeatPassword,
@@ -160,14 +167,18 @@ const SignUpForm = () => {
         )}
 
         <button className={clsx(css.btnSignUp, 'btn-def')} type="submit">
-          {isLoader ? <LoaderDetails isPositioning={true} /> : t('Sign Up')}
+          {isLoader ? (
+            <LoaderDetails isPositioning={true} />
+          ) : (
+            t('signUpPage.signUp')
+          )}
         </button>
       </form>
 
       <p className={css.questionText}>
-        {t('Already have an account?')}{' '}
+        {t('signUpPage.textAlready')}{' '}
         <Link className={css.signInLink} to="/signin">
-          {t('Sign In')}
+          {t('signUpPage.signIn')}
         </Link>
       </p>
 

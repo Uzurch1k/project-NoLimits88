@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,15 +9,17 @@ import { HiOutlineMinus } from 'react-icons/hi';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
-    .min(50, 'The amount must be at least 50ml')
-    .max(5000, 'The amount of water must be less than 5000 ml')
-    .required('Water amount is required'),
+    .min(50, 'modals.addEdit.errorAdd')
+    .max(5000, 'modals.addEdit.errorAdd')
+    .required('modals.addEdit.errorAdd'),
   time: Yup.string()
-    .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format')
-    .required('Time is required'),
+    .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'modals.addEdit.errorEdit')
+    .required('modals.addEdit.errorEdit'),
 });
 
 const WaterForm = ({ initialData = {}, onSubmit }) => {
+  const { t } = useTranslation();
+
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -32,14 +35,12 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     handleSubmit,
     control,
     setValue,
-    /*getValues,*/
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
   });
 
-  // Стеження за змінами води
   const waterAmount = useWatch({ control, name: 'waterAmount' });
 
   const mlToDecimal = ml => parseFloat((ml / 1000).toFixed(3));
@@ -92,7 +93,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
 
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
-      <p className={css.text}>Amount of water</p>
+      <p className={css.text}>{t('modals.addEdit.amount')}</p>
       <div className={css.counterContainer}>
         <button
           type="button"
@@ -102,7 +103,9 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
           <HiOutlineMinus className={css.icon} />
         </button>
         <div className={css.inputWrapper}>
-          <span className={css.waterAmountInput}>{`${waterAmount} ml`}</span>
+          <span className={css.waterAmountInput}>
+            {`${waterAmount} ${t('modals.addEdit.ml')}`}
+          </span>
         </div>
         <button
           type="button"
@@ -113,29 +116,31 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         </button>
       </div>
       {errors.waterAmount && (
-        <span className={css.errorMessage}>{errors.waterAmount.message}</span>
+        <span className={css.errorMessage}>
+          {t(errors.waterAmount.message)}
+        </span>
       )}
       <div className={css.inputContainerTime}>
         <label htmlFor="time" className={css.textTime}>
-          Recording time:
+          {t('modals.addEdit.time')}
         </label>
         <input
           name="time"
           className={`${css.input} ${css.timeInput}`}
           type="time"
           id="time"
-          placeholder="HH:MM"
+          placeholder={t('modals.addEdit.timePlaceholder')}
           {...register('time')}
           onChange={handleTimeChange}
         />
 
         {errors.time && (
-          <span className={css.errorMessage}>{errors.time.message}</span>
+          <span className={css.errorMessage}>{t(errors.time.message)}</span>
         )}
       </div>
       <div className={css.inputContainer}>
         <label htmlFor="waterAmountKeyboard" className={css.settingsTitle}>
-          Enter the value of the water used:
+          {t('modals.addEdit.value')}
         </label>
         <div className={css.inputWrapper}>
           <input
@@ -148,11 +153,13 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
           />
         </div>
         {errors.waterAmount && (
-          <span className={css.errorMessage}>{errors.waterAmount.message}</span>
+          <span className={css.errorMessage}>
+            {t(errors.waterAmount.message)}
+          </span>
         )}
       </div>
       <button className={clsx(css.settingsButton, 'btn-def')} type="submit">
-        Save
+        {t('modals.addEdit.saveBtn')}
       </button>
     </form>
   );

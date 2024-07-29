@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { useRef, useEffect, useState } from 'react';
-
 import css from './WaterProgressBar.module.scss';
 
 const WaterProgressBar = () => {
+  const { t } = useTranslation();
   const progressPercents = 50;
   const progressBarRef = useRef(null);
   const [ellipseLeft, setEllipseLeft] = useState(0);
@@ -20,7 +21,7 @@ const WaterProgressBar = () => {
   return (
     <div className={css.waterProgressBarSection}>
       <div className={css.waterProgressBarBody}>
-        <h3 className={css.waterBarTitle}>today</h3>
+        <h3 className={css.waterBarTitle}>{t('waterMainInfo.today')}</h3>
 
         <div className={css.waterProgressBar} ref={progressBarRef}>
           <div
@@ -31,7 +32,9 @@ const WaterProgressBar = () => {
               className={css.progressEllipse}
               style={{ left: `${ellipseLeft}%` }} // Используем вычисленное значение
             >
-              <span className={css.progressPercent}>{progressPercents}%</span>
+              <span
+                className={css.progressPercent}
+              >{`${progressPercents}%`}</span>
             </div>
           </div>
         </div>
