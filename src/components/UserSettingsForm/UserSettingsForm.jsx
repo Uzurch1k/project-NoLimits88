@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { FaExclamation } from 'react-icons/fa6';
 import { FiUpload } from 'react-icons/fi';
 import defaultAvatar from '../../img/content/default avatar.png';
 import { selectUser } from '../../redux/auth/selectors';
+import { updateUser } from '../../redux/auth/operations';
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
@@ -46,8 +47,9 @@ const userSettingsSchema = Yup.object()
   });
 
 const UserSettingsForm = ({ onClose }) => {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
+  const [avatarUrl, setAvatarUrl] = useState(user.photo || defaultAvatar);
 
   const {
     register,
@@ -58,7 +60,7 @@ const UserSettingsForm = ({ onClose }) => {
     resolver: yupResolver(userSettingsSchema),
     defaultValues: {
       ...user,
-      gender: user.gender || 'woman',
+      gender: user.gender || 'Woman',
     },
   });
 
@@ -76,11 +78,15 @@ const UserSettingsForm = ({ onClose }) => {
     setAvatarUrl(imageUrl);
   };
 
-  const onSubmit = data => {
-    console.log(data);
-    onClose();
-    // код для обробки даних форми
-  };
+ const onSubmit = async data => {
+   try {
+     console.log('Дані для оновлення:', data);
+     await dispatch(updateUser(data));
+     onClose();
+   } catch (error) {
+     console.error('Update user failed:', error);
+   }
+ };
 
   return (
     <>
@@ -115,12 +121,12 @@ const UserSettingsForm = ({ onClose }) => {
                     className={css.genderRadioInput}
                     type="radio"
                     name="gender"
-                    id="woman"
-                    value="woman"
+                    id="Woman"
+                    value="Woman"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
-                    htmlFor="woman"
+                    htmlFor="Woman"
                   >
                     Woman
                   </label>
@@ -131,12 +137,12 @@ const UserSettingsForm = ({ onClose }) => {
                     className={css.genderRadioInput}
                     type="radio"
                     name="gender"
-                    id="man"
-                    value="man"
+                    id="Man"
+                    value="Man"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
-                    htmlFor="man"
+                    htmlFor="Man"
                   >
                     Man
                   </label>
