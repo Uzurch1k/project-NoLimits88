@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addWaterRecord } from '../../redux/water/operations';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
 import { selectSelectedDay } from '../../redux/water/selectors';
+import { TODAY } from '../../constants/time';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -77,7 +78,7 @@ const WaterForm = ({ initialData = {} }) => {
   const selectedDay = useSelector(selectSelectedDay);
 
   const onSubmitHandler = data => {
-    const submitHandler = async data => {
+    const submitHandler = async () => {
       const [hours, minutes] = data.time.split(':');
       const fullDateTime = `${
         selectedDay.split('T')[0]
@@ -88,8 +89,7 @@ const WaterForm = ({ initialData = {} }) => {
         date: fullDateTime,
       };
 
-      console.log('date of new entry: ', newEntry.date);
-      // dispatch(addWaterRecord(newEntry));
+      dispatch(addWaterRecord(newEntry));
       // await dispatch(addWaterRecord(newEntry)).unwrap();
     };
     submitHandler();

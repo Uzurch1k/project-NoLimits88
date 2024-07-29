@@ -9,6 +9,7 @@ export const WATER_INITIAL_STATE = {
     records: [],
     isLoading: false,
   },
+  waterDrunkPerDay: 0,
   error: null,
   selectedDay: TODAY,
   selectedMonth: TODAY,

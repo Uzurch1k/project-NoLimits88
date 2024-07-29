@@ -1,6 +1,5 @@
 import axiosInstance from '../../helpers/axiosBase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { TODAY } from '../../constants/time';
 
 export const fetchAllWaterRecordsOfDay = createAsyncThunk(
   'water/fetchAllForADay',
@@ -40,11 +39,10 @@ export const addWaterRecord = createAsyncThunk(
 
 export const deleteWaterRecord = createAsyncThunk(
   'water/deleteRecord',
-  async (recordData, thunkAPI) => {
+  async (recordId, thunkAPI) => {
     try {
-      await axiosInstance.delete(`/water/${recordData.id}`);
-      // const response = await axiosInstance.get(`/water/day/${recordData.date}`);
-      return recordData.id;
+      await axiosInstance.delete(`/water/${recordId}`);
+      return recordId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -57,7 +55,7 @@ export const editWaterRecord = createAsyncThunk(
     const entry = { amount: recordData.amount, date: recordData.date };
     try {
       await axiosInstance.put(`/water/${recordData.id}`, entry);
-      const response = await axiosInstance.get(`/water/day/${recordData.date}`);
+      const response = await axiosInstance.get(`water/${entry.date}`);
       return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
