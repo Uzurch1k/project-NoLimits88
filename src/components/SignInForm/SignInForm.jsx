@@ -12,6 +12,10 @@ import clsx from 'clsx';
 import css from './SignInForm.module.scss';
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import { LoaderDetails } from '../Loader/Loader';
+<<<<<<< Updated upstream
+=======
+import { useTranslation } from 'react-i18next';
+>>>>>>> Stashed changes
 
 const SignInForm = () => {
   const { t } = useTranslation();

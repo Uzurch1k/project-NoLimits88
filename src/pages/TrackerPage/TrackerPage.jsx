@@ -39,7 +39,7 @@ const TrackerPage = () => {
 
   return (
     <div className={css.body}>
-      <DocumentTitle>{t('Tracker')}</DocumentTitle>
+      <DocumentTitle>{t('page.tracker')}</DocumentTitle>
       <Languages />
       <Section>
         <WaterMainInfo openAddWaterModal={() => openModal('addWater')} />
