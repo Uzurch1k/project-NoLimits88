@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import icons from '../../img/icons/icons.svg';
+
+import icons from '../../img/icons/symbol.svg';
 import css from './BtnShowPassword.module.scss';
 
 const BtnShowPassword = ({ setIsPasswordVisible }) => {
@@ -12,7 +13,7 @@ const BtnShowPassword = ({ setIsPasswordVisible }) => {
       btnRef.current.insertAdjacentHTML(
         'afterbegin',
         `<svg width="20" height="20" class=${css.eye} data-eye="opened">
-        <use href=${icons}#opened-eye></use>
+        <use href=${icons}#icon-eye-on></use>
         </svg>`
       );
       setIsPasswordVisible(true);
@@ -25,7 +26,7 @@ const BtnShowPassword = ({ setIsPasswordVisible }) => {
       btnRef.current.insertAdjacentHTML(
         'afterbegin',
         `<svg width="20" height="20" class=${css.eye} data-eye="closed">
-        <use href=${icons}#closed-eye></use>
+        <use href=${icons}#icon-eye-off></use>
         </svg>`
       );
       setIsPasswordVisible(false);
@@ -41,7 +42,7 @@ const BtnShowPassword = ({ setIsPasswordVisible }) => {
       className={css.showPwdBtn}
     >
       <svg width="20" height="20" className={css.eye} data-eye="closed">
-        <use href={`${icons}#closed-eye`}></use>
+        <use href={`${icons}#icon-eye-off`}></use>
       </svg>
     </button>
   );

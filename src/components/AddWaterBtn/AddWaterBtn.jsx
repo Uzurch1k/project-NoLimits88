@@ -1,4 +1,4 @@
-import icons from '../../img/icons/icons.svg';
+import icons from '../../img/icons/symbol.svg';
 // import css from './AddWaterBtn.module.scss';
 
 const AddWaterBtn = ({ waterClassBtn, openAddWaterModal }) => {
@@ -6,7 +6,7 @@ const AddWaterBtn = ({ waterClassBtn, openAddWaterModal }) => {
     <button className={waterClassBtn} type="button" onClick={openAddWaterModal}>
       <div>
         <svg>
-          <use href={`${icons}#plus`}></use>
+          <use href={`${icons}#icon-plus`}></use>
         </svg>
       </div>
       <span>Add water</span>
