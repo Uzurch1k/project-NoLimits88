@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import css from './WaterForm.module.scss';
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { addWaterRecord } from '../../redux/water/operations';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -69,6 +71,8 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const onSubmitHandler = data => {
     const [hours, minutes] = data.time.split(':');
     const fullDateTime = `${
@@ -80,7 +84,8 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
       date: new Date(fullDateTime).toISOString(),
     };
 
-    console.log(onSubmit(newEntry));
+    dispatch(addWaterRecord(newEntry));
+    // console.log(onSubmit(newEntry));
   };
 
   const handleTimeChange = e => {

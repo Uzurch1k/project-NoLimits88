@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { WATER_INITIAL_STATE } from './initialState';
 import {
   fetchAllWaterRecordsOfDay,
   fetchAllWaterRecordsOfMonth,
@@ -7,31 +8,24 @@ import {
   editWaterRecord,
 } from './operations';
 
-export const WATER_INITIAL_STATE = {
-  records: [],
-  loading: false,
-  error: null,
-};
-
 const isWaterPending = action =>
   typeof action.type === 'string' &&
   action.type.startsWith('water') &&
-  action.type.endWith('pending');
+  action.type.endsWith('pending');
 
 const isWaterRejected = action =>
   typeof action.type === 'string' &&
   action.type.startsWith('water') &&
-  action.type.endWith('pending');
+  action.type.endsWith('pending');
 
 const waterPending = state => {
-  console.log('here');
-  state.records = [];
+  state.recordsOfDay = [];
+  state.recordsOfMonth = [];
   state.loading = true;
   state.error = null;
 };
 
 const waterRejected = (state, action) => {
-  console.log('here2');
   state.loading = false;
   state.error = action.payload;
 };
@@ -42,30 +36,44 @@ const waterSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchAllWaterRecordsOfDay.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
+        state.waterDaily.records = action.payload;
+        state.waterDaily.isLoading = false;
+        state.waterDaily.error = null;
       })
       .addCase(fetchAllWaterRecordsOfMonth.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
+        state.waterMonthly.records = action.payload;
+        state.waterMonthly.isLoading = false;
+        state.waterMonthly.error = null;
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
+        state.waterDaily.records = [
+          ...state.waterMonthly.records,
+          action.payload,
+        ];
+        state.waterMonthly.records = [
+          ...state.waterMonthly.records,
+          action.payload,
+        ];
+        state.waterDaily.isLoading = false;
+        state.waterDaily.error = null;
+        state.waterMonthly.isLoading = false;
+        state.waterMonthly.error = null;
       })
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
-        state.records = action.payload;
+        state.waterDaily.records = state.waterDaily.records.filter(
+          record => record._id !== action.payload
+        );
+        state.waterMonthly.records = state.waterMonthly.records.filter(
+          record => record._id !== action.payload
+        );
         state.loading = false;
         state.error = null;
       })
-      .addCase(editWaterRecord.fulfilled, (state, action) => {
-        state.records = action.payload;
-        state.loading = false;
-        state.error = null;
-      })
+      // .addCase(editWaterRecord.fulfilled, (state, action) => {
+      //   state.records = action.payload;
+      //   state.loading = false;
+      //   state.error = null;
+      // })
       .addMatcher(isWaterPending, waterPending)
       .addMatcher(isWaterRejected, waterRejected);
   },
