@@ -62,11 +62,13 @@
 .timeInput {
   padding: 5px;
   font-size: 16px;
+
 }
 
 .errorMessage {
   color: red;
   font-size: 14px;
+  margin-bottom: 14px;
 }
 
 .settingsButton {
@@ -95,6 +97,12 @@
   border: 1px solid rgba(47, 47, 47, 0.15);
   padding: 14px 16px;
   margin-bottom: 24px;
+  transition: border 150ms ease-in;
+	&:hover,
+	&:focus {
+    border: 1px solid var(--rcw);
+	}
+  
 }
 .inputContainerTime {
   display: flex;
@@ -104,6 +112,7 @@
 .input:focus {
   border-color: var(--cg);
   outline: none;
+ 
 }
 
 .inputWrapper {

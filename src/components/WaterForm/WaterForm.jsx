@@ -20,7 +20,7 @@ const validationSchema = Yup.object().shape({
     .required('Time is required'),
 });
 
-const WaterForm = ({ initialData = {}, onSubmit }) => {
+const WaterForm = ({ initialData = {} }) => {
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -30,6 +30,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         minute: '2-digit',
       }),
   };
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -73,22 +74,25 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     }
   };
 
-  const dispatch = useDispatch();
   const selectedDay = useSelector(selectSelectedDay);
 
   const onSubmitHandler = data => {
-    const [hours, minutes] = data.time.split(':');
-    const fullDateTime = `${
-      selectedDay.split('T')[0]
-    }T${hours}:${minutes}:00.000Z`;
+    const submitHandler = async data => {
+      const [hours, minutes] = data.time.split(':');
+      const fullDateTime = `${
+        selectedDay.split('T')[0]
+      }T${hours}:${minutes}:00.000Z`;
 
-    const newEntry = {
-      amount: mlToDecimal(data.waterAmount),
-      date: fullDateTime,
+      const newEntry = {
+        amount: mlToDecimal(data.waterAmount),
+        date: fullDateTime,
+      };
+
+      console.log('date of new entry: ', newEntry.date);
+      // dispatch(addWaterRecord(newEntry));
+      // await dispatch(addWaterRecord(newEntry)).unwrap();
     };
-
-    dispatch(addWaterRecord(newEntry));
-    // console.log(onSubmit(newEntry));
+    submitHandler();
   };
 
   const handleTimeChange = e => {

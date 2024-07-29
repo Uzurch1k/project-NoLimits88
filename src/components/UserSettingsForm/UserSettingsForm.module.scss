@@ -29,9 +29,11 @@
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
+
 	img {
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 }
 
@@ -50,7 +52,7 @@
 	top: 2px;
 	margin-right: 8px;
 	cursor: pointer;
-	:hover {
+	&:hover {
 		color: var(--cn);
 	}
 }
@@ -88,7 +90,7 @@
 	border-radius: 15px;
 	border: 1px solid rgba(47, 47, 47, 0.15);
 	padding: 14px 16px;
-	cursor: pointer;
+	cursor: text;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: -0.01em;
@@ -99,7 +101,7 @@
 	border-radius: 15px;
 	border: 1px solid rgba(47, 47, 47, 0.15);
 	padding: 14px 16px;
-	cursor: pointer;
+	cursor: text;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: -0.01em;
@@ -111,7 +113,7 @@
 	border-radius: 15px;
 	border: 1px solid rgba(47, 47, 47, 0.15);
 	padding: 14px 16px;
-	cursor: pointer;
+	cursor: text;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: -0.01em;
@@ -230,7 +232,7 @@
 	border-radius: 15px;
 	border: 1px solid rgba(47, 47, 47, 0.15);
 	padding: 14px 16px;
-	cursor: pointer;
+	cursor: text;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: -0.01em;
@@ -286,6 +288,11 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.avatarInputLabel:hover {
+	cursor: pointer;
+}
+
 /*==========================================*/
 @media screen and (min-width: 768px) {
 	.title {
