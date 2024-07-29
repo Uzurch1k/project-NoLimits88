@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { selectUserCount } from '../../redux/auth/selectors';
 import { getUserCount } from '../../redux/auth/operations';
+import { getRandomPhotos } from '../../helpers/randomPhotos';
 
 import ava1 from '../../img/content/ava1.png';
 import ava2 from '../../img/content/ava2.png';
@@ -12,28 +13,27 @@ import css from './AdvantagesSection.module.scss';
 
 const AdvantagesSection = () => {
   const dispatch = useDispatch();
-  const userCount = useSelector(selectUserCount);
+  const { count = 0, photos = [] } = useSelector(selectUserCount) || {};
 
   useEffect(() => {
     dispatch(getUserCount());
   }, [dispatch]);
 
+  const defaultPhotos = [ava1, ava2, ava3];
+  const displayPhotos = getRandomPhotos(photos, defaultPhotos, 3);
+
   return (
     <div className={css.advantagesSection}>
       <div className={css.customers}>
         <ul className={css.customersBox}>
-          <li className={css.customerImgBox}>
-            <img className={css.customerImg} src={ava1} alt="User ava" />
-          </li>
-          <li className={css.customerImgBox}>
-            <img className={css.customerImg} src={ava2} alt="User ava" />
-          </li>
-          <li className={css.customerImgBox}>
-            <img className={css.customerImg} src={ava3} alt="User ava" />
-          </li>
+          {displayPhotos.map((photo, index) => (
+            <li key={index} className={css.customerImgBox}>
+              <img className={css.customerImg} src={photo} alt="User ava" />
+            </li>
+          ))}
         </ul>
         <p className={css.text}>
-          <span className={css.highlightedtext}>{userCount || 0} happy</span>
+          <span className={css.highlightedtext}>{count} happy</span>
           <br /> customers
         </p>
       </div>

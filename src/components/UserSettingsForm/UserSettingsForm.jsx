@@ -109,7 +109,7 @@ const UserSettingsForm = ({ onClose }) => {
     if (photoFile) {
       formData.append('photo', photoFile);
     }
-    console.log(formData);
+
     dispatch(updateUser(formData))
       .unwrap()
       .then(() => {
