@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
 
 import { convertDateToIso } from '../../helpers/convertDateToIso';
-import { selectSelectedDate } from '../../redux/water/selectors';
+import {
+  selectSelectedDay,
+  selectSelectedMonth,
+} from '../../redux/water/selectors';
 
 const Calendar = ({ currentDate }) => {
   const startDate = startOfMonth(new Date(currentDate));
@@ -20,12 +23,12 @@ const Calendar = ({ currentDate }) => {
 
   const generateRandomPercent = () => Math.floor(Math.random() * 100);
 
-  const selectedDate = useSelector(selectSelectedDate);
+  const selectedMonth = useSelector(selectSelectedMonth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllWaterRecordsOfMonth(selectedDate));
-  }, [dispatch, selectedDate]);
+    dispatch(fetchAllWaterRecordsOfMonth(selectedMonth));
+  }, [dispatch, selectedMonth]);
 
   return (
     <ul className={css.calendarWrapper}>

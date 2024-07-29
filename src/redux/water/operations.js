@@ -7,7 +7,7 @@ export const fetchAllWaterRecordsOfDay = createAsyncThunk(
   async (day, thunkAPI) => {
     try {
       const response = await axiosInstance.get(`/water/day/${day}`);
-      return response.data.data;
+      return { selectedDate: day, waterRecordsOfDay: response.data.data };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

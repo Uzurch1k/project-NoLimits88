@@ -2,32 +2,28 @@ import css from './WaterList.module.scss';
 
 import WaterItem from '../WaterItem/WaterItem';
 
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectSelectedDate,
+  selectSelectedDay,
   selectWaterRecordsOfDay,
 } from '../../redux/water/selectors';
-import { useEffect } from 'react';
 import { fetchAllWaterRecordsOfDay } from '../../redux/water/operations';
 
 const WaterList = ({ openEditWaterModal, openDeleteWaterModal }) => {
-  const selectedDate = useSelector(selectSelectedDate);
+  const selectedDay = useSelector(selectSelectedDay);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('here');
-    dispatch(fetchAllWaterRecordsOfDay(selectedDate));
-  }, [dispatch, selectedDate]);
+    dispatch(fetchAllWaterRecordsOfDay(selectedDay));
+  }, [selectedDay, dispatch]);
 
   const waterDailyRecords = useSelector(selectWaterRecordsOfDay);
+
   return (
     <div className={css.waterListSec}>
       <div className={css.waterListbody}>
         <ul className={css.waterList}>
-          {/* <WaterItem
-            openEditWaterModal={openEditWaterModal}
-            openDeleteWaterModal={openDeleteWaterModal}
-          /> */}
           {waterDailyRecords.map((record, index) => (
             <WaterItem
               key={index}

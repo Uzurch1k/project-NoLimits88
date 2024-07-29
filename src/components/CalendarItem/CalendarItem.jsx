@@ -7,7 +7,6 @@ const CalendarItem = ({ day, percent, date }) => {
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
-    console.log(date);
     dispatch(fetchAllWaterRecordsOfDay(date));
   };
 

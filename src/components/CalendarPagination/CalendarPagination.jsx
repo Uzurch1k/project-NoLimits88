@@ -2,22 +2,29 @@ import css from './CalendarPagination.module.scss';
 import icons from '../../img/icons/symbol.svg';
 import { format, addMonths, subMonths, startOfMonth } from 'date-fns';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { setMonth } from '../../redux/water/slice';
+import { useDispatch } from 'react-redux';
+import { convertDateToIso } from '../../helpers/convertDateToIso';
 
 const CalendarPagination = ({ currentDate, setCurrentDate }) => {
   const minDate = new Date('2024-01-01');
   const normalisedDate = startOfMonth(currentDate);
+
+  const dispatch = useDispatch();
 
   const handlePrevMonth = () => {
     const newMonth = subMonths(normalisedDate, 1);
     if (newMonth >= startOfMonth(minDate)) {
       setCurrentDate(newMonth);
     }
+    dispatch(setMonth(convertDateToIso(newMonth)));
   };
 
   const handleNextMonth = () => {
     if (normalisedDate < new Date()) {
       const newMonth = addMonths(normalisedDate, 1);
       setCurrentDate(newMonth);
+      dispatch(setMonth(convertDateToIso(newMonth)));
     }
   };
 
