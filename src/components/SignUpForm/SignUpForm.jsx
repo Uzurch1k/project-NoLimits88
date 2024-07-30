@@ -73,16 +73,14 @@ const SignUpForm = () => {
     setIsLoader(true);
 
     try {
-      const response = await dispatch(registerUser(userData));
-      if (response.error) throw new Error(response.payload);
+      await dispatch(registerUser(userData)).unwrap();
       toast.success('Successfully registered!');
+      reset();
     } catch (error) {
       toast.error('This email is already in use.');
     } finally {
       setIsLoader(false);
     }
-
-    reset();
   };
 
   return (

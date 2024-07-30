@@ -1,15 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setToken } from './slice';
 
-import axiosInstance from '../../helpers/axiosBase';
-
-export const setAuthHeader = token => {
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axiosInstance.defaults.headers.common.Authorization = '';
-};
+import axiosInstance, {
+  clearAuthHeader,
+  setAuthHeader,
+} from '../../helpers/axiosBase';
 
 export const setupInterceptors = store => {
   axiosInstance.interceptors.response.use(
@@ -33,8 +28,9 @@ export const setupInterceptors = store => {
 
             return axiosInstance.request(originalRequest);
           }
-        } catch (error) {
-          return Promise.reject(error);
+        } catch (refreshError) {
+          console.log('logut');
+          return Promise.reject(refreshError);
         }
       }
       return Promise.reject(error);
