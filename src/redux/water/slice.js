@@ -1,13 +1,14 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { WATER_INITIAL_STATE } from './initialState';
 import {
   fetchAllWaterRecordsOfDay,
   fetchAllWaterRecordsOfMonth,
   addWaterRecord,
   deleteWaterRecord,
-  editWaterRecord,
+  // editWaterRecord,
 } from './operations';
 import { TODAY } from '../../constants/time';
+import { calculateWaterDrunkPerDay } from '../../helpers/calculateWaterDrunkPerDay';
 
 const isWaterRejected = action =>
   typeof action.type === 'string' &&
@@ -37,13 +38,12 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllWaterRecordsOfDay.fulfilled, (state, action) => {
-        const amountOfWaterDrunkPerDay =
-          action.payload.waterRecordsOfDay.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
+        const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+          action.payload.waterRecordsOfDay
+        );
 
         state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
         state.waterDaily.records = action.payload.waterRecordsOfDay;
         state.selectedDay = action.payload.selectedDate;
         state.waterDaily.isLoading = false;
@@ -56,10 +56,10 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllWaterRecordsOfMonth.fulfilled, (state, action) => {
-        const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-          (totalAmount, record) => totalAmount + record.amount,
-          0
+        const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+          state.waterDaily.records
         );
+
         state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
 
         state.waterMonthly.records = action.payload;
@@ -76,18 +76,6 @@ const waterSlice = createSlice({
           state.selectedMonth.slice(0, 7)
         );
         if (isRecordToday && isRecordInCurrentMonth) {
-          console.log('current day, and current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => {
-              console.log(record.amount + totalAmount);
-              totalAmount + record.amount;
-            },
-            0
-          );
-          console.log(amountOfWaterDrunkPerDay);
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = [
             ...state.waterDaily.records,
             action.payload,
@@ -96,19 +84,18 @@ const waterSlice = createSlice({
             ...state.waterMonthly.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (!isRecordToday && isRecordInCurrentMonth) {
-          console.log('not current day, and current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = [
             ...state.waterDaily.records,
             action.payload,
@@ -117,40 +104,45 @@ const waterSlice = createSlice({
             ...state.waterMonthly.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (isRecordToday && !isRecordInCurrentMonth) {
-          console.log('current day, not current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = [
             ...state.waterDaily.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (!isRecordToday && !isRecordInCurrentMonth) {
-          console.log('not current day, record not in current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = [
             ...state.waterDaily.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -170,71 +162,65 @@ const waterSlice = createSlice({
           state.selectedMonth.slice(0, 7)
         );
         if (isRecordToday && isRecordInCurrentMonth) {
-          console.log('current day, and current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload
           );
           state.waterMonthly.records = state.waterMonthly.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (!isRecordToday && isRecordInCurrentMonth) {
-          console.log('not current day, and current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload
           );
           state.waterMonthly.records = state.waterMonthly.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (isRecordToday && !isRecordInCurrentMonth) {
-          console.log('current day, and not current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
         }
         if (!isRecordToday && !isRecordInCurrentMonth) {
-          console.log('not current day, and not current month');
-
-          const amountOfWaterDrunkPerDay = state.waterDaily.records.reduce(
-            (totalAmount, record) => totalAmount + record.amount,
-            0
-          );
-          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
           state.waterDaily.isLoading = false;
           state.error = null;
           return;

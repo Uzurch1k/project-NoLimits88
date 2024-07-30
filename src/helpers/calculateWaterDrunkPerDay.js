@@ -1,16 +1,9 @@
-const calculateWaterDrunkPerDay = records => {
+export const calculateWaterDrunkPerDay = records => {
   let totalAmount = 0;
 
-  for (let i = 0; i <= records; i += 1) {
+  for (let i = 0; i < records.length; i += 1) {
     totalAmount += records[i].amount;
   }
 
-  return totalAmount;
+  return Number(totalAmount.toFixed(2));
 };
-
-const someWater = [
-  { id: '1', amount: 0.2 },
-  { id: '2', amount: 0.4 },
-];
-
-console.log(calculateWaterDrunkPerDay(someWater));

@@ -11,8 +11,6 @@ import WaterModal from '../../components/WaterModal/WaterModal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 
 import css from './TrackerPage.module.scss';
-import { useDispatch } from 'react-redux';
-import { deleteWaterRecord } from '../../redux/water/operations';
 
 const TrackerPage = () => {
   const [modals, setModals] = useState({
@@ -35,12 +33,6 @@ const TrackerPage = () => {
         ...prev,
       })
     );
-
-  const dispatch = useDispatch();
-
-  const handleOnClick = () => {
-    dispatch(deleteWaterRecord('66a8b4469b6dc1f54d6cd53d'));
-  };
 
   return (
     <div className={css.body}>
@@ -92,7 +84,6 @@ const TrackerPage = () => {
       >
         <DeleteWaterModal onClose={() => closeModal('deletewater')} />
       </BaseModal>
-      <button onClick={handleOnClick}>Delete water</button>
     </div>
   );
 };
