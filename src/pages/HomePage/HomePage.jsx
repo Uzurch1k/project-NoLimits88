@@ -1,4 +1,4 @@
-import { useSpring, animated } from '@react-spring/web';
+import { useEffect, useState } from 'react';
 
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
 import Section from '../../components/Layout/Section/Section';
@@ -6,33 +6,34 @@ import WelcomeSection from '../../components/WelcomeSection/WelcomeSection';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import Logo from '../../components/Logo/Logo';
 
+import clsx from 'clsx';
 import css from './HomePage.module.scss';
 
 const HomePage = () => {
-  const animationPropsLaft = useSpring({
-    from: { opacity: 0, transform: 'translateX(20px)' },
-    to: { opacity: 1, transform: 'translateX(0px)' },
-    config: { duration: 250 },
-  });
+  const [isVisible, setIsVisible] = useState(false);
 
-  const animationPropsRight = useSpring({
-    from: { opacity: 0, transform: 'translateX(-20px)' },
-    to: { opacity: 1, transform: 'translateX(0px)' },
-    config: { duration: 250 },
-  });
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
     <div className={css.body}>
       <DocumentTitle>Home</DocumentTitle>
       <Section>
-        <animated.div style={animationPropsLaft} className={css.wrapp}>
+        <div
+          className={clsx(css.wrapp, css.blockLaft, {
+            [css.animationLaft]: isVisible,
+          })}
+        >
           <Logo />
           <WelcomeSection />
-        </animated.div>
+        </div>
 
-        <animated.div style={animationPropsRight}>
+        <div
+          className={clsx(css.blockRight, { [css.animationRight]: isVisible })}
+        >
           <AdvantagesSection />
-        </animated.div>
+        </div>
       </Section>
     </div>
   );
