@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +9,10 @@ import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
 
 import { addWaterRecord, editWaterRecord } from '../../redux/water/operations';
-import { selectSelectedDay } from '../../redux/water/selectors';
+import {
+  selectSelectedDay,
+  selectWaterRecordsOfDay,
+} from '../../redux/water/selectors';
 
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
@@ -23,7 +27,11 @@ const validationSchema = Yup.object().shape({
     .required('Time is required'),
 });
 
-const WaterForm = ({ initialData = {}, onClose }) => {
+const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
+  const dispatch = useDispatch();
+  const waterRecords = useSelector(selectWaterRecordsOfDay);
+  const selectedDay = useSelector(selectSelectedDay);
+
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -33,21 +41,18 @@ const WaterForm = ({ initialData = {}, onClose }) => {
         minute: '2-digit',
       }),
   };
-  const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    /*getValues,*/
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues,
   });
 
-  // Стеження за змінами води
   const waterAmount = useWatch({ control, name: 'waterAmount' });
 
   const mlToDecimal = ml => parseFloat((ml / 1000).toFixed(3));
@@ -77,23 +82,25 @@ const WaterForm = ({ initialData = {}, onClose }) => {
     }
   };
 
-  const selectedDay = useSelector(selectSelectedDay);
-
   const onSubmitHandler = data => {
-    const submitHandler = async () => {
-      const [hours, minutes] = data.time.split(':');
-      const fullDateTime = `${
-        selectedDay.split('T')[0]
-      }T${hours}:${minutes}:00.000Z`;
+    const [hours, minutes] = data.time.split(':');
+    const fullDateTime = `${
+      selectedDay.split('T')[0]
+    }T${hours}:${minutes}:00.000Z`;
 
-      const newEntry = {
-        amount: mlToDecimal(data.waterAmount),
-        date: fullDateTime,
-      };
-
-      await dispatch(addWaterRecord(newEntry)).unwrap();
+    const newEntry = {
+      amount: mlToDecimal(data.waterAmount),
+      date: fullDateTime,
     };
-    submitHandler();
+
+    console.log(newEntry);
+
+    if (idWaterItem) {
+      dispatch(editWaterRecord({ newEntry, id: idWaterItem })).unwrap();
+    } else {
+      dispatch(addWaterRecord(newEntry)).unwrap();
+    }
+
     onClose();
   };
 
@@ -103,6 +110,19 @@ const WaterForm = ({ initialData = {}, onClose }) => {
       setValue('time', value);
     }
   };
+
+  useEffect(() => {
+    if (idWaterItem) {
+      const waterItem = waterRecords.find(item => item._id === idWaterItem);
+      if (waterItem) {
+        setValue('waterAmount', waterItem.amount * 1000);
+        const date = new Date(waterItem.date);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        setValue('time', `${hours}:${minutes}`);
+      }
+    }
+  }, [idWaterItem, waterRecords, setValue]);
 
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
@@ -142,7 +162,6 @@ const WaterForm = ({ initialData = {}, onClose }) => {
           {...register('time')}
           onChange={handleTimeChange}
         />
-
         {errors.time && (
           <span className={css.errorMessage}>{errors.time.message}</span>
         )}
@@ -166,7 +185,7 @@ const WaterForm = ({ initialData = {}, onClose }) => {
         )}
       </div>
       <button className={clsx(css.settingsButton, 'btn-def')} type="submit">
-        Save
+        {idWaterItem ? 'Update' : 'Add'}
       </button>
     </form>
   );
