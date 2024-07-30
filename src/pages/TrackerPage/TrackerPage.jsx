@@ -77,6 +77,7 @@ const TrackerPage = () => {
           onAddWater={modals.addWater}
           onEditWater={modals.editWater}
           onClose={() => closeMultipleModals('addWater', 'editWater')}
+          idWaterItem={idWaterItem}
         />
       </BaseModal>
 
