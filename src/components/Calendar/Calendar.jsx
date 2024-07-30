@@ -8,16 +8,22 @@ import {
 } from 'date-fns';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
+import {
+  fetchAllWaterRecordsOfMonth,
+  fetchAllWaterRecordsOfDay,
+} from '../../redux/water/operations';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
 import { selectUser } from '../../redux/auth/selectors';
 import {
   selectSelectedDay,
   selectSelectedMonth,
   selectWaterRecordsOfMonth,
+  selectSelectedDay,
 } from '../../redux/water/selectors';
+import { setSelectedDay } from '../../redux/water/slice';
 
 const Calendar = ({ currentDate }) => {
+  const selectedDay = useSelector(selectSelectedDay);
   const dispatch = useDispatch();
 
   const selectedMonth = useSelector(selectSelectedMonth);
@@ -37,6 +43,12 @@ const Calendar = ({ currentDate }) => {
     dispatch(fetchAllWaterRecordsOfMonth(selectedMonth));
   }, [dispatch, selectedMonth]);
 
+  useEffect(() => {
+    if (selectedDay) {
+      dispatch(fetchAllWaterRecordsOfDay(selectedDay));
+    }
+  }, [dispatch, selectedDay]);
+
   const getDayData = day => {
     return allRecordsOfMonth.filter(record => {
       const recordDate = new Date(record.date);
@@ -54,6 +66,11 @@ const Calendar = ({ currentDate }) => {
     return dailyGoal ? Math.round((totalAmount / dailyGoal) * 100) : 0;
   };
 
+  const handleDayClick = day => {
+    const isoDate = convertDateToIso(day);
+    dispatch(setSelectedDay(isoDate));
+  };
+
   return (
     <ul className={css.calendarWrapper}>
       {month.map(item => (
@@ -62,7 +79,8 @@ const Calendar = ({ currentDate }) => {
           day={item.getDate()}
           percent={calculatePercent(item)}
           date={convertDateToIso(item)}
-          isSelected={convertDateToIso(item) === waterOfDay}
+          onClick={() => handleDayClick(item)}
+          isSelected={convertDateToIso(item) === selectedDay}
         />
       ))}
     </ul>

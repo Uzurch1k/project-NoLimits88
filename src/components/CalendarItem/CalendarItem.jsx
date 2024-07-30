@@ -3,16 +3,14 @@ import css from './CalendarItem.module.scss';
 import { useDispatch } from 'react-redux';
 import { fetchAllWaterRecordsOfDay } from '../../redux/water/operations';
 
-const CalendarItem = ({ day, percent, date, isSelected }) => {
+const CalendarItem = ({ day, percent, date, onClick, isSelected }) => {
   const dispatch = useDispatch();
 
   const selectedDate = new Date(date);
   const today = new Date();
 
   const handleOnClick = () => {
-    if (selectedDate > today) {
-      return;
-    }
+    onClick();
     dispatch(fetchAllWaterRecordsOfDay(date));
   };
 
