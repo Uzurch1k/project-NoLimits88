@@ -237,8 +237,6 @@ const waterSlice = createSlice({
           state.selectedMonth.slice(0, 7)
         );
         if (isRecordToday && isRecordInCurrentMonth) {
-          console.log('current day, current month');
-
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload._id
           );
@@ -265,7 +263,6 @@ const waterSlice = createSlice({
           return;
         }
         if (!isRecordToday && isRecordInCurrentMonth) {
-          console.log('not current day, current month');
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload._id
           );
