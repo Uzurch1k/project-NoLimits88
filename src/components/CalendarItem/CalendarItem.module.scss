@@ -40,7 +40,6 @@
 		background-color: var(--rck);
 	}
 
-	// Переміщення .btnSelectedDate сюди
 	.btnSelectedDate {
 		background-color: var(--cy);
 		color: var(--cg);
@@ -54,7 +53,7 @@
 	}
 
 	.percent {
-		color: rgba(47, 47, 47, 0.6);
+		color: var(--rcg);
 		font-size: 10px;
 		line-height: 1;
 	}
