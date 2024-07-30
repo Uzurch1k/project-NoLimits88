@@ -54,8 +54,10 @@ export const editWaterRecord = createAsyncThunk(
   async (recordData, thunkAPI) => {
     const entry = { amount: recordData.amount, date: recordData.date };
     try {
-      await axiosInstance.put(`/water/${recordData.id}`, entry);
-      const response = await axiosInstance.get(`water/${entry.date}`);
+      const response = await axiosInstance.put(
+        `/water/${recordData.id}`,
+        entry
+      );
       return response.data.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
