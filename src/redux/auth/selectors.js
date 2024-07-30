@@ -6,3 +6,4 @@ export const selectToken = state => state.auth.token;
 export const selectRefreshToken = state => state.auth.refreshToken;
 
 export const selectUserCount = state => state.auth.userCount;
+export const selectUserDailyNorma = state => state.auth.user.amountOfWater;
