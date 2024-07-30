@@ -36,6 +36,7 @@
 		letter-spacing: -0.01em;
 		border-radius: 15px;
 		padding: 16px;
+		transition: border-color 150ms ease-in;
 	}
 	.inputBaseStyles:hover,
 	.inputBaseStyles:focus {
@@ -53,16 +54,18 @@
 	.emailInput {
 		@extend .inputBaseStyles;
 		margin-bottom: 16px;
-		transition: border 150ms ease-in;
+		transition: all 150ms ease-in;
 		&:focus {
 			border: 1px solid var(--rcw);
+			box-shadow: 0px 5px 14px -9px rgba(66, 68, 90, 1);
 		}
 	}
 	.passwordInput {
 		@extend .inputBaseStyles;
-		transition: border 150ms ease-in;
+		transition: all 150ms ease-in;
 		&:focus {
 			border: 1px solid var(--rcw);
+			box-shadow: 0px 5px 14px -9px rgba(66, 68, 90, 1);
 		}
 	}
 	.errorInput {

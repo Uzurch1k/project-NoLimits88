@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
+
 import { FaExclamation } from 'react-icons/fa6';
-import { FiUpload } from 'react-icons/fi';
+
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { selectUser } from '../../redux/auth/selectors';
 import { updateUser } from '../../redux/auth/operations';
+
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+
 import defaultAvatar from '../../img/content/default avatar.png';
+import icons from '../../img/icons/symbol.svg';
 
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
@@ -142,7 +147,9 @@ const UserSettingsForm = ({ onClose }) => {
             id="photo"
           />
           <label htmlFor="photo" className={css.avatarInputLabel}>
-            <FiUpload className={css.uplIcon} />
+            <svg className={css.uplIcon} width="18" height="18">
+              <use href={`${icons}#icon-upload`}></use>
+            </svg>
             Upload a photo
           </label>
         </div>
@@ -247,8 +254,10 @@ const UserSettingsForm = ({ onClose }) => {
                     must set 0)
                   </p>
                   <span className={`${css.text} ${css.activeTime}`}>
-                    <FaExclamation size={18} color="#9BE1A0" /> Active time in
-                    hours
+                    <svg className={css.exclamationIcon} width="22" height="22">
+                      <use href={`${icons}#icon-exclamation`}></use>
+                    </svg>
+                    Active time in hours
                   </span>
                 </div>
               </div>
