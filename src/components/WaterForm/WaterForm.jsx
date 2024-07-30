@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,7 +26,7 @@ const validationSchema = Yup.object().shape({
     .required('Time is required'),
 });
 
-const WaterForm = ({ initialData = {} }) => {
+const WaterForm = ({ initialData = {}, onClose }) => {
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -99,6 +98,7 @@ const WaterForm = ({ initialData = {} }) => {
       // await dispatch(addWaterRecord(newEntry)).unwrap();
     };
     submitHandler();
+    onClose();
   };
 
   const handleTimeChange = e => {

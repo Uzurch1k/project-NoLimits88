@@ -1,7 +1,7 @@
 import WaterForm from '../WaterForm/WaterForm';
 import css from './WaterModal.module.scss';
 
-const WaterModal = ({ onAddWater, onEditWater }) => {
+const WaterModal = ({ onAddWater, onEditWater, onClose }) => {
   const getTitleAndSubtitle = () => {
     if (onAddWater) {
       return {
@@ -27,7 +27,7 @@ const WaterModal = ({ onAddWater, onEditWater }) => {
     <div>
       <h2 className={css.titleModal}>{title}</h2>
       <p className={css.subtitleModal}>{subtitle}</p>
-      <WaterForm />
+      <WaterForm onClose={onClose} />
     </div>
   );
 };
