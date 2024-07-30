@@ -1,14 +1,27 @@
 import css from './Calendar.module.scss';
-
 import CalendarItem from '../CalendarItem/CalendarItem';
-import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
+import {
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  isSameDay,
+} from 'date-fns';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
-import { selectSelectedMonth } from '../../redux/water/selectors';
+import { selectUser } from '../../redux/auth/selectors';
+import {
+  selectSelectedMonth,
+  selectWaterRecordsOfMonth,
+} from '../../redux/water/selectors';
 
 const Calendar = ({ currentDate }) => {
+  const selectedMonth = useSelector(selectSelectedMonth);
+  const allRecordsOfMonth = useSelector(selectWaterRecordsOfMonth);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
   const startDate = startOfMonth(new Date(currentDate));
   const endDate = endOfMonth(new Date(currentDate));
 
@@ -17,23 +30,35 @@ const Calendar = ({ currentDate }) => {
     end: endDate,
   });
 
-  const generateRandomPercent = () => Math.floor(Math.random() * 100);
-
-  const selectedMonth = useSelector(selectSelectedMonth);
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchAllWaterRecordsOfMonth(selectedMonth));
   }, [dispatch, selectedMonth]);
 
+ const getDayData = day => {
+   return allRecordsOfMonth.filter(record => {
+     const recordDate = new Date(record.date);
+     return isSameDay(day, recordDate);
+   });
+ };
+
+ const calculatePercent = day => {
+   const records = getDayData(day);
+   const dailyGoal = user.amountOfWater;
+   const totalAmount = records.reduce(
+     (total, record) => total + record.amount,
+     0
+   );
+   return dailyGoal ? Math.round((totalAmount / dailyGoal) * 100) : 0;
+ };
+
   return (
     <ul className={css.calendarWrapper}>
-      {month.map((day, index) => (
+      {month.map(day => (
         <li key={day} className={css.calendarItem}>
           <CalendarItem
             day={day.getDate()}
-            percent={generateRandomPercent()}
-            date={convertDateToIso(month[index])}
+            percent={calculatePercent(day)}
+            date={convertDateToIso(day)}
           />
         </li>
       ))}
