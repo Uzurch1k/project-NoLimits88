@@ -104,7 +104,7 @@
 	margin-bottom: 14px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.15);
+	border: 1px solid var(--rcp);
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -116,7 +116,7 @@
 .input {
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.15);
+	border: 1px solid var(--rcp);
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -129,7 +129,7 @@
 	margin-top: 8px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.15);
+	border: 1px solid var(--rcp);
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -230,11 +230,11 @@
 
 .normaTextArea {
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.15);
+	border: 1px solid var(--rcp);
 	padding: 16px;
 	margin-bottom: 14px;
 	text-align: justify;
-	color: rgba(47, 47, 47, 0.6);
+	color: var(--rcb);
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: -0.01em;
@@ -251,7 +251,7 @@
 	margin-bottom: 14px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid rgba(47, 47, 47, 0.15);
+	border: 1px solid var(--rcp);
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -312,7 +312,7 @@
 .exclamationIcon {
 	width: 22px;
 	height: 22px;
-	fill: #9be1a0;
+	fill: var(--cg);
 }
 
 /*==========================================*/

@@ -12,15 +12,18 @@ import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
 import { selectUser } from '../../redux/auth/selectors';
 import {
+  selectSelectedDay,
   selectSelectedMonth,
   selectWaterRecordsOfMonth,
 } from '../../redux/water/selectors';
 
 const Calendar = ({ currentDate }) => {
+  const dispatch = useDispatch();
+
   const selectedMonth = useSelector(selectSelectedMonth);
   const allRecordsOfMonth = useSelector(selectWaterRecordsOfMonth);
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+  const waterOfDay = useSelector(selectSelectedDay);
 
   const startDate = startOfMonth(new Date(currentDate));
   const endDate = endOfMonth(new Date(currentDate));
@@ -59,6 +62,7 @@ const Calendar = ({ currentDate }) => {
           day={item.getDate()}
           percent={calculatePercent(item)}
           date={convertDateToIso(item)}
+          isSelected={convertDateToIso(item) === waterOfDay}
         />
       ))}
     </ul>

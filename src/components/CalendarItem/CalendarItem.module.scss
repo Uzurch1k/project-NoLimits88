@@ -31,12 +31,12 @@
 			color: var(--cy);
 		}
 	}
-	// .btnSelectedDate {
-	// 	background-color: var(--rcl);
-	// 	color: var(--cg);
-	// }
 	.btnNot100Percent {
 		background-color: var(--rck);
+	}
+	.btnSelectedDate {
+		background-color: var(--rcl);
+		color: var(--cg);
 	}
 	.day {
 		font-size: 14px;
@@ -45,7 +45,7 @@
 		letter-spacing: -0.01em;
 	}
 	.percent {
-		color: rgba(47, 47, 47, 0.6);
+		color: var(--rcg);
 		font-size: 10px;
 		line-height: 1;
 	}
