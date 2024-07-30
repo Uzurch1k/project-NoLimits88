@@ -1,49 +1,49 @@
 html,
 body {
-	font-family: var(--ff1);
-	color: var(--cy);
-	font-size: 14px;
-	line-height: 1.29;
-	background-color: var(--cw);
+  font-family: var(--ff1);
+  color: var(--cy);
+  font-size: 14px;
+  line-height: 1.29;
+  background-color: var(--cw);
 }
 
 .wrapper {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	max-width: 375px;
-	padding: 16px;
-	margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 375px;
+  padding: 16px;
+  margin: 0 auto;
 }
 
 /* --------- Adaptive tablet (768px) --------- */
 
 @media screen and (min-width: 768px) {
-	html,
-	body {
-		font-size: 16px;
-		line-height: 1.5;
-	}
+  html,
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 
-	.container {
-		max-width: 768px;
-		padding: 32px;
-	}
+  .container {
+    max-width: 768px;
+    padding: 32px;
+  }
 }
 
 /* --------- Adaptive desktop (1440px) --------- */
 
 @media screen and (min-width: 1440px) {
-	.container {
-		max-width: 1440px;
-	}
+  .container {
+    max-width: 1440px;
+  }
 }

@@ -19,37 +19,6 @@ import clsx from 'clsx';
 
 const SignUpForm = () => {
   const { t } = useTranslation();
-  const loginSchema = yup.object().shape({
-    email: yup
-      .string(t('signUpPage.emailSpanError'))
-      .required(t('signUpPage.emailSpanError'))
-      .email(t('signUpPage.emailSpanError'))
-      .test(
-        'isValidAfterSign',
-        t('signUpPage.emailSpanError'),
-        function (email) {
-          const strAfterEmailSign = email.slice(email.indexOf('@'));
-          return (
-            !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.')
-          );
-        }
-      ),
-    password: yup
-      .string()
-      .required(t('signUpPage.passwordSpanError'))
-      .min(6, t('signUpPage.passwordSpanError'))
-      .max(28, t('signUpPage.passwordSpanError'))
-      .matches(/\d/, t('signUpPage.passwordSpanError'))
-      .matches(/[a-zA-Z]/, t('signUpPage.passwordSpanError')),
-    repeatPassword: yup
-      .string()
-      .oneOf(
-        [yup.ref('password'), null],
-        t('signUpPage.repeatPasswordpanErrorTwo')
-      )
-      .required(t('signUpPage.repeatPasswordpanError')),
-  });
-
   const {
     register,
     handleSubmit,
@@ -185,7 +154,7 @@ const SignUpForm = () => {
             type={isRepeatPasswordVisible ? 'text' : 'password'}
             id={fieldRepeatPasswordId}
             {...register('repeatPassword')}
-            placeholder={t('signUpPage.repeatPasswordPlaceholder')}
+            placeholder={t('signUpPage.repeatPassword')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.repeatPassword,

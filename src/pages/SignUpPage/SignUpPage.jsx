@@ -14,8 +14,10 @@ const SignUpPage = () => {
   return (
     <div className={css.body}>
       <DocumentTitle>{t('page.signUp')}</DocumentTitle>
-      <Languages />
+
       <Section>
+        <Languages />
+
         <SignSection>
           <Logo />
           <SignUpForm />

@@ -1,19 +1,20 @@
 .languages {
   display: flex;
   gap: 5px;
-  margin-right: 10px;
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  z-index: 1000;
 }
 
 .languageBtn {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
-
   background-color: transparent;
   border: none;
+  cursor: pointer;
   transform: scale(1);
-
-  transition: transform var(--animation);
+  transition: transform var(--animation, 0.2s ease-in-out);
 }
 
 .languageBtn:hover,
@@ -21,11 +22,16 @@
   transform: scale(1.2);
 }
 
-@media (min-width: 768px) {
-  .languages {
-    margin-right: 15px;
-  }
+.iconFlag {
+  width: 18px;
+  height: 18px;
+}
 
+.line {
+  font-size: 18px;
+}
+
+@media (min-width: 768px) {
   .iconFlag {
     width: 24px;
     height: 24px;
@@ -37,10 +43,6 @@
 }
 
 @media (min-width: 1440px) {
-  .languages {
-    margin-right: 25px;
-  }
-
   .iconFlag {
     width: 30px;
     height: 30px;
