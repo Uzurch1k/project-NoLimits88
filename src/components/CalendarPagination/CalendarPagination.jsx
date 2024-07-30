@@ -58,7 +58,7 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
                 exitActive: css.dateTitleExitActive,
               }}
             >
-              <div className={css.dateTitle}>
+              <div ref={nodeRef} className={css.dateTitle}>
                 <p>{format(currentDate, 'MMM,')}</p>
                 <p>{format(currentDate, 'yyyy')}</p>
               </div>
