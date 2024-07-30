@@ -7,6 +7,7 @@
 	flex-direction: column;
 	gap: 6px;
 	align-items: center;
+
 	.btn100Percent {
 		width: 28px;
 		height: 28px;
@@ -16,34 +17,41 @@
 		justify-content: center;
 		transition: all 100ms ease-in-out;
 		background-color: var(--cw);
+
 		&:hover,
 		&:focus {
 			background-color: var(--rcl);
 			color: var(--cg);
 		}
 	}
+
 	.btnDisabled {
 		cursor: not-allowed;
 		opacity: 0.5;
+
 		&:hover,
 		&:focus {
 			background-color: var(--rck);
 			color: var(--cy);
 		}
 	}
+
 	.btnNot100Percent {
 		background-color: var(--rck);
 	}
+
 	.btnSelectedDate {
-		background-color: var(--rcl);
+		background-color: var(--cy);
 		color: var(--cg);
 	}
+
 	.day {
 		font-size: 14px;
 		font-weight: 700;
 		line-height: 1.28;
 		letter-spacing: -0.01em;
 	}
+
 	.percent {
 		color: var(--rcg);
 		font-size: 10px;
@@ -58,14 +66,17 @@
 
 	.btnDayWrapper {
 		gap: 4px;
+
 		.btn100Percent {
 			width: 38px;
 			height: 38px;
 		}
+
 		.day {
 			font-size: 16px;
 			line-height: 1.5;
 		}
+
 		.percent {
 			font-size: 12px;
 			line-height: 1.83;
