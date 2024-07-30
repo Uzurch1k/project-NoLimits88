@@ -5,9 +5,10 @@ import {
   fetchAllWaterRecordsOfMonth,
   addWaterRecord,
   deleteWaterRecord,
-  editWaterRecord,
+  // editWaterRecord,
 } from './operations';
 import { TODAY } from '../../constants/time';
+import { calculateWaterDrunkPerDay } from '../../helpers/calculateWaterDrunkPerDay';
 
 const isWaterRejected = action =>
   typeof action.type === 'string' &&
@@ -37,12 +38,12 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllWaterRecordsOfDay.fulfilled, (state, action) => {
-        const amountOfWaterDrunkPerDay =
-          action.payload.waterRecordsOfDay.reduce(
-            (amount, record) => amount + record.amount,
-            0
-          );
+        const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+          action.payload.waterRecordsOfDay
+        );
+
         state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
         state.waterDaily.records = action.payload.waterRecordsOfDay;
         state.selectedDay = action.payload.selectedDate;
         state.waterDaily.isLoading = false;
@@ -55,6 +56,12 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllWaterRecordsOfMonth.fulfilled, (state, action) => {
+        const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+          state.waterDaily.records
+        );
+
+        state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
         state.waterMonthly.records = action.payload;
         state.waterMonthly.isLoading = false;
         state.error = null;
@@ -66,7 +73,7 @@ const waterSlice = createSlice({
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         const isRecordToday = action.payload.date.startsWith(TODAY.slice(0, 9));
         const isRecordInCurrentMonth = action.payload.date.startsWith(
-          state.selectedMonth.slice(0, 6)
+          state.selectedMonth.slice(0, 7)
         );
         if (isRecordToday && isRecordInCurrentMonth) {
           state.waterDaily.records = [
@@ -77,6 +84,13 @@ const waterSlice = createSlice({
             ...state.waterMonthly.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -90,6 +104,29 @@ const waterSlice = createSlice({
             ...state.waterMonthly.records,
             action.payload,
           ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+        if (isRecordToday && !isRecordInCurrentMonth) {
+          state.waterDaily.records = [
+            ...state.waterDaily.records,
+            action.payload,
+          ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -99,7 +136,13 @@ const waterSlice = createSlice({
             ...state.waterDaily.records,
             action.payload,
           ];
-          state.waterMonthly.records = [...state.waterMonthly.records];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -116,7 +159,7 @@ const waterSlice = createSlice({
 
         const isRecordToday = recordDate.date.startsWith(TODAY.slice(0, 9));
         const isRecordInCurrentMonth = recordDate.date.startsWith(
-          state.selectedMonth.slice(0, 6)
+          state.selectedMonth.slice(0, 7)
         );
         if (isRecordToday && isRecordInCurrentMonth) {
           state.waterDaily.records = state.waterDaily.records.filter(
@@ -125,6 +168,13 @@ const waterSlice = createSlice({
           state.waterMonthly.records = state.waterMonthly.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -136,6 +186,27 @@ const waterSlice = createSlice({
           state.waterMonthly.records = state.waterMonthly.records.filter(
             record => record._id !== action.payload
           );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+        if (isRecordToday && !isRecordInCurrentMonth) {
+          state.waterDaily.records = state.waterDaily.records.filter(
+            record => record._id !== action.payload
+          );
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
           state.waterDaily.isLoading = false;
           state.error = null;
           return;
@@ -144,7 +215,12 @@ const waterSlice = createSlice({
           state.waterDaily.records = state.waterDaily.records.filter(
             record => record._id !== action.payload
           );
-          // state.waterMonthly.records = [...state.waterMonthly.records];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
           state.waterDaily.isLoading = false;
           state.error = null;
           return;

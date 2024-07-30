@@ -10,3 +10,5 @@ export const selectMonthlyWaterLoading = state =>
 export const selectWaterError = state => state.water.error;
 export const selectSelectedDay = state => state.water.selectedDay;
 export const selectSelectedMonth = state => state.water.selectedMonth;
+export const selectTotalAmountOfWaterDrunkPerDay = state =>
+  state.water.waterDrunkPerDay;
