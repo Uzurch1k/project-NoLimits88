@@ -10,6 +10,8 @@ import {
 import { TODAY } from '../../constants/time';
 import { calculateWaterDrunkPerDay } from '../../helpers/calculateWaterDrunkPerDay';
 
+const storedSelectedDay = localStorage.getItem('selectedDay') || TODAY;
+
 const isWaterRejected = action =>
   typeof action.type === 'string' &&
   action.type.startsWith('water') &&
@@ -23,10 +25,17 @@ const waterRejected = (state, action) => {
 
 const waterSlice = createSlice({
   name: 'water',
-  initialState: WATER_INITIAL_STATE,
+  initialState: {
+    ...WATER_INITIAL_STATE,
+    selectedDay: storedSelectedDay,
+  },
   reducers: {
     setMonth(state, action) {
       state.selectedMonth = action.payload;
+    },
+    setSelectedDay(state, action) {
+      state.selectedDay = action.payload;
+      localStorage.setItem('selectedDay', action.payload); 
     },
   },
   extraReducers: builder => {
@@ -46,6 +55,7 @@ const waterSlice = createSlice({
 
         state.waterDaily.records = action.payload.waterRecordsOfDay;
         state.selectedDay = action.payload.selectedDate;
+        localStorage.setItem('selectedDay', action.payload.selectedDate);
         state.waterDaily.isLoading = false;
         state.error = null;
       })
@@ -334,4 +344,4 @@ const waterSlice = createSlice({
 });
 
 export const waterReducer = waterSlice.reducer;
-export const { setMonth } = waterSlice.actions;
+export const { setMonth, setSelectedDay } = waterSlice.actions;
