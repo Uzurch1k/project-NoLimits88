@@ -7,6 +7,14 @@ const CalendarItem = ({ day, percent, date }) => {
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
+    const selectedDate = new Date(date);
+    const today = new Date();
+
+    if (selectedDate > today) {
+      alert("Can't get water from the future.");
+      return;
+    }
+
     dispatch(fetchAllWaterRecordsOfDay(date));
   };
 

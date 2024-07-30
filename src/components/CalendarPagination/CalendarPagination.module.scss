@@ -100,22 +100,22 @@
 
 .dateTitleEnter {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateY(20px);
 }
 
 .dateTitleEnterActive {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
   transition: all 200ms ease-in-out;
 }
 
 .dateTitleExit {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .dateTitleExitActive {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateY(-20px);
   transition: all 200ms ease-in-out;
 }
