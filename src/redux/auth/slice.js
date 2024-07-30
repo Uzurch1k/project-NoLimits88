@@ -50,6 +50,7 @@ const authSlice = createSlice({
         state.token = null;
         state.refreshToken = null;
         state.isLoggedIn = false;
+        state.selectedDay = null;
       })
 
       .addCase(refreshUser.pending, state => {

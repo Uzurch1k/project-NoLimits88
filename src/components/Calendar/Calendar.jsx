@@ -8,10 +8,7 @@ import {
 } from 'date-fns';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchAllWaterRecordsOfMonth,
-  fetchAllWaterRecordsOfDay,
-} from '../../redux/water/operations';
+import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
 import { selectUser } from '../../redux/auth/selectors';
 import {
@@ -19,16 +16,14 @@ import {
   selectSelectedMonth,
   selectWaterRecordsOfMonth,
 } from '../../redux/water/selectors';
-import { setSelectedDay } from '../../redux/water/slice';
 
 const Calendar = ({ currentDate }) => {
-  const selectedDay = useSelector(selectSelectedDay);
   const dispatch = useDispatch();
 
   const selectedMonth = useSelector(selectSelectedMonth);
   const allRecordsOfMonth = useSelector(selectWaterRecordsOfMonth);
   const user = useSelector(selectUser);
-  const waterOfDay = useSelector(selectSelectedDay);
+  const selectedDay = useSelector(selectSelectedDay);
 
   const startDate = startOfMonth(new Date(currentDate));
   const endDate = endOfMonth(new Date(currentDate));
@@ -41,12 +36,6 @@ const Calendar = ({ currentDate }) => {
   useEffect(() => {
     dispatch(fetchAllWaterRecordsOfMonth(selectedMonth));
   }, [dispatch, selectedMonth]);
-
-  useEffect(() => {
-    if (selectedDay) {
-      dispatch(fetchAllWaterRecordsOfDay(selectedDay));
-    }
-  }, [dispatch, selectedDay]);
 
   const getDayData = day => {
     return allRecordsOfMonth.filter(record => {
@@ -65,11 +54,6 @@ const Calendar = ({ currentDate }) => {
     return dailyGoal ? Math.round((totalAmount / dailyGoal) * 100) : 0;
   };
 
-  const handleDayClick = day => {
-    const isoDate = convertDateToIso(day);
-    dispatch(setSelectedDay(isoDate));
-  };
-
   return (
     <ul className={css.calendarWrapper}>
       {month.map(item => (
@@ -78,7 +62,6 @@ const Calendar = ({ currentDate }) => {
           day={item.getDate()}
           percent={calculatePercent(item)}
           date={convertDateToIso(item)}
-          onClick={() => handleDayClick(item)}
           isSelected={convertDateToIso(item) === selectedDay}
         />
       ))}

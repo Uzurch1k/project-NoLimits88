@@ -33,9 +33,13 @@ const waterSlice = createSlice({
     setMonth(state, action) {
       state.selectedMonth = action.payload;
     },
-    setSelectedDay(state, action) {
-      state.selectedDay = action.payload;
-      localStorage.setItem('selectedDay', action.payload); 
+    setSelectedDay(state) {
+      state.selectedDay = TODAY;
+      localStorage.setItem('selectedDay', TODAY);
+    },
+    clearSelectedDay: state => {
+      state.selectedDay = null;
+      localStorage.removeItem('selectedDay');
     },
   },
   extraReducers: builder => {
@@ -344,4 +348,5 @@ const waterSlice = createSlice({
 });
 
 export const waterReducer = waterSlice.reducer;
-export const { setMonth, setSelectedDay } = waterSlice.actions;
+export const { setMonth, setSelectedDay, clearSelectedDay } =
+  waterSlice.actions;
