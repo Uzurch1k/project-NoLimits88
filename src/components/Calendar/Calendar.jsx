@@ -5,12 +5,8 @@ import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllWaterRecordsOfMonth } from '../../redux/water/operations';
-
 import { convertDateToIso } from '../../helpers/convertDateToIso';
-import {
-  selectSelectedDay,
-  selectSelectedMonth,
-} from '../../redux/water/selectors';
+import { selectSelectedMonth } from '../../redux/water/selectors';
 
 const Calendar = ({ currentDate }) => {
   const startDate = startOfMonth(new Date(currentDate));

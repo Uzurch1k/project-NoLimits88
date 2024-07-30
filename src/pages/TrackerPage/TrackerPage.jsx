@@ -39,7 +39,7 @@ const TrackerPage = () => {
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
-    dispatch(deleteWaterRecord('66a7be9588c83037fce7f55c'));
+    dispatch(deleteWaterRecord('66a8b4469b6dc1f54d6cd53d'));
   };
 
   return (
