@@ -1,7 +1,19 @@
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
 
-const WaterItem = ({ openEditWaterModal, openDeleteWaterModal, amount }) => {
+const WaterItem = ({
+  openEditWaterModal,
+  openDeleteWaterModal,
+  searchWaterItem,
+  setIdWaterItem,
+}) => {
+  const { _id, amount, date } = searchWaterItem;
+
+  const handleOnClick = () => {
+    openDeleteWaterModal();
+    setIdWaterItem(_id);
+  };
+
   return (
     <li className={css.waterItem}>
       <div className={css.iconWaterWrapp}>
@@ -28,7 +40,7 @@ const WaterItem = ({ openEditWaterModal, openDeleteWaterModal, amount }) => {
 
         <button
           className={css.deleteBtn}
-          onClick={openDeleteWaterModal}
+          onClick={handleOnClick}
           aria-label="Delete the entered amount of water"
         >
           <svg className={css.iconAction} width="14" height="14">

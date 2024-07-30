@@ -1,38 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { deleteWaterRecord } from '../../redux/water/operations';
+
 import clsx from 'clsx';
 import css from './DeleteWaterModal.module.scss';
 
-// import { deleteWaterEntry } from '../redux'; * дія в редаксі для видалення
-// import { updateWaterProgressBar, updateWaterList, updateCalendar } from '../redux' * дія в редаксі для оновлення
-import { logOut } from '../../redux/auth/operations'; // скопійовано з LogOutModal, щоб не вибивало помилок за відсутності редаксу, потім видалити!
-
-const DeleteWaterModal = ({ onClose, entryId }) => {
+const DeleteWaterModal = ({ onClose, idWaterItem }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
-    //   try {
-    //     const response = await dispatch(deleteWaterEntry(entryId));
-
-    //     if (response.error) {
-    //       throw new Error(response.error);
-    //     }
-
-    //     dispatch(updateWaterProgressBar());
-    //     dispatch(updateWaterList());
-    //     dispatch(updateCalendar());
-
-    //     onClose();
-    //   } catch (err) {
-    //     toast.error(err.message);
-    //   }
-
-    // скопійовано з LogOutModal, щоб не вибивало помилок за відсутності редаксу, потім видалити!
     try {
-      await dispatch(logOut()).unwrap();
-    } catch (error) {
-      console.error('Logout failed', error);
+      await dispatch(deleteWaterRecord(idWaterItem)).unwrap();
+
+      toast.success('Successfully delete!');
+      onClose();
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
