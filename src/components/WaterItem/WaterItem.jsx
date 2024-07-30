@@ -1,3 +1,6 @@
+import { litersToMilliliters } from '../../helpers/litersToMilliliters';
+import { formatTime } from '../../helpers/formatTime';
+
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
 
@@ -8,6 +11,8 @@ const WaterItem = ({
   setIdWaterItem,
 }) => {
   const { _id, amount, date } = searchWaterItem;
+
+  console.log(searchWaterItem);
 
   const handleOnClick = () => {
     openDeleteWaterModal();
@@ -23,8 +28,8 @@ const WaterItem = ({
       </div>
 
       <div className={css.waterInfo}>
-        <p className={css.waterAmount}>{amount}</p>
-        <p className={css.waterTime}>7:00 AM</p>
+        <p className={css.waterAmount}>{litersToMilliliters(amount)} ml</p>
+        <p className={css.waterTime}>{formatTime(date)}</p>
       </div>
 
       <div className={css.buttonsBox}>
