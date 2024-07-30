@@ -59,24 +59,20 @@ const SignInForm = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const userData = { email: data.email, password: data.password };
 
     setIsLoader(true);
 
-    const isLoginSuccessfull = async () => {
-      try {
-        await dispatch(logIn(userData)).unwrap();
-        toast.success('Successfully logged in!');
-      } catch (error) {
-        toast.error('Invalid email and/or password.');
-      } finally {
-        setIsLoader(false);
-      }
-    };
-    isLoginSuccessfull();
-
-    reset();
+    try {
+      await dispatch(logIn(userData)).unwrap();
+      toast.success('Successfully logged in!');
+      reset();
+    } catch (error) {
+      toast.error('Invalid email and/or password.');
+    } finally {
+      setIsLoader(false);
+    }
   };
 
   return (

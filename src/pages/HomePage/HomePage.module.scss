@@ -5,6 +5,25 @@
 	padding: 118px 16px 67px 16px;
 }
 
+.blockLaft {
+	transform: translateX(0) translateY(20px);
+	opacity: 0;
+	transition: all 600ms ease-in-out;
+}
+.blockRight {
+	transform: translateX(0) translateY(-20px);
+	opacity: 0;
+	transition: all 600ms ease-in-out;
+}
+.animationLaft {
+	transform: translateX(0) translateY(0);
+	opacity: 1;
+}
+.animationRight {
+	transform: translateX(0) translateY(0);
+	opacity: 1;
+}
+
 @media screen and (min-width: 768px) {
 	.wrapp {
 		padding: 106px 64px 50px 64px;
@@ -18,5 +37,18 @@
 		justify-content: center;
 		align-items: center;
 		height: 736px;
+	}
+
+	.blockLaft {
+		transform: translateX(20px) translateY(0);
+	}
+	.blockRight {
+		transform: translateX(-20px) translateY(0);
+	}
+	.animationLaft {
+		transform: translateX(0) translateY(0);
+	}
+	.animationRight {
+		transform: translateX(0) translateY(0);
 	}
 }

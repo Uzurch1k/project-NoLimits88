@@ -3,8 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 
-import { FaExclamation } from 'react-icons/fa6';
-
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -13,7 +11,7 @@ import { updateUser } from '../../redux/auth/operations';
 
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
 
-import defaultAvatar from '../../img/content/default avatar.png';
+import avaDef from '../../img/content/ava-def.png';
 import icons from '../../img/icons/symbol.svg';
 
 import clsx from 'clsx';
@@ -136,7 +134,7 @@ const UserSettingsForm = ({ onClose }) => {
             {photoUrl ? (
               <img src={photoUrl} alt="" />
             ) : (
-              <img src={defaultAvatar} alt="" />
+              <img src={avaDef} alt="" />
             )}
           </div>
           <input
