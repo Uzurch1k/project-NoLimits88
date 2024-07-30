@@ -7,11 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
 
-import { TODAY } from '../../constants/time';
-import { addWaterRecord } from '../../redux/water/operations';
+import { addWaterRecord, editWaterRecord } from '../../redux/water/operations';
 import { selectSelectedDay } from '../../redux/water/selectors';
-
-import { convertDateToIso } from '../../helpers/convertDateToIso';
 
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
@@ -94,8 +91,7 @@ const WaterForm = ({ initialData = {}, onClose }) => {
         date: fullDateTime,
       };
 
-      dispatch(addWaterRecord(newEntry));
-      // await dispatch(addWaterRecord(newEntry)).unwrap();
+      await dispatch(addWaterRecord(newEntry)).unwrap();
     };
     submitHandler();
     onClose();

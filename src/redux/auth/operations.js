@@ -29,7 +29,6 @@ export const setupInterceptors = store => {
             return axiosInstance.request(originalRequest);
           }
         } catch (refreshError) {
-          console.log('logut');
           return Promise.reject(refreshError);
         }
       }
