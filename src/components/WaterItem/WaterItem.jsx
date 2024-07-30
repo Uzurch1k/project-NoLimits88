@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
 
-const WaterItem = ({ openEditWaterModal, openDeleteWaterModal }) => {
+const WaterItem = ({ openEditWaterModal, openDeleteWaterModal, amount }) => {
   const { t } = useTranslation();
   return (
     <li className={css.waterItem}>
@@ -13,7 +13,9 @@ const WaterItem = ({ openEditWaterModal, openDeleteWaterModal }) => {
       </div>
 
       <div className={css.waterInfo}>
-        <p className={css.waterAmount}>250 {t('modals.addEdit.ml')}</p>
+        <p className={css.waterAmount}>
+          {amount} {t('modals.addEdit.ml')}
+        </p>
         <p className={css.waterTime}>7:00 AM</p>
       </div>
 

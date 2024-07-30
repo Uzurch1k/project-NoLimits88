@@ -1,53 +1,67 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+
 import * as Yup from 'yup';
-import { FaExclamation } from 'react-icons/fa6';
-import { FiUpload } from 'react-icons/fi';
-import defaultAvatar from '../../img/content/default avatar.png';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { selectUser } from '../../redux/auth/selectors';
+import { updateUser } from '../../redux/auth/operations';
+
 import calculateDailyWaterNorma from '../../helpers/calculateDailyWaterNorma';
+
+import avaDef from '../../img/content/ava-def.png';
+import icons from '../../img/icons/symbol.svg';
+
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
 
-const userSettingsSchema = Yup.object()
-  .shape({
-    name: Yup.string().required('modals.UserSettingsForm.errors.name'),
-    email: Yup.string()
-      .email('modals.UserSettingsForm.errors.email')
-      .required('modals.UserSettingsForm.errors.email'),
-    weight: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'modals.UserSettingsForm.errors.weight')
-      .max(999, 'modals.UserSettingsForm.errors.weight')
-      .nullable(),
-    amountOfWater: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'modals.UserSettingsForm.errors.water')
-      .max(999, 'modals.UserSettingsForm.errors.water'),
-    activeTime: Yup.number()
-      .transform(value => (isNaN(value) ? undefined : value))
-      .min(0, 'modals.UserSettingsForm.errors.time')
-      .max(1440, 'modals.UserSettingsForm.errors.time')
-      .nullable(),
-  })
-  .test('weight-and-active-time', null, function (values) {
+const userSettingsSchema = Yup.object().shape({
+  name: Yup.string().required('The field is required'),
+  email: Yup.string()
+    .email('Please enter a valid email address (must contain @)')
+    .required('Email is required'),
+  weight: Yup.number()
+    .transform(value => (isNaN(value) ? undefined : value))
+    .min(0, 'The value must be at least 0')
+    .max(999, 'The value must be no more than 3 numbers')
+    .nullable(),
+  amountOfWater: Yup.number()
+    .typeError('Amount of water should be a number')
+    .min(0, 'The value must be at least 0')
+    .max(999, 'The value must be no more than 3 numbers')
+    .nullable(),
+  activeTime: Yup.number()
+    .typeError('Active time must be a number')
+    .min(0, 'The value must be at least 0')
+    .max(1440, 'The value must be no more than 1440 minutes')
+    .nullable(),
+  gender: Yup.string()
+    .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
+    .required('Gender is required'),
+});
+
+/* .test('weight-and-active-time', null, function (values) {
     const { weight, activeTime } = values;
-    if ((weight && !activeTime) || (!weight && activeTime)) {
+    if ((weight || activeTime) && (!weight || !activeTime)) {
       return this.createError({
         path: 'weight',
         message: 'modals.UserSettingsForm.errors.weightAndActiveTime',
       });
     }
     return true;
-  });
+  })*/
 
 const UserSettingsForm = ({ onClose }) => {
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatar || defaultAvatar);
+
+  const [photoUrl, setPhotoUrl] = useState(user?.photo);
+  const [photoFile, setPhotoFile] = useState();
 
   const {
     register,
@@ -58,28 +72,58 @@ const UserSettingsForm = ({ onClose }) => {
     resolver: yupResolver(userSettingsSchema),
     defaultValues: {
       ...user,
-      gender: user.gender || 'woman',
+      gender: user.gender || 'Woman',
+      weight: user.weight || '0',
+      activeTime: user.activeTime || '0',
+      amountOfWater: user.amountOfWater || '0',
     },
+    mode: 'onChange',
   });
 
-  const { name, gender, email, weight, amountOfWater, activeTime } = watch();
+  const { name, gender, email, weight, amountOfWater, activeTime, photo } =
+    watch();
   const isAnyFieldFilled =
-    name || email || weight || amountOfWater || activeTime;
+    name || email || weight || amountOfWater || activeTime || photo;
 
   const dailyWaterNorma = calculateDailyWaterNorma(gender, weight, activeTime);
   const displayWaterNorma = isNaN(dailyWaterNorma) ? '0' : `${dailyWaterNorma}`;
 
-  const handleAvatarUpload = event => {
+  const handlePhotoUpload = event => {
     const file = event.target.files[0];
     if (!file) return;
     const imageUrl = URL.createObjectURL(file);
-    setAvatarUrl(imageUrl);
+    setPhotoUrl(imageUrl);
+    setPhotoFile(file);
   };
 
-  const onSubmit = data => {
-    console.log(data);
-    onClose();
-    // код для обробки даних форми
+  const handleNumberInput = (event, maxLength) => {
+    const value = event.target.value;
+    if (value.length > maxLength) {
+      event.target.value = value.slice(0, maxLength);
+    }
+  };
+
+  const onSubmit = async data => {
+    const formData = new FormData();
+    formData.append('name', data.name.trim());
+    formData.append('email', data.email.trim());
+    formData.append('weight', data.weight);
+    formData.append('amountOfWater', data.amountOfWater);
+    formData.append('activeTime', data.activeTime);
+    formData.append('gender', data.gender);
+    if (photoFile) {
+      formData.append('photo', photoFile);
+    }
+
+    dispatch(updateUser(formData))
+      .unwrap()
+      .then(() => {
+        toast.success('User data updated successfully!');
+        onClose();
+      })
+      .catch(() => {
+        toast.error('Failed to update user data.');
+      });
   };
 
   return (
@@ -89,17 +133,23 @@ const UserSettingsForm = ({ onClose }) => {
       <form className={css.settingsForm} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.avatarCont}>
           <div className={css.avatarImg}>
-            <img src={avatarUrl} alt="" />
+            {photoUrl ? (
+              <img src={photoUrl} alt="" />
+            ) : (
+              <img src={avaDef} alt="" />
+            )}
           </div>
           <input
-            onChange={handleAvatarUpload}
+            onChange={handlePhotoUpload}
             className={css.avatarInput}
             type="file"
-            name="avatar"
-            id="avatar"
+            name="photo"
+            id="photo"
           />
-          <label htmlFor="avatar" className={css.avatarInputLabel}>
-            <FiUpload className={css.uplIcon} />
+          <label htmlFor="photo" className={css.avatarInputLabel}>
+            <svg className={css.uplIcon} width="18" height="18">
+              <use href={`${icons}#icon-upload`}></use>
+            </svg>
             {t('modals.UserSettingsForm.uploadPhotoBtn')}
           </label>
         </div>
@@ -117,12 +167,12 @@ const UserSettingsForm = ({ onClose }) => {
                     className={css.genderRadioInput}
                     type="radio"
                     name="gender"
-                    id="woman"
-                    value="woman"
+                    id="Woman"
+                    value="Woman"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
-                    htmlFor="woman"
+                    htmlFor="Woman"
                   >
                     {t('modals.UserSettingsForm.femaleGenderLabel')}
                   </label>
@@ -133,12 +183,12 @@ const UserSettingsForm = ({ onClose }) => {
                     className={css.genderRadioInput}
                     type="radio"
                     name="gender"
-                    id="man"
-                    value="man"
+                    id="Man"
+                    value="Man"
                   />
                   <label
                     className={`${css.text} ${css.genderLabel}`}
-                    htmlFor="man"
+                    htmlFor="Man"
                   >
                     {t('modals.UserSettingsForm.femaleGenderMale')}
                   </label>
@@ -209,7 +259,9 @@ const UserSettingsForm = ({ onClose }) => {
                     {t('modals.UserSettingsForm.starText')}
                   </p>
                   <span className={`${css.text} ${css.activeTime}`}>
-                    <FaExclamation size={18} color="#9BE1A0" />{' '}
+                    <svg className={css.exclamationIcon} width="22" height="22">
+                      <use href={`${icons}#icon-exclamation`}></use>
+                    </svg>
                     {t('modals.UserSettingsForm.activeText')}
                   </span>
                 </div>
@@ -227,6 +279,7 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="weight"
                       id="weight"
+                      onInput={e => handleNumberInput(e, 4)}
                     />
                     {errors.weight && (
                       <span className={css.errorMessage}>
@@ -246,6 +299,8 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="activeTime"
                       id="activeTime"
+                      onInput={e => handleNumberInput(e, 5)}
+                      step="0.1"
                     />
                     {errors.activeTime && (
                       <span className={css.errorMessage}>

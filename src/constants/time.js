@@ -1,1 +1,2 @@
-export const TODAY = new Date().toISOString();
+import { convertDateToIso } from '../helpers/convertDateToIso';
+export const TODAY = convertDateToIso(new Date());

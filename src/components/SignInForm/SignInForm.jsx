@@ -1,21 +1,22 @@
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+
 import { useState, useId } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useForm } from 'react-hook-form';
+
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+
 import { logIn } from '../../redux/auth/operations';
-import { useDispatch } from 'react-redux';
-import clsx from 'clsx';
-import css from './SignInForm.module.scss';
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import { LoaderDetails } from '../Loader/Loader';
-<<<<<<< Updated upstream
-=======
-import { useTranslation } from 'react-i18next';
->>>>>>> Stashed changes
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import clsx from 'clsx';
+import css from './SignInForm.module.scss';
 
 const SignInForm = () => {
   const { t } = useTranslation();
@@ -69,20 +70,18 @@ const SignInForm = () => {
 
     try {
       await dispatch(logIn(userData)).unwrap();
-      toast.success(t('signInPage.success'));
+      toast.success('Successfully logged in!');
+      reset();
     } catch (error) {
-      toast.error(t('signInPage.error'));
+      toast.error('Invalid email and/or password.');
     } finally {
       setIsLoader(false);
     }
-
-    reset();
   };
 
   return (
     <div className={css.signInBody}>
-      <h2 className={css.signInTitle}>{t('signInPage.signIn')}</h2>
-
+      <h2 className={css.signInTitle}>Sign In</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
           {t('signInPage.email')}
@@ -148,12 +147,12 @@ const SignInForm = () => {
         autoClose={2500}
         hideProgressBar
         closeOnClick
-        rtl={false}
+        // rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
-        transition="slide"
+        // transition="slide"
         closeButton={window.innerWidth > 480}
       />
     </div>
