@@ -1,11 +1,21 @@
 import { useTranslation } from 'react-i18next';
 import { useForm, useWatch } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
-import css from './WaterForm.module.scss';
+
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
+
+import { TODAY } from '../../constants/time';
+import { addWaterRecord } from '../../redux/water/operations';
+import { selectSelectedDay } from '../../redux/water/selectors';
+
+import { convertDateToIso } from '../../helpers/convertDateToIso';
+
+import css from './WaterForm.module.scss';
+import clsx from 'clsx';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()
@@ -17,7 +27,7 @@ const validationSchema = Yup.object().shape({
     .required('modals.addEdit.errorEdit'),
 });
 
-const WaterForm = ({ initialData = {}, onSubmit }) => {
+const WaterForm = ({ initialData = {}, onClose }) => {
   const { t } = useTranslation();
 
   const defaultValues = {
@@ -29,6 +39,7 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
         minute: '2-digit',
       }),
   };
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -70,18 +81,25 @@ const WaterForm = ({ initialData = {}, onSubmit }) => {
     }
   };
 
+  const selectedDay = useSelector(selectSelectedDay);
+
   const onSubmitHandler = data => {
-    const [hours, minutes] = data.time.split(':');
-    const fullDateTime = `${
-      new Date().toISOString().split('T')[0]
-    }T${hours}:${minutes}:00.000Z`;
+    const submitHandler = async () => {
+      const [hours, minutes] = data.time.split(':');
+      const fullDateTime = `${
+        selectedDay.split('T')[0]
+      }T${hours}:${minutes}:00.000Z`;
 
-    const newEntry = {
-      amount: mlToDecimal(data.waterAmount),
-      date: new Date(fullDateTime).toISOString(),
+      const newEntry = {
+        amount: mlToDecimal(data.waterAmount),
+        date: fullDateTime,
+      };
+
+      dispatch(addWaterRecord(newEntry));
+      // await dispatch(addWaterRecord(newEntry)).unwrap();
     };
-
-    console.log(onSubmit(newEntry));
+    submitHandler();
+    onClose();
   };
 
   const handleTimeChange = e => {

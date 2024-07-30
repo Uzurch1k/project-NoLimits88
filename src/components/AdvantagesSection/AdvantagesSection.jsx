@@ -1,45 +1,49 @@
 import { useTranslation } from 'react-i18next';
-import css from './AdvantagesSection.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { selectUserCount } from '../../redux/auth/selectors';
+import { getUserCount } from '../../redux/auth/operations';
+import { getRandomPhotos } from '../../helpers/randomPhotos';
+
 import ava1 from '../../img/content/ava1.png';
 import ava2 from '../../img/content/ava2.png';
 import ava3 from '../../img/content/ava3.png';
 
+import css from './AdvantagesSection.module.scss';
+
 const AdvantagesSection = () => {
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+  const { count = 0, photos = [] } = useSelector(selectUserCount) || {};
+
+  useEffect(() => {
+    dispatch(getUserCount());
+  }, [dispatch]);
+
+  const defaultPhotos = [ava1, ava2, ava3];
+  const displayPhotos = getRandomPhotos(photos, defaultPhotos, 3);
 
   return (
     <div className={css.advantagesSection}>
       <div className={css.customers}>
         <ul className={css.customersBox}>
-          <li className={css.customerImgBox}>
-            <img
-              className={css.customerImg}
-              src={ava1}
-              alt={t('User avatar')}
-            />
-          </li>
-          <li className={css.customerImgBox}>
-            <img
-              className={css.customerImg}
-              src={ava2}
-              alt={t('User avatar')}
-            />
-          </li>
-          <li className={css.customerImgBox}>
-            <img
-              className={css.customerImg}
-              src={ava3}
-              alt={t('User avatar')}
-            />
-          </li>
+          {displayPhotos.map((photo, index) => (
+            <li key={index} className={css.customerImgBox}>
+              <img
+                className={css.customerImg}
+                src={photo}
+                alt={t('User avatar')}
+              />
+            </li>
+          ))}
         </ul>
         <p className={css.text}>
-          {t('advantagesSection.our')}{' '}
-          <span className={css.highlightedText}>
-            {t('advantagesSection.happy')}
+          <span className={css.highlightedtext}>
+            {count} {t('advantagesSection.happy')}
           </span>
-          <br />
-          {t('advantagesSection.customers')}
+          <br /> {t('advantagesSection.customers')}
         </p>
       </div>
       <div className={css.group}>
