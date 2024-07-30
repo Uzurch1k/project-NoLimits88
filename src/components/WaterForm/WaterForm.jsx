@@ -1,15 +1,21 @@
+import { useDispatch } from 'react-redux';
 import { useForm, useWatch } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
-import css from './WaterForm.module.scss';
+
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
-import { useDispatch, useSelector } from 'react-redux';
-import { addWaterRecord } from '../../redux/water/operations';
-import { convertDateToIso } from '../../helpers/convertDateToIso';
-import { selectSelectedDay } from '../../redux/water/selectors';
+
 import { TODAY } from '../../constants/time';
+import { addWaterRecord } from '../../redux/water/operations';
+import { selectSelectedDay } from '../../redux/water/selectors';
+
+import { convertDateToIso } from '../../helpers/convertDateToIso';
+
+import css from './WaterForm.module.scss';
+import clsx from 'clsx';
 
 const validationSchema = Yup.object().shape({
   waterAmount: Yup.number()

@@ -77,7 +77,7 @@ const SignUpForm = () => {
       if (response.error) throw new Error(response.payload);
       toast.success('Successfully registered!');
     } catch (error) {
-      toast.error('Registration failed');
+      toast.error('This email is already in use.');
     } finally {
       setIsLoader(false);
     }
@@ -175,12 +175,12 @@ const SignUpForm = () => {
         autoClose={2500}
         hideProgressBar
         closeOnClick
-        rtl={false}
+        // rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
-        transition="slide"
+        // transition="slide"
         closeButton={window.innerWidth > 480}
       />
     </div>
