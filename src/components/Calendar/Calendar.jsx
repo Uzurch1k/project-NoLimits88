@@ -18,7 +18,6 @@ import {
   selectSelectedDay,
   selectSelectedMonth,
   selectWaterRecordsOfMonth,
-  selectSelectedDay,
 } from '../../redux/water/selectors';
 import { setSelectedDay } from '../../redux/water/slice';
 
