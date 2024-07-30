@@ -9,6 +9,7 @@ const WaterDetailedInfo = ({
   openAddWaterModal,
   openEditWaterModal,
   openDeleteWaterModal,
+  setIdWaterItem,
 }) => {
   return (
     <div className={css.waterDetailedSec}>
@@ -17,6 +18,7 @@ const WaterDetailedInfo = ({
         openAddWaterModal={openAddWaterModal}
         openEditWaterModal={openEditWaterModal}
         openDeleteWaterModal={openDeleteWaterModal}
+        setIdWaterItem={setIdWaterItem}
       />
       <div className={css.waterDetailedWrapp}>
         <MonthInfo />

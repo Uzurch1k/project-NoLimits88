@@ -10,7 +10,11 @@ import {
 } from '../../redux/water/selectors';
 import { fetchAllWaterRecordsOfDay } from '../../redux/water/operations';
 
-const WaterList = ({ openEditWaterModal, openDeleteWaterModal }) => {
+const WaterList = ({
+  openEditWaterModal,
+  openDeleteWaterModal,
+  setIdWaterItem,
+}) => {
   const selectedDay = useSelector(selectSelectedDay);
   const dispatch = useDispatch();
 
@@ -22,19 +26,27 @@ const WaterList = ({ openEditWaterModal, openDeleteWaterModal }) => {
 
   return (
     <div className={css.waterListSec}>
-      <div className={css.waterListbody}>
-        <ul className={css.waterList}>
-          {waterDailyRecords.map((record, index) => (
-            <WaterItem
-              key={index}
-              openEditWaterModal={openEditWaterModal}
-              openDeleteWaterModal={openDeleteWaterModal}
-              date={record.date}
-              amount={record.amount}
-            />
-          ))}
-        </ul>
-      </div>
+      {waterDailyRecords.length !== 0 ? (
+        <div className={css.waterListbody}>
+          <ul className={css.waterList}>
+            {waterDailyRecords.map(item => (
+              <WaterItem
+                key={item._id}
+                openEditWaterModal={openEditWaterModal}
+                openDeleteWaterModal={openDeleteWaterModal}
+                searchWaterItem={item}
+                setIdWaterItem={setIdWaterItem}
+              />
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className={css.defWaterBlock}>
+          <div>
+            <span>Add water to the list</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

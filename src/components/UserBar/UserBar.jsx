@@ -1,9 +1,11 @@
 import { selectUser } from '../../redux/auth/selectors';
 import { useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
+
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
+
 import icon from '../../img/icons/symbol.svg';
-import defaultAvatar from '../../img/content/default avatar.png';
+import avaDef from '../../img/content/ava-def.png';
 
 import clsx from 'clsx';
 import css from './UserBar.module.scss';
@@ -53,11 +55,7 @@ const UserBar = ({ openSettings, openLogout, name }) => {
         <p>{name}</p>
 
         <div className={css.avatarWrapper}>
-          {photo ? (
-            <img src={photo} alt="" />
-          ) : (
-            <img src={defaultAvatar} alt="" />
-          )}
+          {photo ? <img src={photo} alt="" /> : <img src={avaDef} alt="" />}
         </div>
 
         <div className={css.iconArrowWrapp}>

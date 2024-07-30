@@ -16,6 +16,8 @@ import css from './TrackerPage.module.scss';
 
 const TrackerPage = () => {
   const { t } = useTranslation();
+  const [idWaterItem, setIdWaterItem] = useState('');
+
   const [modals, setModals] = useState({
     logout: false,
     settings: false,
@@ -50,6 +52,7 @@ const TrackerPage = () => {
           openAddWaterModal={() => openModal('addWater')}
           openEditWaterModal={() => openModal('editWater')}
           openDeleteWaterModal={() => openModal('deletewater')}
+          setIdWaterItem={setIdWaterItem}
         />
       </Section>
 
@@ -78,6 +81,7 @@ const TrackerPage = () => {
           onAddWater={modals.addWater}
           onEditWater={modals.editWater}
           onClose={() => closeMultipleModals('addWater', 'editWater')}
+          idWaterItem={idWaterItem}
         />
       </BaseModal>
 
@@ -86,7 +90,10 @@ const TrackerPage = () => {
         onClose={() => closeModal('deletewater')}
         classNameModal={css.deletewaterModal}
       >
-        <DeleteWaterModal onClose={() => closeModal('deletewater')} />
+        <DeleteWaterModal
+          onClose={() => closeModal('deletewater')}
+          idWaterItem={idWaterItem}
+        />
       </BaseModal>
     </div>
   );

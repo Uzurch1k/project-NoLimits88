@@ -3,8 +3,9 @@ import WaterForm from '../WaterForm/WaterForm';
 
 import css from './WaterModal.module.scss';
 
-const WaterModal = ({ onAddWater, onEditWater, onClose }) => {
+const WaterModal = ({ onAddWater, onEditWater, onClose, idWaterItem }) => {
   const { t } = useTranslation();
+
   const getTitleAndSubtitle = () => {
     if (onAddWater) {
       return {
@@ -30,7 +31,7 @@ const WaterModal = ({ onAddWater, onEditWater, onClose }) => {
     <div>
       <h2 className={css.titleModal}>{title}</h2>
       <p className={css.subtitleModal}>{subtitle}</p>
-      <WaterForm onClose={onClose} />
+      <WaterForm onClose={onClose} idWaterItem={idWaterItem} />
     </div>
   );
 };
