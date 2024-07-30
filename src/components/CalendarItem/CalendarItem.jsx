@@ -1,13 +1,10 @@
 import clsx from 'clsx';
 import css from './CalendarItem.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchAllWaterRecordsOfDay } from '../../redux/water/operations';
-import { useState } from 'react';
-import { selectSelectedDay } from '../../redux/water/selectors';
 
 const CalendarItem = ({ day, percent, date, isSelected }) => {
   const dispatch = useDispatch();
-  console.log(isSelected);
 
   const selectedDate = new Date(date);
   const today = new Date();
