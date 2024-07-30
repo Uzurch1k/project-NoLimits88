@@ -1,7 +1,7 @@
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
 
-const WaterItem = ({ openEditWaterModal, openDeleteWaterModal }) => {
+const WaterItem = ({ openEditWaterModal, openDeleteWaterModal, amount }) => {
   return (
     <li className={css.waterItem}>
       <div className={css.iconWaterWrapp}>
@@ -11,7 +11,7 @@ const WaterItem = ({ openEditWaterModal, openDeleteWaterModal }) => {
       </div>
 
       <div className={css.waterInfo}>
-        <p className={css.waterAmount}>250 ml</p>
+        <p className={css.waterAmount}>{amount}</p>
         <p className={css.waterTime}>7:00 AM</p>
       </div>
 

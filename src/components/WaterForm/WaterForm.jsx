@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useForm, useWatch } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,7 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
 
+import { TODAY } from '../../constants/time';
 import { addWaterRecord } from '../../redux/water/operations';
+import { selectSelectedDay } from '../../redux/water/selectors';
+
+import { convertDateToIso } from '../../helpers/convertDateToIso';
 
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
@@ -76,18 +81,24 @@ const WaterForm = ({ initialData = {} }) => {
     }
   };
 
-  const submitHandler = async data => {
-    const [hours, minutes] = data.time.split(':');
-    const fullDateTime = `${
-      new Date().toISOString().split('T')[0]
-    }T${hours}:${minutes}:00.000Z`;
+  const selectedDay = useSelector(selectSelectedDay);
 
-    const newEntry = {
-      amount: mlToDecimal(data.waterAmount),
-      date: new Date(fullDateTime).toISOString(),
+  const onSubmitHandler = data => {
+    const submitHandler = async () => {
+      const [hours, minutes] = data.time.split(':');
+      const fullDateTime = `${
+        selectedDay.split('T')[0]
+      }T${hours}:${minutes}:00.000Z`;
+
+      const newEntry = {
+        amount: mlToDecimal(data.waterAmount),
+        date: fullDateTime,
+      };
+
+      dispatch(addWaterRecord(newEntry));
+      // await dispatch(addWaterRecord(newEntry)).unwrap();
     };
-
-    await dispatch(addWaterRecord(newEntry)).unwrap();
+    submitHandler();
   };
 
   const handleTimeChange = e => {
@@ -98,7 +109,7 @@ const WaterForm = ({ initialData = {} }) => {
   };
 
   return (
-    <form className={css.waterForm} onSubmit={handleSubmit(submitHandler)}>
+    <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
       <p className={css.text}>Amount of water</p>
       <div className={css.counterContainer}>
         <button
