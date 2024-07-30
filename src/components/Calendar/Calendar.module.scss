@@ -1,29 +1,20 @@
 .calendarWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 18px;
-  .calendarItem {
-    width: calc((100% - 108px) / 7);
-  }
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 20px;
+	column-gap: 18px;
 }
 
 @media screen and (min-width: 768px) {
-  .calendarWrapper {
-    row-gap: 15px;
-    column-gap: 48px;
-    .calendarItem {
-      width: calc((100% - 336px) / 8);
-    }
-  }
+	.calendarWrapper {
+		row-gap: 15px;
+		column-gap: 48px;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-  .calendarWrapper {
-    row-gap: 15px;
-    column-gap: 42px;
-    .calendarItem {
-      width: calc((100% - 294px) / 8);
-    }
-  }
+	.calendarWrapper {
+		row-gap: 15px;
+		column-gap: 42px;
+	}
 }

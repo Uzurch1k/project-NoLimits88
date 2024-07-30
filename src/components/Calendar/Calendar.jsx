@@ -34,33 +34,32 @@ const Calendar = ({ currentDate }) => {
     dispatch(fetchAllWaterRecordsOfMonth(selectedMonth));
   }, [dispatch, selectedMonth]);
 
- const getDayData = day => {
-   return allRecordsOfMonth.filter(record => {
-     const recordDate = new Date(record.date);
-     return isSameDay(day, recordDate);
-   });
- };
+  const getDayData = day => {
+    return allRecordsOfMonth.filter(record => {
+      const recordDate = new Date(record.date);
+      return isSameDay(day, recordDate);
+    });
+  };
 
- const calculatePercent = day => {
-   const records = getDayData(day);
-   const dailyGoal = user.amountOfWater;
-   const totalAmount = records.reduce(
-     (total, record) => total + record.amount,
-     0
-   );
-   return dailyGoal ? Math.round((totalAmount / dailyGoal) * 100) : 0;
- };
+  const calculatePercent = day => {
+    const records = getDayData(day);
+    const dailyGoal = user.amountOfWater;
+    const totalAmount = records.reduce(
+      (total, record) => total + record.amount,
+      0
+    );
+    return dailyGoal ? Math.round((totalAmount / dailyGoal) * 100) : 0;
+  };
 
   return (
     <ul className={css.calendarWrapper}>
-      {month.map(day => (
-        <li key={day} className={css.calendarItem}>
-          <CalendarItem
-            day={day.getDate()}
-            percent={calculatePercent(day)}
-            date={convertDateToIso(day)}
-          />
-        </li>
+      {month.map(item => (
+        <CalendarItem
+          key={item}
+          day={item.getDate()}
+          percent={calculatePercent(item)}
+          date={convertDateToIso(item)}
+        />
       ))}
     </ul>
   );
