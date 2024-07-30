@@ -15,7 +15,7 @@ import css from './TrackerPage.module.scss';
 const TrackerPage = () => {
   const [idWaterItem, setIdWaterItem] = useState('');
 
-  const [modals, setModals] = useState({
+	const [modals, setModals] = useState({
     logout: false,
     settings: false,
     addWater: false,
