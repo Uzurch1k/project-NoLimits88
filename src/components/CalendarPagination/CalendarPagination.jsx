@@ -5,12 +5,14 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import { setMonth } from '../../redux/water/slice';
 import { useDispatch } from 'react-redux';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
+import { useRef } from 'react';
 
 const CalendarPagination = ({ currentDate, setCurrentDate }) => {
   const minDate = new Date('2024-01-01');
   const normalisedDate = startOfMonth(currentDate);
 
   const dispatch = useDispatch();
+  const nodeRef = useRef(null);
 
   const handlePrevMonth = () => {
     const newMonth = subMonths(normalisedDate, 1);
@@ -46,6 +48,7 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
         <div className={css.dateTitleBox}>
           <SwitchTransition>
             <CSSTransition
+              nodeRef={nodeRef}
               key={format(currentDate, 'MMM-yyyy')}
               timeout={200}
               classNames={{
