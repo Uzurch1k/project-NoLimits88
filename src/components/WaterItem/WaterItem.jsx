@@ -12,8 +12,6 @@ const WaterItem = ({
 }) => {
   const { _id, amount, date } = searchWaterItem;
 
-  console.log(searchWaterItem);
-
   const handleOnClick = () => {
     openDeleteWaterModal();
     setIdWaterItem(_id);
