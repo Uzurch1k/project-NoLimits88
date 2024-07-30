@@ -66,7 +66,7 @@ const SignInForm = () => {
 
     try {
       await dispatch(logIn(userData)).unwrap();
-      toast.success('Successfully logged in!');
+      // toast.success('Successfully logged in!');
       reset();
     } catch (error) {
       toast.error('Invalid email and/or password.');
