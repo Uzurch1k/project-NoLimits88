@@ -4,7 +4,7 @@
 	align-items: center;
 	width: 147.5px;
 	justify-content: space-between;
-	background-color: var(--cw);
+	background-color: var(--dcy);
 	border-radius: 15px;
 	padding: 18px 14px;
 	backdrop-filter: blur(16.799999237060547px);
@@ -30,11 +30,12 @@
 .waterAmount {
 	font-weight: 700;
 	line-height: 1;
+	color: var(--dcq);
 }
 .waterTime {
 	font-size: 12px;
 	line-height: 1;
-	color: var(--rcb);
+	color: var(--drcb);
 }
 
 .buttonsBox {
@@ -57,7 +58,7 @@
 }
 .iconAction {
 	fill: none;
-	stroke: var(--cy);
+	stroke: var(--dcq);
 	transition: all 150ms ease-in;
 }
 

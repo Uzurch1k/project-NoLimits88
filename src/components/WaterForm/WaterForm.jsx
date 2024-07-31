@@ -15,6 +15,8 @@ import {
   selectWaterRecordsOfDay,
 } from '../../redux/water/selectors';
 
+import icons from '../../img/icons/symbol.svg';
+
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
 
@@ -137,8 +139,8 @@ const WaterForm = ({
       if (waterItem) {
         setValue('waterAmount', waterItem.amount * 1000);
         const date = new Date(waterItem.date);
-        const hours = String(date.getUTCHours()).padStart(2, '0'); // Используем UTC
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0'); // Используем UTC
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
         setValue('time', `${hours}:${minutes}`);
       }
     }
@@ -153,7 +155,9 @@ const WaterForm = ({
           className={css.decrementButton}
           onClick={decrementWater}
         >
-          <HiOutlineMinus className={css.icon} />
+          <svg className={css.icon} width="40" height="40">
+            <use href={`${icons}#icon-minus-amount`}></use>
+          </svg>
         </button>
         <div className={css.inputWrapper}>
           <span className={css.waterAmountInput}>{`${waterAmount} ${t(
@@ -165,7 +169,9 @@ const WaterForm = ({
           className={css.incrementButton}
           onClick={incrementWater}
         >
-          <GoPlus className={css.icon} />
+          <svg className={css.icon} width="40" height="40">
+            <use href={`${icons}#icon-plus-amount`}></use>
+          </svg>
         </button>
       </div>
       {errors.waterAmount && (

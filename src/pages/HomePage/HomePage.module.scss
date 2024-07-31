@@ -1,28 +1,28 @@
 .wrapp {
 	position: relative;
 	border-radius: 30px;
-	background-color: var(--cu);
+	background-color: var(--dcu);
 	padding: 118px 16px 67px 16px;
 }
 
-.blockLaft {
-	transform: translateX(0) translateY(20px);
-	opacity: 0;
-	transition: all 600ms ease-in-out;
-}
-.blockRight {
-	transform: translateX(0) translateY(-20px);
-	opacity: 0;
-	transition: all 600ms ease-in-out;
-}
-.animationLaft {
-	transform: translateX(0) translateY(0);
-	opacity: 1;
-}
-.animationRight {
-	transform: translateX(0) translateY(0);
-	opacity: 1;
-}
+// .blockLaft {
+// 	transform: translateX(0) translateY(20px);
+// 	opacity: 0;
+// 	transition: all 600ms ease-in;
+// }
+// .blockRight {
+// 	transform: translateX(0) translateY(-20px);
+// 	opacity: 0;
+// 	transition: all 600ms ease-in;
+// }
+// .animationLaft {
+// 	transform: translateX(0) translateY(0);
+// 	opacity: 1;
+// }
+// .animationRight {
+// 	transform: translateX(0) translateY(0);
+// 	opacity: 1;
+// }
 
 @media screen and (min-width: 768px) {
 	.wrapp {
@@ -39,16 +39,16 @@
 		height: 736px;
 	}
 
-	.blockLaft {
-		transform: translateX(20px) translateY(0);
-	}
-	.blockRight {
-		transform: translateX(-20px) translateY(0);
-	}
-	.animationLaft {
-		transform: translateX(0) translateY(0);
-	}
-	.animationRight {
-		transform: translateX(0) translateY(0);
-	}
+	// .blockLaft {
+	// 	transform: translateX(20px) translateY(0);
+	// }
+	// .blockRight {
+	// 	transform: translateX(-20px) translateY(0);
+	// }
+	// .animationLaft {
+	// 	transform: translateX(0) translateY(0);
+	// }
+	// .animationRight {
+	// 	transform: translateX(0) translateY(0);
+	// }
 }

@@ -8,12 +8,13 @@
 	width: 198px;
 	border-radius: 15px;
 	padding: 12px;
-	background-color: var(--cw);
+	background-color: var(--dcy);
 	box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .waterBarTitle {
 	font-size: 14px;
+	color: var(--dcq);
 	line-height: 1;
 	text-transform: capitalize;
 	margin-bottom: 22px;
@@ -62,7 +63,7 @@
 .waterProgressValue {
 	font-size: 10px;
 	line-height: 1;
-	color: var(--rcb);
+	color: var(--drcb);
 	&:nth-child(2) {
 		transform: translateX(8px);
 	}

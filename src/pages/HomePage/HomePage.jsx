@@ -5,6 +5,7 @@ import Section from '../../components/Layout/Section/Section';
 import WelcomeSection from '../../components/WelcomeSection/WelcomeSection';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import Logo from '../../components/Logo/Logo';
+import ThemeToggleButton from '../../components/ThemeToggleButton/ThemeToggleButton';
 import Languages from '../../components/Languages/Languages';
 import { useTranslation } from 'react-i18next';
 
@@ -15,9 +16,9 @@ const HomePage = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsVisible(true);
+  // }, []);
 
   return (
     <div className={css.body}>
@@ -30,6 +31,7 @@ const HomePage = () => {
           })}
         >
           <Logo />
+          <ThemeToggleButton />
           <WelcomeSection />
         </div>
 

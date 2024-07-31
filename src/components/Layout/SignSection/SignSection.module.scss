@@ -2,13 +2,11 @@
 	position: relative;
 	padding: 0 16px;
 	border-radius: 30px;
-	background-color: var(--cu);
+	background-color: var(--dcu);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 780px;
-	// height: 100%;
-	// max-height: 780px;
 }
 
 @media screen and (min-width: 768px) {

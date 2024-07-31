@@ -15,7 +15,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		transition: all 100ms ease-in-out;
+		transition: all 150ms ease-in-out;
 		background-color: var(--cw);
 
 		&:hover,
@@ -53,7 +53,7 @@
 	}
 
 	.percent {
-		color: var(--rcg);
+		color: var(--drcg);
 		font-size: 10px;
 		line-height: 1;
 	}
