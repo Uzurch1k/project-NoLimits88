@@ -1,0 +1,21 @@
+.axisTick {
+  font-size: 15px;
+  line-height: 1.49;
+}
+
+.tooltipContainer {
+  background-color: var(--cw);
+  border: 1px solid var(--cw);
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 6px var(--cu);
+  font-size: 10px;
+  color: var(--cb);
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+	.tooltipContainer {
+  font-size: 12px;
+}
+}
