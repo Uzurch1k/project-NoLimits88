@@ -23,6 +23,17 @@ const waterRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const insertRecord = (records, record) => {
+  const index = records.findIndex(
+    r => new Date(r.date) > new Date(record.date)
+  );
+  if (index === -1) {
+    records.push(record);
+  } else {
+    records.splice(index, 0, record);
+  }
+};
+
 const waterSlice = createSlice({
   name: 'water',
   initialState: {
@@ -59,7 +70,6 @@ const waterSlice = createSlice({
         state.waterDaily.records = action.payload.waterRecordsOfDay.sort(
           (a, b) => new Date(a.date) - new Date(b.date)
         );
-
         state.selectedDay = action.payload.selectedDate;
         localStorage.setItem('selectedDay', action.payload.selectedDate);
         state.waterDaily.isLoading = false;
@@ -68,16 +78,10 @@ const waterSlice = createSlice({
 
       .addCase(fetchAllWaterRecordsOfMonth.pending, state => {
         state.waterMonthly.records = [];
-        state.waterMonthly.isLoading = false;
+        state.waterMonthly.isLoading = true;
         state.error = null;
       })
       .addCase(fetchAllWaterRecordsOfMonth.fulfilled, (state, action) => {
-        const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
-          state.waterDaily.records
-        );
-
-        state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
-
         state.waterMonthly.records = action.payload.sort(
           (a, b) => new Date(a.date) - new Date(b.date)
         );
@@ -89,27 +93,30 @@ const waterSlice = createSlice({
         state.waterDaily.isLoading = true;
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
-        const isRecordToday = action.payload.date.startsWith(TODAY.slice(0, 9));
-        const isRecordInCurrentMonth = action.payload.date.startsWith(
-          state.selectedMonth.slice(0, 7)
-        );
+        const newRecord = action.payload;
 
-        const insertRecord = (records, record) => {
-          const index = records.findIndex(
-            r => new Date(r.date) > new Date(record.date)
-          );
-          if (index === -1) {
-            records.push(record);
-          } else {
-            records.splice(index, 0, record);
-          }
-        };
+        const selectedDay = state.selectedDay.slice(0, 10);
+        const selectedMonth = state.selectedMonth.slice(0, 7);
+        const recordDate = newRecord.date.slice(0, 10);
+        const recordMonth = newRecord.date.slice(0, 7);
 
-        insertRecord(state.waterDaily.records, action.payload);
+        const isRecordToday = recordDate === selectedDay;
+        const isRecordInCurrentMonth = recordMonth === selectedMonth;
+
+        if (isRecordToday) {
+          insertRecord(state.waterDaily.records, newRecord);
+        }
 
         if (isRecordInCurrentMonth) {
-          insertRecord(state.waterMonthly.records, action.payload);
+          insertRecord(state.waterMonthly.records, newRecord);
         }
+
+        state.waterDaily.records.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+        state.waterMonthly.records.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
 
         state.waterDrunkPerDay = calculateWaterDrunkPerDay(
           state.waterDaily.records
@@ -127,7 +134,9 @@ const waterSlice = createSlice({
           record => record._id === action.payload
         );
 
-        const isRecordToday = recordToDelete.date.startsWith(TODAY.slice(0, 9));
+        const isRecordToday = recordToDelete.date.startsWith(
+          TODAY.slice(0, 10)
+        );
         const isRecordInCurrentMonth = recordToDelete.date.startsWith(
           state.selectedMonth.slice(0, 7)
         );
@@ -155,47 +164,36 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(editWaterRecord.fulfilled, (state, action) => {
-        const isRecordToday = action.payload.date.startsWith(TODAY.slice(0, 9));
-        const isRecordInCurrentMonth = action.payload.date.startsWith(
-          state.selectedMonth.slice(0, 7)
-        );
+        const updatedRecord = action.payload;
+
+        const selectedDay = state.selectedDay.slice(0, 10);
+        const selectedMonth = state.selectedMonth.slice(0, 7);
+        const recordDate = updatedRecord.date.slice(0, 10);
+        const recordMonth = updatedRecord.date.slice(0, 7);
+
+        const isRecordToday = recordDate === selectedDay;
+        const isRecordInCurrentMonth = recordMonth === selectedMonth;
 
         const filterRecords = records =>
-          records.filter(record => record._id !== action.payload._id);
+          records.filter(record => record._id !== updatedRecord._id);
 
-        if (isRecordToday || !isRecordInCurrentMonth) {
-          state.waterDaily.records = filterRecords(state.waterDaily.records);
-        }
-
-        if (isRecordInCurrentMonth) {
-          state.waterMonthly.records = filterRecords(
-            state.waterMonthly.records
-          );
-        }
+        state.waterDaily.records = filterRecords(state.waterDaily.records);
+        state.waterMonthly.records = filterRecords(state.waterMonthly.records);
 
         if (isRecordToday) {
-          const index = state.waterDaily.records.findIndex(
-            record => new Date(record.date) > new Date(action.payload.date)
-          );
-
-          if (index === -1) {
-            state.waterDaily.records.push(action.payload);
-          } else {
-            state.waterDaily.records.splice(index, 0, action.payload);
-          }
+          insertRecord(state.waterDaily.records, updatedRecord);
         }
 
         if (isRecordInCurrentMonth) {
-          const index = state.waterMonthly.records.findIndex(
-            record => new Date(record.date) > new Date(action.payload.date)
-          );
-
-          if (index === -1) {
-            state.waterMonthly.records.push(action.payload);
-          } else {
-            state.waterMonthly.records.splice(index, 0, action.payload);
-          }
+          insertRecord(state.waterMonthly.records, updatedRecord);
         }
+
+        state.waterDaily.records.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+        state.waterMonthly.records.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
 
         state.waterDrunkPerDay = calculateWaterDrunkPerDay(
           state.waterDaily.records
