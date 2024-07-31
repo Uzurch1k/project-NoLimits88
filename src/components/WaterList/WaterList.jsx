@@ -1,6 +1,7 @@
 import css from './WaterList.module.scss';
 
 import WaterItem from '../WaterItem/WaterItem';
+import { useTranslation } from 'react-i18next';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,7 @@ const WaterList = ({
   openDeleteWaterModal,
   setIdWaterItem,
 }) => {
+  const { t } = useTranslation();
   const selectedDay = useSelector(selectSelectedDay);
   const dispatch = useDispatch();
 
@@ -43,7 +45,7 @@ const WaterList = ({
       ) : (
         <div className={css.defWaterBlock}>
           <div>
-            <span>Add water to the list</span>
+            <span>{t('modals.addEdit.addwater')}</span>
           </div>
         </div>
       )}

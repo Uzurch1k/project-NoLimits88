@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,19 +18,6 @@ import {
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
 
-const validationSchema = Yup.object().shape({
-  waterAmount: Yup.number()
-    .min(50, 'modals.addEdit.errorAdd')
-    .max(5000, 'modals.addEdit.errorAdd')
-    .required('modals.addEdit.errorAdd'),
-  time: Yup.string()
-    .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'modals.addEdit.errorEdit')
-    .required('modals.addEdit.errorEdit'),
-});
-
-const WaterForm = ({ initialData = {}, onClose }) => {
-  const { t } = useTranslation();
-
 const WaterForm = ({
   initialData = {},
   onClose,
@@ -38,6 +25,17 @@ const WaterForm = ({
   onAddWater,
   onEditWater,
 }) => {
+  const { t } = useTranslation();
+  const validationSchema = Yup.object().shape({
+    waterAmount: Yup.number()
+      .min(50, t('modals.UserSettingsForm.errors.water50'))
+      .max(5000, 'modals.UserSettingsForm.errors.water500')
+      .required('modals.UserSettingsForm.errors.required'),
+    time: Yup.string()
+      .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format')
+      .required('Time is required'),
+  });
+
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecordsOfDay);
   const selectedDay = useSelector(selectSelectedDay);
@@ -158,9 +156,9 @@ const WaterForm = ({
           <HiOutlineMinus className={css.icon} />
         </button>
         <div className={css.inputWrapper}>
-          <span className={css.waterAmountInput}>
-            {`${waterAmount} ${t('modals.addEdit.ml')}`}
-          </span>
+          <span className={css.waterAmountInput}>{`${waterAmount} ${t(
+            'modals.addEdit.ml'
+          )}`}</span>
         </div>
         <button
           type="button"
@@ -171,9 +169,7 @@ const WaterForm = ({
         </button>
       </div>
       {errors.waterAmount && (
-        <span className={css.errorMessage}>
-          {t(errors.waterAmount.message)}
-        </span>
+        <span className={css.errorMessage}>{errors.waterAmount.message}</span>
       )}
       <div className={css.inputContainerTime}>
         <label htmlFor="time" className={css.textTime}>
@@ -184,12 +180,12 @@ const WaterForm = ({
           className={`${css.input} ${css.timeInput}`}
           type="time"
           id="time"
-          placeholder={t('modals.addEdit.timePlaceholder')}
+          placeholder="HH:MM"
           {...register('time')}
           onChange={handleTimeChange}
         />
         {errors.time && (
-          <span className={css.errorMessage}>{t(errors.time.message)}</span>
+          <span className={css.errorMessage}>{errors.time.message}</span>
         )}
       </div>
       <div className={css.inputContainer}>
@@ -207,9 +203,7 @@ const WaterForm = ({
           />
         </div>
         {errors.waterAmount && (
-          <span className={css.errorMessage}>
-            {t(errors.waterAmount.message)}
-          </span>
+          <span className={css.errorMessage}>{errors.waterAmount.message}</span>
         )}
       </div>
       <button className={clsx(css.settingsButton, 'btn-def')} type="submit">

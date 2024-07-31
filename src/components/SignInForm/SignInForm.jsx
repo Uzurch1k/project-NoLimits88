@@ -1,20 +1,23 @@
-import { useTranslation } from 'react-i18next';
-
-import { useState, useId } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useState, useId } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { logIn } from '../../redux/auth/operations';
+import { useDispatch } from 'react-redux';
+
+import clsx from 'clsx';
+import css from './SignInForm.module.scss';
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import { LoaderDetails } from '../Loader/Loader';
 
 const SignInForm = () => {
   const { t } = useTranslation();
-
   const loginSchema = yup.object().shape({
     email: yup
       .string()
@@ -47,7 +50,9 @@ const SignInForm = () => {
   } = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
-    defaultValues: { email: '', password: '' },
+    defaultValues: {
+      defaultValues: { email: '', password: '' },
+    },
   });
 
   const fieldEmailId = useId();
@@ -75,7 +80,7 @@ const SignInForm = () => {
 
   return (
     <div className={css.signInBody}>
-      <h2 className={css.signInTitle}>Sign In</h2>
+      <h2 className={css.signInTitle}>{t('signInPage.signIn')}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
           {t('signInPage.email')}

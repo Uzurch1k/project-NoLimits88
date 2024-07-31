@@ -1,11 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import css from './WaterItem.module.scss';
-import icons from '../../img/icons/symbol.svg';
-
-const WaterItem = ({ openEditWaterModal, openDeleteWaterModal, amount }) => {
-  const { t } = useTranslation();
 import { litersToMilliliters } from '../../helpers/litersToMilliliters';
 import { formatTime } from '../../helpers/formatTime';
+import { useTranslation } from 'react-i18next';
 
 import css from './WaterItem.module.scss';
 import icons from '../../img/icons/symbol.svg';
@@ -16,6 +11,7 @@ const WaterItem = ({
   searchWaterItem,
   setIdWaterItem,
 }) => {
+  const { t } = useTranslation();
   const { _id, amount, date } = searchWaterItem;
 
   const handleOnClickDelete = () => {
@@ -37,7 +33,9 @@ const WaterItem = ({
       </div>
 
       <div className={css.waterInfo}>
-        <p className={css.waterAmount}>{litersToMilliliters(amount)} ml</p>
+        <p className={css.waterAmount}>
+          {litersToMilliliters(amount)} {t('dailyInfo.ml')}
+        </p>
         <p className={css.waterTime}>{formatTime(date)}</p>
       </div>
 

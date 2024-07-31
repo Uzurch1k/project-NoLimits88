@@ -1,11 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { useRef, useEffect, useState } from 'react';
-import css from './WaterProgressBar.module.scss';
-
-const WaterProgressBar = () => {
-  const { t } = useTranslation();
-  const progressPercents = 50;
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { selectTotalAmountOfWaterDrunkPerDay } from '../../redux/water/selectors';
 import { selectUserDailyNorma } from '../../redux/auth/selectors';
@@ -15,6 +10,10 @@ import css from './WaterProgressBar.module.scss';
 import clsx from 'clsx';
 
 const WaterProgressBar = () => {
+  const { t } = useTranslation();
+  const progressBarRef = useRef(null);
+  const [ellipseLeft, setEllipseLeft] = useState(0);
+
   const amountOfWaterDrunkPerDay = useSelector(
     selectTotalAmountOfWaterDrunkPerDay
   );
@@ -40,9 +39,7 @@ const WaterProgressBar = () => {
   return (
     <div className={css.waterProgressBarSection}>
       <div className={css.waterProgressBarBody}>
-      
         <h3 className={css.waterBarTitle}>{t('waterMainInfo.today')}</h3>
-
         <div className={css.waterProgressBar} ref={progressBarRef}>
           <div
             className={clsx(css.progressBarFill, {
@@ -61,9 +58,6 @@ const WaterProgressBar = () => {
               >
                 {progressPercents}%
               </span>
-              <span
-                className={css.progressPercent}
-              >{`${progressPercents}%`}</span>
             </div>
           </div>
         </div>

@@ -8,12 +8,9 @@ import { deleteWaterRecord } from '../../redux/water/operations';
 import clsx from 'clsx';
 import css from './DeleteWaterModal.module.scss';
 
-// import { deleteWaterEntry } from '../redux'; * дія в редаксі для видалення
-// import { updateWaterProgressBar, updateWaterList, updateCalendar } from '../redux' * дія в редаксі для оновлення
-import { logOut } from '../../redux/auth/operations'; // скопійовано з LogOutModal, щоб не вибивало помилок за відсутності редаксу, потім видалити!
-
-const DeleteWaterModal = ({ onClose, entryId }) => {
+const DeleteWaterModal = ({ onClose, idWaterItem }) => {
   const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const handleDelete = async () => {

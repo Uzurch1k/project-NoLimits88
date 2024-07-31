@@ -130,6 +130,7 @@
     },
     "addEdit": {
       "add": "Add water",
+      "addwater": "Add water to the list",
       "edit": "Edit the entered amount of water",
       "choose": "Choose a value:",
       "correct": "Correct entered data:",
@@ -170,7 +171,9 @@
         "name": "Please enter a valid name using Latin characters",
         "weight": "Weight is required",
         "time": "Active time is required",
-        "water": "Amount of water to drink is required"
+        "water50": "The amount must be at least 50ml",
+        "water500": "The amount of water must be less than 5000 ml",
+        "required": "Water amount is required"
       }
     }
   },
