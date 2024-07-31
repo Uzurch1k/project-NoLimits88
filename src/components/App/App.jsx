@@ -10,6 +10,8 @@ import PrivateRoute from '../Routes/PrivateRoute';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import { LoaderMain } from '../Loader/Loader';
 
+import { ThemeProvider } from '../Providers/ThemeProvider';
+import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('../../pages/TrackerPage/TrackerPage'));
 const SignInPage = lazy(() => import('../../pages/SignInPage/SignInPage'));
@@ -28,6 +30,8 @@ function App() {
   return isRefreshing ? (
     <LoaderMain />
   ) : (
+    <ThemeProvider>
+       <ThemeToggleButton />
     <SharedLayout>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -51,6 +55,7 @@ function App() {
         />
       </Routes>
     </SharedLayout>
+    </ThemeProvider>
   );
 }
 export default App;

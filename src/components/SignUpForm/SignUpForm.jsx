@@ -84,7 +84,7 @@ const SignUpForm = () => {
 
     try {
       await dispatch(registerUser(userData)).unwrap();
-      toast.success('Successfully registered!');
+      // toast.success('Successfully registered!');
       reset();
     } catch (error) {
       toast.error('This email is already in use.');

@@ -5,6 +5,7 @@ import axiosInstance, {
   clearAuthHeader,
   setAuthHeader,
 } from '../../helpers/axiosBase';
+import { clearSelectedDay, setSelectedDay } from '../water/slice';
 
 export const setupInterceptors = store => {
   axiosInstance.interceptors.response.use(
@@ -45,6 +46,7 @@ export const logIn = createAsyncThunk(
       const { user, accessToken, refreshToken } = res.data.data;
 
       setAuthHeader(accessToken);
+      thunkAPI.dispatch(setSelectedDay());
 
       return { user, accessToken, refreshToken };
     } catch (error) {
@@ -80,6 +82,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axiosInstance.post('/users/logout');
     clearAuthHeader();
+    thunkAPI.dispatch(clearSelectedDay());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

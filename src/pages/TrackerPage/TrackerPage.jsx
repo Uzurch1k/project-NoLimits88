@@ -15,6 +15,8 @@ import Languages from '../../components/Languages/Languages';
 import css from './TrackerPage.module.scss';
 
 const TrackerPage = () => {
+  const [idWaterItem, setIdWaterItem] = useState('');
+
   const [modals, setModals] = useState({
     logout: false,
     settings: false,
@@ -78,6 +80,7 @@ const TrackerPage = () => {
           onAddWater={modals.addWater}
           onEditWater={modals.editWater}
           onClose={() => closeMultipleModals('addWater', 'editWater')}
+          idWaterItem={idWaterItem}
         />
       </BaseModal>
 

@@ -9,10 +9,15 @@ body {
 	--cy: #323f47;
 	--cb: #2f2f2f;
 	--cr: #ef5050;
+	--cp: #fddf72;
+	--co: #d5a90b;
 
+	--rcp: rgba(47, 47, 47, 0.15);
+	--rcl: rgba(50, 63, 71, 1);
+	--rck: rgba(50, 63, 71, 0.2);
+	--rcm: rgba(47, 47, 47, 0.2);
 	--rcy: rgba(50, 63, 71, 0.4);
 	--rcn: rgba(50, 63, 71, 0.4);
-	--rcm: rgba(47, 47, 47, 0.2);
 	--rcw: rgba(47, 47, 47, 0.4);
 	--rcg: rgba(47, 47, 47, 0.5);
 	--rcb: rgba(47, 47, 47, 0.6);
@@ -20,4 +25,8 @@ body {
 	/* Fonts */
 	--ff1: "Poppins", sans-serif;
 	--ff2: "Gilroy", sans-serif;
+}
+
+body.dark{
+	background-color: var(--cy);
 }

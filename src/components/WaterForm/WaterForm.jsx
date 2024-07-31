@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,7 +10,10 @@ import { GoPlus } from 'react-icons/go';
 import { HiOutlineMinus } from 'react-icons/hi';
 
 import { addWaterRecord, editWaterRecord } from '../../redux/water/operations';
-import { selectSelectedDay } from '../../redux/water/selectors';
+import {
+  selectSelectedDay,
+  selectWaterRecordsOfDay,
+} from '../../redux/water/selectors';
 
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
@@ -27,6 +31,17 @@ const validationSchema = Yup.object().shape({
 const WaterForm = ({ initialData = {}, onClose }) => {
   const { t } = useTranslation();
 
+const WaterForm = ({
+  initialData = {},
+  onClose,
+  idWaterItem,
+  onAddWater,
+  onEditWater,
+}) => {
+  const dispatch = useDispatch();
+  const waterRecords = useSelector(selectWaterRecordsOfDay);
+  const selectedDay = useSelector(selectSelectedDay);
+
   const defaultValues = {
     waterAmount: initialData.waterAmount || 50,
     time:
@@ -34,15 +49,16 @@ const WaterForm = ({ initialData = {}, onClose }) => {
       new Date().toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
+        hour12: false,
       }),
   };
-  const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     control,
     setValue,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -78,23 +94,35 @@ const WaterForm = ({ initialData = {}, onClose }) => {
     }
   };
 
-  const selectedDay = useSelector(selectSelectedDay);
+  const onSubmitHandler = async data => {
+    const [hours, minutes] = data.time.split(':');
+    const fullDateTime = new Date(
+      Date.UTC(
+        new Date(selectedDay).getFullYear(),
+        new Date(selectedDay).getMonth(),
+        new Date(selectedDay).getDate(),
+        hours,
+        minutes
+      )
+    ).toISOString();
 
-  const onSubmitHandler = data => {
-    const submitHandler = async () => {
-      const [hours, minutes] = data.time.split(':');
-      const fullDateTime = `${
-        selectedDay.split('T')[0]
-      }T${hours}:${minutes}:00.000Z`;
-
-      const newEntry = {
-        amount: mlToDecimal(data.waterAmount),
-        date: fullDateTime,
-      };
-
-      await dispatch(addWaterRecord(newEntry)).unwrap();
-    };
-    submitHandler();
+    if (onEditWater) {
+      await dispatch(
+        editWaterRecord({
+          amount: mlToDecimal(data.waterAmount),
+          date: fullDateTime,
+          id: idWaterItem,
+        })
+      ).unwrap();
+    } else {
+      await dispatch(
+        addWaterRecord({
+          amount: mlToDecimal(data.waterAmount),
+          date: fullDateTime,
+        })
+      ).unwrap();
+    }
+    reset();
     onClose();
   };
 
@@ -104,6 +132,19 @@ const WaterForm = ({ initialData = {}, onClose }) => {
       setValue('time', value);
     }
   };
+
+  useEffect(() => {
+    if (onEditWater && idWaterItem) {
+      const waterItem = waterRecords.find(item => item._id === idWaterItem);
+      if (waterItem) {
+        setValue('waterAmount', waterItem.amount * 1000);
+        const date = new Date(waterItem.date);
+        const hours = String(date.getUTCHours()).padStart(2, '0'); // Используем UTC
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0'); // Используем UTC
+        setValue('time', `${hours}:${minutes}`);
+      }
+    }
+  }, [idWaterItem, waterRecords, setValue, onEditWater]);
 
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
@@ -147,7 +188,6 @@ const WaterForm = ({ initialData = {}, onClose }) => {
           {...register('time')}
           onChange={handleTimeChange}
         />
-
         {errors.time && (
           <span className={css.errorMessage}>{t(errors.time.message)}</span>
         )}

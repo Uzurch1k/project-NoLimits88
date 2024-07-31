@@ -18,8 +18,13 @@ const WaterItem = ({
 }) => {
   const { _id, amount, date } = searchWaterItem;
 
-  const handleOnClick = () => {
+  const handleOnClickDelete = () => {
     openDeleteWaterModal();
+    setIdWaterItem(_id);
+  };
+
+  const handleOnClickEdit = () => {
+    openEditWaterModal();
     setIdWaterItem(_id);
   };
 
@@ -39,7 +44,7 @@ const WaterItem = ({
       <div className={css.buttonsBox}>
         <button
           className={css.editBtn}
-          onClick={openEditWaterModal}
+          onClick={handleOnClickEdit}
           aria-label="Edit the entered amount of water"
         >
           <svg className={css.iconAction} width="14" height="14">
@@ -49,7 +54,7 @@ const WaterItem = ({
 
         <button
           className={css.deleteBtn}
-          onClick={handleOnClick}
+          onClick={handleOnClickDelete}
           aria-label="Delete the entered amount of water"
         >
           <svg className={css.iconAction} width="14" height="14">
