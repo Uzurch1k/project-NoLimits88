@@ -2,7 +2,11 @@
 
 Water Tracker is an application designed to monitor and analyze water
 consumption. It allows users to log their daily water intake and receive
-personalized recommendations for maintaining optimal hydration levels.
+personalized recommendations for maintaining optimal hydration levels. The
+application also includes a dark mode, providing a comfortable user experience
+and reducing eye strain in low-light conditions.
+
+![](/src/assets/darktheme.jpg)
 
 ## Features
 
