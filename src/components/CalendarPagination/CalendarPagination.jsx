@@ -7,7 +7,11 @@ import { useDispatch } from 'react-redux';
 import { convertDateToIso } from '../../helpers/convertDateToIso';
 import { useRef } from 'react';
 
-const CalendarPagination = ({ currentDate, setCurrentDate }) => {
+const CalendarPagination = ({
+  currentDate,
+  setCurrentDate,
+  setShowStatistics,
+}) => {
   const minDate = new Date('2024-01-01');
   const normalisedDate = startOfMonth(currentDate);
 
@@ -28,6 +32,10 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
       setCurrentDate(newMonth);
       dispatch(setMonth(convertDateToIso(newMonth)));
     }
+  };
+
+  const handleStatisticsButtonClick = () => {
+    setShowStatistics(prevState => !prevState);
   };
 
   const isPrevDisabled = normalisedDate <= startOfMonth(minDate);
@@ -75,7 +83,7 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
           </svg>
         </button>
       </div>
-      <button className={css.statisticsButton}>
+      <button className={css.statisticsButton} onClick={handleStatisticsButtonClick}>
         <svg width="20" height="20" className={css.iconStatistics}>
           <use href={`${icons}#icon-pie-chart`} />
         </svg>
