@@ -27,7 +27,12 @@ const WaterModal = ({ onAddWater, onEditWater, onClose, idWaterItem }) => {
     <div>
       <h2 className={css.titleModal}>{title}</h2>
       <p className={css.subtitleModal}>{subtitle}</p>
-      <WaterForm onClose={onClose} idWaterItem={idWaterItem} />
+      <WaterForm
+        onClose={onClose}
+        idWaterItem={idWaterItem}
+        onAddWater={onAddWater}
+        onEditWater={onEditWater}
+      />
     </div>
   );
 };

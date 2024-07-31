@@ -27,7 +27,13 @@ const validationSchema = Yup.object().shape({
     .required('Time is required'),
 });
 
-const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
+const WaterForm = ({
+  initialData = {},
+  onClose,
+  idWaterItem,
+  onAddWater,
+  onEditWater,
+}) => {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecordsOfDay);
   const selectedDay = useSelector(selectSelectedDay);
@@ -39,6 +45,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
       new Date().toLocaleTimeString('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
+        hour12: false,
       }),
   };
 
@@ -47,6 +54,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
     handleSubmit,
     control,
     setValue,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -82,25 +90,35 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
     }
   };
 
-  const onSubmitHandler = data => {
+  const onSubmitHandler = async data => {
     const [hours, minutes] = data.time.split(':');
-    const fullDateTime = `${
-      selectedDay.split('T')[0]
-    }T${hours}:${minutes}:00.000Z`;
+    const fullDateTime = new Date(
+      Date.UTC(
+        new Date(selectedDay).getFullYear(),
+        new Date(selectedDay).getMonth(),
+        new Date(selectedDay).getDate(),
+        hours,
+        minutes
+      )
+    ).toISOString();
 
-    const newEntry = {
-      amount: mlToDecimal(data.waterAmount),
-      date: fullDateTime,
-    };
-
-    console.log(newEntry);
-
-    if (idWaterItem) {
-      dispatch(editWaterRecord({ newEntry, id: idWaterItem })).unwrap();
+    if (onEditWater) {
+      await dispatch(
+        editWaterRecord({
+          amount: mlToDecimal(data.waterAmount),
+          date: fullDateTime,
+          id: idWaterItem,
+        })
+      ).unwrap();
     } else {
-      dispatch(addWaterRecord(newEntry)).unwrap();
+      await dispatch(
+        addWaterRecord({
+          amount: mlToDecimal(data.waterAmount),
+          date: fullDateTime,
+        })
+      ).unwrap();
     }
-
+    reset();
     onClose();
   };
 
@@ -112,17 +130,17 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
   };
 
   useEffect(() => {
-    if (idWaterItem) {
+    if (onEditWater && idWaterItem) {
       const waterItem = waterRecords.find(item => item._id === idWaterItem);
       if (waterItem) {
         setValue('waterAmount', waterItem.amount * 1000);
         const date = new Date(waterItem.date);
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const hours = String(date.getUTCHours()).padStart(2, '0'); // Используем UTC
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0'); // Используем UTC
         setValue('time', `${hours}:${minutes}`);
       }
     }
-  }, [idWaterItem, waterRecords, setValue]);
+  }, [idWaterItem, waterRecords, setValue, onEditWater]);
 
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
@@ -185,7 +203,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem }) => {
         )}
       </div>
       <button className={clsx(css.settingsButton, 'btn-def')} type="submit">
-        {idWaterItem ? 'Update' : 'Add'}
+        Save
       </button>
     </form>
   );
