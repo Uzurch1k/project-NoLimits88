@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
 import Section from '../../components/Layout/Section/Section';
@@ -14,8 +15,8 @@ import css from './TrackerPage.module.scss';
 
 const TrackerPage = () => {
   const [idWaterItem, setIdWaterItem] = useState('');
-
-	const [modals, setModals] = useState({
+  const { t } = useTranslation();
+  const [modals, setModals] = useState({
     logout: false,
     settings: false,
     addWater: false,
@@ -38,7 +39,7 @@ const TrackerPage = () => {
 
   return (
     <div className={css.body}>
-      <DocumentTitle>Tracker</DocumentTitle>
+      <DocumentTitle>{t('page.tracker')}</DocumentTitle>
       <Section>
         <WaterMainInfo openAddWaterModal={() => openModal('addWater')} />
 

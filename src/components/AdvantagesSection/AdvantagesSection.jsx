@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -12,6 +13,8 @@ import ava3 from '../../img/content/ava3.png';
 import css from './AdvantagesSection.module.scss';
 
 const AdvantagesSection = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const { count = 0, photos = [] } = useSelector(selectUserCount) || {};
 
@@ -28,26 +31,32 @@ const AdvantagesSection = () => {
         <ul className={css.customersBox}>
           {displayPhotos.map((photo, index) => (
             <li key={index} className={css.customerImgBox}>
-              <img className={css.customerImg} src={photo} alt="User ava" />
+              <img
+                className={css.customerImg}
+                src={photo}
+                alt={t('User avatar')}
+              />
             </li>
           ))}
         </ul>
         <p className={css.text}>
-          <span className={css.highlightedtext}>{count} happy</span>
-          <br /> customers
+          <span className={css.highlightedtext}>
+            {count} {t('advantagesSection.happy')}
+          </span>
+          <br /> {t('advantagesSection.customers')}
         </p>
       </div>
       <div className={css.group}>
         <ul className={css.advantagesGroup}>
           <li className={css.advantagesGroupItem}>
             <span className={css.ellipse}></span>
-            <p>Habit drive</p>
+            <p>{t('advantagesSection.habit')}</p>
           </li>
           <li className={css.advantagesGroupItem}>
-            <p>View statistics</p>
+            <p>{t('advantagesSection.statistics')}</p>
           </li>
           <li className={css.advantagesGroupItem}>
-            <p>Personal rate setting</p>
+            <p>{t('advantagesSection.setting')}</p>
           </li>
         </ul>
       </div>

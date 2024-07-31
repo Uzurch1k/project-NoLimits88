@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useState, useId } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,29 +16,32 @@ import css from './SignInForm.module.scss';
 import BtnShowPassword from '../BtnShowPassword/BtnShowPassword';
 import { LoaderDetails } from '../Loader/Loader';
 
-const loginSchema = yup.object().shape({
-  email: yup
-    .string('Email should be a string')
-    .required('Email is required')
-    .email('Invalid email format')
-    .test('isValidAfterSign', 'Invalid email format', function (email) {
-      const strAfterEmailSign = email.slice(email.indexOf('@'));
-      if (strAfterEmailSign.includes('@') === -1) {
-        return true;
-      } else if (strAfterEmailSign.includes('@') !== -1) {
-        return strAfterEmailSign.includes('.');
-      }
-    }),
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(6, 'Password should have at least 6 characters')
-    .max(28, 'Password should not have more than 28 characters')
-    .matches(/\d/, 'The password must contain at least one number')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters'),
-});
-
 const SignInForm = () => {
+  const { t } = useTranslation();
+  const loginSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required(t('signInPage.emailSpanError'))
+      .email(t('signInPage.emailSpanError'))
+      .test(
+        'isValidAfterSign',
+        t('signInPage.emailSpanError'),
+        function (email) {
+          const strAfterEmailSign = email.slice(email.indexOf('@'));
+          return (
+            !strAfterEmailSign.includes('@') || strAfterEmailSign.includes('.')
+          );
+        }
+      ),
+    password: yup
+      .string()
+      .required(t('signInPage.passwordSpanError'))
+      .min(6, t('signInPage.passwordSpanError'))
+      .max(28, t('signInPage.passwordSpanError'))
+      .matches(/\d/, t('signInPage.passwordSpanError'))
+      .matches(/[a-zA-Z]/, t('signInPage.passwordSpanError')),
+  });
+
   const {
     register,
     handleSubmit,
@@ -77,11 +80,10 @@ const SignInForm = () => {
 
   return (
     <div className={css.signInBody}>
-      <h2 className={css.signInTitle}>Sign In</h2>
-
+      <h2 className={css.signInTitle}>{t('signInPage.signIn')}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.signInForm}>
         <label htmlFor={fieldEmailId} className={css.emailLabel}>
-          Email
+          {t('signInPage.email')}
         </label>
         <input
           type="email"
@@ -91,14 +93,14 @@ const SignInForm = () => {
             [css.emailInput]: true,
             [css.errorEmailInput]: errors.email,
           })}
-          placeholder="Enter your email"
+          placeholder={t('signInPage.emailPlaceholder')}
         />
         {errors.email && (
           <p className={css.errorMessage}>{errors.email.message}</p>
         )}
 
         <label htmlFor={fieldPasswordId} className={css.passwordLabel}>
-          Password
+          {t('signInPage.password')}
         </label>
         <div
           className={clsx({
@@ -110,7 +112,7 @@ const SignInForm = () => {
             type={isPasswordVisible ? 'text' : 'password'}
             id={fieldPasswordId}
             {...register('password')}
-            placeholder="Enter your password"
+            placeholder={t('signInPage.passwordPlaceholder')}
             className={clsx({
               [css.passwordInput]: true,
               [css.errorPasswordInput]: errors.password,
@@ -123,14 +125,18 @@ const SignInForm = () => {
         )}
 
         <button type="submit" className={clsx(css.btnSignIn, 'btn-def')}>
-          {isLoader ? <LoaderDetails isPositioning={true} /> : 'Sign In'}
+          {isLoader ? (
+            <LoaderDetails isPositioning={true} />
+          ) : (
+            t('signInPage.signIn')
+          )}
         </button>
       </form>
 
       <p className={css.questionText}>
-        Don&#39;t have an account?{' '}
+        {t('signInPage.dontAccount')}{' '}
         <Link className={css.signUpLink} to="/signup">
-          Sign Up
+          {t('signInPage.signUp')}
         </Link>
       </p>
 
@@ -145,7 +151,7 @@ const SignInForm = () => {
         draggable
         pauseOnHover
         theme="light"
-        // transition:Slide
+        // transition="slide"
         closeButton={window.innerWidth > 480}
       />
     </div>

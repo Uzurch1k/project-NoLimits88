@@ -1,17 +1,20 @@
+import { useTranslation } from 'react-i18next';
 import WaterForm from '../WaterForm/WaterForm';
+
 import css from './WaterModal.module.scss';
 
 const WaterModal = ({ onAddWater, onEditWater, onClose, idWaterItem }) => {
+  const { t } = useTranslation();
   const getTitleAndSubtitle = () => {
     if (onAddWater) {
       return {
-        title: 'Add water',
-        subtitle: 'Choose a value:',
+        title: t('modals.addEdit.add'),
+        subtitle: t('modals.addEdit.choose'),
       };
     } else if (onEditWater) {
       return {
-        title: 'Edit the entered amount of water',
-        subtitle: 'Correct entered data:',
+        title: t('modals.addEdit.edit'),
+        subtitle: t('modals.addEdit.correct'),
       };
     } else {
       return {

@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import icons from '../../img/icons/symbol.svg';
 // import css from './AddWaterBtn.module.scss';
 
 const AddWaterBtn = ({ waterClassBtn, openAddWaterModal }) => {
+  const { t } = useTranslation();
   return (
     <button className={waterClassBtn} type="button" onClick={openAddWaterModal}>
       <div>
@@ -9,7 +11,7 @@ const AddWaterBtn = ({ waterClassBtn, openAddWaterModal }) => {
           <use href={`${icons}#icon-plus`}></use>
         </svg>
       </div>
-      <span>Add water</span>
+      <span>{t('waterMainInfo.btn')}</span>
     </button>
   );
 };

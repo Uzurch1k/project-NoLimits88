@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
 import DocumentTitle from '../../components/Layout/DocumentTitle/DocumentTitle';
@@ -6,12 +7,14 @@ import WelcomeSection from '../../components/WelcomeSection/WelcomeSection';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import Logo from '../../components/Logo/Logo';
 import ThemeToggleButton from '../../components/ThemeToggleButton/ThemeToggleButton';
+import Languages from '../../components/Languages/Languages';
 
 import clsx from 'clsx';
 import css from './HomePage.module.scss';
 
 const HomePage = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const { t } = useTranslation();
+  const [isVisible, setIsVisible] = useState(false);
 
   // useEffect(() => {
   //   setIsVisible(true);
@@ -19,7 +22,7 @@ const HomePage = () => {
 
   return (
     <div className={css.body}>
-      <DocumentTitle>Home</DocumentTitle>
+      <DocumentTitle>{t(`page.Home`)}</DocumentTitle>
       <Section>
         <div
           className={clsx(css.wrapp, css.blockLaft, {
@@ -28,6 +31,7 @@ const HomePage = () => {
         >
           <Logo />
           <ThemeToggleButton />
+          <Languages />
           <WelcomeSection />
         </div>
 

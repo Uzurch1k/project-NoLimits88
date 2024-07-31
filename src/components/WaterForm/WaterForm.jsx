@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,17 +17,24 @@ import icons from '../../img/icons/symbol.svg';
 import css from './WaterForm.module.scss';
 import clsx from 'clsx';
 
-const validationSchema = Yup.object().shape({
-  waterAmount: Yup.number()
-    .min(50, 'The amount must be at least 50ml')
-    .max(5000, 'The amount of water must be less than 5000 ml')
-    .required('Water amount is required'),
-  time: Yup.string()
-    .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format')
-    .required('Time is required'),
-});
+const WaterForm = ({
+  initialData = {},
+  onClose,
+  idWaterItem,
+  onAddWater,
+  onEditWater,
+}) => {
+  const { t } = useTranslation();
+  const validationSchema = Yup.object().shape({
+    waterAmount: Yup.number()
+      .min(50, t('modals.UserSettingsForm.errors.water50'))
+      .max(5000, 'modals.UserSettingsForm.errors.water500')
+      .required('modals.UserSettingsForm.errors.required'),
+    time: Yup.string()
+      .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format')
+      .required('Time is required'),
+  });
 
-const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
   const dispatch = useDispatch();
   const waterRecords = useSelector(selectWaterRecordsOfDay);
   const selectedDay = useSelector(selectSelectedDay);
@@ -137,7 +145,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
 
   return (
     <form className={css.waterForm} onSubmit={handleSubmit(onSubmitHandler)}>
-      <p className={css.text}>Amount of water</p>
+      <p className={css.text}>{t('modals.addEdit.amount')}</p>
       <div className={css.counterContainer}>
         <button
           type="button"
@@ -149,7 +157,9 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
           </svg>
         </button>
         <div className={css.inputWrapper}>
-          <span className={css.waterAmountInput}>{`${waterAmount} ml`}</span>
+          <span className={css.waterAmountInput}>{`${waterAmount} ${t(
+            'modals.addEdit.ml'
+          )}`}</span>
         </div>
         <button
           type="button"
@@ -166,7 +176,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
       )}
       <div className={css.inputContainerTime}>
         <label htmlFor="time" className={css.textTime}>
-          Recording time:
+          {t('modals.addEdit.time')}
         </label>
         <input
           name="time"
@@ -183,7 +193,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
       </div>
       <div className={css.inputContainer}>
         <label htmlFor="waterAmountKeyboard" className={css.settingsTitle}>
-          Enter the value of the water used:
+          {t('modals.addEdit.value')}
         </label>
         <div className={css.inputWrapper}>
           <input
@@ -200,7 +210,7 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
         )}
       </div>
       <button className={clsx(css.settingsButton, 'btn-def')} type="submit">
-        Save
+        {t('modals.addEdit.saveBtn')}
       </button>
     </form>
   );

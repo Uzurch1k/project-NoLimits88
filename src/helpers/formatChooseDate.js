@@ -1,4 +1,4 @@
-export const formatChooseDate = dateString => {
+export const formatChooseDate = (dateString, t) => {
   const date = new Date(dateString);
   const today = new Date();
 
@@ -7,7 +7,7 @@ export const formatChooseDate = dateString => {
     date.getMonth() === today.getMonth() &&
     date.getFullYear() === today.getFullYear()
   ) {
-    return 'Today';
+    return t('waterMainInfo.today');
   }
 
   const day = date.getDate();
