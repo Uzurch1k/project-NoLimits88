@@ -26,20 +26,23 @@ const userSettingsSchema = Yup.object().shape({
     .email('Please enter a valid email address (must contain @)')
     .required('Email is required'),
   weight: Yup.number()
-    .transform(value => (isNaN(value) ? undefined : value))
+    .transform(value => (value === '' || isNaN(value) ? undefined : value))
+    .typeError('Weight must be a number')
     .min(0, 'The value must be at least 0')
     .max(999, 'The value must be no more than 3 numbers')
-    .nullable(),
+    .required('Weight is required'),
   amountOfWater: Yup.number()
+    .transform(value => (value === '' || isNaN(value) ? undefined : value))
     .typeError('Amount of water should be a number')
     .min(0, 'The value must be at least 0')
     .max(999, 'The value must be no more than 3 numbers')
-    .nullable(),
+    .required('Amount of water is required'),
   activeTime: Yup.number()
+    .transform(value => (value === '' || isNaN(value) ? undefined : value))
     .typeError('Active time must be a number')
     .min(0, 'The value must be at least 0')
     .max(1440, 'The value must be no more than 1440 minutes')
-    .nullable(),
+    .required('Active time is required'),
   gender: Yup.string()
     .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
     .required('Gender is required'),
@@ -204,7 +207,9 @@ const UserSettingsForm = ({ onClose }) => {
                   </label>
                   <input
                     {...register('name')}
-                    className={css.inputFirst}
+                    className={`${css.inputFirst} ${
+                      errors.name ? css.inputError : ''
+                    }`}
                     type="text"
                     name="name"
                     id="name"
@@ -275,7 +280,9 @@ const UserSettingsForm = ({ onClose }) => {
                     </label>
                     <input
                       {...register('weight')}
-                      className={css.inputWeight}
+                      className={`${css.inputWeight} ${
+                        errors.weight ? css.inputWeightError : ''
+                      }`}
                       type="number"
                       name="weight"
                       id="weight"
@@ -330,7 +337,7 @@ const UserSettingsForm = ({ onClose }) => {
                       type="number"
                       name="amountOfWater"
                       id="amountOfWater"
-                      step="0.1"
+                      step="0.01"
                     />
                     {errors.amountOfWater && (
                       <span className={css.errorMessage}>
