@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-hot-toast';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -41,18 +43,6 @@ const userSettingsSchema = Yup.object().shape({
     .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
     .required('Gender is required'),
 });
-
-/* .test('weight-and-active-time', null, function (values) {
-    const { weight, activeTime } = values;
-    if ((weight || activeTime) && (!weight || !activeTime)) {
-      return this.createError({
-        path: 'weight',
-        message:
-          'Both weight and active time must be filled if one of them is filled',
-      });
-    }
-    return true;
-  })*/
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -113,15 +103,13 @@ const UserSettingsForm = ({ onClose }) => {
       formData.append('photo', photoFile);
     }
 
-    dispatch(updateUser(formData))
-      .unwrap()
-      .then(() => {
-        toast.success('User data updated successfully!');
-        onClose();
-      })
-      .catch(() => {
-        toast.error('Failed to update user data.');
-      });
+    try {
+      await dispatch(updateUser(formData)).unwrap();
+      toast.success('User data updated successfully!');
+      onClose();
+    } catch (error) {
+      toast.error('Failed to update user data.');
+    }
   };
 
   return (
@@ -345,6 +333,21 @@ const UserSettingsForm = ({ onClose }) => {
           Save
         </button>
       </form>
+
+      <ToastContainer
+        className={css.Toastify}
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar
+        closeOnClick
+        // rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition:Slide
+        closeButton={window.innerWidth > 480}
+      />
     </>
   );
 };

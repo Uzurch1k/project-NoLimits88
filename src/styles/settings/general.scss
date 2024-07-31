@@ -4,7 +4,8 @@ body {
 	color: var(--cy);
 	font-size: 14px;
 	line-height: 1.29;
-	background-color: var(--cw);
+	background-color: var(--dcy);
+	transition: all 150ms ease-in;
 }
 
 .wrapper {

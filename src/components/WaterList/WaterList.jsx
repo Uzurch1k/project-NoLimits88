@@ -19,6 +19,7 @@ const WaterList = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (selectedDay === null) return;
     dispatch(fetchAllWaterRecordsOfDay(selectedDay));
   }, [selectedDay, dispatch]);
 

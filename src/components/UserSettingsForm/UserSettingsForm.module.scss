@@ -104,7 +104,9 @@
 	margin-bottom: 14px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid var(--rcp);
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -116,7 +118,9 @@
 .input {
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid var(--rcp);
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -129,7 +133,9 @@
 	margin-top: 8px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid var(--rcp);
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;
@@ -211,7 +217,7 @@
 
 .genderRadioInput:checked + .genderLabel::before {
 	background-color: var(--cg);
-	box-shadow: inset 0 0 0 5px var(--cw);
+	box-shadow: inset 0 0 0 5px var(--dcw);
 }
 .womanLabel {
 	margin-bottom: 14px;
@@ -230,7 +236,9 @@
 
 .normaTextArea {
 	border-radius: 15px;
-	border: 1px solid var(--rcp);
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
 	padding: 16px;
 	margin-bottom: 14px;
 	text-align: justify;
@@ -251,7 +259,9 @@
 	margin-bottom: 14px;
 	width: 100%;
 	border-radius: 15px;
-	border: 1px solid var(--rcp);
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
 	padding: 14px 16px;
 	cursor: text;
 	font-size: 14px;

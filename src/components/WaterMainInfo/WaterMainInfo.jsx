@@ -1,15 +1,20 @@
 import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
-import css from './WaterMainInfo.module.scss';
-import bottlx1 from '../../img/content/bottle@x1.png';
-import bottlex2 from '../../img/content/bottle@x2.png';
-import Logo from '../../components/Logo/Logo';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
 import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
+
+import Logo from '../../components/Logo/Logo';
+import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
+
+import bottlx1 from '../../img/content/bottle@x1.png';
+import bottlex2 from '../../img/content/bottle@x2.png';
+
+import css from './WaterMainInfo.module.scss';
 
 const WaterMainInfo = ({ openAddWaterModal }) => {
   return (
     <div className={css.wrapp}>
       <Logo />
+      <ThemeToggleButton />
       <AddWaterBtn
         waterClassBtn={css.waterClassBtn}
         openAddWaterModal={openAddWaterModal}

@@ -4,20 +4,20 @@
 	left: 16px;
 	border-radius: 15px;
 	padding: 12px;
-	background-color: var(--cw);
+	background-color: var(--dcy);
 	box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .dailyNormaValue {
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1;
-	color: var(--cy);
+	color: var(--dcq);
 	margin-bottom: 6px;
 }
 .normaDescr {
 	font-size: 10px;
 	line-height: 1;
-	color: var(--rcb);
+	color: var(--drcb);
 }
 
 @media screen and (min-width: 768px) {
