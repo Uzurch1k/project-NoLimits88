@@ -8,6 +8,7 @@ const DailyInfo = ({
   openAddWaterModal,
   openEditWaterModal,
   openDeleteWaterModal,
+  setIdWaterItem,
 }) => {
   return (
     <div className={css.dailyInfoSec}>
@@ -21,6 +22,7 @@ const DailyInfo = ({
       <WaterList
         openEditWaterModal={openEditWaterModal}
         openDeleteWaterModal={openDeleteWaterModal}
+        setIdWaterItem={setIdWaterItem}
       />
     </div>
   );

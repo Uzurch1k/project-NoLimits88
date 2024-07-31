@@ -5,7 +5,7 @@ import {
   fetchAllWaterRecordsOfMonth,
   addWaterRecord,
   deleteWaterRecord,
-  // editWaterRecord,
+  editWaterRecord,
 } from './operations';
 import { TODAY } from '../../constants/time';
 import { calculateWaterDrunkPerDay } from '../../helpers/calculateWaterDrunkPerDay';
@@ -227,54 +227,108 @@ const waterSlice = createSlice({
         }
       })
 
-      // .addCase(editWaterRecord.pending, state => {
-      //   state.waterDaily.isLoading = true;
-      //   state.error = null;
-      // })
-      // .addCase(editWaterRecord.fulfilled, (state, action) => {
-      //   const isRecordToday = action.payload[0].date.startsWith(
-      //     TODAY.slice(0, 9)
-      //   );
-      //   const isRecordInCurrentMonth = action.payload[0].date.startsWith(
-      //     state.selectedMonth.slice(0, 6)
-      //   );
-      //   if (isRecordToday && isRecordInCurrentMonth) {
-      //     state.waterDaily.records = [
-      //       ...state.waterDaily.records,
-      //       action.payload,
-      //     ];
-      //     state.waterMonthly.records = [
-      //       ...state.waterDaily.records,
-      //       action.payload,
-      //     ];
-      //     state.waterDaily.isLoading = false;
-      //     state.error = null;
-      //     return;
-      //   }
-      //   if (!isRecordToday && isRecordInCurrentMonth) {
-      //     state.waterDaily.records = state.waterDaily.records.filter(
-      //       record => record._id !== action.payload
-      //     );
-      //     state.waterMonthly.records = state.waterMonthly.records.filter(
-      //       record => record._id !== action.payload
-      //     );
-      //     state.waterDaily.isLoading = false;
-      //     state.error = null;
-      //     return;
-      //   }
-      //   if (!isRecordToday && !isRecordInCurrentMonth) {
-      //     state.waterDaily.records = state.waterDaily.records.filter(
-      //       record => record._id !== action.payload
-      //     );
-      //     // state.waterMonthly.records = [...state.waterMonthly.records];
-      //     state.waterDaily.isLoading = false;
-      //     state.error = null;
-      //     return;
-      //   }
-      //   state.records = action.payload;
-      //   state.loading = false;
-      //   state.error = null;
-      // })
+      .addCase(editWaterRecord.pending, state => {
+        state.waterDaily.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editWaterRecord.fulfilled, (state, action) => {
+        const isRecordToday = action.payload.date.startsWith(TODAY.slice(0, 9));
+        const isRecordInCurrentMonth = action.payload.date.startsWith(
+          state.selectedMonth.slice(0, 7)
+        );
+        if (isRecordToday && isRecordInCurrentMonth) {
+          state.waterDaily.records = state.waterDaily.records.filter(
+            record => record._id !== action.payload._id
+          );
+          state.waterMonthly.records = state.waterMonthly.records.filter(
+            record => record._id !== action.payload._id
+          );
+          state.waterDaily.records = [
+            ...state.waterDaily.records,
+            action.payload,
+          ];
+          state.waterMonthly.records = [
+            ...state.waterMonthly.records,
+            action.payload,
+          ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+        if (!isRecordToday && isRecordInCurrentMonth) {
+          state.waterDaily.records = state.waterDaily.records.filter(
+            record => record._id !== action.payload._id
+          );
+          state.waterMonthly.records = state.waterMonthly.records.filter(
+            record => record._id !== action.payload._id
+          );
+          state.waterDaily.records = [
+            ...state.waterDaily.records,
+            action.payload,
+          ];
+          state.waterMonthly.records = [
+            ...state.waterMonthly.records,
+            action.payload,
+          ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+        if (isRecordToday && !isRecordInCurrentMonth) {
+          state.waterDaily.records = state.waterDaily.records.filter(
+            record => record._id !== action.payload._id
+          );
+
+          state.waterDaily.records = [
+            ...state.waterDaily.records,
+            action.payload,
+          ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+        if (!isRecordToday && !isRecordInCurrentMonth) {
+          state.waterDaily.records = state.waterDaily.records.filter(
+            record => record._id !== action.payload._id
+          );
+
+          state.waterDaily.records = [
+            ...state.waterDaily.records,
+            action.payload,
+          ];
+
+          const amountOfWaterDrunkPerDay = calculateWaterDrunkPerDay(
+            state.waterDaily.records
+          );
+
+          state.waterDrunkPerDay = amountOfWaterDrunkPerDay;
+
+          state.waterDaily.isLoading = false;
+          state.error = null;
+          return;
+        }
+      })
       .addMatcher(isWaterRejected, waterRejected);
   },
 });

@@ -5,6 +5,24 @@ import css from './WaterProgressBar.module.scss';
 const WaterProgressBar = () => {
   const { t } = useTranslation();
   const progressPercents = 50;
+import { useSelector } from 'react-redux';
+import { selectTotalAmountOfWaterDrunkPerDay } from '../../redux/water/selectors';
+import { selectUserDailyNorma } from '../../redux/auth/selectors';
+import { calculateWaterProgress } from '../../helpers/calculateWaterProgress';
+
+import css from './WaterProgressBar.module.scss';
+
+const WaterProgressBar = () => {
+  const amountOfWaterDrunkPerDay = useSelector(
+    selectTotalAmountOfWaterDrunkPerDay
+  );
+
+  const userDailyNorma = useSelector(selectUserDailyNorma);
+
+  const progressPercents = calculateWaterProgress(
+    amountOfWaterDrunkPerDay,
+    userDailyNorma
+  );
   const progressBarRef = useRef(null);
   const [ellipseLeft, setEllipseLeft] = useState(0);
 
