@@ -3,14 +3,14 @@
 	top: 100%;
 	width: 100%;
 	border-radius: 15px;
-	background-color: var(--cw);
+	background-color: var(--dcy);
 	z-index: 100;
 	margin-top: 4px;
 	padding: 14px 20px;
 	box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
 	opacity: 0;
 	transform: translateY(-10px);
-	transition: all 200ms ease-in;
+	transition: all 150ms ease-in;
 	visibility: hidden;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .userBarPopoverItem {
-	color: var(--rcy);
+	color: var(--drcn);
 	transition: all 150ms ease-in;
 }
 
@@ -40,7 +40,7 @@
 .iconPopover {
 	height: 100%;
 	width: 100%;
-	stroke: var(--rcy);
+	stroke: var(--drcn);
 	fill: none;
 	transition: all 150ms ease-in;
 }
@@ -55,13 +55,13 @@
 .userBarPopoverItem.active,
 .userBarPopoverItem:hover,
 .userBarPopoverItem:focus-within {
-	color: var(--cy);
+	color: var(--dcq);
 }
 
 .iconPopover.activeIcon,
 .userBarPopoverItem:hover .iconPopover,
 .userBarPopoverItem:focus-within .iconPopover {
-	stroke: var(--cy);
+	stroke: var(--dcq);
 }
 
 @media screen and (min-width: 768px) {

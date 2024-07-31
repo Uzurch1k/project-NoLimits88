@@ -42,18 +42,6 @@ const userSettingsSchema = Yup.object().shape({
     .required('Gender is required'),
 });
 
-/* .test('weight-and-active-time', null, function (values) {
-    const { weight, activeTime } = values;
-    if ((weight || activeTime) && (!weight || !activeTime)) {
-      return this.createError({
-        path: 'weight',
-        message:
-          'Both weight and active time must be filled if one of them is filled',
-      });
-    }
-    return true;
-  })*/
-
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);

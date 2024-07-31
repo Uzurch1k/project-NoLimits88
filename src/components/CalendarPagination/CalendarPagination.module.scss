@@ -8,7 +8,7 @@
 	.calendarArrowIcon {
 		fill: transparent;
 		stroke: var(--cy);
-		transition: transform 100ms ease-in-out;
+		transition: transform 150ms ease-in-out;
 	}
 
 	.dateTitleBox {
@@ -106,7 +106,7 @@
 .dateTitleEnterActive {
   opacity: 1;
   transform: translateY(0);
-  transition: all 200ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
 .dateTitleExit {
@@ -117,5 +117,5 @@
 .dateTitleExitActive {
   opacity: 0;
   transform: translateY(-20px);
-  transition: all 200ms ease-in-out;
+  transition: all 150ms ease-in-out;
 }
