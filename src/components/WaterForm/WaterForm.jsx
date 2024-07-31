@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { GoPlus } from 'react-icons/go';
-import { HiOutlineMinus } from 'react-icons/hi';
-
 import { addWaterRecord, editWaterRecord } from '../../redux/water/operations';
 import {
   selectSelectedDay,
