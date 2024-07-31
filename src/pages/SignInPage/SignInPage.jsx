@@ -4,7 +4,6 @@ import Section from '../../components/Layout/Section/Section';
 import SignSection from '../../components/Layout/SignSection/SignSection';
 import Logo from '../../components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
-import Languages from '../../components/Languages/Languages';
 import { useTranslation } from 'react-i18next';
 import css from './SignInPage.module.scss';
 
@@ -13,7 +12,6 @@ const SignInPage = () => {
   return (
     <div className={css.body}>
       <DocumentTitle>{t('page.signIn')}</DocumentTitle>
-      <Languages />
       <Section>
         <SignSection>
           <Logo />

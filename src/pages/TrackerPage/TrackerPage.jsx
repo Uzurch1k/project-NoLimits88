@@ -10,7 +10,6 @@ import LogOutModal from '../../components/LogOutModal/LogOutModal';
 import UserSettingsModal from '../../components/UserSettingsModal/UserSettingsModal';
 import WaterModal from '../../components/WaterModal/WaterModal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
-import Languages from '../../components/Languages/Languages';
 
 import css from './TrackerPage.module.scss';
 
@@ -41,7 +40,6 @@ const TrackerPage = () => {
   return (
     <div className={css.body}>
       <DocumentTitle>{t('page.tracker')}</DocumentTitle>
-      <Languages />
       <Section>
         <WaterMainInfo openAddWaterModal={() => openModal('addWater')} />
 

@@ -4,6 +4,7 @@ import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
 
 import Logo from '../../components/Logo/Logo';
 import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
+import Languages from '../Languages/Languages';
 
 import bottlx1 from '../../img/content/bottle@x1.png';
 import bottlex2 from '../../img/content/bottle@x2.png';
@@ -14,6 +15,7 @@ const WaterMainInfo = ({ openAddWaterModal }) => {
   return (
     <div className={css.wrapp}>
       <Logo />
+      <Languages />
       <ThemeToggleButton />
       <AddWaterBtn
         waterClassBtn={css.waterClassBtn}
