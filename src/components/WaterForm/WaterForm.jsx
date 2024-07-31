@@ -191,7 +191,6 @@ const WaterForm = ({ initialData = {}, onClose, idWaterItem, onEditWater }) => {
             {...register('waterAmount')}
             type="number"
             id="waterAmountKeyboard"
-            min="50"
             onChange={handleKeyboardAmountChange}
           />
         </div>

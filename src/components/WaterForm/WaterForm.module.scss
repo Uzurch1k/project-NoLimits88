@@ -1,159 +1,159 @@
 .waterForm {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .text {
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1.28;
-	letter-spacing: -0.01em;
-	margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
 }
 .textEnter {
-	margin-bottom: 8px;
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 1.25;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
 }
 
 .counterContainer {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .decrementButton,
 .incrementButton {
-	width: 40px;
-	height: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	&:hover .icon {
-		stroke: var(--cg);
-	}
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover .icon {
+    stroke: var(--cg);
+  }
 }
 .icon {
-	stroke: var(--cy);
-	fill: transparent;
-	width: 100%;
-	height: 100%;
-	transition: stroke 150ms ease-in;
+  stroke: var(--cy);
+  fill: transparent;
+  width: 100%;
+  height: 100%;
+  transition: stroke 150ms ease-in;
 }
 
 .waterAmountInput {
-	width: 100px;
-	text-align: center;
-	font-weight: 700;
-	padding: 11px 0;
-	border-radius: 30px;
-	background-color: var(--cy);
-	color: var(--cw);
+  width: 100px;
+  text-align: center;
+  font-weight: 700;
+  padding: 11px 0;
+  border-radius: 30px;
+  background-color: var(--cy);
+  color: var(--cw);
 }
 
 .inputContainer {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .timeInput {
-	padding: 5px;
-	font-size: 16px;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .errorMessage {
-	color: red;
-	font-size: 14px;
-	margin-bottom: 14px;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 14px;
 }
 
 .settingsButton {
-	padding: 14px 40px;
-	cursor: pointer;
+  padding: 14px 40px;
+  cursor: pointer;
 }
 .settingsButton:hover,
 .settingsButton:focus {
-	background-color: var(--cn);
+  background-color: var(--cn);
 }
 .settingsTitle {
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 1.25;
-	letter-spacing: -0.01em;
-	margin-bottom: 8px;
-	color: var(--cy);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--cy);
 }
 .textTime {
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 .input {
-	height: 46px;
-	width: 100%;
-	border-radius: 15px;
-	padding: 14px 16px;
-	margin-bottom: 24px;
-	border: 1px solid var(--drcm);
-	color: var(--dcb);
-	background-color: transparent;
-	transition: border 150ms ease-in;
-	&:hover,
-	&:focus {
-		border: 1px solid var(--rcw);
-	}
+  height: 46px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--drcm);
+  color: var(--dcb);
+  background-color: transparent;
+  transition: border 150ms ease-in;
+  &:hover,
+  &:focus {
+    border: 1px solid var(--rcw);
+  }
 }
 .inputContainerTime {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .input:hover,
 .input:focus {
-	border-color: var(--cg);
-	outline: none;
+  border-color: var(--cg);
+  outline: none;
 }
 
 .inputWrapper {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-input[type="time"]:hover {
-	cursor: text;
+input[type='time']:hover {
+  cursor: text;
 }
 
 /*==========================================*/
 @media screen and (min-width: 768px) {
-	.settingsButton {
-		padding: 16px 50px;
-		cursor: pointer;
-	}
+  .settingsButton {
+    padding: 16px 50px;
+    cursor: pointer;
+  }
 
-	.input {
-		height: 56px;
-		padding: 16px;
-	}
+  .input {
+    height: 56px;
+    padding: 16px;
+  }
 
-	.text {
-		font-size: 16px;
-	}
-	.textEnter {
-		font-size: 18px;
-		line-height: 1.33;
-	}
+  .text {
+    font-size: 16px;
+  }
+  .textEnter {
+    font-size: 18px;
+    line-height: 1.33;
+  }
 
-	.decrementButton,
-	.incrementButton {
-		width: 43px;
-		height: 43px;
-	}
+  .decrementButton,
+  .incrementButton {
+    width: 43px;
+    height: 43px;
+  }
 
-	.waterAmountInput {
-		width: 107px;
-		font-size: 15px;
-		line-height: 1.49;
-	}
+  .waterAmountInput {
+    width: 107px;
+    font-size: 15px;
+    line-height: 1.49;
+  }
 }
 
 /*==================================================*/
