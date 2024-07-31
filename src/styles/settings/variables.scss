@@ -26,3 +26,7 @@ body {
 	--ff1: "Poppins", sans-serif;
 	--ff2: "Gilroy", sans-serif;
 }
+
+body.dark{
+	background-color: var(--cy);
+}
