@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { ThreeDots } from 'react-loader-spinner';
 
 import { deleteWaterRecord } from '../../redux/water/operations';
 
@@ -11,9 +14,12 @@ import css from './DeleteWaterModal.module.scss';
 const DeleteWaterModal = ({ onClose, idWaterItem }) => {
   const { t } = useTranslation();
 
+  const [isLoader, setIsLoader] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
+    setIsLoader(true);
     try {
       await dispatch(deleteWaterRecord(idWaterItem)).unwrap();
 
@@ -21,6 +27,8 @@ const DeleteWaterModal = ({ onClose, idWaterItem }) => {
       onClose();
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setIsLoader(false);
     }
   };
 
@@ -30,12 +38,26 @@ const DeleteWaterModal = ({ onClose, idWaterItem }) => {
       <p className={css.quest}>{t('modals.delete.text')}</p>
       <div className={css.boxBtns}>
         <button
-          className={clsx(css.btndelete, 'btn-def')}
+          className={clsx(
+            css.btndelete,
+            'btn-def',
+            isLoader && css.btnWithLoader
+          )}
           type="button"
           onClick={handleDelete}
         >
+          {isLoader && (
+            <ThreeDots
+              visible={true}
+              radius="9"
+              color="white"
+              ariaLabel="three-dots-loading"
+              wrapperClass={css.loader}
+            />
+          )}
           {t('modals.delete.delete')}
         </button>
+
         <button
           className={clsx(css.btncancel, 'btn-def')}
           type="button"

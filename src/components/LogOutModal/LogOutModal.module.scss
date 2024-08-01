@@ -32,7 +32,29 @@
 	color: var(--cy);
 }
 
+.btnWithLoader {
+	position: relative;
+	color: transparent;
+	transition: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.loader {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+}
+
 @media screen and (min-width: 768px) {
+	.loader {
+		width: 40px;
+		height: 40px;
+	}
+
 	.title {
 		font-size: 28px;
 		margin-bottom: 24px;
