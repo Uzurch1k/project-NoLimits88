@@ -92,8 +92,9 @@
 }
 
 .advantagesGroup {
-	max-width: 168px;
+	max-width: 200px;
 	display: flex;
+	justify-content: end;
 	flex-wrap: wrap;
 	gap: 4px;
 }
@@ -178,7 +179,7 @@
 	}
 
 	.advantagesGroup {
-		max-width: 242px;
+		max-width: 300px;
 		gap: 10px;
 	}
 
