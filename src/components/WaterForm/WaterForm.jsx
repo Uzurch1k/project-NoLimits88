@@ -64,7 +64,7 @@ const WaterForm = ({
     defaultValues,
   });
 
-  const [isLoader, setIsLoader] = useState(true);
+  const [isLoader, setIsLoader] = useState(false);
 
   const waterAmount = useWatch({ control, name: 'waterAmount' });
 
