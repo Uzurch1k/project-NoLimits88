@@ -75,11 +75,11 @@ const CalendarPagination = ({ currentDate, setCurrentDate }) => {
           </svg>
         </button>
       </div>
-      <button className={css.statisticsButton}>
+      {/* <button className={css.statisticsButton}>
         <svg width="20" height="20" className={css.iconStatistics}>
           <use href={`${icons}#icon-pie-chart`} />
         </svg>
-      </button>
+      </button> */}
     </div>
   );
 };
