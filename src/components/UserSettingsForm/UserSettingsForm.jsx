@@ -20,34 +20,6 @@ import icons from '../../img/icons/symbol.svg';
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
 
-const userSettingsSchema = Yup.object().shape({
-  name: Yup.string().required('The field is required'),
-  email: Yup.string()
-    .email('Please enter a valid email address (must contain @)')
-    .required('Email is required'),
-  weight: Yup.number()
-    .transform(value => (value === '' || isNaN(value) ? undefined : value))
-    .typeError('Weight must be a number')
-    .min(0, 'The value must be at least 0')
-    .max(999, 'The value must be no more than 3 numbers')
-    .required('Weight is required'),
-  amountOfWater: Yup.number()
-    .transform(value => (value === '' || isNaN(value) ? undefined : value))
-    .typeError('Amount of water should be a number')
-    .min(0, 'The value must be at least 0')
-    .max(999, 'The value must be no more than 3 numbers')
-    .required('Amount of water is required'),
-  activeTime: Yup.number()
-    .transform(value => (value === '' || isNaN(value) ? undefined : value))
-    .typeError('Active time must be a number')
-    .min(0, 'The value must be at least 0')
-    .max(1440, 'The value must be no more than 1440 minutes')
-    .required('Active time is required'),
-  gender: Yup.string()
-    .oneOf(['Woman', 'Man'], 'Gender must be either Woman or Man')
-    .required('Gender is required'),
-});
-
 /* .test('weight-and-active-time', null, function (values) {
     const { weight, activeTime } = values;
     if ((weight || activeTime) && (!weight || !activeTime)) {
@@ -61,6 +33,31 @@ const userSettingsSchema = Yup.object().shape({
 
 const UserSettingsForm = ({ onClose }) => {
   const { t } = useTranslation();
+
+  const userSettingsSchema = Yup.object().shape({
+    name: Yup.string().required(t('modals.UserSettingsForm.fieldReq')),
+    email: Yup.string()
+      .email(t('modals.UserSettingsForm.validEmail'))
+      .required(t('modals.UserSettingsForm.emailReq')),
+    weight: Yup.number()
+      .transform(value => (isNaN(value) ? undefined : value))
+      .min(0, t('modals.UserSettingsForm.value0'))
+      .max(999, t('modals.UserSettingsForm.value3'))
+      .nullable(),
+    amountOfWater: Yup.number()
+      .typeErrort('modals.UserSettingsForm.amountWater')
+      .min(0, t('modals.UserSettingsForm.value0'))
+      .max(999, t('modals.UserSettingsForm.value3'))
+      .nullable(),
+    activeTime: Yup.number()
+      .typeError(t('modals.UserSettingsForm.activeTime'))
+      .min(0, t('modals.UserSettingsForm.value0'))
+      .max(1440, t('modals.UserSettingsForm.value1440'))
+      .nullable(),
+    gender: Yup.string()
+      .oneOf(['Woman', 'Man'], t('modals.UserSettingsForm.gender'))
+      .required(t('modals.UserSettingsForm.genderReq')),
+  });
 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -127,6 +124,15 @@ const UserSettingsForm = ({ onClose }) => {
     } catch (error) {
       toast.error('Failed to update user data.');
     }
+    dispatch(updateUser(formData))
+      .unwrap()
+      .then(() => {
+        toast.success(t('modals.UserSettingsForm.userUpd'));
+        onClose();
+      })
+      .catch(() => {
+        toast.error(t('modals.UserSettingsForm.failedUpd'));
+      });
   };
 
   return (

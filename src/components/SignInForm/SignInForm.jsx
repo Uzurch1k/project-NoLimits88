@@ -72,7 +72,7 @@ const SignInForm = () => {
       // toast.success('Successfully logged in!');
       reset();
     } catch (error) {
-      toast.error('Invalid email and/or password.');
+      toast.error(t('signInPage.emailSpanError'));
     } finally {
       setIsLoader(false);
     }

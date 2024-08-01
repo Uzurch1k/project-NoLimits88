@@ -87,7 +87,7 @@ const SignUpForm = () => {
       // toast.success('Successfully registered!');
       reset();
     } catch (error) {
-      toast.error('This email is already in use.');
+      toast.error(t('signUpPage.usedEmail'));
     } finally {
       setIsLoader(false);
     }

@@ -17,7 +17,7 @@ const DeleteWaterModal = ({ onClose, idWaterItem }) => {
     try {
       await dispatch(deleteWaterRecord(idWaterItem)).unwrap();
 
-      toast.success('Successfully delete!');
+      toast.success(t('modals.delete.success'));
       onClose();
     } catch (err) {
       toast.error(err.message);
