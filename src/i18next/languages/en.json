@@ -54,6 +54,7 @@
     "repeatPasswordpanError": "Required",
     "repeatPasswordpanErrorTwo": "Passwords must match",
     "textAlready": "Already have account?",
+    "usedEmail": "This email is already in use.",
     "signIn": "Sign In"
   },
   "forgotPage": {
@@ -120,7 +121,7 @@
       "delete": "Delete",
       "cancel": "Cancel",
       "error": "Failed to delete the entry",
-      "success": "Entry deleted successfully"
+      "success": "Successfully delete!"
     },
     "logOut": {
       "title": "Log Out",
@@ -145,6 +146,17 @@
       "saveBtn": "Save"
     },
     "UserSettingsForm": {
+      "userUpd": "User data updated successfully!",
+      "fieldReq": "The field is required",
+      "validEmail": "Please enter a valid email address (must contain @)",
+      "emailReq": "Email is required",
+      "value0": "The value must be at least 0",
+      "value3": "The value must be no more than 3 numbers",
+      "amountWater": "Amount of water should be a number",
+      "activTime": "Active time must be a number",
+      "value1440": "The value must be no more than 1440 minutes",
+      "gender": "Gender must be either Woman or Man",
+      "genderReq": "Gender is required",
       "setting": "Setting",
       "uploadPhotoBtn": "Upload a photo",
       "yourGenderLabel": "Your gender identity",
