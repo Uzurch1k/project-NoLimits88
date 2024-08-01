@@ -46,7 +46,7 @@ const UserSettingsForm = ({ onClose }) => {
       .max(999, t('modals.UserSettingsForm.value3'))
       .nullable(),
     amountOfWater: Yup.number()
-      .typeErrort(t('modals.UserSettingsForm.amountWater'))
+      .typeError(t('modals.UserSettingsForm.amountWater'))
       .min(0, t('modals.UserSettingsForm.value0'))
       .max(999, t('modals.UserSettingsForm.value3'))
       .nullable(),
