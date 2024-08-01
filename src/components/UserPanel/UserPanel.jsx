@@ -13,7 +13,7 @@ const UserPanel = ({ openSettings, openLogout }) => {
     <div className={css.userPanel}>
       <h2 className={css.hello}>
         {t('Userbar.hello')}
-        <span className={css.userPanelName}>, {name}</span>!
+        <span className={css.userPanelName}>, {name}!</span>
       </h2>
       <UserBar
         openSettings={openSettings}
