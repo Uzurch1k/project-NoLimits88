@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { ThreeDots } from 'react-loader-spinner';
+
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -19,18 +21,6 @@ import icons from '../../img/icons/symbol.svg';
 
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
-import { ThreeDots } from 'react-loader-spinner';
-
-/* .test('weight-and-active-time', null, function (values) {
-    const { weight, activeTime } = values;
-    if ((weight || activeTime) && (!weight || !activeTime)) {
-      return this.createError({
-        path: 'weight',
-        message: 'modals.UserSettingsForm.errors.weightAndActiveTime',
-      });
-    }
-    return true;
-  })*/
 
 const UserSettingsForm = ({ onClose }) => {
   const { t } = useTranslation();
