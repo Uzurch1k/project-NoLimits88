@@ -6,6 +6,8 @@
 }
 
 .hello {
+	display: flex;
+	align-items: center;
 	font-family: var(--ff2);
 	font-size: 32px;
 	font-weight: 400;
@@ -15,6 +17,11 @@
 
 .userPanelName {
 	font-weight: 700;
+	text-align: start;
+	width: 185px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 @media screen and (min-width: 768px) {
@@ -27,5 +34,8 @@
 	.hello {
 		line-height: 1.05;
 		font-size: 36px;
+	}
+	.userPanelName {
+		width: 200px;
 	}
 }

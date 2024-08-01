@@ -13,6 +13,13 @@
 	padding: 6px 12px;
 	gap: 8px;
 	font-weight: 700;
+	p {
+		text-align: start;
+		width: 75px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
 .avatarWrapper {
@@ -54,6 +61,9 @@
 @media screen and (min-width: 768px) {
 	.userBarButton {
 		gap: 10px;
+		p {
+			width: 85px;
+		}
 	}
 
 	.avatarWrapper {
