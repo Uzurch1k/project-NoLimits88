@@ -68,7 +68,7 @@ const UserSettingsForm = ({ onClose }) => {
       gender: user.gender || 'Woman',
       weight: user.weight || '0',
       activeTime: user.activeTime || '0',
-      amountOfWater: user.amountOfWater || '0',
+      amountOfWater: user.amountOfWater || '2',
     },
     mode: 'onChange',
   });
@@ -378,18 +378,18 @@ const UserSettingsForm = ({ onClose }) => {
       </form>
 
       <ToastContainer
-        className={css.Toastify}
-        position="top-right"
-        autoClose={2500}
-        hideProgressBar
-        closeOnClick
-        // rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        // transition:Slide
-        closeButton={window.innerWidth > 480}
+      // className={css.Toastify}
+      // position="top-right"
+      // autoClose={2500}
+      // hideProgressBar
+      // closeOnClick
+      // rtl={false}
+      // pauseOnFocusLoss
+      // draggable
+      // pauseOnHover
+      // theme="light"
+      // transition:Slide
+      // closeButton={window.innerWidth > 480}
       />
     </>
   );

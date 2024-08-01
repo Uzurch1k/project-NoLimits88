@@ -25,7 +25,7 @@
     "signIn": "Sign In",
     "email": "Enter your email",
     "emailPlaceholder": "Enter your email",
-    "emailSpanError": "Invalid email format",
+    "emailSpanError": "Invalid login or password",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
     "passwordSpanError": "Password must be at least 6 characters long, include one uppercase letter, one number, and one special character",
