@@ -1,61 +1,84 @@
 .title {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 16px;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 16px;
 }
 
 .quest {
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 28px;
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 28px;
 }
 
 .boxBtns {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	width: 100%;
 }
 
 .btndelete {
-    width: 100%;
+	width: 100%;
 }
 
 .btncancel {
-    width: 100%;
-    background-color: var(--cu);
-    color: var(--rcn);
+	width: 100%;
+	background-color: var(--cu);
+	color: var(--rcn);
 }
 
 .btncancel:hover,
 .btncancel:focus-within {
-    color: var(--cy);
+	color: var(--cy);
+}
+
+.btnWithLoader {
+	position: relative;
+	color: transparent;
+	transition: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.loader {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
 }
 
 @media screen and (min-width: 768px) {
-    .title {
-        font-size: 28px;
-        margin-bottom: 24px;
-    }
+	.loader {
+		width: 40px;
+		height: 40px;
+	}
 
-    .quest {
-        font-size: 18px;
-        margin-bottom: 24px;
-    }
+	.title {
+		font-size: 28px;
+		margin-bottom: 24px;
+	}
 
-    .boxBtns {
-        justify-content: center;
-        flex-direction: row;
-        gap: 10px;
-        padding-left: 40px;
-        padding-right: 40px;
-    }
+	.quest {
+		font-size: 18px;
+		margin-bottom: 24px;
+	}
 
-    .btnlogout,
-    .btncancel {
-        width: fit-content;
-        padding: 18px 57px;
-    }
+	.boxBtns {
+		justify-content: center;
+		flex-direction: row;
+		gap: 10px;
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+
+	.btnlogout,
+	.btncancel {
+		width: fit-content;
+		padding: 18px 57px;
+	}
 }
 
-@media screen and (min-width: 1440px) {}
+@media screen and (min-width: 1440px) {
+}

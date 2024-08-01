@@ -64,7 +64,7 @@ const WaterForm = ({
     defaultValues,
   });
 
-  const [isLoader, setIsLoader] = useState(false);
+  const [isLoader, setIsLoader] = useState(true);
 
   const waterAmount = useWatch({ control, name: 'waterAmount' });
 
@@ -225,8 +225,6 @@ const WaterForm = ({
         {isLoader && (
           <ThreeDots
             visible={true}
-            height="50"
-            width="50"
             radius="9"
             color="white"
             ariaLabel="three-dots-loading"

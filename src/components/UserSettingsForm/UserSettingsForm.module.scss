@@ -1,151 +1,151 @@
 .settingsForm {
-  display: flex;
-  flex-direction: column;
-  color: var(--cb);
+	display: flex;
+	flex-direction: column;
+	color: var(--cb);
 }
 
 .title {
-  align-self: flex-start;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
+	align-self: flex-start;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	margin-bottom: 20px;
 }
 .avatarCont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: 40px;
 }
 
 .avatarImg {
-  user-select: none;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+	user-select: none;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 
-  img {
-    pointer-events: none;
-    user-select: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+	img {
+		pointer-events: none;
+		user-select: none;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
 .avatarInput {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 .avatarInputLabel {
-  color: var(--cy);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  transition: all 150ms ease-in;
-  &:hover,
-  &:focus {
-    color: var(--cg);
-  }
-  &:hover .uplIcon,
-  &:focus .uplIcon {
-    stroke: var(--cg);
-  }
+	color: var(--cy);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	letter-spacing: -0.01em;
+	cursor: pointer;
+	transition: all 150ms ease-in;
+	&:hover,
+	&:focus {
+		color: var(--cg);
+	}
+	&:hover .uplIcon,
+	&:focus .uplIcon {
+		stroke: var(--cg);
+	}
 }
 .uplIcon {
-  fill: transparent;
-  stroke: var(--cb);
-  width: 18px;
-  height: 18px;
-  transition: all 150ms ease-in;
+	fill: transparent;
+	stroke: var(--cb);
+	width: 18px;
+	height: 18px;
+	transition: all 150ms ease-in;
 }
 
 .settingsBox {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  margin-bottom: 40px;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	margin-bottom: 40px;
 }
 .genderCont {
-  margin-bottom: 24px;
-  width: 100%;
+	margin-bottom: 24px;
+	width: 100%;
 }
 
 .genderWrapper {
-  display: flex;
-  gap: 20px;
+	display: flex;
+	gap: 20px;
 }
 .genderLabel {
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 
 .UserInfoCont {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
 }
 .inputFirst {
-  margin-bottom: 14px;
-  width: 100%;
-  border-radius: 15px;
-  border: 1px solid var(--drcm);
-  color: var(--dcb);
-  background-color: transparent;
-  padding: 14px 16px;
-  cursor: text;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  transition: border-color 150ms ease-in;
+	margin-bottom: 14px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
+	padding: 14px 16px;
+	cursor: text;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
+	transition: border-color 150ms ease-in;
 }
 .inputError {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .input {
-  width: 100%;
-  border-radius: 15px;
-  border: 1px solid var(--drcm);
-  color: var(--dcb);
-  background-color: transparent;
-  padding: 14px 16px;
-  cursor: text;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  transition: border-color 150ms ease-in;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
+	padding: 14px 16px;
+	cursor: text;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
+	transition: border-color 150ms ease-in;
 }
 .inputAnount {
-  margin-top: 8px;
-  width: 100%;
-  border-radius: 15px;
-  border: 1px solid var(--drcm);
-  color: var(--dcb);
-  background-color: transparent;
-  padding: 14px 16px;
-  cursor: text;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  transition: border-color 150ms ease-in;
+	margin-top: 8px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
+	padding: 14px 16px;
+	cursor: text;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
+	transition: border-color 150ms ease-in;
 }
 
 .input:hover,
@@ -156,252 +156,266 @@
 .inputFirst:focus,
 .inputWeight:hover,
 .inputWeight:focus {
-  border-color: var(--cg);
-  outline: none;
+	border-color: var(--cg);
+	outline: none;
 }
 
 .normaCont {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 .metricsWrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
 }
 
 .figure {
-  color: var(--cg);
+	color: var(--cg);
 }
 
 .settingsButton {
-  padding: 14px 40px;
+	padding: 14px 40px;
 }
 
 .btnWithLoader {
-  position: relative;
-  color: transparent;
-  transition: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	position: relative;
+	color: transparent;
+	transition: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .loader {
-  position: absolute;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
 }
 
 .settingsTitle {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin-bottom: 14px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	margin-bottom: 14px;
 }
 .settingsTitleUserInfo {
-  margin-bottom: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
 }
 .genderRadioInput {
-  width: 0px;
-  height: 0px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-  transition: background-color 150ms ease-in, box-shadow 150ms ease-in;
+	width: 0px;
+	height: 0px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	transition:
+		background-color 150ms ease-in,
+		box-shadow 150ms ease-in;
 }
 
 .genderLabel::before {
-  content: '';
-  border-radius: 100%;
-  border: 1px solid var(--cg);
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  top: 5px;
-  margin-right: 10px;
-  transition: background-color 150ms ease-in, box-shadow 150ms ease-in;
+	content: "";
+	border-radius: 100%;
+	border: 1px solid var(--cg);
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+	margin-right: 10px;
+	transition:
+		background-color 150ms ease-in,
+		box-shadow 150ms ease-in;
 }
 
 .genderRadioInput:checked + .genderLabel::before {
-  background-color: var(--cg);
-  box-shadow: inset 0 0 0 5px var(--dcw);
+	background-color: var(--cg);
+	box-shadow: inset 0 0 0 5px var(--dcw);
 }
 .womanLabel {
-  margin-bottom: 14px;
+	margin-bottom: 14px;
 }
 .textInNorma {
-  margin-bottom: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	margin-bottom: 4px;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 .formulaWrapOne,
 .formulaWrapTwo {
-  margin-bottom: 14px;
+	margin-bottom: 14px;
 }
 
 .normaTextArea {
-  border-radius: 15px;
-  border: 1px solid var(--drcm);
-  color: var(--dcb);
-  background-color: transparent;
-  padding: 16px;
-  margin-bottom: 14px;
-  text-align: justify;
-  color: var(--rcb);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	border-radius: 15px;
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
+	padding: 16px;
+	margin-bottom: 14px;
+	text-align: justify;
+	color: var(--rcb);
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 .textWeightFormula {
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	margin-bottom: 8px;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 .inputWeight {
-  margin-bottom: 14px;
-  width: 100%;
-  border-radius: 15px;
-  border: 1px solid var(--drcm);
-  color: var(--dcb);
-  background-color: transparent;
-  padding: 14px 16px;
-  cursor: text;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  transition: border-color 150ms ease-in;
+	margin-bottom: 14px;
+	width: 100%;
+	border-radius: 15px;
+	border: 1px solid var(--drcm);
+	color: var(--dcb);
+	background-color: transparent;
+	padding: 14px 16px;
+	cursor: text;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
+	transition: border-color 150ms ease-in;
 }
 .inputWeightError {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .textWaterAmount {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-  margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
+	margin-bottom: 5px;
 }
 
 .waterAmountField {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  margin-bottom: 14px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-bottom: 14px;
 }
 
 .errorMessage {
-  color: var(--cr);
-  font-size: 12px;
-  line-height: 1.28;
-  display: inline-block;
-  width: 100%;
-  margin-top: 4px;
+	color: var(--cr);
+	font-size: 12px;
+	line-height: 1.28;
+	display: inline-block;
+	width: 100%;
+	margin-top: 4px;
 }
 
 .waterNorma,
 .normaFormula {
-  color: var(--cg);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	color: var(--cg);
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 
 .activeTime {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+	line-height: 1.28;
 }
 .normaCont {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .formulaCont {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .exclamationIcon {
-  width: 22px;
-  height: 22px;
-  fill: var(--cg);
+	width: 22px;
+	height: 22px;
+	fill: var(--cg);
+}
+
+.loader {
+	width: 40px;
+	height: 40px;
 }
 
 /*==========================================*/
 @media screen and (min-width: 768px) {
-  .title {
-    font-size: 28px;
-    line-height: 1.14;
-    letter-spacing: -0.01em;
-  }
-  .settingsTitle,
-  .settingsTitleUserInfo {
-    font-size: 18px;
-    line-height: 1.33;
-  }
-  .genderLabel,
-  .textInNorma,
-  .normaFormula,
-  .normaTextArea,
-  .activeTime,
-  .textWeightFormula,
-  .waterNorma {
-    font-size: 16px;
-    line-height: 1.5;
-  }
+	.title {
+		font-size: 28px;
+		line-height: 1.14;
+		letter-spacing: -0.01em;
+	}
+	.settingsTitle,
+	.settingsTitleUserInfo {
+		font-size: 18px;
+		line-height: 1.33;
+	}
+	.genderLabel,
+	.textInNorma,
+	.normaFormula,
+	.normaTextArea,
+	.activeTime,
+	.textWeightFormula,
+	.waterNorma {
+		font-size: 16px;
+		line-height: 1.5;
+	}
 
-  .formulaCont {
-    display: flex;
-    flex-direction: row;
-    gap: 28px;
-  }
+	.formulaCont {
+		display: flex;
+		flex-direction: row;
+		gap: 28px;
+	}
 
-  .settingsButton {
-    padding: 16px 50px;
-  }
-  .waterAmountField {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-  }
-  .textWaterAmount {
-    margin-bottom: 0;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .avatarImg {
-    width: 100px;
-    height: 100px;
-  }
+	.settingsButton {
+		padding: 16px 50px;
+	}
+	.waterAmountField {
+		display: flex;
+		flex-direction: row;
+		gap: 5px;
+	}
+	.textWaterAmount {
+		margin-bottom: 0;
+		font-size: 16px;
+		line-height: 1.5;
+	}
+	.avatarImg {
+		width: 100px;
+		height: 100px;
+	}
 
-  .uplIcon {
-    width: 20px;
-    height: 20px;
-  }
+	.uplIcon {
+		width: 20px;
+		height: 20px;
+	}
 }
 
 /*==================================================*/
 @media screen and (min-width: 1440px) {
-  .settingsBox {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-  .normaCont {
-    margin-bottom: 0;
-  }
+	.settingsBox {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 40px;
+	}
+	.normaCont {
+		margin-bottom: 0;
+	}
 }
