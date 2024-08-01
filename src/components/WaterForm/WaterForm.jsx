@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,8 @@ import {
   selectSelectedDay,
   selectWaterRecordsOfDay,
 } from '../../redux/water/selectors';
+
+import { ThreeDots } from 'react-loader-spinner';
 
 import icons from '../../img/icons/symbol.svg';
 
@@ -62,6 +64,8 @@ const WaterForm = ({
     defaultValues,
   });
 
+  const [isLoader, setIsLoader] = useState(false);
+
   const waterAmount = useWatch({ control, name: 'waterAmount' });
 
   const mlToDecimal = ml => parseFloat((ml / 1000).toFixed(3));
@@ -92,6 +96,7 @@ const WaterForm = ({
   };
 
   const onSubmitHandler = async data => {
+    setIsLoader(true);
     const [hours, minutes] = data.time.split(':');
     const fullDateTime = new Date(
       Date.UTC(
@@ -119,6 +124,7 @@ const WaterForm = ({
         })
       ).unwrap();
     }
+    setIsLoader(false);
     reset();
     onClose();
   };
@@ -208,7 +214,25 @@ const WaterForm = ({
           <span className={css.errorMessage}>{errors.waterAmount.message}</span>
         )}
       </div>
-      <button className={clsx(css.settingsButton, 'btn-def')} type="submit">
+      <button
+        className={clsx(
+          css.settingsButton,
+          'btn-def',
+          isLoader && css.btnWithLoader
+        )}
+        type="submit"
+      >
+        {isLoader && (
+          <ThreeDots
+            visible={true}
+            height="50"
+            width="50"
+            radius="9"
+            color="white"
+            ariaLabel="three-dots-loading"
+            wrapperClass={css.loader}
+          />
+        )}
         {t('modals.addEdit.saveBtn')}
       </button>
     </form>

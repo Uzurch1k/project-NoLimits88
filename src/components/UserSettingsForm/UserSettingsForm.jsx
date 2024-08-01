@@ -19,6 +19,7 @@ import icons from '../../img/icons/symbol.svg';
 
 import clsx from 'clsx';
 import css from './UserSettingsForm.module.scss';
+import { ThreeDots } from 'react-loader-spinner';
 
 const userSettingsSchema = Yup.object().shape({
   name: Yup.string().required('The field is required'),
@@ -85,6 +86,8 @@ const UserSettingsForm = ({ onClose }) => {
     mode: 'onChange',
   });
 
+  const [isLoader, setIsLoader] = useState(false);
+
   const { name, gender, email, weight, amountOfWater, activeTime, photo } =
     watch();
   const isAnyFieldFilled =
@@ -109,6 +112,7 @@ const UserSettingsForm = ({ onClose }) => {
   };
 
   const onSubmit = async data => {
+    setIsLoader(true);
     const formData = new FormData();
     formData.append('name', data.name.trim());
     formData.append('email', data.email.trim());
@@ -126,6 +130,8 @@ const UserSettingsForm = ({ onClose }) => {
       onClose();
     } catch (error) {
       toast.error('Failed to update user data.');
+    } finally {
+      setIsLoader(false);
     }
   };
 
@@ -352,10 +358,25 @@ const UserSettingsForm = ({ onClose }) => {
         </div>
 
         <button
-          className={clsx(css.settingsButton, 'btn-def')}
+          className={clsx(
+            css.settingsButton,
+            'btn-def',
+            isLoader && css.btnWithLoader
+          )}
           type="submit"
           disabled={!isAnyFieldFilled}
         >
+          {isLoader && (
+            <ThreeDots
+              visible={true}
+              height="50"
+              width="50"
+              radius="9"
+              color="white"
+              ariaLabel="three-dots-loading"
+              wrapperClass={css.loader}
+            />
+          )}
           {t('modals.UserSettingsForm.saveBtn')}
         </button>
       </form>
